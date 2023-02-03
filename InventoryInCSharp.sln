@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8609A5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postgresql", "Postgresql", "{3F619679-1F15-48A7-A5DB-2D888F613C1C}"
 	ProjectSection(SolutionItems) = preProject
-		DataBase.sql = DataBase.sql
+		init.sql = init.sql
 	EndProjectSection
 EndProject
 Global
