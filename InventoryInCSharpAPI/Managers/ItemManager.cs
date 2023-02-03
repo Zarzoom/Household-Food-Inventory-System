@@ -12,7 +12,12 @@ public class ItemManager
 // private List<Item> ItemList { get; set; } = new List<Item>();
 
     public void addToItemList(Item newItem) {
-        IR.Add(newItem);
+        IR.AddToItemList(newItem);
         IR.SaveChanges();
+    }
+
+    public IEnumerable<Item> GetItemList()
+    {
+        return (IR.GetItemList());
     }
 }

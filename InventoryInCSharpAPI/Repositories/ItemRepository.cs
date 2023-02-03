@@ -9,9 +9,12 @@ namespace InventoryInCSharpAPI.Services
         public ItemRepository(DbContextOptions<ItemRepository> options) : base (options)
         {
         }
-        public void AddToItemList()
+        public void AddToItemList(Item newItem){
+            ItemList.Add(newItem);
+        }
+        public IEnumerable<Item> GetItemList()
         {
-
+            return (ItemList.ToList());
         }
 
 

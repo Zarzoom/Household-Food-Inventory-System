@@ -20,7 +20,7 @@ public class ItemController : ControllerBase
     [HttpGet]
     public IEnumerable<Item> Get()
     {
-        return new List <Item> ();
+        return(itemManager.GetItemList());
     }
 
     // GET api/<ItemController>/5
