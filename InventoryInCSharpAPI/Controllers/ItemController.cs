@@ -34,7 +34,7 @@ public class ItemController : ControllerBase
     [HttpPost]
     public void Post([FromBody] Item postmanItem)
     {
-        itemManager.addToList(postmanItem);
+        itemManager.addToItemList(postmanItem);
     }
 
     // PUT api/<ItemController>/5

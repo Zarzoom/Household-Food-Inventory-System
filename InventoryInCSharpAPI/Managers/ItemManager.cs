@@ -1,11 +1,18 @@
 ﻿namespace InventoryInCSharp.Managers;
 using InventoryInCSharp.Models;
+using InventoryInCSharpAPI.Services;
+
 public class ItemManager
 {
-    private List<Item> ItemList { get; set; } = new List<Item>();
-
-    public void addToList(Item item)
+    private ItemRepository IR { get; set; }
+    public ItemManager(ItemRepository IR)
     {
-        ItemList.Add(item);
+        this.IR = IR;
+    }
+// private List<Item> ItemList { get; set; } = new List<Item>();
+
+    public void addToItemList(Item newItem) {
+        IR.Add(newItem);
+        IR.SaveChanges();
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Item
     {
-        private long itemID;
+        public long itemID { get; set; }
         public String brand { get; set; }
         public String price { get; set; }
         public String genericName { get; set; }
