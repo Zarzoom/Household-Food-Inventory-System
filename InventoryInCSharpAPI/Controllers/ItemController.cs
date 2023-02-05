@@ -29,7 +29,7 @@ public class ItemController : ControllerBase
     {
         return itemManager.findByPrimaryKey(primaryKey);
     }
-
+    // GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
     public IEnumerable<Item> Get(String searchValue)
     {
@@ -38,22 +38,28 @@ public class ItemController : ControllerBase
 
     // POST api/<ItemController>
     [HttpPost]
-    public void Post([FromBody] Item postmanItem)
+    public Item Post([FromBody] Item postmanItem)
     {
-        itemManager.addToItemList(postmanItem);
+        return itemManager.addToItemList(postmanItem);
     }
 
-    // PUT api/<ItemController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] Item item)
+    // PUT api/<ItemController>
+    [HttpPut]
+    public Item Put([FromBody] Item updatedItem)
     {
-
+        return itemManager.itemUpdate(updatedItem);
     }
 
-    // DELETE api/<ItemController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
+    //// PUT api/<ItemController>/5
+    //[HttpPut("{id}")]
+    //public void Put(int id, [FromBody] Item item)
+    //{
 
+    //}
+
+    //// DELETE api/<ItemController>/5
+    //[HttpDelete("{id}")]
+    //public void Delete(int id)
+    //{
+    //}
 }

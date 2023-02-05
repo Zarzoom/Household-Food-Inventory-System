@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InventoryInCSharpAPI.Services
 {
-    public class ItemRepository : DbContext
+    public class InventoryRepository : DbContext
     {
         public DbSet<Item> ItemList { get; set; }
-        public ItemRepository(DbContextOptions<ItemRepository> options) : base (options)
+        public InventoryRepository(DbContextOptions<InventoryRepository> options) : base (options)
         {
         }
         public void AddToItemList(Item newItem){

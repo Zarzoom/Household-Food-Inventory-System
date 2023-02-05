@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ItemManager>();
-builder.Services.AddDbContext<ItemRepository>(options =>
+builder.Services.AddDbContext<InventoryRepository>(options =>
       options.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString")));
 
 
