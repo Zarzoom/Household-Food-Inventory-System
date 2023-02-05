@@ -16,25 +16,22 @@ namespace InventoryInCSharpAPI.Services
         {
             return (ItemList.ToList());
         }
+        public Item FindItemByPrimaryKey(long primaryKey )
+        {
+            return (ItemList.Find(primaryKey));
+        }
+
+        //rename this method.
+        //This method does a contains search using the generic name and/or brand
+        public IEnumerable<Item> ContainsSearchForGenericNameAndBrand(String searchValue ) 
+        {
+            var items = from item in ItemList
+                        where item.genericName.Contains(searchValue)
+                        || item.brand.Contains(searchValue)
+                        select item;
+            return items;
+        }
 
 
-        //public Item createItem(Item item)
-        //    {
-        //        return itemRepository.save(item);
-        //    }
-
-        //public List<Item> findAll()
-        //    {
-        //        List<Item> itemList = new ArrayList<>();
-        //        Iterator<Item> itemIterator = itemRepository.findAll().iterator();
-        //        itemIterator.forEachRemaining(itemList::add);
-        //        return itemList;
-
-        //    }
-
-        //public void delete(Item item)
-        //    {
-        //        itemRepository.delete(item);
-        //    }
     }
 }

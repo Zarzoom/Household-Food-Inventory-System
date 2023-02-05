@@ -24,10 +24,16 @@ public class ItemController : ControllerBase
     }
 
     // GET api/<ItemController>/5
-    [HttpGet("sdfghjk/{id}")]
-    public string Get(int id)
+    [HttpGet("{primaryKey}")]
+    public Item Get(long primaryKey)
     {
-        return "value";
+        return itemManager.findByPrimaryKey(primaryKey);
+    }
+
+    [HttpGet("search/{searchValue}")]
+    public IEnumerable<Item> Get(String searchValue)
+    {
+        return itemManager.Search(searchValue);
     }
 
     // POST api/<ItemController>
@@ -49,4 +55,5 @@ public class ItemController : ControllerBase
     public void Delete(int id)
     {
     }
+
 }

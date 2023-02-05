@@ -20,4 +20,14 @@ public class ItemManager
     {
         return (IR.GetItemList());
     }
+
+    public Item findByPrimaryKey(long primaryKey)
+    {
+        return IR.FindItemByPrimaryKey(primaryKey);
+    }
+
+    public IEnumerable<Item> Search(String findValue) 
+    {
+        return IR.ContainsSearchForGenericNameAndBrand(findValue);
+    }
 }
