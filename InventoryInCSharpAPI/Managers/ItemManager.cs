@@ -1,6 +1,6 @@
-﻿namespace InventoryInCSharp.Managers;
-using InventoryInCSharp.Models;
+﻿using InventoryInCSharpAPI.Models;
 using InventoryInCSharpAPI.Services;
+namespace InventoryInCSharpAPI.Managers;
 
 public class ItemManager
 {

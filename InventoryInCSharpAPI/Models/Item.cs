@@ -1,4 +1,4 @@
-﻿namespace InventoryInCSharp.Models
+﻿namespace InventoryInCSharpAPI.Models
 {
     public class Item
     {

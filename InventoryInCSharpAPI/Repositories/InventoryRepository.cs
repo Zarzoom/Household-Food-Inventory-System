@@ -1,4 +1,4 @@
-﻿using InventoryInCSharp.Models;
+﻿using InventoryInCSharpAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryInCSharpAPI.Services
@@ -6,6 +6,7 @@ namespace InventoryInCSharpAPI.Services
     public class InventoryRepository : DbContext
     {
         public DbSet<Item> ItemList { get; set; }
+        public DbSet<Pantry> PantryList { get; set; }
         public InventoryRepository(DbContextOptions<InventoryRepository> options) : base (options)
         {
         }
@@ -31,6 +32,30 @@ namespace InventoryInCSharpAPI.Services
                         select item;
             return items;
         }
+
+        public void addToPantryList(Pantry newPantry)
+        {
+            PantryList.Add(newPantry);
+        }
+
+        public IEnumerable<Pantry> GetPantryList()
+        {
+            return (PantryList.ToList());
+        }
+
+        public Pantry FindPantryByPrimaryKey(long primaryKey)
+        {
+            return (PantryList.Find(primaryKey));
+        }
+
+        public IEnumerable<Pantry> ContainsSearchForPantryName(String searchValue)
+        {
+            var pantries = from pantry in PantryList
+                        where pantry.pantryName.Contains(searchValue)
+                        select pantry;
+            return pantries;
+        }
+
 
 
     }

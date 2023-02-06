@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using InventoryInCSharp.Models;
+using InventoryInCSharpAPI.Models;
+using InventoryInCSharpAPI.Managers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace InventoryInCSharp.Controllers;
 
-using InventoryInCSharp.Managers;
 [Route("api/[controller]")]
 [ApiController]
 public class ItemController : ControllerBase
