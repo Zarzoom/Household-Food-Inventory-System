@@ -2,13 +2,18 @@
 {
     public class Item
     {
+        //example had [required] above student name but not ID. why? Do I need that?
         public long itemID { get; set; }
         public String brand { get; set; }
         public float price { get; set; }
         public String genericName { get; set; }
         public String size { get; set; }
+        public virtual ICollection<Pantry> Pantries { get; set; }
 
-        public Item() { }
+        public Item() {
+            this.Pantries = new HashSet<Pantry>();
+
+        }
         public Item(String brand, float price, String genericName, String size)
         {
             this.brand = brand;

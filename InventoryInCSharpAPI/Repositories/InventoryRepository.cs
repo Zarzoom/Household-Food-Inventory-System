@@ -1,5 +1,6 @@
 ﻿using InventoryInCSharpAPI.Models;
-using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
+using System.Data.Common;
 
 namespace InventoryInCSharpAPI.Services
 {
@@ -7,7 +8,7 @@ namespace InventoryInCSharpAPI.Services
     {
         public DbSet<Item> ItemList { get; set; }
         public DbSet<Pantry> PantryList { get; set; }
-        public InventoryRepository(DbContextOptions<InventoryRepository> options) : base (options)
+        public InventoryRepository(DbConnection options) : base (options, false)
         {
         }
         public void AddToItemList(Item newItem){

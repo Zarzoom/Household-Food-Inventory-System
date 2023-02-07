@@ -1,7 +1,8 @@
 using InventoryInCSharpAPI.Managers;
 using InventoryInCSharpAPI.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using System.Data.Entity;
+using System.Data.Common;
+//using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ItemManager>();
-builder.Services.AddDbContext<InventoryRepository>(options =>
-      options.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString")));
 builder.Services.AddSingleton<PantryManager>();
 
 var app = builder.Build();
