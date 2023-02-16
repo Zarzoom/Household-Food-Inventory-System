@@ -1,59 +1,73 @@
 ﻿using InventoryInCSharpAPI.Models;
-using Microsoft.EntityFrameworkCore;
+using Venflow;
 
 namespace InventoryInCSharpAPI.Services
 {
-    public class InventoryRepository : DbContext
+    public class InventoryRepository : Database
     {
-        public DbSet<Item> ItemList { get; set; }
-        public DbSet<Pantry> PantryList { get; set; }
-        public InventoryRepository(DbContextOptions<InventoryRepository> options) : base (options)
+        public Table<Item> ItemList { get; set; }
+        public Table<Pantry> PantryList { get; set; }
+        public InventoryRepository(DatabaseOptionsBuilder DBO) : base (DBO)
         {
         }
-        public void AddToItemList(Item newItem){
-            ItemList.Add(newItem);
+        // public async void additemrepositorytoList(InventoryRepository h){
+        //     await ItemList.Insert
+        // }
+        public async void AddToItemList(Item newItem){
+            await ItemList.Insert().InsertAsync(newItem);
+            //ItemList.Add(newItem);
         }
-        public IEnumerable<Item> GetItemList()
+        public async Task<List<Item>> GetItemList()
         {
-            return (ItemList.ToList());
+            return await ItemList.QueryBatch($"SELECT \"ItemID\", \"GenericName\", \"Brand\", \"Size\", \"Price\" FROM \"ItemList\"").QueryAsync();
         }
-        public Item FindItemByPrimaryKey(long primaryKey )
+        public async Task <Item> FindItemByPrimaryKey(long primaryKey )
         {
-            return (ItemList.Find(primaryKey));
+            return await ItemList.QuerySingle( $"SELECT \"ItemID\",\"Brand\",\"GenericName\",\"Price\",\"Size\", FROM \"ItemList\" WHERE \"ItemID\"= \"{primaryKey}\"").QueryAsync();
         }
 
         //rename this method.
         //This method does a contains search using the generic name and/or brand
-        public IEnumerable<Item> ContainsSearchForGenericNameAndBrand(String searchValue ) 
+        public async Task<List<Item>> ContainsSearchForGenericNameAndBrand(String searchValue ) 
         {
-            var items = from item in ItemList
-                        where item.genericName.Contains(searchValue)
-                        || item.brand.Contains(searchValue)
-                        select item;
-            return items;
+             return await ItemList.QueryBatch($"SELECT \"ItemID\",\"Brand\",\"GenericName\",\"Price\",\"Size\", FROM ItemList WHERE \"Brand\" like \"%{searchValue}%\" OR \"GenericName\" like \"%{searchValue}%\"").QueryAsync();
+            // var items = from item in ItemList
+            //             where item.genericName.Contains(searchValue)
+            //             || item.brand.Contains(searchValue)
+            //             select item;
+            // return items;
         }
 
-        public void addToPantryList(Pantry newPantry)
+        public async Task<Pantry> addToPantryList(Pantry newPantry)
         {
-            PantryList.Add(newPantry);
+            await PantryList.Insert().InsertAsync(newPantry);
+            return newPantry;
         }
 
-        public IEnumerable<Pantry> GetPantryList()
+        public async Task<List<Pantry>> GetPantryList()
         {
-            return (PantryList.ToList());
+            return await PantryList.QueryBatch($"SELECT \"PantryID\", \"PantryName\", FROM \"PantryList\"").QueryAsync();
         }
 
-        public Pantry FindPantryByPrimaryKey(long primaryKey)
+        public async Task <Pantry> FindPantryByPrimaryKey(long primaryKey)
         {
-            return (PantryList.Find(primaryKey));
+                return await PantryList.QuerySingle( $"SELECT \"PantryID\",\"PantryName\", FROM \"PantryList\" WHERE \"PantryID\"= \"{primaryKey}\"").QueryAsync();
+
         }
 
-        public IEnumerable<Pantry> ContainsSearchForPantryName(String searchValue)
+        public async Task <List<Pantry>> ContainsSearchForPantryName(String searchValue)
         {
-            var pantries = from pantry in PantryList
-                        where pantry.pantryName.Contains(searchValue)
-                        select pantry;
-            return pantries;
+             return await PantryList.QueryBatch($"SELECT \"PantryID\", \"PantryName\", FROM \"PantryList\" WHERE \"PantryID\" like \"%{searchValue}%\" OR \"PantryName\" like \"%{searchValue}%\"").QueryAsync();
+        }
+
+        public async Task <Item> itemUpdate(Item updateMe){
+            await ItemList.UpdateAsync(updateMe);
+            return updateMe;
+        }
+
+        public async Task<Pantry> pantryUpdate(Pantry updateMe){
+            await PantryList.UpdateAsync(updateMe);
+            return updateMe;
         }
 
 

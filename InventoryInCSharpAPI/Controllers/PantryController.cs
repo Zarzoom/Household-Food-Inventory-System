@@ -36,7 +36,9 @@ public class PantryController : ControllerBase
     [HttpPut]
     public Pantry Put([FromBody] Pantry updatedPantry)
     {
-        return pantryManager.pantryUpdate(updatedPantry);
+        var retreivedItems = pantryManager.pantryUpdate(updatedPantry);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
     }
 

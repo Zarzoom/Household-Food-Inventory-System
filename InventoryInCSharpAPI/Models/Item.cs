@@ -1,20 +1,22 @@
-﻿namespace InventoryInCSharpAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace InventoryInCSharpAPI.Models
 {
     public class Item
     {
-        public long itemID { get; set; }
-        public String brand { get; set; }
-        public float price { get; set; }
-        public String genericName { get; set; }
-        public String size { get; set; }
+        [KeyAttribute]
+        public long ItemID { get; set; }
+        public String Brand { get; set; }
+        public float Price { get; set; }
+        public String GenericName { get; set; }
+        public String Size { get; set; }
 
         public Item() { }
         public Item(String brand, float price, String genericName, String size)
         {
-            this.brand = brand;
-            this.price = price;
-            this.genericName = genericName;
-            this.size = size;
+            this.Brand = brand;
+            this.Price = price;
+            this.GenericName = genericName;
+            this.Size = size;
         }
     }
 }

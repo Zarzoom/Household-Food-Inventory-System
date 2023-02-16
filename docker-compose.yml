@@ -8,16 +8,17 @@ services:
         depends_on:
             - db
     db:
-        image: "mysql"
-        command: --init-file /data/application/init.sql
+        image: postgres
         volumes:
-            - ./init.sql:/data/application/init.sql
+             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+            - "5432:5432"
         cap_add:
             - SYS_NICE  # CAP_SYS_NICE
         environment:
-            MYSQL_ROOT_USER: root
-            MYSQL_DATABASE: InventoryData
-            MYSQL_ROOT_PASSWORD: "Your_password123"
+            POSTGRES_USER: root
+            POSTGRES_DATABASE: InventoryData
+            POSTGRES_PASSWORD: "Your_password123"
             ACCEPT_EULA: "Y"
     #InventoryData:
     #    image: postgres:13.1

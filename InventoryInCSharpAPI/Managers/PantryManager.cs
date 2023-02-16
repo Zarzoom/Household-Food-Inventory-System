@@ -12,31 +12,37 @@ namespace InventoryInCSharpAPI.Managers;
 
     public Pantry addToPantyList(Pantry newPantry)
     {
-        IR.addToPantryList(newPantry);
-        IR.SaveChanges();
-        return newPantry;
+        var retreivedItems= IR.addToPantryList(newPantry);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     public IEnumerable<Pantry> getPantryList()
     {
-        return IR.GetPantryList();
+        var retreivedItems= IR.GetPantryList();
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     public Pantry FindPantryByPrimaryKey(long primaryKey)
     {
-        return IR.FindPantryByPrimaryKey(primaryKey);
+        var retreivedItems= IR.FindPantryByPrimaryKey(primaryKey);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     public IEnumerable<Pantry> Search(String findValue)
     {
-        return IR.ContainsSearchForPantryName(findValue);
+        var retreivedItems= IR.ContainsSearchForPantryName(findValue);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
-    public Pantry pantryUpdate(Pantry updatedPantry)
+    public async Task<Pantry> pantryUpdate(Pantry updatedPantry)
     {
-        Pantry updateMe = IR.FindPantryByPrimaryKey(updatedPantry.pantryID);
+        Pantry updateMe = FindPantryByPrimaryKey(updatedPantry.PantryID);
         if (updateMe != null) { 
-        updateMe.pantryName = updatedPantry.pantryName;
-            IR.SaveChanges();
+        updateMe.PantryName = updatedPantry.PantryName;
+             await IR.pantryUpdate(updateMe);
             return updateMe;
         }
         else { return null; }

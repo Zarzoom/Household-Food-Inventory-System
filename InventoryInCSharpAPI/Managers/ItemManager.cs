@@ -1,10 +1,11 @@
 ﻿using InventoryInCSharpAPI.Models;
 using InventoryInCSharpAPI.Services;
+using Venflow;
 namespace InventoryInCSharpAPI.Managers;
 
 public class ItemManager
 {
-    private InventoryRepository IR { get; set; }
+    private InventoryRepository IR;
     public ItemManager(InventoryRepository IR)
     {
         this.IR = IR;
@@ -13,35 +14,40 @@ public class ItemManager
 
     public Item addToItemList(Item newItem) {
         IR.AddToItemList(newItem);
-        IR.SaveChanges();
         return newItem;
     }
 
     public IEnumerable<Item> GetItemList()
     {
-        return (IR.GetItemList());
+        var retreivedItems= IR.GetItemList();
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     public Item findByPrimaryKey(long primaryKey)
     {
-        return IR.FindItemByPrimaryKey(primaryKey);
+        var retreivedItems= IR.FindItemByPrimaryKey(primaryKey);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     public IEnumerable<Item> Search(String findValue) 
     {
-        return IR.ContainsSearchForGenericNameAndBrand(findValue);
+        var retreivedItems= IR.ContainsSearchForGenericNameAndBrand(findValue);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
-    public Item itemUpdate(Item updatedItem)
+    public async Task<Item> itemUpdate(Item updatedItem)
     {
-        Item updateMe = IR.FindItemByPrimaryKey(updatedItem.itemID);
+        Item updateMe = findByPrimaryKey(updatedItem.ItemID);
         if (updateMe != null) 
         {
-            updateMe.brand = updatedItem.brand;
-            updateMe.price = updatedItem.price;
-            updateMe.genericName = updatedItem.genericName;
-            updateMe.size = updatedItem.size;
-            IR.SaveChanges();
+            updateMe.Brand = updatedItem.Brand;
+            updateMe.Price = updatedItem.Price;
+            updateMe.GenericName = updatedItem.GenericName;
+            updateMe.Size = updatedItem.Size;
+            await IR.itemUpdate(updateMe);
             return updateMe;
         }
         else { return null; }

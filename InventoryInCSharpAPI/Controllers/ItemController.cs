@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryInCSharpAPI.Models;
 using InventoryInCSharpAPI.Managers;
+using Venflow.AspNetCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -47,7 +48,9 @@ public class ItemController : ControllerBase
     [HttpPut]
     public Item Put([FromBody] Item updatedItem)
     {
-        return itemManager.itemUpdate(updatedItem);
+       var retreivedItems = itemManager.itemUpdate(updatedItem);
+        retreivedItems.Wait();
+        return retreivedItems.Result;
     }
 
     //// PUT api/<ItemController>/5

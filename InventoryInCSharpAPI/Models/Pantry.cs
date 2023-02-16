@@ -1,13 +1,20 @@
-﻿namespace InventoryInCSharpAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace InventoryInCSharpAPI.Models
 {
     public class Pantry
     {
-        public String pantryName {get; set; }
-        public long pantryID{get; set; }
+        public String PantryName {get; set; }
+        
+        [KeyAttribute]
+        public long PantryID{get; set; }
 
+        public Pantry()
+        {
+            
+        }
         public Pantry(String pantryName)
         {
-            this.pantryName = pantryName;
+            this.PantryName = pantryName;
         }
     }
 }
