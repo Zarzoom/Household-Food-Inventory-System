@@ -30,6 +30,12 @@ public class ItemManager
         retreivedItems.Wait();
         return retreivedItems.Result;
     }
+    // public Item findWithItem(Item theItem)
+    // {
+    //     var retreivedItems= IR.FindItemByPrimaryKey(theItem.ItemID);
+    //     retreivedItems.Wait();
+    //     return retreivedItems.Result;
+    //}
 
     public IEnumerable<Item> Search(String findValue) 
     {

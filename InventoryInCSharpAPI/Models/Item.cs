@@ -5,10 +5,10 @@ namespace InventoryInCSharpAPI.Models
     {
         [KeyAttribute]
         public long ItemID { get; set; }
-        public String Brand { get; set; }
-        public float Price { get; set; }
-        public String GenericName { get; set; }
-        public String Size { get; set; }
+        public virtual String Brand { get; set; }
+        public virtual float Price { get; set; }
+        public virtual String GenericName { get; set; }
+        public virtual String Size { get; set; }
 
         public Item() { }
         public Item(String brand, float price, String genericName, String size)

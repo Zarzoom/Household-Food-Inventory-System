@@ -30,6 +30,12 @@ public class ItemController : ControllerBase
     {
         return itemManager.findByPrimaryKey(primaryKey);
     }
+    
+    // [HttpPost("IDK")]
+    // public Item Get([FromBody] Item theItem)
+    // {
+    //     return itemManager.findWithItem(theItem);
+    // }
     // GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
     public IEnumerable<Item> Get(String searchValue)
