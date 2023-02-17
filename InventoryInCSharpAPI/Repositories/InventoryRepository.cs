@@ -54,13 +54,13 @@ namespace InventoryInCSharpAPI.Services
 
         public async Task <Pantry> FindPantryByPrimaryKey(long primaryKey)
         {
-                return await PantryList.QuerySingle( $"SELECT \"PantryID\",\"PantryName\" FROM \"PantryList\" WHERE \"PantryID\"= \"{primaryKey}\"").QueryAsync();
-
+            return await PantryList.QuerySingle( $"SELECT \"PantryID\",\"PantryName\" FROM \"PantryList\" WHERE \"PantryID\"= {primaryKey}").TrackChanges().QueryAsync();
+           
         }
 
         public async Task <List<Pantry>> ContainsSearchForPantryName(String searchValue)
         {
-             return await PantryList.QueryBatch($"SELECT \"PantryID\", \"PantryName\" FROM \"PantryList\" WHERE \"PantryID\" like \"%{searchValue}%\" OR \"PantryName\" like \"%{searchValue}%\"").QueryAsync();
+             return await PantryList.QueryBatch($"SELECT \"PantryID\", \"PantryName\" FROM \"PantryList\" WHERE Lower(\"PantryName\") like Lower('%{searchValue}%')").QueryAsync();
         }
 
         public async Task <Item> itemUpdate(Item updateMe){

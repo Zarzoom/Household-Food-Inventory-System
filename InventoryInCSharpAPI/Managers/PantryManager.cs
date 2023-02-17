@@ -41,8 +41,8 @@ namespace InventoryInCSharpAPI.Managers;
     {
         Pantry updateMe = FindPantryByPrimaryKey(updatedPantry.PantryID);
         if (updateMe != null) { 
-        updateMe.PantryName = updatedPantry.PantryName;
-             await IR.pantryUpdate(updateMe);
+            updateMe.PantryName = updatedPantry.PantryName;
+            await IR.pantryUpdate(updateMe);
             return updateMe;
         }
         else { return null; }

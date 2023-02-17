@@ -3,7 +3,7 @@ namespace InventoryInCSharpAPI.Models
 {
     public class Pantry
     {
-        public String PantryName {get; set; }
+        public virtual String PantryName {get; set; }
         
         [KeyAttribute]
         public long PantryID{get; set; }
