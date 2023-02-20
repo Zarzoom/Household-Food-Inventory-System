@@ -1,7 +1,7 @@
 ﻿using InventoryInCSharpAPI.Models;
 using InventoryInCSharpAPI.Repositories;
-namespace InventoryInCSharpAPI.Managers
-{
+namespace InventoryInCSharpAPI.Managers;
+
     public class PantryContentsManager
     {
     private PantryContentsRepository PCR {get; set;}
@@ -21,5 +21,12 @@ namespace InventoryInCSharpAPI.Managers
         results.Wait();
         return(results.Result);
     }
+
+public IEnumerable<PantryContents> FindContentsByPCPantryID(long PCPantryID)
+    {
+        var results = PCR.FindContentsByPCPantryID(PCPantryID);
+        results.Wait();
+        return(results.Result);
+    }    
     }
-}
+

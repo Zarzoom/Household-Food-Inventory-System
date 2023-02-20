@@ -25,4 +25,10 @@ namespace InventoryInCSharpAPI.Controllers;
     {
     return pantryContentsManager.getAllPantryContents();
     }
+
+     [HttpGet("{PCPantryID}")]
+    public IEnumerable<PantryContents> Get(long PCPantryID)
+    {
+        return pantryContentsManager.FindContentsByPCPantryID(PCPantryID);
+    }
 }
