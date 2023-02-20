@@ -3,3 +3,6 @@ Household food inventory is an aplication to manage the items that are in your p
 
 # Current Status
 The app allows items to be added to a database and subsequently managed. Features available for management include updating current items, searching using the primary key, and incomplete versions of the brand and generic name. 
+
+# ToDo
+Price wont take in anything less than one. It needs to take in a number less than 1.

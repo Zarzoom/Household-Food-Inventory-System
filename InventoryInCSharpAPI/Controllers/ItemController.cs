@@ -29,7 +29,7 @@ public class ItemController : ControllerBase
     {
         return itemManager.findByPrimaryKey(primaryKey);
     }
-    // GET api/<ItemController>/search/searchValue
+    //GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
     public IEnumerable<Item> Get(String searchValue)
     {
@@ -45,9 +45,9 @@ public class ItemController : ControllerBase
 
     // PUT api/<ItemController>
     [HttpPut]
-    public Item Put([FromBody] Item updatedItem)
+    public void Put([FromBody] Item updatedItem)
     {
-        return itemManager.itemUpdate(updatedItem);
+        itemManager.itemUpdate(updatedItem);
     }
 
     //// PUT api/<ItemController>/5

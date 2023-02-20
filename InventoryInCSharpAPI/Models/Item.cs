@@ -8,11 +8,8 @@
         public float price { get; set; }
         public String genericName { get; set; }
         public String size { get; set; }
-        public virtual ICollection<Pantry> Pantries { get; set; }
 
         public Item() {
-            this.Pantries = new HashSet<Pantry>();
-
         }
         public Item(String brand, float price, String genericName, String size)
         {

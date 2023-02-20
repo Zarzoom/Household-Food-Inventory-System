@@ -1,11 +1,11 @@
 ﻿using InventoryInCSharpAPI.Models;
-using InventoryInCSharpAPI.Services;
+using InventoryInCSharpAPI.Repositories;
 namespace InventoryInCSharpAPI.Managers;
 
 public class ItemManager
 {
-    private InventoryRepository IR { get; set; }
-    public ItemManager(InventoryRepository IR)
+    private ItemRepository IR { get; set; }
+    public ItemManager(ItemRepository IR)
     {
         this.IR = IR;
     }
@@ -13,38 +13,32 @@ public class ItemManager
 
     public Item addToItemList(Item newItem) {
         IR.AddToItemList(newItem);
-        IR.SaveChanges();
         return newItem;
     }
 
     public IEnumerable<Item> GetItemList()
     {
-        return (IR.GetItemList());
+        var results = IR.GetItemList();
+        results.Wait();
+        return (results.Result);
     }
 
     public Item findByPrimaryKey(long primaryKey)
     {
-        return IR.FindItemByPrimaryKey(primaryKey);
+        var results = IR.FindItemByPrimaryKey(primaryKey);
+        results.Wait();
+        return (results.Result);
     }
 
     public IEnumerable<Item> Search(String findValue) 
     {
-        return IR.ContainsSearchForGenericNameAndBrand(findValue);
+        var results = IR.ContainsSearchForGenericNameAndBrand(findValue);
+        results.Wait();
+        return (results.Result);
     }
 
-    public Item itemUpdate(Item updatedItem)
+    public void itemUpdate(Item updatedItem)
     {
-        Item updateMe = IR.FindItemByPrimaryKey(updatedItem.itemID);
-        if (updateMe != null) 
-        {
-            updateMe.brand = updatedItem.brand;
-            updateMe.price = updatedItem.price;
-            updateMe.genericName = updatedItem.genericName;
-            updateMe.size = updatedItem.size;
-            IR.SaveChanges();
-            return updateMe;
-        }
-        else { return null; }
-
+      IR.itemUpdate(updatedItem);
     }
 }

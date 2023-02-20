@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryInCSharpAPI.Models;
 using InventoryInCSharpAPI.Managers;
+
 namespace InventoryInCSharpAPI.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class PantryController : ControllerBase
@@ -30,13 +32,13 @@ public class PantryController : ControllerBase
 
     [HttpPost]
     public Pantry Post([FromBody] Pantry postmanPantry) {
-    return pantryManager.addToPantyList(postmanPantry);
+    return pantryManager.addToPantryList(postmanPantry);
     }
 
     [HttpPut]
-    public Pantry Put([FromBody] Pantry updatedPantry)
+    public void Put([FromBody] Pantry updatedPantry)
     {
-        return pantryManager.pantryUpdate(updatedPantry);
+        pantryManager.pantryUpdate(updatedPantry);
     }
     }
 

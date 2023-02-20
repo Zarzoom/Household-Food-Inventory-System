@@ -10,6 +10,8 @@ services:
     db:
         image: "mysql"
         command: --init-file /data/application/init.sql
+        ports:
+            - "3306:3306"
         volumes:
             - ./init.sql:/data/application/init.sql
         cap_add:

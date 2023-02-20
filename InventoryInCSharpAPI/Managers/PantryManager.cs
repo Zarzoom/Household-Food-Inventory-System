@@ -1,45 +1,44 @@
 ﻿using InventoryInCSharpAPI.Models;
-using InventoryInCSharpAPI.Services;
+using InventoryInCSharpAPI.Repositories;
 namespace InventoryInCSharpAPI.Managers;
 
     public class PantryManager
     {
-    private InventoryRepository IR {get; set;}
-    public PantryManager(InventoryRepository IR)
+    private PantryRepository IR {get; set;}
+    public PantryManager(PantryRepository IR)
     {
         this.IR = IR;
     }
 
-    public Pantry addToPantyList(Pantry newPantry)
+    public Pantry addToPantryList(Pantry newPantry)
     {
-        IR.addToPantryList(newPantry);
-        IR.SaveChanges();
+        IR.AddToPantryList(newPantry);
         return newPantry;
     }
 
     public IEnumerable<Pantry> getPantryList()
     {
-        return IR.GetPantryList();
+        var results = IR.GetPantryList();
+        results.Wait();
+        return (results.Result);
     }
 
     public Pantry FindPantryByPrimaryKey(long primaryKey)
     {
-        return IR.FindPantryByPrimaryKey(primaryKey);
+        var results = IR.FindPantryByPrimaryKey(primaryKey);
+        results.Wait();
+        return (results.Result);
     }
 
     public IEnumerable<Pantry> Search(String findValue)
     {
-        return IR.ContainsSearchForPantryName(findValue);
+        var results = IR.ContainsSearchForPantryName(findValue);
+        results.Wait();
+        return (results.Result);
     }
-    public Pantry pantryUpdate(Pantry updatedPantry)
+    public void pantryUpdate(Pantry updatedPantry)
     {
-        Pantry updateMe = IR.FindPantryByPrimaryKey(updatedPantry.pantryID);
-        if (updateMe != null) { 
-        updateMe.pantryName = updatedPantry.pantryName;
-            IR.SaveChanges();
-            return updateMe;
-        }
-        else { return null; }
+        IR.pantryUpdate(updatedPantry);
     }
     }
 

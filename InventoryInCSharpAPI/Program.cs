@@ -1,7 +1,7 @@
 using InventoryInCSharpAPI.Managers;
-using InventoryInCSharpAPI.Services;
-using System.Data.Entity;
+//using InventoryInCSharpAPI.Services;
 using System.Data.Common;
+using InventoryInCSharpAPI.Repositories;
 //using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ItemManager>();
 builder.Services.AddSingleton<PantryManager>();
+builder.Services.AddSingleton<PantryContentsManager>();
+builder.Services.AddSingleton<ItemRepository>();
+builder.Services.AddSingleton<PantryRepository>();
+builder.Services.AddSingleton<PantryContentsRepository>();
+
 
 var app = builder.Build();
 
