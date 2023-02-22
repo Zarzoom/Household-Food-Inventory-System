@@ -6,3 +6,5 @@ The app allows items to be added to a database and subsequently managed. Feature
 
 # ToDo
 Price wont take in anything less than one. It needs to take in a number less than 1.
+Make delete pantry function??
+Prevent duplicate items in a pantry??

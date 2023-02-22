@@ -1,5 +1,5 @@
-﻿namespace InventoryInCSharpAPI.Models
-{
+﻿namespace InventoryInCSharpAPI.Models;
+
     public class Pantry
     {
         public String pantryName {get; set; }
@@ -13,4 +13,4 @@
             this.pantryName = pantryName;
         }
     }
-}
+
