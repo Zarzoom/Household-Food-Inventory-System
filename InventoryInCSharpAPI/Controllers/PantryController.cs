@@ -29,7 +29,11 @@ public class PantryController : ControllerBase
     {
         return pantryManager.Search(searchValue);
     }
-
+    [HttpPut("deletePantry/{PantryID}")]
+    public void deletePantry(long PantryID){
+        pantryManager.deletePantry(PantryID);
+    }
+    
     [HttpPost]
     public Pantry Post([FromBody] Pantry postmanPantry) {
     return pantryManager.addToPantryList(postmanPantry);

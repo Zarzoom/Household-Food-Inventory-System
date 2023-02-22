@@ -33,6 +33,11 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.FindContentsByPCPantryID(PCPantryID);
     }
+    [HttpGet("{PCPantryID}/{PCItemID}")]
+    public PantryContents Get(long PCPantryID, long PCItemID)
+    {
+        return pantryContentsManager.FindContentsByItemIDAndPantryID(PCPantryID, PCItemID);
+    }
 
     [HttpGet("retrievePantry/{PantryID}")]
     public IEnumerable<Item> GetContentsFromPantry(long PantryID)

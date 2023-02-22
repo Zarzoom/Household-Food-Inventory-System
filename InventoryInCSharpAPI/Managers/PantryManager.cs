@@ -4,41 +4,58 @@ namespace InventoryInCSharpAPI.Managers;
 
     public class PantryManager
     {
-    private PantryRepository IR {get; set;}
-    public PantryManager(PantryRepository IR)
+    private PantryRepository PR {get; set;}
+    private PantryContentsManager PCM { get; set; }
+    public PantryManager(PantryRepository PR, PantryContentsManager PCM)
     {
-        this.IR = IR;
+        this.PCM = PCM;
+        this.PR = PR;
     }
 
     public Pantry addToPantryList(Pantry newPantry)
     {
-        IR.AddToPantryList(newPantry);
+        PR.AddToPantryList(newPantry);
         return newPantry;
     }
 
     public IEnumerable<Pantry> getPantryList()
     {
-        var results = IR.GetPantryList();
+        var results = PR.GetPantryList();
         results.Wait();
         return (results.Result);
     }
 
     public Pantry FindPantryByPrimaryKey(long primaryKey)
     {
-        var results = IR.FindPantryByPrimaryKey(primaryKey);
+        var results = PR.FindPantryByPrimaryKey(primaryKey);
         results.Wait();
         return (results.Result);
     }
 
     public IEnumerable<Pantry> Search(String findValue)
     {
-        var results = IR.ContainsSearchForPantryName(findValue);
+        var results = PR.ContainsSearchForPantryName(findValue);
         results.Wait();
         return (results.Result);
     }
     public void pantryUpdate(Pantry updatedPantry)
     {
-        IR.pantryUpdate(updatedPantry);
+        PR.pantryUpdate(updatedPantry);
+    }
+    public void deletePantry(long PantryID)
+    {
+        IEnumerable<PantryContents> itemsInPantry = PCM.FindContentsByPCPantryID(PantryID);
+        if (itemsInPantry != null)
+        {
+            foreach (PantryContents PantryContent in itemsInPantry)
+            {
+                PCM.deletePantryContent(PantryContent.PCPantryID);
+            }
+        }
+        else
+        {
+        }
+        PR.deletePantry(PantryID);
     }
     }
 

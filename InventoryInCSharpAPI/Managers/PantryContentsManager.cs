@@ -16,8 +16,19 @@ public class PantryContentsManager
 
     public PantryContents addToPantry(PantryContents newPantryContent)
     {
-        PCR.addToPantry(newPantryContent);
-        return (newPantryContent);
+        PantryContents IsItDuplicate = FindContentsByItemIDAndPantryID(newPantryContent.PCPantryID, newPantryContent.PCItemID);
+        if (IsItDuplicate == null)
+        {
+            PCR.addToPantry(newPantryContent);
+            return (newPantryContent);
+        }
+        else
+        {
+            IsItDuplicate.Quantity += newPantryContent.Quantity;
+            pantryContentUpdate(IsItDuplicate);
+            return IsItDuplicate;
+        }
+        
     }
 
     public IEnumerable<PantryContents> getAllPantryContents()
@@ -34,6 +45,13 @@ public class PantryContentsManager
         return (results.Result);
     }
 
+    public PantryContents FindContentsByItemIDAndPantryID(long PCPantryID, long PCItemID)
+    {
+        var results = PCR.FindContentsByItemIDAndPantryID(PCPantryID, PCItemID);
+        results.Wait();
+        return (results.Result);
+    }
+    
     public IEnumerable<Item> WhatIsInThatPantry(long PCPantryID)
     {
         var contentsByPantryID = PCR.FindContentsByPCPantryID(PCPantryID);
@@ -71,5 +89,10 @@ public class PantryContentsManager
 
     public void deletePantryContent(long PantryContentID){
         PCR.deletePantryContent(PantryContentID);
+    }
+
+    public void deleteContentsByPantry(long PantryID)
+    {
+        PCR.deletePantryContentsByPantry(PantryID);
     }
 }

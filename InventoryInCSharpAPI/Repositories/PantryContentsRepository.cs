@@ -57,7 +57,14 @@
                 var deletedRows = await connection.ExecuteAsync(sql, parameters);
             } 
         }
-
+        public async void deletePantryContentsByPantry(long PantryID){
+            using (var connection = new MySqlConnection("server=db,3306;user=root;password=Your_password123;database=InventoryData;"))
+            {
+                var parameters = new { PantryID};
+                var sql = $"DELETE FROM PantryContents WHERE PantryID = @PantryID";
+                var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            } 
+        }
         public async Task<IEnumerable<PantryContents>> FindContentsByPCItemID(long PCItemID)
         {
             using (var connection = new MySqlConnection("server=db,3306;user=root;password=Your_password123;database=InventoryData;"))
@@ -66,6 +73,17 @@
                 var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID";
                 var allPantryContentWithPCItemID = await connection.QueryAsync<PantryContents>(sql, parameters);
                 return allPantryContentWithPCItemID;
+            }
+        }
+
+        public async Task<PantryContents> FindContentsByItemIDAndPantryID(long PCPantryID, long PCItemID)
+        {
+            using (var connection = new MySqlConnection("server=db,3306;user=root;password=Your_password123;database=InventoryData;"))
+            {
+                var parameters = new { PCItemID, PCPantryID };
+                var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
+                var PantryContentsThatMatch = await connection.QueryAsync<PantryContents>(sql, parameters);
+                return PantryContentsThatMatch.Single();
             }
         }
     }

@@ -56,6 +56,15 @@ using Dapper;
             var createdPantry = await connection.ExecuteAsync(sql, updateMe);
         }
         }
+        
+        public async void deletePantry(long PantryID){
+            using (var connection = new MySqlConnection("server=db,3306;user=root;password=Your_password123;database=InventoryData;"))
+            {
+                var parameters = new { PantryID};
+                var sql = $"DELETE FROM PantryList WHERE PantryID = @PantryID";
+                var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            } 
+        }
 
     }
 }

@@ -17,6 +17,10 @@ public class ItemController : ControllerBase
         this.itemManager = itemManager;
     }
     // GET: api/<ItemController>
+    /// <summary>
+    /// prices bellow 1 need a 0 in the ones place. example: 0.99
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public IEnumerable<Item> Get()
     {
