@@ -57,5 +57,29 @@ namespace InventoryInCSharpAPI.Managers;
         }
         PR.deletePantry(PantryID);
     }
+    
+    //commented out in controller to prevent catastrophic accidents.
+    public void deleteALLPantries()
+    {
+        IEnumerable<PantryContents> itemsInPantry;
+        IEnumerable <Pantry> AllPantries= getPantryList();
+        foreach (Pantry pantry in AllPantries)
+        {
+            itemsInPantry = PCM.FindContentsByPCPantryID(pantry.pantryID);
+
+            if (itemsInPantry != null)
+            {
+                foreach (PantryContents PantryContent in itemsInPantry)
+                {
+                    PCM.deletePantryContent(PantryContent.PCPantryID);
+                    PR.deletePantry(pantry.pantryID);
+                }
+            }
+            else
+            {
+                PR.deletePantry(pantry.pantryID);
+            }
+        }
+    }
     }
 

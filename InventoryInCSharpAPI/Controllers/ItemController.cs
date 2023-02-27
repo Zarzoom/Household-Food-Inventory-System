@@ -53,17 +53,15 @@ public class ItemController : ControllerBase
     {
         itemManager.itemUpdate(updatedItem);
     }
+    [HttpPut("deleteItem/{ItemID}")]
+    public void deleteItem(long ItemID){
+        itemManager.deleteItem(ItemID);
+    }
+    //Commented out for safety. This method deletes ALL Items.
+    //This method has not been tested.
+    [HttpPut("deleteAllItems")]
+    public void deleteALLItems(){
+        itemManager.deleteALLItems();
+    }
 
-    //// PUT api/<ItemController>/5
-    //[HttpPut("{id}")]
-    //public void Put(int id, [FromBody] Item item)
-    //{
-
-    //}
-
-    //// DELETE api/<ItemController>/5
-    //[HttpDelete("{id}")]
-    //public void Delete(int id)
-    //{
-    //}
 }

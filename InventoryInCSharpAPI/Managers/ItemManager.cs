@@ -41,4 +41,20 @@ public class ItemManager
     {
       IR.itemUpdate(updatedItem);
     }
+    
+    public void deleteItem(long ItemID)
+    {
+        IR.deleteItem(ItemID);
+    }
+    
+    //commented out in controller to prevent catastrophic accidents.
+
+    public void deleteALLItems()
+    {
+        IEnumerable<Item> AllItems = GetItemList();
+        foreach (Item item in AllItems)
+        {
+            deleteItem(item.itemID);
+        }
+    }
 }

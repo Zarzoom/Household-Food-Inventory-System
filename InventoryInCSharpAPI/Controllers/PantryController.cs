@@ -44,5 +44,12 @@ public class PantryController : ControllerBase
     {
         pantryManager.pantryUpdate(updatedPantry);
     }
+    
+     //Commented out for safety. This method deletes ALL Items.
+     //This method has not been tested.
+     [HttpPut("deleteAllItems")]
+     public void deleteALLItems(){
+         pantryManager.deleteALLPantries();
+     }
     }
 

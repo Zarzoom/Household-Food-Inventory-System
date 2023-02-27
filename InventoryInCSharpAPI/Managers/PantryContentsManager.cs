@@ -24,7 +24,7 @@ public class PantryContentsManager
         }
         else
         {
-            IsItDuplicate.Quantity += newPantryContent.Quantity;
+            IsItDuplicate.quantity += newPantryContent.quantity;
             pantryContentUpdate(IsItDuplicate);
             return IsItDuplicate;
         }
@@ -62,7 +62,7 @@ public class PantryContentsManager
             var findPantryItems = IR.FindItemByPrimaryKey(pantryContent.PCItemID);
             findPantryItems.Wait();
             var PantryItemList = findPantryItems.Result;
-            PantryItemList.Quantity = pantryContent.Quantity;
+            PantryItemList.quantity = pantryContent.quantity;
             yield return PantryItemList;
         }
     }
@@ -77,7 +77,7 @@ public class PantryContentsManager
             var findPantryItems = PR.FindPantryByPrimaryKey(pantryContent.PCPantryID);
             findPantryItems.Wait();
             var PantriesContainingItem = findPantryItems.Result;
-            PantryItem pantryItem = new PantryItem(PantriesContainingItem.pantryName, pantryContent.Quantity, pantryContent.PantryContentID);
+            PantryItem pantryItem = new PantryItem(PantriesContainingItem.pantryName, pantryContent.quantity, pantryContent.PantryContentID);
             yield return pantryItem;
         }
     }

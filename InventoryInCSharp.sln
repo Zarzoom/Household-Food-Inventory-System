@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8609A5
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
+		docker-compose-test.yml = docker-compose-test.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postgresql", "Postgresql", "{3F619679-1F15-48A7-A5DB-2D888F613C1C}"
 	ProjectSection(SolutionItems) = preProject
 		init.sql = init.sql
+		run-dotnet-app.sh = run-dotnet-app.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInCSharp.IntegrationTests", "InventoryInCSharp.IntegrationTests\InventoryInCSharp.IntegrationTests.csproj", "{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}"

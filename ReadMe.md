@@ -6,3 +6,4 @@ The app allows items to be added to a database and subsequently managed. Feature
 
 # ToDo
 In the managers, switch to taking in managers of other types instead of their repositories
+change price from float to decimal in c#

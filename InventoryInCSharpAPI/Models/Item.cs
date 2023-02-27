@@ -8,7 +8,7 @@
         public float price { get; set; }
         public String genericName { get; set; }
         public String size { get; set; }
-        public long Quantity {get; set;}
+        public long quantity {get; set;}
 
         public Item() {
         }
