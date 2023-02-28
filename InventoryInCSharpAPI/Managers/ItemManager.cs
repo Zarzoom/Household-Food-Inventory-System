@@ -4,57 +4,58 @@ namespace InventoryInCSharpAPI.Managers;
 
 public class ItemManager
 {
-    private ItemRepository IR { get; set; }
+    private readonly ItemRepository _IR;
     public ItemManager(ItemRepository IR)
     {
-        this.IR = IR;
+        this._IR = IR;
     }
 // private List<Item> ItemList { get; set; } = new List<Item>();
 
-    public Item addToItemList(Item newItem) {
-        IR.AddToItemList(newItem);
+    public Item AddToItemList(Item newItem)
+    {
+        _IR.AddToItemList(newItem);
         return newItem;
     }
 
     public IEnumerable<Item> GetItemList()
     {
-        var results = IR.GetItemList();
+        var results = _IR.GetItemList();
         results.Wait();
         return (results.Result);
     }
 
-    public Item findByPrimaryKey(long primaryKey)
+    public Item FindByPrimaryKey(long primaryKey)
     {
-        var results = IR.FindItemByPrimaryKey(primaryKey);
+        var results = _IR.FindItemByPrimaryKey(primaryKey);
         results.Wait();
         return (results.Result);
     }
 
-    public IEnumerable<Item> Search(String findValue) 
+    public IEnumerable<Item> Search(String findValue)
     {
-        var results = IR.ContainsSearchForGenericNameAndBrand(findValue);
+        var results = _IR.ContainsSearchForGenericNameAndBrand(findValue);
         results.Wait();
         return (results.Result);
     }
 
-    public void itemUpdate(Item updatedItem)
+    public void ItemUpdate(Item updatedItem)
     {
-      IR.itemUpdate(updatedItem);
+        _IR.ItemUpdate(updatedItem);
     }
-    
-    public void deleteItem(long ItemID)
+
+    public void DeleteItem(long itemID)
     {
-        IR.deleteItem(ItemID);
+        _IR.DeleteItem(itemID);
     }
-    
+
     //commented out in controller to prevent catastrophic accidents.
 
-    public void deleteALLItems()
+    public void DeleteALLItems()
     {
-        IEnumerable<Item> AllItems = GetItemList();
-        foreach (Item item in AllItems)
+        IEnumerable<Item> allItems = GetItemList();
+        foreach (Item item in allItems)
         {
-            deleteItem(item.itemID);
+            DeleteItem(item.itemID);
         }
     }
 }

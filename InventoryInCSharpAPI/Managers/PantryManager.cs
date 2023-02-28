@@ -2,84 +2,84 @@
 using InventoryInCSharpAPI.Repositories;
 namespace InventoryInCSharpAPI.Managers;
 
-    public class PantryManager
-    {
-    private PantryRepository PR {get; set;}
-    private PantryContentsManager PCM { get; set; }
+public class PantryManager
+{
+    private readonly PantryRepository _PR;
+    private readonly PantryContentsManager _PCM;
     public PantryManager(PantryRepository PR, PantryContentsManager PCM)
     {
-        this.PCM = PCM;
-        this.PR = PR;
+        this._PCM = PCM;
+        this._PR = PR;
     }
 
-    public Pantry addToPantryList(Pantry newPantry)
+    public Pantry AddToPantryList(Pantry newPantry)
     {
-        PR.AddToPantryList(newPantry);
+        _PR.AddToPantryList(newPantry);
         return newPantry;
     }
 
-    public IEnumerable<Pantry> getPantryList()
+    public IEnumerable<Pantry> GetPantryList()
     {
-        var results = PR.GetPantryList();
+        var results = _PR.GetPantryList();
         results.Wait();
         return (results.Result);
     }
 
     public Pantry FindPantryByPrimaryKey(long primaryKey)
     {
-        var results = PR.FindPantryByPrimaryKey(primaryKey);
+        var results = _PR.FindPantryByPrimaryKey(primaryKey);
         results.Wait();
         return (results.Result);
     }
 
     public IEnumerable<Pantry> Search(String findValue)
     {
-        var results = PR.ContainsSearchForPantryName(findValue);
+        var results = _PR.ContainsSearchForPantryName(findValue);
         results.Wait();
         return (results.Result);
     }
-    public void pantryUpdate(Pantry updatedPantry)
+    public void PantryUpdate(Pantry updatedPantry)
     {
-        PR.pantryUpdate(updatedPantry);
+        _PR.PantryUpdate(updatedPantry);
     }
-    public void deletePantry(long PantryID)
+    public void DeletePantry(long pantryID)
     {
-        IEnumerable<PantryContents> itemsInPantry = PCM.FindContentsByPCPantryID(PantryID);
+        IEnumerable<PantryContents> itemsInPantry = _PCM.FindContentsByPCPantryID(pantryID);
         if (itemsInPantry != null)
         {
             foreach (PantryContents PantryContent in itemsInPantry)
             {
-                PCM.deletePantryContent(PantryContent.PCPantryID);
+                _PCM.DeletePantryContent(PantryContent.pantryContentID);
             }
         }
         else
         {
         }
-        PR.deletePantry(PantryID);
+        _PR.DeletePantry(pantryID);
     }
-    
+
     //commented out in controller to prevent catastrophic accidents.
-    public void deleteALLPantries()
+    public void DeleteALLPantries()
     {
         IEnumerable<PantryContents> itemsInPantry;
-        IEnumerable <Pantry> AllPantries= getPantryList();
+        IEnumerable<Pantry> AllPantries = GetPantryList();
         foreach (Pantry pantry in AllPantries)
         {
-            itemsInPantry = PCM.FindContentsByPCPantryID(pantry.pantryID);
+            itemsInPantry = _PCM.FindContentsByPCPantryID(pantry.pantryID);
 
             if (itemsInPantry != null)
             {
                 foreach (PantryContents PantryContent in itemsInPantry)
                 {
-                    PCM.deletePantryContent(PantryContent.PCPantryID);
-                    PR.deletePantry(pantry.pantryID);
+                    _PCM.DeletePantryContent(PantryContent.pantryContentID);
+
                 }
             }
             else
             {
-                PR.deletePantry(pantry.pantryID);
+
             }
+            _PR.DeletePantry(pantry.pantryID);
         }
     }
-    }
-
+}

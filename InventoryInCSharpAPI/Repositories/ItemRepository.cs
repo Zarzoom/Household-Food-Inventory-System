@@ -1,9 +1,7 @@
 ﻿namespace InventoryInCSharpAPI.Repositories
 {
     using InventoryInCSharpAPI.Models;
-    using System.Data.Common;
     using Dapper;
-    using System.Data.SqlClient;
     using MySqlConnector;
 
     public class ItemRepository
@@ -25,13 +23,13 @@
 
         public async Task<IEnumerable<Item>> GetItemList()
         {
-            using(var connection =
+            using (var connection =
                    new MySqlConnection(
                        "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
             {
                 var sql = "SELECT * FROM ItemList";
-                var ItemList = await connection.QueryAsync<Item>(sql);
-                return ItemList;
+                var itemList = await connection.QueryAsync<Item>(sql);
+                return itemList;
             }
         }
 
@@ -43,8 +41,8 @@
             {
                 var parameters = new { primaryKey };
                 var sql = $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @primaryKey";
-                var Item = await connection.QueryAsync<Item>(sql, parameters);
-                return Item.Single();
+                var item = await connection.QueryAsync<Item>(sql, parameters);
+                return item.SingleOrDefault();
             }
         }
 
@@ -59,12 +57,12 @@
                 //var parameters = new {searchValue};
                 var sql =
                     $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE LOWER(GenericName) LIKE LOWER('%{searchValue}%') OR LOWER(Brand) LIKE LOWER('%{searchValue}%')";
-                var Item = await connection.QueryAsync<Item>(sql);
-                return Item;
+                var item = await connection.QueryAsync<Item>(sql);
+                return item;
             }
         }
 
-        public async void itemUpdate(Item updateMe)
+        public async void ItemUpdate(Item updateMe)
         {
             using (var connection =
                    new MySqlConnection(
@@ -76,7 +74,7 @@
             }
         }
 
-        public async void deleteItem(long ItemID)
+        public async void DeleteItem(long ItemID)
         {
             using (var connection =
                    new MySqlConnection(

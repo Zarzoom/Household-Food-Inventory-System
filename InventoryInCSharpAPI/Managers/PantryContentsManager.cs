@@ -4,95 +4,103 @@ namespace InventoryInCSharpAPI.Managers;
 
 public class PantryContentsManager
 {
-    private PantryContentsRepository PCR { get; set; }
-    private ItemRepository IR { get; set; }
-    private PantryRepository PR {get; set;}
-    public PantryContentsManager(PantryContentsRepository PCR, ItemRepository IR, PantryRepository PR)
+    private readonly PantryContentsRepository _PCR;
+    private readonly ItemManager _IM;
+    private readonly PantryRepository _PR;
+    public PantryContentsManager(PantryContentsRepository PCR, ItemManager IM, PantryRepository PR)
     {
-        this.PR = PR;
-        this.IR = IR;
-        this.PCR = PCR;
+        this._PR = PR;
+        this._IM = IM;
+        this._PCR = PCR;
     }
 
-    public PantryContents addToPantry(PantryContents newPantryContent)
+    public PantryContents AddToPantry(PantryContents newPantryContent)
     {
-        PantryContents IsItDuplicate = FindContentsByItemIDAndPantryID(newPantryContent.PCPantryID, newPantryContent.PCItemID);
-        if (IsItDuplicate == null)
+        var doesPantryExistTask = _PR.FindPantryByPrimaryKey(newPantryContent.pcPantryID);
+        doesPantryExistTask.Wait();
+        Pantry doesPantryExist = doesPantryExistTask.Result;
+        Item doesItemExist = _IM.FindByPrimaryKey(newPantryContent.pcItemID);
+        if (doesPantryExist is not null && doesItemExist is not null)
         {
-            PCR.addToPantry(newPantryContent);
-            return (newPantryContent);
+            PantryContents isItDuplicate = FindContentsByItemIDAndPantryID(newPantryContent.pcPantryID, newPantryContent.pcItemID);
+            if (isItDuplicate is null)
+            {
+                _PCR.AddToPantry(newPantryContent);
+                return (newPantryContent);
+            }
+            else
+            {
+                isItDuplicate.quantity += newPantryContent.quantity;
+                PantryContentUpdate(isItDuplicate);
+                return isItDuplicate;
+            }
         }
         else
         {
-            IsItDuplicate.quantity += newPantryContent.quantity;
-            pantryContentUpdate(IsItDuplicate);
-            return IsItDuplicate;
+            return null;
         }
-        
     }
 
-    public IEnumerable<PantryContents> getAllPantryContents()
+    public IEnumerable<PantryContents> GetAllPantryContents()
     {
-        var results = PCR.GetAllPantryContents();
+        var results = _PCR.GetAllPantryContents();
         results.Wait();
         return (results.Result);
     }
 
-    public IEnumerable<PantryContents> FindContentsByPCPantryID(long PCPantryID)
+    public IEnumerable<PantryContents> FindContentsByPCPantryID(long pcPantryID)
     {
-        var results = PCR.FindContentsByPCPantryID(PCPantryID);
+        var results = _PCR.FindContentsByPCPantryID(pcPantryID);
         results.Wait();
         return (results.Result);
     }
 
-    public PantryContents FindContentsByItemIDAndPantryID(long PCPantryID, long PCItemID)
+    public PantryContents FindContentsByItemIDAndPantryID(long pcPantryID, long pcItemID)
     {
-        var results = PCR.FindContentsByItemIDAndPantryID(PCPantryID, PCItemID);
+        var results = _PCR.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
         results.Wait();
         return (results.Result);
     }
-    
-    public IEnumerable<Item> WhatIsInThatPantry(long PCPantryID)
+
+    public IEnumerable<Item> WhatIsInThatPantry(long pcPantryID)
     {
-        var contentsByPantryID = PCR.FindContentsByPCPantryID(PCPantryID);
+        var contentsByPantryID = _PCR.FindContentsByPCPantryID(pcPantryID);
         contentsByPantryID.Wait();
         var listOfPantryContents = contentsByPantryID.Result;
         foreach (PantryContents pantryContent in listOfPantryContents)
         {
-            var findPantryItems = IR.FindItemByPrimaryKey(pantryContent.PCItemID);
-            findPantryItems.Wait();
-            var PantryItemList = findPantryItems.Result;
-            PantryItemList.quantity = pantryContent.quantity;
-            yield return PantryItemList;
+            var pantryItemList = _IM.FindByPrimaryKey(pantryContent.pcItemID);
+            pantryItemList.quantity = pantryContent.quantity;
+            yield return pantryItemList;
         }
     }
 
-    public IEnumerable<PantryItem> WhereIsThatItem(long PCItemID)
+    public IEnumerable<PantryItem> WhereIsThatItem(long pcItemID)
     {
-        var contentsByItemID = PCR.FindContentsByPCItemID(PCItemID);
+        var contentsByItemID = _PCR.FindContentsByPCItemID(pcItemID);
         contentsByItemID.Wait();
         var listOfItemContents = contentsByItemID.Result;
         foreach (PantryContents pantryContent in listOfItemContents)
         {
-            var findPantryItems = PR.FindPantryByPrimaryKey(pantryContent.PCPantryID);
+            var findPantryItems = _PR.FindPantryByPrimaryKey(pantryContent.pcPantryID);
             findPantryItems.Wait();
-            var PantriesContainingItem = findPantryItems.Result;
-            PantryItem pantryItem = new PantryItem(PantriesContainingItem.pantryName, pantryContent.quantity, pantryContent.PantryContentID);
+            PantryItem pantryItem = new PantryItem(findPantryItems.Result.pantryName, pantryContent.quantity, pantryContent.pantryContentID);
             yield return pantryItem;
         }
     }
 
-    public void pantryContentUpdate(PantryContents updatedPantryContent)
+    public void PantryContentUpdate(PantryContents updatedPantryContent)
     {
-        PCR.pantryContentUpdate(updatedPantryContent);
+        _PCR.PantryContentUpdate(updatedPantryContent);
     }
 
-    public void deletePantryContent(long PantryContentID){
-        PCR.deletePantryContent(PantryContentID);
+    public void DeletePantryContent(long pantryContentID)
+    {
+        _PCR.DeletePantryContent(pantryContentID);
     }
 
-    public void deleteContentsByPantry(long PantryID)
+    public void DeleteContentsByPantry(long pantryID)
     {
-        PCR.deletePantryContentsByPantry(PantryID);
+        _PCR.DeletePantryContentsByPantry(pantryID);
     }
 }

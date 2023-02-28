@@ -7,7 +7,7 @@ namespace InventoryInCSharpAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class PantryController : ControllerBase
-    {
+{
     private readonly PantryManager pantryManager;
 
     public PantryController(PantryManager pantryManager)
@@ -15,8 +15,9 @@ public class PantryController : ControllerBase
         this.pantryManager = pantryManager;
     }
     [HttpGet]
-    public IEnumerable<Pantry> Get() {
-    return pantryManager.getPantryList();
+    public IEnumerable<Pantry> Get()
+    {
+        return pantryManager.GetPantryList();
     }
     [HttpGet("{primaryKey}")]
     public Pantry Get(long primaryKey)
@@ -29,27 +30,29 @@ public class PantryController : ControllerBase
     {
         return pantryManager.Search(searchValue);
     }
-    [HttpPut("deletePantry/{PantryID}")]
-    public void deletePantry(long PantryID){
-        pantryManager.deletePantry(PantryID);
+    [HttpPut("deletePantry/{pantryID}")]
+    public void DeletePantry(long pantryID)
+    {
+
+        pantryManager.DeletePantry(pantryID);
     }
-    
+
     [HttpPost]
-    public Pantry Post([FromBody] Pantry postmanPantry) {
-    return pantryManager.addToPantryList(postmanPantry);
+    public Pantry Post([FromBody] Pantry postmanPantry)
+    {
+        return pantryManager.AddToPantryList(postmanPantry);
     }
 
     [HttpPut]
     public void Put([FromBody] Pantry updatedPantry)
     {
-        pantryManager.pantryUpdate(updatedPantry);
-    }
-    
-     //Commented out for safety. This method deletes ALL Items.
-     //This method has not been tested.
-     [HttpPut("deleteAllItems")]
-     public void deleteALLItems(){
-         pantryManager.deleteALLPantries();
-     }
+        pantryManager.PantryUpdate(updatedPantry);
     }
 
+    //Commented out for safety. This method deletes ALL Items.
+    //This method has not been tested.
+    // [HttpPut("DeleteAllPantries")]
+    // public void DeleteALLItems(){
+    //     pantryManager.DeleteALLPantries();
+    // }
+}

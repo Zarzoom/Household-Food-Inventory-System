@@ -1,14 +1,16 @@
 namespace InventoryInCSharpAPI.Models;
 
-public class PantryItem{
-    public string PantryName {get; set;}
-    public long Quantity {get; set;}
-    public long PantryContentID;
+public class PantryItem
+{
+    public string pantryName { get; set; }
+    public long quantity { get; set; }
+    public long pantryContentID { get; set; }
 
-    public PantryItem(){}
-    public PantryItem(string PantryName, long Quantity, long PantryContentID)
+    public PantryItem() {}
+    public PantryItem(string pantryName, long quantity, long pantryContentID)
     {
-        this.PantryName = PantryName;
-        this.Quantity = Quantity;
+        this.pantryContentID = pantryContentID;
+        this.pantryName = pantryName;
+        this.quantity = quantity;
     }
 }

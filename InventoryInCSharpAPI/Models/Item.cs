@@ -1,22 +1,22 @@
 ﻿namespace InventoryInCSharpAPI.Models;
 
-    public class Item
-    {
-        //example had [required] above student name but not ID. why? Do I need that?
-        public long itemID { get; set; }
-        public String brand { get; set; }
-        public float price { get; set; }
-        public String genericName { get; set; }
-        public String size { get; set; }
-        public long quantity {get; set;}
+public class Item
+{
+    public long itemID { get; set; }
+    public String brand { get; set; }
+    public float price { get; set; }
+    public String genericName { get; set; }
+    public String size { get; set; }
+    public long quantity { get; set; }
 
-        public Item() {
-        }
-        public Item(String brand, float price, String genericName, String size)
-        {
-            this.brand = brand;
-            this.price = price;
-            this.genericName = genericName;
-            this.size = size;
-        }
+    public Item()
+    {
     }
+    public Item(String brand, float price, String genericName, String size)
+    {
+        this.brand = brand;
+        this.price = price;
+        this.genericName = genericName;
+        this.size = size;
+    }
+}

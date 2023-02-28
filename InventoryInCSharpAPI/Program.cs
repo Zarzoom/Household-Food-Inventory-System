@@ -1,6 +1,5 @@
 using InventoryInCSharpAPI.Managers;
 //using InventoryInCSharpAPI.Services;
-using System.Data.Common;
 using InventoryInCSharpAPI.Repositories;
 //using Microsoft.Extensions.Configuration;
 

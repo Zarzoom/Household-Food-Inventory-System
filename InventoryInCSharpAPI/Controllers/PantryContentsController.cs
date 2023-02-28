@@ -6,7 +6,6 @@ namespace InventoryInCSharpAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-
 public class PantryContentsController : ControllerBase
 {
     private readonly PantryContentsManager pantryContentsManager;
@@ -19,46 +18,47 @@ public class PantryContentsController : ControllerBase
     [HttpPost]
     public PantryContents Post([FromBody] PantryContents postmanPantryContent)
     {
-        return pantryContentsManager.addToPantry(postmanPantryContent);
+        return pantryContentsManager.AddToPantry(postmanPantryContent);
     }
 
     [HttpGet]
     public IEnumerable<PantryContents> Get()
     {
-        return pantryContentsManager.getAllPantryContents();
+        return pantryContentsManager.GetAllPantryContents();
     }
 
-    [HttpGet("{PCPantryID}")]
-    public IEnumerable<PantryContents> Get(long PCPantryID)
+    [HttpGet("{pcPantryID}")]
+    public IEnumerable<PantryContents> Get(long pcPantryID)
     {
-        return pantryContentsManager.FindContentsByPCPantryID(PCPantryID);
+        return pantryContentsManager.FindContentsByPCPantryID(pcPantryID);
     }
-    [HttpGet("{PCPantryID}/{PCItemID}")]
-    public PantryContents Get(long PCPantryID, long PCItemID)
+    [HttpGet("{pcPantryID}/{pcItemID}")]
+    public PantryContents Get(long pcPantryID, long pcItemID)
     {
-        return pantryContentsManager.FindContentsByItemIDAndPantryID(PCPantryID, PCItemID);
-    }
-
-    [HttpGet("retrievePantry/{PantryID}")]
-    public IEnumerable<Item> GetContentsFromPantry(long PantryID)
-    {
-        return pantryContentsManager.WhatIsInThatPantry(PantryID);
+        return pantryContentsManager.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
     }
 
-    [HttpGet("retrieveItemLocation/{ItemID}")]
-    public IEnumerable<PantryItem> findPantriesContainingItem(long ItemID)
+    [HttpGet("retrievePantry/{pantryID}")]
+    public IEnumerable<Item> GetContentsFromPantry(long pantryID)
     {
-        return pantryContentsManager.WhereIsThatItem(ItemID);
+        return pantryContentsManager.WhatIsInThatPantry(pantryID);
     }
 
-    [HttpPut("deletePantryContent/{PantryContentID}")]
-    public void deletePantryContent(long PantryContentID){
-        pantryContentsManager.deletePantryContent(PantryContentID);
+    [HttpGet("retrieveItemLocation/{itemID}")]
+    public IEnumerable<PantryItem> findPantriesContainingItem(long itemID)
+    {
+        return pantryContentsManager.WhereIsThatItem(itemID);
+    }
+
+    [HttpPut("deletePantryContent/{pantryContentID}")]
+    public void DeletePantryContent(long pantryContentID)
+    {
+        pantryContentsManager.DeletePantryContent(pantryContentID);
     }
 
     [HttpPut]
     public void Put([FromBody] PantryContents updatedPantryContent)
     {
-        pantryContentsManager.pantryContentUpdate(updatedPantryContent);
+        pantryContentsManager.PantryContentUpdate(updatedPantryContent);
     }
 }

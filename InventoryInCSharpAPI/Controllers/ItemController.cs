@@ -24,14 +24,14 @@ public class ItemController : ControllerBase
     [HttpGet]
     public IEnumerable<Item> Get()
     {
-        return(itemManager.GetItemList());
+        return (itemManager.GetItemList());
     }
 
     // GET api/<ItemController>/5
     [HttpGet("{primaryKey}")]
     public Item Get(long primaryKey)
     {
-        return itemManager.findByPrimaryKey(primaryKey);
+        return itemManager.FindByPrimaryKey(primaryKey);
     }
     //GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
@@ -44,24 +44,25 @@ public class ItemController : ControllerBase
     [HttpPost]
     public Item Post([FromBody] Item postmanItem)
     {
-        return itemManager.addToItemList(postmanItem);
+        return itemManager.AddToItemList(postmanItem);
     }
 
     // PUT api/<ItemController>
     [HttpPut]
     public void Put([FromBody] Item updatedItem)
     {
-        itemManager.itemUpdate(updatedItem);
+        itemManager.ItemUpdate(updatedItem);
     }
-    [HttpPut("deleteItem/{ItemID}")]
-    public void deleteItem(long ItemID){
-        itemManager.deleteItem(ItemID);
+    [HttpPut("deleteItem/{itemID}")]
+    public void DeleteItem(long itemID)
+    {
+        itemManager.DeleteItem(itemID);
     }
     //Commented out for safety. This method deletes ALL Items.
-    //This method has not been tested.
-    [HttpPut("deleteAllItems")]
-    public void deleteALLItems(){
-        itemManager.deleteALLItems();
-    }
+    //This method has been manually tested. 
+    // [HttpPut("deleteAllItems")]
+    // public void deleteALLItems(){
+    //     itemManager.deleteALLItems();
+    // }
 
 }
