@@ -9,12 +9,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8609A5
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
+		docker-compose-test.yml = docker-compose-test.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postgresql", "Postgresql", "{3F619679-1F15-48A7-A5DB-2D888F613C1C}"
 	ProjectSection(SolutionItems) = preProject
 		init.sql = init.sql
+		run-dotnet-app.sh = run-dotnet-app.sh
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInCSharp.IntegrationTests", "InventoryInCSharp.IntegrationTests\InventoryInCSharp.IntegrationTests.csproj", "{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +30,10 @@ Global
 		{A09E87C9-25A6-4B63-A1BC-179D9924BAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A09E87C9-25A6-4B63-A1BC-179D9924BAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A09E87C9-25A6-4B63-A1BC-179D9924BAB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

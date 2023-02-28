@@ -1,50 +1,61 @@
-﻿namespace InventoryInCSharp.Managers;
-using InventoryInCSharp.Models;
-using InventoryInCSharpAPI.Services;
+﻿using InventoryInCSharpAPI.Models;
+using InventoryInCSharpAPI.Repositories;
+namespace InventoryInCSharpAPI.Managers;
 
 public class ItemManager
 {
-    private InventoryRepository IR { get; set; }
-    public ItemManager(InventoryRepository IR)
+    private readonly ItemRepository _IR;
+    public ItemManager(ItemRepository IR)
     {
-        this.IR = IR;
+        this._IR = IR;
     }
 // private List<Item> ItemList { get; set; } = new List<Item>();
 
-    public Item addToItemList(Item newItem) {
-        IR.AddToItemList(newItem);
-        IR.SaveChanges();
+    public Item AddToItemList(Item newItem)
+    {
+        _IR.AddToItemList(newItem);
         return newItem;
     }
 
     public IEnumerable<Item> GetItemList()
     {
-        return (IR.GetItemList());
+        var results = _IR.GetItemList();
+        results.Wait();
+        return (results.Result);
     }
 
-    public Item findByPrimaryKey(long primaryKey)
+    public Item FindByPrimaryKey(long primaryKey)
     {
-        return IR.FindItemByPrimaryKey(primaryKey);
+        var results = _IR.FindItemByPrimaryKey(primaryKey);
+        results.Wait();
+        return (results.Result);
     }
 
-    public IEnumerable<Item> Search(String findValue) 
+    public IEnumerable<Item> Search(String findValue)
     {
-        return IR.ContainsSearchForGenericNameAndBrand(findValue);
+        var results = _IR.ContainsSearchForGenericNameAndBrand(findValue);
+        results.Wait();
+        return (results.Result);
     }
 
-    public Item itemUpdate(Item updatedItem)
+    public void ItemUpdate(Item updatedItem)
     {
-        Item updateMe = IR.FindItemByPrimaryKey(updatedItem.itemID);
-        if (updateMe != null) 
+        _IR.ItemUpdate(updatedItem);
+    }
+
+    public void DeleteItem(long itemID)
+    {
+        _IR.DeleteItem(itemID);
+    }
+
+    //commented out in controller to prevent catastrophic accidents.
+
+    public void DeleteALLItems()
+    {
+        IEnumerable<Item> allItems = GetItemList();
+        foreach (Item item in allItems)
         {
-            updateMe.brand = updatedItem.brand;
-            updateMe.price = updatedItem.price;
-            updateMe.genericName = updatedItem.genericName;
-            updateMe.size = updatedItem.size;
-            IR.SaveChanges();
-            return updateMe;
+            DeleteItem(item.itemID);
         }
-        else { return null; }
-
     }
 }

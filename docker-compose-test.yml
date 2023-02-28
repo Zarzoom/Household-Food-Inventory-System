@@ -6,8 +6,8 @@ services:
             - "8000:80"
             - "9000:443"
         depends_on:
-            - db
-    db:
+            - testdb
+    testdb:
         image: "mysql"
         command: --init-file /data/application/init.sql
         ports:
