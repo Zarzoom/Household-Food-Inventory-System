@@ -22,6 +22,26 @@ public class ItemTests
             actual.Wait();
         }
     }
+    [OneTimeTearDown]
+    public void DatabasePreparation()
+    {
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "DELETE FROM ItemList";
+            var actual = connection.ExecuteAsync(sql);
+            actual.Wait();
+        }
+
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
+            var actual = connection.Execute(sql);
+        }
+    }
 
     public void InsertUsingAPI(Item newItem)
     {
@@ -51,6 +71,7 @@ public class WhenItemIsInserted : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabasePreparation();
         try
         {
 
@@ -70,6 +91,7 @@ public class WhenItemIsInserted : ItemTests
             Console.WriteLine(e);
             throw;
         }
+        Task.Delay(1000).Wait();
 
         actualItem = GetActual();
 
@@ -98,7 +120,7 @@ public class WhenItemIsInserted : ItemTests
 
         return expectedItem;
     }
-    
+
     //Execute
     [Test]
     public void ThenItemsBrandIsCorrect()
@@ -124,21 +146,6 @@ public class WhenItemIsInserted : ItemTests
         Assert.AreEqual(expectedItem.size, actualItem.size);
     }
 
-
-    [OneTimeTearDown]
-    public void Destruction()
-    {
-        using Task<HttpResponseMessage> httpResponse = client.PutAsync($"http://localhost:8000/api/Item/deleteItem/{actualItem.itemID}", null);
-        httpResponse.Wait();
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
-    }
 }
 
 public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : ItemTests
@@ -150,6 +157,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -177,6 +185,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         expectedItem.brand = "Brand Test 2";
         expectedItem.price = 1.99F;
         expectedItem.size = "2 Test";
+        expectedItem.itemID = 2;
     }
 
     public void InsertItemsForTesting()
@@ -233,25 +242,13 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         Assert.AreEqual(expectedItem.size, actualItem.size);
     }
 
-
-    [OneTimeTearDown]
-    public void Destruction()
+    [Test]
+    public void ThenTheCorrectPrimaryKeyIsFound()
     {
-
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/1", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/2", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/3", null).Wait();
-
-        Task.Delay(1000).Wait();
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
+        Assert.AreEqual(expectedItem.itemID, actualItem.itemID);
     }
+
+
 }
 
 public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryKey : ItemTests
@@ -263,6 +260,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -291,6 +289,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         expectedItem.brand = "Brand Test 2";
         expectedItem.price = 1.99F;
         expectedItem.size = "2 Test";
+        expectedItem.itemID = 2;
     }
 
     public void InsertItemsForTesting()
@@ -300,7 +299,6 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
-        //testItem1.itemID = 1;
 
         InsertUsingAPI(testItem1);
 
@@ -309,7 +307,6 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
-        //testItem2.itemID = 2;
 
         InsertUsingAPI(testItem2);
 
@@ -346,26 +343,12 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
     {
         Assert.AreEqual(expectedItem.size, actualItem.size);
     }
-
-
-    [OneTimeTearDown]
-    public void Destruction()
+    [Test]
+    public void ThenTheCorrectPrimaryKeyIsFound()
     {
-
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/1", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/2", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/3", null).Wait();
-
-        Task.Delay(1000).Wait();
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
+        Assert.AreEqual(expectedItem.itemID, actualItem.itemID);
     }
+
 }
 
 public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGenericNameAndBrandContentsSearch : ItemTests
@@ -382,6 +365,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -456,6 +440,14 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         testItem3.size = "3 Test";
 
         InsertUsingAPI(testItem3);
+
+        Item testItem4 = new Item();
+        testItem4.genericName = "Should Not Be Found";
+        testItem4.brand = "should not be found";
+        testItem4.price = 9.99F;
+        testItem4.size = "4 not found";
+
+        InsertUsingAPI(testItem4);
     }
 
     //Execute
@@ -465,24 +457,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         Assert.AreEqual(expectedItemString, actualItemString);
     }
 
-    [OneTimeTearDown]
-    public void Destruction()
-    {
 
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/1", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/2", null).Wait();
-        client.PutAsync($"http://localhost:8000/api/Item/deleteItem/3", null).Wait();
-        Task.Delay(1000).Wait();
-
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
-    }
 }
 
 [TestFixture]
@@ -495,6 +470,7 @@ public class WhenItemsAreUpdated : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabasePreparation();
         InsertItemToUpdate();
         Task.Delay(1000).Wait();
         try
@@ -553,6 +529,7 @@ public class WhenItemsAreUpdated : ItemTests
         expectedItem.brand = "Best Test";
         expectedItem.size = "1 question";
         expectedItem.price = 7.88F;
+        expectedItem.itemID = 1;
 
         return expectedItem;
     }
@@ -584,19 +561,4 @@ public class WhenItemsAreUpdated : ItemTests
 
     }
 
-
-    [OneTimeTearDown]
-    public void Destruction()
-    {
-        using Task<HttpResponseMessage> httpResponse = client.PutAsync($"http://localhost:8000/api/Item/deleteItem/{actualItem.itemID}", null);
-        httpResponse.Wait();
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
-    }
 }
