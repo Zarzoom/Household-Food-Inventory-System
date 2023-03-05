@@ -513,7 +513,7 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
         {
             throw;
         }
-        
+
         CreateExpected();
     }
 
@@ -582,5 +582,200 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
     public void ThenAllPantryContentsAreReturned()
     {
         Assert.AreEqual(expectedPantryContentsString, actualPantryContentsString);
+    }
+}
+
+public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : PantryContentsTests
+{
+    private List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
+    private String expectedPantryContentsString;
+    private String actualPantryContentsString;
+
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+
+        ItemInsert();
+        PantryInsert();
+        PantryContentsInsert();
+
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents/deletePantryContent/2", null);
+            httpResponse.Wait();
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        Task.Delay(1000).Wait();
+        GetActual();
+        Task.Delay(1000).Wait();
+        CreateExpected();
+
+    }
+
+    public void CreateExpected()
+    {
+        PantryContents testPantryContent1 = new PantryContents
+        {
+            pcPantryID = 2,
+            pcItemID = 1,
+            quantity = 3,
+            pantryContentID = 1,
+
+        };
+
+        expectedPantryContentsList.Add(testPantryContent1);
+
+        PantryContents testPantryContent3 = new PantryContents
+        {
+            pcPantryID = 2,
+            pcItemID = 3,
+            quantity = 3,
+            pantryContentID = 3,
+        };
+
+        expectedPantryContentsList.Add(testPantryContent3);
+
+        PantryContents testPantryContent4 = new PantryContents
+        {
+            pcPantryID = 3,
+            pcItemID = 2,
+            quantity = 3,
+            pantryContentID = 4,
+
+        };
+
+        expectedPantryContentsList.Add(testPantryContent4);
+
+
+        PantryContents testPantryContent5 = new PantryContents
+        {
+            pcPantryID = 3,
+            pcItemID = 3,
+            quantity = 3,
+            pantryContentID = 5,
+
+        };
+
+        expectedPantryContentsList.Add(testPantryContent5);
+
+        expectedPantryContentsString = JsonSerializer.Serialize(expectedPantryContentsList);
+
+    }
+
+    public void GetActual()
+    {
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID FROM PantryContents";
+            var actual = connection.Query<PantryContents>(sql);
+            Task.Delay(1000).Wait();
+            actualPantryContentsString = JsonSerializer.Serialize(actual);
+        }
+    }
+
+    [Test]
+    public void ThenThePantryContentHasBeenDeleted()
+    {
+        Assert.AreEqual(expectedPantryContentsString, actualPantryContentsString);
+    }
+}
+
+public class WhenPantryContentIsUpdated : PantryContentsTests
+{
+    private PantryContents updatedPantryContent = new PantryContents();
+    private PantryContents expectedUpdatedPantryContents = new PantryContents();
+    private PantryContents actualUpdatedPantryContents = new PantryContents();
+
+
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+
+        ItemInsert();
+        PantryInsert();
+        PantryContentsInsert();
+        
+        CreateUpdatedPantryContent();
+
+        try
+        {
+            var content = new StringContent(JsonSerializer.Serialize(updatedPantryContent), Encoding.UTF8, "application/json");
+            using Task<HttpResponseMessage> httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents", content);
+            httpResponse.Wait();
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        Task.Delay(1000).Wait();
+        GetActual();
+        Task.Delay(1000).Wait();
+        CreateExpected();
+
+    }
+
+    public void CreateExpected()
+    {
+        expectedUpdatedPantryContents.pcPantryID = 3;
+        expectedUpdatedPantryContents.pcItemID = 1;
+        expectedUpdatedPantryContents.quantity = 54;
+        expectedUpdatedPantryContents.pantryContentID = 3;
+    }
+
+    public void GetActual()
+    {
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID FROM PantryContents WHERE PantryContentID = 3";
+            var actual = connection.Query<PantryContents>(sql);
+            var result = actual.Single();
+            Task.Delay(1000).Wait();
+            actualUpdatedPantryContents = result;
+        }
+    }
+
+    public void CreateUpdatedPantryContent()
+    {
+        updatedPantryContent.pcPantryID = 3;
+        updatedPantryContent.pcItemID = 1;
+        updatedPantryContent.quantity = 54;
+        updatedPantryContent.pantryContentID = 3;
+    }
+
+    [Test]
+    public void ThenThePCPantryIDIsUpdated()
+    {
+        Assert.AreEqual(expectedUpdatedPantryContents.pcPantryID, actualUpdatedPantryContents.pcPantryID);
+    }
+
+    [Test]
+    public void ThenThePCItemIDIsUpdated()
+    {
+        Assert.AreEqual(expectedUpdatedPantryContents.pcItemID, actualUpdatedPantryContents.pcItemID);
+    }
+    
+    [Test]
+    public void ThenTheQuanittyIsUpdated()
+    {
+        Assert.AreEqual(expectedUpdatedPantryContents.quantity, actualUpdatedPantryContents.quantity);
+    }
+    
+    [Test]
+    public void ThenThePantryContentIDStayedTheSame()
+    {
+        Assert.AreEqual(expectedUpdatedPantryContents.pantryContentID, actualUpdatedPantryContents.pantryContentID);
     }
 }
