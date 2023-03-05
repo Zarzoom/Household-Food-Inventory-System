@@ -38,7 +38,7 @@ public class PantryContentsController : ControllerBase
         return pantryContentsManager.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
     }
 
-    [HttpGet("retrievePantry/{pantryID}")]
+    [HttpGet("retrieveItemsFromPantry/{pantryID}")]
     public IEnumerable<Item> GetContentsFromPantry(long pantryID)
     {
         return pantryContentsManager.WhatIsInThatPantry(pantryID);

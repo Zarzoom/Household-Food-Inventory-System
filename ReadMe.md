@@ -13,3 +13,4 @@ To run the Tests for this project.
 
 # ToDo
 Add integration testing for pantry and pantry contents.
+Test delete function for Item.

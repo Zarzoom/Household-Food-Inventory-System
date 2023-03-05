@@ -8,11 +8,11 @@
         public long pantryContentID { get; set; }
 
         public PantryContents() {}
-        public PantryContents(long quantity, long pcItemId, long pcPantryId)
+        public PantryContents(long quantity, long pcItemID, long pcPantryID)
         {
             this.quantity = this.quantity;
-            this.pcItemID = pcItemId;
-            this.pcPantryID = pcPantryId;
+            this.pcItemID = pcItemID;
+            this.pcPantryID = pcPantryID;
         }
     }
 }

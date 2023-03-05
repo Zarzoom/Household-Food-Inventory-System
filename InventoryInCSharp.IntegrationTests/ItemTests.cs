@@ -11,55 +11,6 @@ public class ItemTests
 {
     protected static readonly HttpClient client = new HttpClient();
 
-    public void InsertDirectlyToDatabase(Item newItem)
-    {
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@genericName, @brand, @price, @size)";
-            var actual = connection.ExecuteAsync(sql, newItem);
-            actual.Wait();
-        }
-    }
-    [OneTimeTearDown]
-    public void DatabasePreparation()
-    {
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "DELETE FROM ItemList";
-            var actual = connection.ExecuteAsync(sql);
-            actual.Wait();
-        }
-
-        using (var connection =
-               new MySqlConnection(
-                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
-        {
-            var sql = "ALTER TABLE ItemList AUTO_INCREMENT = 1";
-            var actual = connection.Execute(sql);
-        }
-    }
-
-    public void InsertUsingAPI(Item newItem)
-    {
-        try
-        {
-
-            var content = new StringContent(JsonSerializer.Serialize(newItem), Encoding.UTF8, "application/json");
-            using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/Item", content);
-            httpResponse.Wait();
-            Task.Delay(1000).Wait();
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
 }
 
 [TestFixture]
@@ -71,7 +22,7 @@ public class WhenItemIsInserted : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
-        DatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
         try
         {
 
@@ -157,7 +108,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
     [OneTimeSetUp]
     public void Setup()
     {
-        DatabasePreparation();
+       DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -197,7 +148,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem1.size = "1 Test";
         //testItem1.itemID = 1;
 
-        InsertDirectlyToDatabase(testItem1);
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
 
         Item testItem2 = new Item();
         testItem2.genericName = "Generic Name Test 2";
@@ -206,7 +157,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem2.size = "2 Test";
         //testItem2.itemID = 2;
 
-        InsertDirectlyToDatabase(testItem2);
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
 
         Item testItem3 = new Item();
         testItem3.genericName = "Generic Name Test 3";
@@ -214,7 +165,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
 
-        InsertDirectlyToDatabase(testItem3);
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
     }
 
     //Execute
@@ -260,7 +211,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
     [OneTimeSetUp]
     public void Setup()
     {
-        DatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -300,7 +251,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
 
-        InsertUsingAPI(testItem1);
+        InsertMethods.ItemInsertUsingAPI(testItem1);
 
         Item testItem2 = new Item();
         testItem2.genericName = "Generic Name Test 2";
@@ -308,7 +259,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
 
-        InsertUsingAPI(testItem2);
+        InsertMethods.ItemInsertUsingAPI(testItem2);
 
         Item testItem3 = new Item();
         testItem3.genericName = "Generic Name Test 3";
@@ -316,7 +267,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
 
-        InsertUsingAPI(testItem3);
+        InsertMethods.ItemInsertUsingAPI(testItem3);
     }
 
     //Execute
@@ -351,7 +302,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
 
 }
 
-public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGenericNameAndBrandContentsSearch : ItemTests
+public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGenericNameAndBrandContentsSearch : ItemTests
 {
     private static readonly HttpClient client = new HttpClient();
 
@@ -365,7 +316,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
     [OneTimeSetUp]
     public void Setup()
     {
-        DatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -382,10 +333,10 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
             Console.WriteLine(e);
             throw;
         }
-        GetExpectedItemList();
+        GetExpectedItemString();
     }
 
-    public void GetExpectedItemList()
+    public void GetExpectedItemString()
     {
         expectedItem1.genericName = "Generic Name Test 1";
         expectedItem1.brand = "Brand Test 1";
@@ -422,7 +373,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         testItem1.size = "1 Test";
 
 
-        InsertUsingAPI(testItem1);
+        InsertMethods.ItemInsertUsingAPI(testItem1);
 
         Item testItem2 = new Item();
         testItem2.genericName = "Generic Name Test 2";
@@ -431,7 +382,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         testItem2.size = "2 Test";
         //testItem2.itemID = 2;
 
-        InsertUsingAPI(testItem2);
+        InsertMethods.ItemInsertUsingAPI(testItem2);
 
         Item testItem3 = new Item();
         testItem3.genericName = "Generic Name Test 3";
@@ -439,7 +390,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
 
-        InsertUsingAPI(testItem3);
+        InsertMethods.ItemInsertUsingAPI(testItem3);
 
         Item testItem4 = new Item();
         testItem4.genericName = "Should Not Be Found";
@@ -447,7 +398,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWihtGeneri
         testItem4.price = 9.99F;
         testItem4.size = "4 not found";
 
-        InsertUsingAPI(testItem4);
+        InsertMethods.ItemInsertUsingAPI(testItem4);
     }
 
     //Execute
@@ -470,8 +421,8 @@ public class WhenItemsAreUpdated : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
-        DatabasePreparation();
-        InsertItemToUpdate();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        InsertItemsForUpdate();
         Task.Delay(1000).Wait();
         try
         {
@@ -502,14 +453,28 @@ public class WhenItemsAreUpdated : ItemTests
         expectedItem = CreateExpected();
     }
 
-    public void InsertItemToUpdate()
+    public void InsertItemsForUpdate()
     {
         Item itemToUpdate = new Item();
         itemToUpdate.brand = "Test Failure";
         itemToUpdate.price = 99999.99F;
         itemToUpdate.genericName = "Failed Test";
         itemToUpdate.size = "1 failed test";
-        InsertDirectlyToDatabase(itemToUpdate);
+        InsertMethods.ItemInsertDirectlyToDatabase(itemToUpdate);
+
+        Item testItem1 = new Item();
+        testItem1.brand = "Wrong Item 1";
+        testItem1.price = 8888.88F;
+        testItem1.genericName = "Wrong Item";
+        testItem1.size = "1 wrong item";
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
+        
+        Item testItem2 = new Item();
+        testItem2.brand = "Wrong Item 2";
+        testItem2.price = 8888.88F;
+        testItem2.genericName = "Wrong Item";
+        testItem2.size = "2 wrong item";
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
     }
     public Item GetActual()
     {
@@ -517,7 +482,7 @@ public class WhenItemsAreUpdated : ItemTests
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "SELECT * FROM ItemList";
+            var sql = "SELECT GenericName, Brand, Price, Size, ItemID FROM ItemList WHERE ItemID = 1";
             var actual = connection.Query<Item>(sql);
             return actual.Single();
         }
@@ -561,4 +526,214 @@ public class WhenItemsAreUpdated : ItemTests
 
     }
 
+    [Test]
+    public void ThenItemIDStayedTheSame()
+    {
+        Assert.AreEqual(expectedItem.itemID, actualItem.itemID);
+    }
+
+}
+
+[TestFixture]
+public class WhenItemsAreDeleted : ItemTests
+{
+    private static readonly HttpClient client = new HttpClient();
+    private String actualItemString;
+    private Item expectedItem1 = new Item();
+    private Item expectedItem2 = new Item();
+    private Item expectedItem3 = new Item();
+    private List<Item> expectedItemList = new List<Item>();
+    private String expectedItemString;
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        InsertItemsForTesting();
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.PutAsync("http://localhost:8000/api/Item/deleteItem/2", null);
+            httpResponse.Wait();
+        }
+        catch(Exception e)
+        {
+            throw;
+        }
+        Task.Delay(1000).Wait();
+        GetActualItemList();
+        Task.Delay(1000).Wait();
+        GetExpectedItemList();
+    }
+
+    public void InsertItemsForTesting()
+    {
+        Item testItem1 = new Item();
+        testItem1.genericName = "Generic Name Test 1";
+        testItem1.brand = "Brand Test 1";
+        testItem1.price = 1.99F;
+        testItem1.size = "1 Test";
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
+
+        Item testItem2 = new Item();
+        testItem2.genericName = "Generic Name Test 2";
+        testItem2.brand = "Brand Test 2";
+        testItem2.price = 1.99F;
+        testItem2.size = "2 Test";
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
+
+        Item testItem3 = new Item();
+        testItem3.genericName = "Generic Name Test 3";
+        testItem3.brand = "Brand Test 3";
+        testItem3.price = 1.99F;
+        testItem3.size = "3 Test";
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
+    }
+
+    public void GetActualItemList()
+    {
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync("http://localhost:8000/api/Item");
+            httpResponse.Wait();
+            var result = httpResponse.Result.Content.ReadAsStringAsync();
+            result.Wait();
+            actualItemString = result.Result;
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+
+    }
+    public void GetExpectedItemList()
+    {
+        expectedItem1.genericName = "Generic Name Test 1";
+        expectedItem1.brand = "Brand Test 1";
+        expectedItem1.price = 1.99F;
+        expectedItem1.size = "1 Test";
+        expectedItem1.itemID = 1;
+        expectedItemList.Add(expectedItem1);
+
+        expectedItem3.genericName = "Generic Name Test 3";
+        expectedItem3.brand = "Brand Test 3";
+        expectedItem3.price = 1.99F;
+        expectedItem3.size = "3 Test";
+        expectedItem3.itemID = 3;
+
+        expectedItemList.Add(expectedItem3);
+
+        expectedItemString = JsonSerializer.Serialize(expectedItemList);
+    }
+
+    [Test]
+    public void ThenTheCorrectItemHasBeenDeleted()
+    {
+        Assert.AreEqual(actualItemString, expectedItemString);
+    }
+}
+
+public class WhenItemListIsQueriedForAllItems : ItemTests
+{
+    private List<Item> expectedItemList = new List<Item>();
+    private String expectedItemString;
+    private String actualItemString;
+
+    
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        DatabaseCleanUp.ItemListDatabasePreparation();
+     
+
+
+        ItemInsert();
+
+
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync("http://localhost:8000/api/Item");
+            httpResponse.Wait();
+            var result = httpResponse.Result.Content.ReadAsStringAsync();
+            result.Wait();
+            actualItemString = result.Result;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        
+        CreateExpected();
+    }
+    
+    public void ItemInsert()
+    {
+        Item testItem1 = new Item();
+        testItem1.genericName = "Generic Name Test 1";
+        testItem1.brand = "Brand Test 1";
+        testItem1.price = 1.99F;
+        testItem1.size = "1 Test";
+        //testItem1.itemID = 1;
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
+
+        Item testItem2 = new Item();
+        testItem2.genericName = "Generic Name Test 2";
+        testItem2.brand = "Brand Test 2";
+        testItem2.price = 1.99F;
+        testItem2.size = "2 Test";
+        //testItem2.itemID = 2;
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
+
+        Item testItem3 = new Item();
+        testItem3.genericName = "Generic Name Test 3";
+        testItem3.brand = "Brand Test 3";
+        testItem3.price = 1.99F;
+        testItem3.size = "3 Test";
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
+    }
+
+    public void CreateExpected()
+    {
+        Item testItem1 = new Item();
+        testItem1.genericName = "Generic Name Test 1";
+        testItem1.brand = "Brand Test 1";
+        testItem1.price = 1.99F;
+        testItem1.size = "1 Test";
+        testItem1.itemID = 1;
+
+        expectedItemList.Add(testItem1);
+
+
+        Item testItem2 = new Item();
+        testItem2.genericName = "Generic Name Test 2";
+        testItem2.brand = "Brand Test 2";
+        testItem2.price = 1.99F;
+        testItem2.size = "2 Test";
+        testItem2.itemID = 2;
+
+        expectedItemList.Add(testItem2);
+
+
+        Item testItem3 = new Item();
+        testItem3.genericName = "Generic Name Test 3";
+        testItem3.brand = "Brand Test 3";
+        testItem3.price = 1.99F;
+        testItem3.size = "3 Test";
+        testItem3.itemID = 3;
+
+       expectedItemList.Add(testItem3);
+
+       expectedItemString = JsonSerializer.Serialize(expectedItemList);
+    }
+
+    [Test]
+    public void ThenAllPantriesHaveBeenReturned()
+    {
+        Assert.AreEqual(expectedItemString, actualItemString);
+    }
 }
