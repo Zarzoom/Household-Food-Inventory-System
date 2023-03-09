@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8"/>
+    <title>Item Display</title>
+</head>
+<body>
+
+<!--  "Item" header-->
+<div class="row">
+</div>
+<div class="row" style="margin: 4em">
+    <div class="col-md-12">
+        <h1 class='text-center' style='font-family:"Times New Roman", Times, serif; '>
+            Items
+        </h1>
+    </div>
+</div>
+<div class="row">
+</div>
+
+<!--Item display-->
+<div class="row">
+    <div class="col-md-3" style="margin: 1em ;background-color: rgba(143, 184,255, 0.5);">
+        <p>
+            Generic Name:<br>Brand Name:<br>Size:<br>Price:
+        </p>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Edit</a>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Delete</a>
+    </div>
+</div>
+
+<!-- New Item-->
+<div class="row">
+    <div class="col-md-3" style="margin: 1em ;background-color: rgba(143, 184,255, 0.5);">
+        <p>
+            <label>Generic Name:</label><br/>
+            <input type="text" placeholder="beans"><br/>
+            <label>Brand:</label><br/>
+            <input type="text" placeholder="World Famous Beans"><br/>
+            <label>Size:</label><br/>
+            <input type="text" placeholder="3oz"><br/>
+            <label>Price:</label><br/>
+            <input type="text" step="any" placeholder="0.00"><br/>
+        </p>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Add</a>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Cancel</a>
+    </div>
+</div>
+
+<!--edit Item-->
+<div class="row">
+    <div class="col-md-3" style="margin: 1em ;background-color: rgba(143, 184,255, 0.5);">
+        <p>
+            <label>Generic Name:</label><br/>
+            <input type="text" placeholder="beans"/><br/>
+            <label>Brand:</label><br/>
+            <input type="text" placeholder="World Famous Beans"/><br/>
+            <label>Size:</label><br/>
+            <input type="text" placeholder="3oz"/><br/>
+            <label>Price:</label><br/>
+            <input type="text" step="any" placeholder="0.00"/><br/>
+        </p>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Edit</a>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Cancel</a>
+    </div>
+</div>
+
+<!--Delete Item pop-up-->
+<div class="row">
+    <div class="col-md-3" style="margin: 1em ;background-color: rgba(143, 184,255, 0.5);">
+        <p>
+            Generic Name:<br>Brand Name:<br>Size:<br>Price:
+        </p>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Cancel</a>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Delete</a>
+    </div>
+</div>
+
+<!--Item Search-->
+<div class="row">
+    <div class="col-md-3" style="margin: 1em ;background-color: rgba(143, 184,255, 0.5);">
+        <p>
+            <label>Search by Generic Name or Brand</label><br>
+            <input type="text" placeholder="search"><br>
+        </p>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Search</a>
+        <a class="btn btn-sm" style="background-color: rgba(255,214,143);" href="#" role="button">Cancel</a>
+    </div>
+</div>
+</body>
+</html>
