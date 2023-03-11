@@ -1,7 +1,7 @@
 ﻿const EditItem = () => {
     return (
         <div className="row">
-            <div className="col-md-3" style={{margin: "1em" ,backgroundColor: "rgba(143, 184,255, 0.5)"}}>
+            <div className="col-md-3 BlueBox">
                 <p>
                     <label>Generic Name:</label><br/>
                     <input type="text" placeholder="beans"/><br/>
@@ -12,8 +12,8 @@
                     <label>Price:</label><br/>
                     <input type="text" step="any" placeholder="0.00"/><br/>
                 </p>
-                <a className="btn btn-sm" style={{backgroundColor: "rgba(255,214,143)"}} href="#" role="button">Edit</a>
-                <a className="btn btn-sm" style={{backgroundColor: "rgba(255,214,143)"}} href="#" role="button">Cancel</a>
+                <a className="btn btn-sm" href="#" role="button">Edit</a>
+                <a className="btn btn-sm" href="#" role="button">Cancel</a>
             </div>
         </div>
     );
