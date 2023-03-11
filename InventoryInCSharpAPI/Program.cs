@@ -19,7 +19,17 @@ builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
 
-
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+  
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:3000",
+                "http://localhost:8000");
+        });
+});  
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,5 +42,5 @@ app.UseSwaggerUI();
 // app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 app.Run();
