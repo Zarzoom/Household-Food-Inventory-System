@@ -1,15 +1,44 @@
-﻿const ItemDisplay = () => {
+﻿import {useState, useEffect} from "react";
+import {_Item} from "../../DataModels/_Item";
+import ItemManager from "../../Services/Managers/ItemManager"
+import EditItem from "./EditItem"
+
+const newItemManager = new ItemManager();
+var itemArray: _Item[] = new Array();
+function ItemDisplay() {
+    const [getAllItems, setGetAllItems] = useState<_Item[]>(new Array());
+    const [state, setState] = useState('');
+    // const PromiseItemArray = newItemManager.getAllItems();
+    // const ItemArray = await Promise.all(PromiseItemArray);
+ 
+    useEffect(() => {
+        setState('success');
+        
+        newItemManager.getAllItems().then(itemArray => setGetAllItems(itemArray));
+    }, []);
+    
+    
+    
     return (
         <div className="col-md-3">
-            <div className="BlueBox">
-                <p>
-                    Generic Name:<br/>Brand Name:<br/>Size:<br/>Price:
-                </p>
-                <a className="btn btn-sm" href="#" role="button">Edit</a>
-                <a className="btn btn-sm" href="#"
-                   role="button">Delete</a>
-            </div>
+            
+                {state === 'loading' ?
+                    (
+                        <p>loading</p>
+                    ) : (
+                        <p>
+                            {getAllItems.map((item:_Item) => (<div className="BlueBox">
+                                <p> 
+                                    Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
+                                </p>
+                                <a className="btn btn-sm" href="#" role="button" data-bs-toggle="modal" data-bs-target="#EditItemModal">Edit</a>
+                                <a className="btn btn-sm" href="#"
+                                   role="button">Delete</a>
+                            </div>))}
+                        </p>
+                    )}
         </div>
     );
 };
 export default ItemDisplay;
+

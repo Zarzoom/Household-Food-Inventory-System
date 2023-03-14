@@ -35,7 +35,8 @@ const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
 
     return (
 
-        <div className="col-md-3 BlueBox">
+        <div className="col-md-3">
+         <div className= "BlueBox">
             <p>
                 <label>Generic Name:</label><br/>
                 <input type="text" placeholder="beans" value={item.genericName}
@@ -52,6 +53,7 @@ const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
             </p>
             <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => newItemManager.addItem(ItemToJsonParse)}>Add</a>
             <a className="btn btn-sm" href="#" role="button">Cancel</a>
+         </div>
         </div>
 
     );

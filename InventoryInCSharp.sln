@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postgresql", "Postgresql", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryInCSharp.IntegrationTests", "InventoryInCSharp.IntegrationTests\InventoryInCSharp.IntegrationTests.csproj", "{E3F185FB-AA89-4EB9-9E20-D9D046F7423C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InventoryInCSharpUI", "InventoryInCSharpUI", "{87484D07-C929-4377-A564-EA3FF9A73B74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
