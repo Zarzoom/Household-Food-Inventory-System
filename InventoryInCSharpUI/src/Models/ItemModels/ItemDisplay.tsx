@@ -31,7 +31,7 @@ function ItemDisplay() {
                                 <p> 
                                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                                 </p>
-                                <a className="btn btn-sm" href="#" role="button" data-bs-toggle="modal" data-bs-target="#EditItemModal">Edit</a>
+                                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => }>Edit</a>
                                 <a className="btn btn-sm" href="#"
                                    role="button">Delete</a>
                             </div>))}

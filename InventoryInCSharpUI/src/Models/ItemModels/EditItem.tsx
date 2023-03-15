@@ -37,10 +37,8 @@ function EditItem(itemForUpdate: _Item) {
     };
 
     return (
-        <div className="modal" id="EditItemModal">
-            <div className="modal-dialog">
-                <div className="modal-content">
-        <div className="modal-body">
+        <div className="col-md-3">
+
             <div className= "BlueBox">
                 
                     <label>Generic Name:</label><br/>
@@ -60,9 +58,7 @@ function EditItem(itemForUpdate: _Item) {
                 <a className="btn btn-sm" href="#" role="button">Cancel</a>
             </div>
         </div>
-                </div>
-            </div>
-        </div>
+
 
     );
 };
