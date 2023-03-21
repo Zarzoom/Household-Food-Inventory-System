@@ -5,6 +5,7 @@ import EditItem from "./EditItem"
 
 const newItemManager = new ItemManager();
 var itemArray: _Item[] = new Array();
+
 function ItemDisplay() {
     const [getAllItems, setGetAllItems] = useState<_Item[]>(new Array());
     const [state, setState] = useState('');
@@ -31,7 +32,7 @@ function ItemDisplay() {
                                 <p> 
                                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                                 </p>
-                                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => }>Edit</a>
+                                <a className="btn btn-sm" href="#" role="button" onClick={()=>EditItem(item)}>Edit</a>
                                 <a className="btn btn-sm" href="#"
                                    role="button">Delete</a>
                             </div>))}
@@ -41,4 +42,5 @@ function ItemDisplay() {
     );
 };
 export default ItemDisplay;
+
 

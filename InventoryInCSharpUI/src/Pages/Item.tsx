@@ -1,5 +1,6 @@
 ﻿import ItemDisplay from "../Models/ItemModels/ItemDisplay"
 import NewItem from "../Models/ItemModels/NewItem"
+import EditItem from "../Models/ItemModels/EditItem"
 
 const Item = () => {
     return (
@@ -15,9 +16,6 @@ const Item = () => {
                 <ItemDisplay></ItemDisplay><NewItem></NewItem>
                 </div>
             </div>
-
-
-
     );
 };
 
