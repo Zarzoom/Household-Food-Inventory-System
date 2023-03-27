@@ -1,7 +1,7 @@
 ﻿import {useState, useEffect} from "react";
 import {_Item} from "../../DataModels/_Item";
 import ItemManager from "../../Services/Managers/ItemManager"
-import EditItem from "./EditItem"
+
 
 const newItemManager = new ItemManager();
 var itemArray: _Item[] = new Array();
@@ -32,7 +32,7 @@ function ItemDisplay() {
                                 <p> 
                                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                                 </p>
-                                <a className="btn btn-sm" href="#" role="button" onClick={()=>EditItem(item)}>Edit</a>
+                                {/*<a className="btn btn-sm" href="#" role="button" onClick={()=>EditItem(item)}>Edit</a>*/}
                                 <a className="btn btn-sm" href="#"
                                    role="button">Delete</a>
                             </div>))}
