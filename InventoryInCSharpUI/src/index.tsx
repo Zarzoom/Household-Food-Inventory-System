@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import Item from "./Pages/Item";
 import "./BootstrapOverride.css";
+import {Provider} from "react-redux"
+import {store} from "./Stores/Store"
 
 
 
@@ -20,4 +22,8 @@ export default function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root')as HTMLElement);
-root.render(<App />);
+root.render(
+    <Provider store = {store}>
+    <App />
+    </Provider>
+);

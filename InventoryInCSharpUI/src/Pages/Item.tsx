@@ -1,4 +1,4 @@
-﻿import ItemDisplay from "../Models/ItemModels/ItemDisplay"
+﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import NewItem from "../Models/ItemModels/NewItem"
 
 

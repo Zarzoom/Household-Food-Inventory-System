@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {RootState} from '../Stores/ItemListStore'
+import {useSelector} from 'react-redux'
+import {RootState} from '../Stores/Store'
 import getItem from '../DataModels/getItem'
 
 interface ItemsState{
@@ -11,6 +12,7 @@ const initialState: ItemsState={
     status: 'idle',
     StateOfItems: new Array()
 }
+export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
 
 export const ItemsReducer = createSlice({
         name: 'items',
