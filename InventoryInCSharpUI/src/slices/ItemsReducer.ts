@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import getItem from '../DataModels/getItem'
+import Item from '../DataModels/Item'
 
 interface ItemsState{
     status: String,
@@ -20,7 +21,10 @@ export const ItemsReducer = createSlice({
         reducers:{
            goFetchItems: (state, action: PayloadAction<getItem[]>) =>{ 
                state.StateOfItems= action.payload
+           },
+           goCreateItem: (state, action: PayloadAction<Item>)=>{
+               
            }
         },
 })
-export const {goFetchItems} = ItemsReducer.actions;
+export const {goFetchItems, goCreateItem} = ItemsReducer.actions;
