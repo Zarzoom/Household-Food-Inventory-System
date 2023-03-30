@@ -20,7 +20,7 @@ export const ItemsReducer = createSlice({
         initialState,
         reducers:{
            goFetchItems: (state, action: PayloadAction<getItem[]>) =>{ 
-               state.StateOfItems= action.payload
+               state.StateOfItems.concat( action.payload)
            },
            goCreateItem: (state, action: PayloadAction<getItem>)=>{
                state.StateOfItems.push(action.payload);

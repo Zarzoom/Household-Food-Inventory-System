@@ -1,17 +1,26 @@
 ﻿import {useState} from "react";
 import ItemManager from "../../Services/Managers/ItemManager"
+import {createItem} from "../../Thunks/ItemsThunk"
+import {useAppDispatch} from '../../Hooks/hooks'
+import Item from "../../DataModels/Item"
 
-const newItemManager = new ItemManager();
+
+// const newItemManager = new ItemManager();
+// const NewItemDispatch = (newItem: any) =>{
+//     const ItemToJSONStringify = JSON.stringify(newItem);
+//     const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
+//     const dispatch = useAppDispatch();
+//     dispatch(createItem(ItemToJsonParse));
+//}
 function NewItem() {
 
-    const [item, setItem] = useState({
+   const [item, setItem] = useState({
         brand: "",
         price: "",
         genericName: "",
         size: "",
     });
-const ItemToJSONStringify = JSON.stringify(item);
-const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
+
     const updateBrand = (newBrand: string) => {
         setItem(previousState => {
             return {...previousState, brand: newBrand}
@@ -32,6 +41,12 @@ const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
             return {...previousState, size: newSize}
         });
     };
+    const dispatch = useAppDispatch();
+    const NewItemDispatch = () =>{
+        const ItemToJSONStringify = JSON.stringify(item);
+        const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
+        dispatch(createItem(ItemToJsonParse));
+    };
 
     return (
 
@@ -51,13 +66,15 @@ const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
                 <input type="text" step="any" placeholder="0.00" value={item.price}
                        onChange={(event) => updatePrice(event.target.value)}/><br/>
             </p>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => newItemManager.addItem(ItemToJsonParse)}>Add</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>
             <a className="btn btn-sm" href="#" role="button">Cancel</a>
          </div>
         </div>
 
     );
 };
+
+
 
 
 export default NewItem;

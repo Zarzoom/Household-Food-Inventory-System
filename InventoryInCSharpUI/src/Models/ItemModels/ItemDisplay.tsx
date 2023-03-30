@@ -6,7 +6,7 @@ import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {useSelector} from 'react-redux'
 import {store} from "../../Stores/Store"
 import {selectAllItems} from "../../slices/ItemsReducer"
-import {fetchItems} from "../../Thunks/retrieveItemsThunk"
+import {fetchItems} from "../../Thunks/ItemsThunk"
 
 const newItemManager = new ItemManager();
 
@@ -14,7 +14,7 @@ export const ItemDisplay =() => {
     const dispatch = useAppDispatch();
     const ItemList = dispatch(fetchItems())
    const AllItems = useAppSelector(selectAllItems)
-    const renderedAllItems = AllItems.map((item: getItem) => {return (<div className="BlueBox">
+    const renderedAllItems = AllItems.map((item: getItem) => { return (<div className="BlueBox" key ={"" + item.itemID}>
         <p>
             Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
         </p>
