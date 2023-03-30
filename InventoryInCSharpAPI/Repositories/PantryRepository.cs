@@ -10,12 +10,13 @@ public class PantryRepository
     {
     }
 
-    public async void AddToPantryList(Pantry newPantry)
+    public async Task<int> AddToPantryList(Pantry newPantry)
     {
         using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "INSERT INTO PantryList (PantryName) VALUES (@PantryName)";
-            var createdItem = await connection.ExecuteAsync(sql, newPantry);
+            var sql = "INSERT INTO PantryList (PantryName) VALUES (@PantryName); SELECT LAST_INSERT_ID()";
+            var createdItem = await connection.QueryAsync<int>(sql, newPantry);
+            return createdItem.SingleOrDefault();
         }
     }
     public async Task<IEnumerable<Pantry>> GetPantryList()

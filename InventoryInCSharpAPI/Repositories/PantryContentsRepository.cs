@@ -10,12 +10,13 @@ public class PantryContentsRepository
     {
     }
     // I could make this easier by having them add the pantryName and ItemID and then use contents search to get pantryID for them.
-    public async void AddToPantry(PantryContents newPantryContent)
+    public async Task<int> AddToPantry(PantryContents newPantryContent)
     {
         using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "INSERT INTO PantryContents (PCPantryID, PCItemID, Quantity) VALUES (@PCPantryID, @PCItemID, @Quantity)";
-            var createdItem = await connection.ExecuteAsync(sql, newPantryContent);
+            var sql = "INSERT INTO PantryContents (PCPantryID, PCItemID, Quantity) VALUES (@PCPantryID, @PCItemID, @Quantity); SELECT LAST_INSERT_ID()";
+            var createdItem = await connection.QueryAsync<int>(sql, newPantryContent);
+            return createdItem.SingleOrDefault();
         }
     }
 

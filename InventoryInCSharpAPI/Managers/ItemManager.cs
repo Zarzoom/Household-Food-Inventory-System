@@ -13,7 +13,9 @@ public class ItemManager
 
     public Item AddToItemList(Item newItem)
     {
-        _IR.AddToItemList(newItem);
+        var results = _IR.AddToItemList(newItem);
+        results.Wait();
+        newItem.itemID = results.Result;
         return newItem;
     }
 

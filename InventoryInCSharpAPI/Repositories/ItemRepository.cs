@@ -10,14 +10,15 @@
         {
         }
 
-        public async void AddToItemList(Item newItem)
+        public async Task<int> AddToItemList(Item newItem)
         {
             using (var connection =
                    new MySqlConnection(
                        "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
             {
-                var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size)";
-                var createdItem = await connection.ExecuteAsync(sql, newItem);
+                var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size); SELECT LAST_INSERT_ID()";
+                var createdItem = await connection.QueryAsync<int>(sql, newItem);
+                return createdItem.SingleOrDefault();
             }
         }
 

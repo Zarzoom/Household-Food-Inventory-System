@@ -25,7 +25,9 @@ public class PantryContentsManager
             PantryContents isItDuplicate = FindContentsByItemIDAndPantryID(newPantryContent.pcPantryID, newPantryContent.pcItemID);
             if (isItDuplicate is null)
             {
-                _PCR.AddToPantry(newPantryContent);
+                var results = _PCR.AddToPantry(newPantryContent);
+                results.Wait();
+                newPantryContent.pcItemID = results.Result;
                 return (newPantryContent);
             }
             else

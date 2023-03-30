@@ -14,7 +14,9 @@ public class PantryManager
 
     public Pantry AddToPantryList(Pantry newPantry)
     {
-        _PR.AddToPantryList(newPantry);
+        var results = _PR.AddToPantryList(newPantry);
+        results.Wait();
+        newPantry.pantryID = results.Result;
         return newPantry;
     }
 

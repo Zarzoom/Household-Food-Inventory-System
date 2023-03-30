@@ -22,11 +22,11 @@ export const fetchItems =
         };
 
 export const createItem =
-    (): AppThunk =>
+    (newItem:Item): AppThunk =>
         async dispatch =>{
-        const asynchResponse = await client.postData('http://localhost:8000/api/Item')
+        const asynchResponse = await client.postData('http://localhost:8000/api/Item', newItem)
             dispatch(
-                createItem()
+                createItem(asynchResponse)
             )
         }
         
