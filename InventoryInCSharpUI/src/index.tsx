@@ -6,6 +6,8 @@ import Item from "./Pages/Item";
 import "./BootstrapOverride.css";
 import {Provider} from "react-redux"
 import {store} from "./Stores/Store"
+import {useAppDispatch} from './Hooks/hooks'
+import {fetchItems} from "./Thunks/ItemsThunk"
 
 
 
@@ -25,5 +27,5 @@ const root = ReactDOM.createRoot(document.getElementById('root')as HTMLElement);
 root.render(
     <Provider store = {store}>
     <App />
-    </Provider>
+    </Provider> 
 );

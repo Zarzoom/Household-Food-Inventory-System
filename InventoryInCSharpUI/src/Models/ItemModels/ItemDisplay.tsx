@@ -11,8 +11,14 @@ import {fetchItems} from "../../Thunks/ItemsThunk"
 const newItemManager = new ItemManager();
 
 export const ItemDisplay =() => {
-    const dispatch = useAppDispatch();
-    const ItemList = dispatch(fetchItems())
+    const dispatch = useAppDispatch();'' 
+    const ItemStatus = useAppSelector(state => state.Items.status)
+    useEffect(()=> {
+        if(ItemStatus === 'idle') {
+            const ItemList = dispatch(fetchItems())
+        }
+    }, [ItemStatus, dispatch])
+
    const AllItems = useAppSelector(selectAllItems)
     const renderedAllItems = AllItems.map((item: getItem) => { return (<div className="BlueBox" key ={"" + item.itemID}>
         <p>
