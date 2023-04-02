@@ -27,6 +27,7 @@ export const ItemsReducer = createSlice({
            },
            goCreateItem: (state, action: PayloadAction<getItem>)=>{
                state.StateOfItems.push(action.payload);
+               
            }
         },
 })

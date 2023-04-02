@@ -46,6 +46,7 @@ function NewItem() {
         const ItemToJSONStringify = JSON.stringify(item);
         const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
         dispatch(createItem(ItemToJsonParse));
+        return 'Added'
     };
 
     return (

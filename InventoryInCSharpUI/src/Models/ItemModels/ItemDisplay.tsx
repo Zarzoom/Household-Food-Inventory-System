@@ -11,7 +11,7 @@ import {fetchItems} from "../../Thunks/ItemsThunk"
 const newItemManager = new ItemManager();
 
 export const ItemDisplay =() => {
-    const dispatch = useAppDispatch();'' 
+    const dispatch = useAppDispatch(); 
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
         if(ItemStatus === 'idle') {
