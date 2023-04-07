@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux'
 import {store} from "../../Stores/Store"
 import {selectAllItems} from "../../slices/ItemsReducer"
 import {fetchItems} from "../../Thunks/ItemsThunk"
+import {SingleItemDisplay} from "./SingleItemDisplay"
 
 const newItemManager = new ItemManager();
 
@@ -17,22 +18,17 @@ export const ItemDisplay =() => {
         if(ItemStatus === 'idle') {
             const ItemList = dispatch(fetchItems())
         }
+            
     }, [ItemStatus, dispatch])
 
    const AllItems = useAppSelector(selectAllItems)
-    const renderedAllItems = AllItems.map((item: getItem) => { return (<div className="BlueBox" key ={"" + item.itemID}>
-        <p>
-            Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
-        </p>
-        {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => }>Edit</a>*/}
-        <a className="btn btn-sm" href="#"
-           role="button">Delete</a>
-    </div>)})
+    const renderedAllItems = AllItems.map((item: getItem) => { return (
+        <div  key={"" + item.itemID}>
+            <SingleItemDisplay {...item}></SingleItemDisplay>
+            </div>
+            )})
     return <div className="col-md-3">{renderedAllItems}</div>
 }
-
-    
-    
 
 
 

@@ -6,7 +6,7 @@ import Item from '../DataModels/Item'
 
 interface ItemsState{
     StateOfItems: getItem[]
-    status: 'idle' | 'succeeded' | 'failed',
+    status: 'idle' | 'succeeded' | 'search'| 'failed',
     error: string | null
 }
 
@@ -27,8 +27,20 @@ export const ItemsReducer = createSlice({
            },
            goCreateItem: (state, action: PayloadAction<getItem>)=>{
                state.StateOfItems.push(action.payload);
-               
-           }
+           },
+            goDeleteItem: (state, action: PayloadAction<Number>)=>{
+               state.StateOfItems = state.StateOfItems.filter(item => item.itemID !== action.payload);
+            },
+            goUpdateItem: (state, action: PayloadAction<getItem>)=>{
+               const updateStateItem = state.StateOfItems.findIndex(item=> item.itemID == action.payload.itemID)
+              state.StateOfItems[updateStateItem] = action.payload;
+            },
+            goContentsItemSearch: (state, action: PayloadAction<getItem[]>)=>{
+                state.StateOfItems = action.payload;
+                    
+                }
+
+            }
         },
-})
-export const {goFetchItems, goCreateItem} = ItemsReducer.actions;
+)
+export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch} = ItemsReducer.actions;

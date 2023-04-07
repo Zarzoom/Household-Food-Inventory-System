@@ -40,9 +40,11 @@ public class ItemManager
         return (results.Result);
     }
 
-    public void ItemUpdate(Item updatedItem)
+    public Item ItemUpdate(Item updatedItem)
     {
-        _IR.ItemUpdate(updatedItem);
+       var results =  _IR.ItemUpdate(updatedItem);
+       results.Wait();
+       return (results.Result);
     }
 
     public void DeleteItem(long itemID)

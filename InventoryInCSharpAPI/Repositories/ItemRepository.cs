@@ -63,15 +63,16 @@
             }
         }
 
-        public async void ItemUpdate(Item updateMe)
+        public async Task<Item> ItemUpdate(Item updateMe)
         {
             using (var connection =
                    new MySqlConnection(
                        "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
             {
                 var sql =
-                    "UPDATE ItemList SET GenericName = @GenericName, Brand = @Brand, Price = @Price, Size = @Size WHERE ItemID = @ItemID";
-                var createdItem = await connection.ExecuteAsync(sql, updateMe);
+                "UPDATE ItemList SET GenericName = @GenericName, Brand = @Brand, Price = @Price, Size = @Size WHERE ItemID = @ItemID; SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @ItemID ";
+                var createdItem = await connection.QueryAsync<Item>(sql, updateMe);
+                return createdItem.SingleOrDefault();
             }
         }
 

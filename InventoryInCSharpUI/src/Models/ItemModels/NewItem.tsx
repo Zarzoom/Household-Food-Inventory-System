@@ -46,9 +46,17 @@ function NewItem() {
         const ItemToJSONStringify = JSON.stringify(item);
         const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
         dispatch(createItem(ItemToJsonParse));
-        return 'Added'
     };
-
+ const CancelAddItem= () =>{
+     setItem(previousState => {
+         return {...previousState, size: ""}});
+     setItem(previousState => {
+         return {...previousState, genericName: ""}});
+     setItem(previousState => {
+         return {...previousState, price: ""}});
+     setItem(previousState => {
+         return {...previousState, brand: ""}});
+ }
     return (
 
         <div className="col-md-3">
@@ -68,10 +76,9 @@ function NewItem() {
                        onChange={(event) => updatePrice(event.target.value)}/><br/>
             </p>
             <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>
-            <a className="btn btn-sm" href="#" role="button">Cancel</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>
          </div>
         </div>
-
     );
 };
 

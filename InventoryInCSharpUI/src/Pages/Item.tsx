@@ -1,5 +1,6 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import NewItem from "../Models/ItemModels/NewItem"
+import {SearchItem} from "../Models/ItemModels/SearchItem"
 
 
 const Item = () => {
@@ -13,7 +14,7 @@ const Item = () => {
                         </h1>
                     </div>
                 </div><div className="row">
-                <ItemDisplay></ItemDisplay><NewItem></NewItem>
+                <ItemDisplay></ItemDisplay><NewItem></NewItem><SearchItem></SearchItem>
                 </div>
             </div>
     );
