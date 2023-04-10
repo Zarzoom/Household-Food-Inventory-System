@@ -8,6 +8,8 @@ import {Provider} from "react-redux"
 import {store} from "./Stores/Store"
 import {useAppDispatch} from './Hooks/hooks'
 import {fetchItems} from "./Thunks/ItemsThunk"
+import Pantry from "./Pages/Pantry"
+import MyPantry from "./Pages/MyPantry"
 
 
 
@@ -16,7 +18,9 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<Item/>} />
+                    <Route index element={<MyPantry/>}/>
+                    <Route path = "item" element={<Item/>} />
+                    <Route path = "pantry" element={<Pantry/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

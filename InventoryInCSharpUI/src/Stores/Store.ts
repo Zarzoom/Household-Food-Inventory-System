@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {ItemsReducer, goFetchItems} from '../slices/ItemsReducer'
+import {PantriesReducer} from '../slices/PantriesReducer'
 import { AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import getItem from '../DataModels/getItem'
@@ -7,7 +8,7 @@ import getItem from '../DataModels/getItem'
 export const store = configureStore({
     reducer: {
         Items: ItemsReducer.reducer,
-        
+        Pantry: PantriesReducer.reducer        
     }
 })
 // export type RootState = ReturnType<typeof store.getState>

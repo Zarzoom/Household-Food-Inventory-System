@@ -8,10 +8,10 @@ const Layout = () => {
                     <a className="nav-link" href="/">Home</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#"></a>
+                    <a className="nav-link" href="/pantry">Pantry</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#"></a>
+                    <a className="nav-link" href="/item">Items</a>
                 </li>
             </ul>
             <Outlet />

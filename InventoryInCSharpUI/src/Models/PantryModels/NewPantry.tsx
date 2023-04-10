@@ -11,40 +11,23 @@ import Item from "../../DataModels/Item"
 //     const dispatch = useAppDispatch();
 //     dispatch(createItem(ItemToJsonParse));
 //}
-function NewItem() {
+function NewPantry() {
 
-   const [item, setItem] = useState({
-        brand: "",
-        price: "",
-        genericName: "",
-        size: "",
+   const [pantry, setPantry] = useState({
+        pantryName: ""
     });
 
-    const updateBrand = (newBrand: string) => {
-        setItem(previousState => {
-            return {...previousState, brand: newBrand}
+    const updateBrand = (newPantryName: string) => {
+        setPantry(previousState => {
+            return {...previousState, pantryname: newPantryName}
         });
     };
-    const updatePrice = (newPrice: string) => {
-        setItem(previousState => {
-            return {...previousState, price: newPrice}
-        });
-    };
-    const updateGenericName = (newGenericName: string) => {
-        setItem(previousState => {
-            return {...previousState, genericName: newGenericName}
-        });
-    };
-    const updateSize = (newSize: string) => {
-        setItem(previousState => {
-            return {...previousState, size: newSize}
-        });
-    };
+    
     const dispatch = useAppDispatch();
     const NewItemDispatch = () =>{
-        const ItemToJSONStringify = JSON.stringify(item);
-        const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
-        dispatch(createItem(ItemToJsonParse));
+        const PantryToJSONStringify = JSON.stringify(pantry);
+        const ItemToJsonParse = JSON.parse(PantryToJSONStringify);
+        dispatch(createItem(PantryToJsonParse));
     };
  const CancelAddItem= () =>{
      setItem(previousState => {

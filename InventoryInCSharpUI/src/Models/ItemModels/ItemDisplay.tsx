@@ -1,15 +1,12 @@
 ﻿import {useState, useEffect, Component} from "react";
 import Item from "../../DataModels/Item";
 import getItem from "../../DataModels/getItem";
-import ItemManager from "../../Services/Managers/ItemManager"
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {useSelector} from 'react-redux'
 import {store} from "../../Stores/Store"
 import {selectAllItems} from "../../slices/ItemsReducer"
 import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemDisplay} from "./SingleItemDisplay"
-
-const newItemManager = new ItemManager();
 
 export const ItemDisplay =() => {
     const dispatch = useAppDispatch(); 
