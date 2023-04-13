@@ -21,12 +21,12 @@ export const PantryDisplay =() => {
     }, [PantryStatus, dispatch])
 
    const AllPantries = useAppSelector(selectAllPantries)
-    const renderedAllItems = AllPantries.map((pantry: Pantry) => { return (
+    const renderedAllPantries = AllPantries.map((pantry: Pantry) => { return (
         <div  key={"" + pantry.pantryID}>
             <SinglePantryDisplay {...pantry}></SinglePantryDisplay>
             </div>
             )})
-    return <div className="col-md-3">{renderedAllItems}</div>
+    return <div className="col-md-3">{renderedAllPantries}</div>
 }
 
 

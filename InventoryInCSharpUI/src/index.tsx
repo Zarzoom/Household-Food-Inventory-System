@@ -11,8 +11,6 @@ import {fetchItems} from "./Thunks/ItemsThunk"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 
-
-
 export default function App() {
     return (
         <BrowserRouter>

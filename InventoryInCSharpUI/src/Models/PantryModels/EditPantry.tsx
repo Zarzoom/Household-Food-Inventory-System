@@ -1,50 +1,27 @@
 import {useState} from "react";
-import {updateItem} from "../../Thunks/ItemsThunk"
+import {updatePantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import getItem from "../../DataModels/getItem"
+import Pantry from "../../DataModels/Pantry"
 import ObjectAndState from "../../DataModels/ObjectAndState"
-export function EditItem(ItemAndState: ObjectAndState) {
-    const itemForUpdate = ItemAndState.itemForGet as getItem;
-    
-    // const [display, setDisplay] = useState(
-    //     {
-    //         show: ItemAndState.state
-    //     }
-    // )
+export function EditPantry(pantryForUpdate: Pantry) {
 
-    const [item, setItem] = useState({
-        itemID: itemForUpdate.itemID,
-        brand: itemForUpdate.brand,
-        price: "" + itemForUpdate.price,
-        genericName: itemForUpdate.genericName,
-        size: itemForUpdate.size,
+
+    const [pantry, setPantry] = useState({
+        pantryID: pantryForUpdate.pantryID,
+        pantryName: pantryForUpdate.pantryName
     });
 
-    const updateBrand = (newBrand: string) => {
-        setItem(previousState => {
-            return {...previousState, brand: newBrand}
+    const updatePantryName = (newPantryName: string) => {
+        setPantry(previousState => {
+            return {...previousState, pantryName: newPantryName}
         });
-    };
-    const updatePrice = (newPrice: string) => {
-        setItem(previousState => {
-            return {...previousState, price: newPrice}
-        });
-    };
-    const updateGenericName = (newGenericName: string) => {
-        setItem(previousState => {
-            return {...previousState, genericName: newGenericName}
-        });
-    };
-    const updateSize = (newSize: string) => {
-        setItem(previousState => {
-            return {...previousState, size: newSize}
-        });
-    };
+    }
+    
     const dispatch = useAppDispatch();
-    const UpdatedItemDispatch = () =>{
-        const ItemToJSONStringify = JSON.stringify(item);
-        const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
-        dispatch(updateItem(ItemToJsonParse));
+    const UpdatedPantryDispatch = () =>{
+        const PantryToJSONStringify = JSON.stringify(pantry);
+        const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
+        dispatch(updatePantry(PantryToJsonParse));
         return 'Added'
     };
 
@@ -53,20 +30,12 @@ export function EditItem(ItemAndState: ObjectAndState) {
         <div className="col-md-3">
             <div className= "BlueBox">
                 <p>
-                    <label>Generic Name:</label><br/>
-                    <input type="text" placeholder="beans" value={item.genericName}
-                           onChange={(event) => updateGenericName(event.target.value)}/><br/>
-                    <label>Brand:</label><br/>
-                    <input type="text" placeholder="World Famous Beans" value={item.brand}
-                           onChange={(event) => updateBrand(event.target.value)}/><br/>
-                    <label>Size:</label><br/>
-                    <input type="text" placeholder="3oz" value={item.size}
-                           onChange={(event) => updateSize(event.target.value)}/><br/>
-                    <label>Price:</label><br/>
-                    <input type="text" step="any" placeholder="0.00" value={item.price}
-                           onChange={(event) => updatePrice(event.target.value)}/><br/>
+                    <label>Pantry Name:</label><br/>
+                    <input type="text" placeholder="beans" value={pantry.pantryName}
+                           onChange={(event) => updatePantryName(event.target.value)}/><br/>
+                    
                 </p>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => UpdatedItemDispatch()}>Edit</a>
+                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => UpdatedPantryDispatch()}>Edit</a>
                 <a className="btn btn-sm" href="#" role="button">Cancel</a>
             </div>
         </div>

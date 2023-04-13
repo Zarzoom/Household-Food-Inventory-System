@@ -26,7 +26,20 @@ export const PantriesReducer = createSlice({
             state.StateOfPantry = action.payload;
             state.status = 'succeeded'
         },
+        goCreatePantry: (state , action: PayloadAction<Pantry>) =>{
+            state.StateOfPantry.push(action.payload);
+        },
+        goUpdatePantry: (state, action: PayloadAction<Pantry>) => {
+            const updateStatePantry = state.StateOfPantry.findIndex(pantry => pantry.pantryID == action.payload.pantryID)
+    state.StateOfPantry[updateStatePantry] = action.payload;
+        },
+        goDeletePantry: (state, action: PayloadAction<Number>) =>{
+            state.StateOfPantry = state.StateOfPantry.filter(pantry => pantry.pantryID !== action.payload);
+        },
+        goContentsPantrySearch: (state, action: PayloadAction<Pantry[]>) =>{
+            state.StateOfPantry = action.payload;
+        }
     }
-    },
+    }
     )
-export const {goFetchPantries} = PantriesReducer.actions;
+export const {goFetchPantries, goCreatePantry, goUpdatePantry, goDeletePantry, goContentsPantrySearch} = PantriesReducer.actions;

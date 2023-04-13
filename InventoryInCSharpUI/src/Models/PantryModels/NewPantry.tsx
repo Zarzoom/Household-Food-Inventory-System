@@ -1,7 +1,8 @@
 ﻿import {useState} from "react";
-import {createItem} from "../../Thunks/ItemsThunk"
+import {createPantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import Item from "../../DataModels/Item"
+import Pantry from "../../DataModels/Pantry"
+import PantryNoID from "../../DataModels/PantryNoID"
 
 
 // const newItemManager = new ItemManager();
@@ -17,48 +18,34 @@ function NewPantry() {
         pantryName: ""
     });
 
-    const updateBrand = (newPantryName: string) => {
+    const updatePantryName = (newPantryName: string) => {
         setPantry(previousState => {
-            return {...previousState, pantryname: newPantryName}
+            return {...previousState, pantryName: newPantryName}
         });
     };
     
     const dispatch = useAppDispatch();
-    const NewItemDispatch = () =>{
+    const NewPantryDispatch = () =>{
         const PantryToJSONStringify = JSON.stringify(pantry);
-        const ItemToJsonParse = JSON.parse(PantryToJSONStringify);
-        dispatch(createItem(PantryToJsonParse));
+        const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
+        dispatch(createPantry(PantryToJsonParse));
     };
- const CancelAddItem= () =>{
-     setItem(previousState => {
-         return {...previousState, size: ""}});
-     setItem(previousState => {
-         return {...previousState, genericName: ""}});
-     setItem(previousState => {
-         return {...previousState, price: ""}});
-     setItem(previousState => {
-         return {...previousState, brand: ""}});
+ const CancelAddPantry= () =>{
+     setPantry(previousState => {
+         return {...previousState, pantryName: ""}});
  }
     return (
 
         <div className="col-md-3">
          <div className= "BlueBox">
             <p>
-                <label>Generic Name:</label><br/>
-                <input type="text" placeholder="beans" value={item.genericName}
-                       onChange={(event) => updateGenericName(event.target.value)}/><br/>
-                <label>Brand:</label><br/>
-                <input type="text" placeholder="World Famous Beans" value={item.brand}
-                       onChange={(event) => updateBrand(event.target.value)}/><br/>
-                <label>Size:</label><br/>
-                <input type="text" placeholder="3oz" value={item.size}
-                       onChange={(event) => updateSize(event.target.value)}/><br/>
-                <label>Price:</label><br/>
-                <input type="text" step="any" placeholder="0.00" value={item.price}
-                       onChange={(event) => updatePrice(event.target.value)}/><br/>
+                <label>Pantry Name:</label><br/>
+                <input type="text" placeholder="Freezer" value={pantry.pantryName}
+                       onChange={(event) => updatePantryName(event.target.value)}/><br/>
+
             </p>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewPantryDispatch()}>Add</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddPantry()}>Cancel</a>
          </div>
         </div>
     );
@@ -67,4 +54,4 @@ function NewPantry() {
 
 
 
-export default NewItem;
+export default NewPantry;

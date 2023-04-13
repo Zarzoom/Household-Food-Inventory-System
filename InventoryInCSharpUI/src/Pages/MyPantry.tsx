@@ -1,4 +1,4 @@
-
+import {PantryListDisplay} from '../Models/PantryContentsModel/PantryListDisplay'
 const MyPantry = () => {
     return (
 
@@ -10,6 +10,7 @@ const MyPantry = () => {
                     </h1>
                 </div>
             </div><div className="row">
+            <PantryListDisplay></PantryListDisplay>
         </div>
         </div>
     );

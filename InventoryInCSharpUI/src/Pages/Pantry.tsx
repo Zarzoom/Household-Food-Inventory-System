@@ -1,4 +1,6 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
+import {SearchPantry} from "../Models/PantryModels/SearchPantry"
+import NewPantry from "../Models/PantryModels/NewPantry"
 const Pantry = () => {
     return (
 
@@ -10,7 +12,7 @@ const Pantry = () => {
                     </h1>
                 </div>
             </div><div className="row">
-            <PantryDisplay></PantryDisplay>
+            <PantryDisplay></PantryDisplay><NewPantry></NewPantry><SearchPantry></SearchPantry>
         </div>
         </div>
     );

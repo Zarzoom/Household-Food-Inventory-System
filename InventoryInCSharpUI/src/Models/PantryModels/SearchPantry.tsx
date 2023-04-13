@@ -1,13 +1,12 @@
 
 import {useState} from "react";
-import {contentsItemSearch, fetchItems} from "../../Thunks/ItemsThunk"
+import {fetchPantries, contentsPantrySearch} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import getItem from "../../DataModels/getItem"
-import {ItemDisplay} from './ItemDisplay'
+import Pantry from "../../DataModels/Pantry"
 import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 
-export function SearchItem() {
+export function SearchPantry() {
     const [search, setSearch] = useState("");
 
     const updateSearch = (newSearch: string) => {
@@ -17,15 +16,15 @@ export function SearchItem() {
     const dispatch = useAppDispatch();
     const SearchDispatch = () =>{
         if(search === ""){
-            dispatch(fetchItems());
+            dispatch(fetchPantries());
         }
         else {
-            dispatch(contentsItemSearch(search));
+            dispatch(contentsPantrySearch(search));
         }
     }
     const CancelDispatch = () =>{
         setSearch("");
-        dispatch(fetchItems());
+        dispatch(fetchPantries());
     }
 
     return (
@@ -33,7 +32,7 @@ export function SearchItem() {
             <div className="BlueBox">
                 <p>
                     <label>Search:</label><br/>
-                    <input type="text" placeholder="Generic or Brand Name" value={search}
+                    <input type="text" placeholder="Pantry Name" value={search}
                            onChange={(event) => updateSearch(event.target.value)}/><br/>
 
                 </p>

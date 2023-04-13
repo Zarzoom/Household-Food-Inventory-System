@@ -40,9 +40,11 @@ public class PantryManager
         results.Wait();
         return (results.Result);
     }
-    public void PantryUpdate(Pantry updatedPantry)
+    public Pantry PantryUpdate(Pantry updatedPantry)
     {
-        _PR.PantryUpdate(updatedPantry);
+       var results = _PR.PantryUpdate(updatedPantry);
+       results.Wait();
+       return (results.Result);
     }
     public void DeletePantry(long pantryID)
     {

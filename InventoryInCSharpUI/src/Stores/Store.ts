@@ -4,21 +4,17 @@ import {PantriesReducer} from '../slices/PantriesReducer'
 import { AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import getItem from '../DataModels/getItem'
+import {PantryContentsReducer} from '../slices/PantryContentsReducer'
+
 
 export const store = configureStore({
     reducer: {
         Items: ItemsReducer.reducer,
-        Pantry: PantriesReducer.reducer        
+        Pantry: PantriesReducer.reducer,
+        PantryContents: PantryContentsReducer.reducer
     }
 })
-// export type RootState = ReturnType<typeof store.getState>
-// export type AppDispatch = typeof store.dispatch
-// export type AppThunk<ReturnType = Promise<getItem>> = ThunkAction<
-//     ReturnType,
-//     RootState,
-//     unknown,
-//     AnyAction
-// >
+ // export const initStoreDecision = (preloadedState)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

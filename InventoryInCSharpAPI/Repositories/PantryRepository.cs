@@ -53,12 +53,13 @@ public class PantryRepository
 
     }
 
-    public async void PantryUpdate(Pantry updateMe)
+    public async Task<Pantry> PantryUpdate(Pantry updateMe)
     {
         using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "UPDATE PantryList SET PantryName = @PantryName WHERE PantryID = @PantryID";
-            var createdPantry = await connection.ExecuteAsync(sql, updateMe);
+            var sql = "UPDATE PantryList SET PantryName = @PantryName WHERE PantryID = @PantryID; SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @PantryID";
+            var createdPantry = await connection.QueryAsync<Pantry>(sql, updateMe);
+            return createdPantry.SingleOrDefault();
         }
     }
 

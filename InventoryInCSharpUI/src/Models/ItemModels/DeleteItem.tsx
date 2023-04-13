@@ -17,7 +17,7 @@ export function DeleteItem(itemAndState: ObjectAndState) {
         const ItemIDForDeleting = ItemForDeleting.itemID;
         dispatch(deleteItem(ItemIDForDeleting));
             };
-    
+    // Cancel doesn't work
     if(StateSubstitute === 1) {
         return (
             <div>

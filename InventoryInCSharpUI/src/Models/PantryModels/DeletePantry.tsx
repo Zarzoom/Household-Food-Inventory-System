@@ -1,41 +1,34 @@
-﻿import getItem from "../../DataModels/getItem"
+﻿import Pantry from "../../DataModels/Pantry"
 import {useAppDispatch} from '../../Hooks/hooks'
-import {deleteItem} from "../../Thunks/ItemsThunk"
+import {deletePantry} from "../../Thunks/PantriesThunk"
 import ObjectAndState from "../../DataModels/ObjectAndState"
 import {useState, useEffect, Component, SetStateAction} from "react";
 
 
 
-export function DeleteItem(itemAndState: ObjectAndState) {
-    
-    const ItemForDeleting = itemAndState.itemForGet as getItem;
-    
-   const StateSubstitute = itemAndState.state
+export function DeletePantry(pantryForDelete: Pantry) {
+
     
     const dispatch = useAppDispatch();
-    const deleteItemDispatch = () => {
-        const ItemIDForDeleting = ItemForDeleting.itemID;
-        dispatch(deleteItem(ItemIDForDeleting));
+    const deletePantryDispatch = () => {
+        const PantryIDForDeleting = pantryForDelete.pantryID;
+        dispatch(deletePantry(PantryIDForDeleting));
             };
     
-    if(StateSubstitute === 1) {
+    //Cancel button does not work.
         return (
             <div>
                 <div className="row">
                     <div className="col-md-3 BlueBox">
                         <p>
-                            Generic Name: {ItemForDeleting.genericName}<br/>Brand
-                            Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
+                            Pantry Name: {pantryForDelete.pantryName}
                         </p>
                         <a className="btn btn-sm" href="#" role="button">Cancel</a>
                         <a className="btn btn-sm" href="#" role="button"
-                           onClick={(event: any) => deleteItemDispatch()}>Delete</a>
+                           onClick={(event: any) => deletePantryDispatch()}>Delete</a>
                     </div>
                 </div>
             </div>
         );
-    }
-    
-    else{<></>}
 
 }
