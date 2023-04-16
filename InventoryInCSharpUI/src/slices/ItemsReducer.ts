@@ -16,6 +16,7 @@ const initialState: ItemsState={
     StateOfItems: new Array()
 }
 export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
+export const selectItemsByID = (state: RootState, ID: number) => state.Items.StateOfItems.find(item=> item.itemID === ID);
 
 export const ItemsReducer = createSlice({
         name: 'items',
@@ -38,7 +39,10 @@ export const ItemsReducer = createSlice({
             goContentsItemSearch: (state, action: PayloadAction<getItem[]>)=>{
                 state.StateOfItems = action.payload;
                     
-                }
+                },
+            // goPantryItemsSearch: (state, action: PayloadAction<getItem[]>) => {
+            //   
+            // }
 
             }
         },

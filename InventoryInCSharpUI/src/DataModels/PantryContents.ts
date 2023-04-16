@@ -1,8 +1,8 @@
 ﻿type PantryContents ={
-    quantity: number
+    quantity?: number
     pcItemID: number
     pcPantryID: number
-    psntryContentID?:number
+    pantryContentID:number
 }
 
 export default PantryContents;

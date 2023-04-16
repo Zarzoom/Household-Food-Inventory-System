@@ -17,7 +17,7 @@ const initialState: PantryState={
 }
 
 export const selectAllPantries = (state: RootState) => state.Pantry.StateOfPantry;
-
+export const selectPantryByID = (state: RootState, ID: number) => state.Pantry.StateOfPantry.find(pantry => pantry.pantryID === ID)
 export const PantriesReducer = createSlice({
     name: 'pantry',
     initialState,

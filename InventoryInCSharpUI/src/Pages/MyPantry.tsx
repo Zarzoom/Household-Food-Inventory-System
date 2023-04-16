@@ -1,4 +1,5 @@
 import {PantryListDisplay} from '../Models/PantryContentsModel/PantryListDisplay'
+import {PantryContentsDisplay} from '../Models/PantryContentsModel/PantryContentsDisplay'
 const MyPantry = () => {
     return (
 
@@ -10,7 +11,7 @@ const MyPantry = () => {
                     </h1>
                 </div>
             </div><div className="row">
-            <PantryListDisplay></PantryListDisplay>
+            <PantryListDisplay></PantryListDisplay><PantryContentsDisplay></PantryContentsDisplay>
         </div>
         </div>
     );

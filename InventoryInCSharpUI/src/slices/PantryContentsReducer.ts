@@ -16,7 +16,7 @@ const initialState: PantryContentsState={
     StateOfPantryContents: new Array()
 }
 
-export const selectAllPantries = (state: RootState) => state.PantryContents.StateOfPantryContents;
+export const selectAllPantryContents = (state: RootState) => state.PantryContents.StateOfPantryContents;
 
 export const PantryContentsReducer = createSlice({
     name: 'pantryContents',
