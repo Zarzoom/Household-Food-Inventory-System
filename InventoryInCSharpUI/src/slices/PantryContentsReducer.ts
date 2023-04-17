@@ -8,15 +8,18 @@ interface PantryContentsState{
     StateOfPantryContents: PantryContents[]
     status: 'idle' | 'succeeded' | 'failed',
     error: string| null
+    PantryFilter: number| null
 }
 
 const initialState: PantryContentsState={
     status:'idle',
     error: null,
-    StateOfPantryContents: new Array()
+    StateOfPantryContents: new Array(),
+    PantryFilter: -1
 }
 
 export const selectAllPantryContents = (state: RootState) => state.PantryContents.StateOfPantryContents;
+export const selectPantryFilter = (state: RootState) => state.PantryContents.PantryFilter;
 
 export const PantryContentsReducer = createSlice({
     name: 'pantryContents',
@@ -28,8 +31,11 @@ export const PantryContentsReducer = createSlice({
         },
         goFetchItemsInPantry: (state, action: PayloadAction<PantryContents[]>) => {
             state.StateOfPantryContents = action.payload;
+        },
+        goSetPantryFilter: (state, action: PayloadAction<number>) => {
+            state.PantryFilter = action.payload;
         }
     }
 })
 
-export const {goFetchPantryContents, goFetchItemsInPantry} = PantryContentsReducer.actions;
+export const {goFetchPantryContents, goFetchItemsInPantry, goSetPantryFilter} = PantryContentsReducer.actions;

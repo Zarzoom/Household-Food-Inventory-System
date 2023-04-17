@@ -5,11 +5,12 @@ import {useState, useEffect, Component} from "react";
 import {fetchPantryContents} from "../../Thunks/PantryContentsThunk"
 import Pantry from "../../DataModels/Pantry"
 import PantryContents from "../../DataModels/PantryContents"
-import {selectAllPantryContents} from "../../slices/PantryContentsReducer"
+import {selectAllPantryContents, selectPantryFilter} from "../../slices/PantryContentsReducer"
 import {selectPantryByID} from "../../slices/PantriesReducer"
 import {SinglePantryContentDisplay} from "./SinglePantryContentDisplay"
 export const PantryContentsDisplay = () =>{
     const dispatch = useAppDispatch();
+
     const PantryContentsStatus = useAppSelector(state => state.PantryContents.status);
 const CurrentPantryContents = useAppSelector(selectAllPantryContents);
 useEffect(() =>{
@@ -17,11 +18,22 @@ useEffect(() =>{
         const PantryContentsList = dispatch(fetchPantryContents());
     }
 }, [PantryContentsStatus, dispatch])
-    // const singularPantryContent = CurrentPantryContents[0];
-    // const actualSinglePantryContent = singularPantryContent as PantryContents
-    console.log(CurrentPantryContents);
-    // const pantry = useAppSelector(state=>selectPantryByID(state, actualSinglePantryContent.pcPantryID))
-    // const pantryForName = pantry as Pantry;
+
+    
+    let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)
+    let pantryName: string = "All Pantries";
+
+
+        const pantry = useAppSelector(state=>selectPantryByID(state, pantryID as number))
+        const officialPantry= pantry as Pantry;
+
+
+    // pantry = useAppSelector(state => selectPantryByID(state, actualSinglePantryContent.pcPantryID))
+    // let pantryName: string = "No Name"
+    if(pantry != null) {
+        pantryName = officialPantry.pantryName;
+    }
+    console.log(pantryID);
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
     return(
     <div className= "col-md-3">
@@ -34,7 +46,7 @@ useEffect(() =>{
   
    return( <div className="col-md-9">       
            <h2 className= 'text-left' style={{fontFamily: "'Times New Roman', Times, serif"}}>
-        Pantry Name
+               {pantryName}
     </h2>
         {PantryItems}
    </div>
