@@ -20,12 +20,13 @@ public class PantryContentsRepository
         }
     }
 
-    public async void PantryContentUpdate(PantryContents updateMe)
+    public async Task<PantryContents> PantryContentUpdate(PantryContents updateMe)
     {
         using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "UPDATE PantryContents SET PCPantryID = @PCPantryID, PCItemID = @PCItemID, Quantity = @Quantity WHERE PantryContentID = @PantryContentID";
-            var createdPantryContent = await connection.ExecuteAsync(sql, updateMe);
+            var sql = "UPDATE PantryContents SET PCPantryID = @PCPantryID, PCItemID = @PCItemID, Quantity = @Quantity WHERE PantryContentID = @PantryContentID; SELECT PantryContentID, PCPantryID, PCItemID, Quantity FROM PantryContents WHERE PantryContentID = @PantryContentID";
+            var createdPantryContent = await connection.QueryAsync<PantryContents>(sql, updateMe);
+            return createdPantryContent.SingleOrDefault();
         }
     }
 

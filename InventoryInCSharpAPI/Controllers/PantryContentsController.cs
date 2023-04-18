@@ -57,8 +57,8 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPut]
-    public void Put([FromBody] PantryContents updatedPantryContent)
+    public PantryContents Put([FromBody] PantryContents updatedPantryContent)
     {
-        pantryContentsManager.PantryContentUpdate(updatedPantryContent);
+        return pantryContentsManager.PantryContentUpdate(updatedPantryContent);
     }
 }

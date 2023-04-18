@@ -91,9 +91,11 @@ public class PantryContentsManager
         }
     }
 
-    public void PantryContentUpdate(PantryContents updatedPantryContent)
+    public PantryContents PantryContentUpdate(PantryContents updatedPantryContent)
     {
-        _PCR.PantryContentUpdate(updatedPantryContent);
+       var results = _PCR.PantryContentUpdate(updatedPantryContent);
+       results.Wait();
+       return (results.Result);
     }
 
     public void DeletePantryContent(long pantryContentID)
