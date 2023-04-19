@@ -38,5 +38,12 @@ export const updatePantryContents =
     dispatch(
         goUpdatePantryContents(asynchResponse)
     )
-        }
+        };
+export const addPantryContents = (newPantryContents: PantryContentsNoID): AppThunk =>
+    async dispatch => {
+    const asynchResponse = await client.postData('http://localhost:8000/api/PantryContents', newPantryContents)
+        .then(response => response.json())
+        .then(response => response as PantryContents);
+    dispatch(fetchItemsInPantry(newPantryContents.pcPantryID));
+    }
         

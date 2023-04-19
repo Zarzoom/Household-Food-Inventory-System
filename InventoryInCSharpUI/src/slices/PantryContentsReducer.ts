@@ -38,7 +38,8 @@ export const PantryContentsReducer = createSlice({
         goUpdatePantryContents: (state, action: PayloadAction<PantryContents>) => {
         const updateStatePantryContent = state.StateOfPantryContents.findIndex(pantryContents => pantryContents.pantryContentID == action.payload.pantryContentID);
         state.StateOfPantryContents[updateStatePantryContent] = action.payload;
-        }
+        },
+
     }
 })
 

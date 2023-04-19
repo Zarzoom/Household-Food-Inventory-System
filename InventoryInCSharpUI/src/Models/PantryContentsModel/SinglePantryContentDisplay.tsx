@@ -8,6 +8,7 @@ import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"
 
+
 export function SinglePantryContentDisplay(pantryContents: PantryContents){
     
     const pantryContentsForSelection = pantryContents as PantryContents;
