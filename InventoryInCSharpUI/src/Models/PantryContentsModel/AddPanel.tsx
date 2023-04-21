@@ -10,30 +10,42 @@ import {selectAllItems, selectContainsSearch} from "../../slices/ItemsReducer"
 import {contentsItemSearch, fetchItems, getSelectedItemData} from "../../Thunks/ItemsThunk"
 import {SingleItemForPantryContents} from "./SingleItemForPantryContents"
 import SearchIcon from '@rsuite/icons/Search';
-
+import StarIcon from '@rsuite/icons/legacy/Star';
 
 
 export const AddPanel = () =>{
-    const AllItems = useAppSelector(selectAllItems)
+    // const AllItems = useAppSelector(selectAllItems)
     const [open,setOpen] = useState(false);
+    const [inputValue, setInputValue] = useState("")
     const [searchValue, setSearchValue] = useState("");
     const placement= "right";
-
-    const renderedAllItems = AllItems.map((item: getItem) => { return (
+    const SearchSelector = useAppSelector(state => selectContainsSearch(state, searchValue));
+    
+    let currentItems: getItem[] = SearchSelector;
+    
+    // if (searchValue!= ""){
+    //     currentItems = SearchSelector;
+    // }
+    // else if (searchValue == ""){
+    //     currentItems = SearchSelector;
+    // }
+    // const Search = (search: string) =>{
+    //     setSearchValue(inputValue);
+    //     currentItems = SearchSelector;
+    // }
+    // const CancelDispatch = (search: string) =>{
+    //     setSearchValue("");
+    //     currentItems = AllItems
+    // }
+    const renderedAllItems = currentItems.map((item: getItem) => { return (
         <div  key={"" + item.itemID}>
             <SingleItemForPantryContents {...item}></SingleItemForPantryContents>
         </div>
     )})
     const dispatch = useAppDispatch();
-    const SearchDispatch = () =>{
 
 
 
-    }
-    const CancelDispatch = () =>{
-        setSearchValue("");
-        dispatch(fetchItems());
-    }
 return(
     <div>
 <Button appearance= 'primary' color={'cyan'} onClick={() => setOpen(true)}>Add Item To Pantry</Button>
@@ -45,8 +57,9 @@ return(
         {/*        <SearchIcon onClick = {(event:any)=>SearchDispatch()}/>*/}
         {/*    </InputGroup.Button>*/}
         {/*</InputGroup>*/}
-        <label>Search</label><input type= "text" onChange={(event: any)=>setSearchValue(event.target.value)}/>
-        <IconButton size={'sm'} icon={<SearchIcon/>} onClick = {(event:any)=>SearchDispatch()}></IconButton>
+        <label>Search</label><input type= "text" onChange={(event: any)=>setInputValue(event.target.value)}/>
+        <IconButton size={'sm'} icon={<SearchIcon/>} onClick = {(event:any)=>setSearchValue(inputValue)}></IconButton>
+        <IconButton size={'sm'} icon={<StarIcon/>} onClick = {(event:any)=> setSearchValue("")}></IconButton>
     </Drawer.Header>
     <Drawer.Body>
         {renderedAllItems}
