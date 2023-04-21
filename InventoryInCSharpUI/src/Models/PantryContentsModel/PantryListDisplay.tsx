@@ -23,7 +23,7 @@ export const PantryListDisplay = () => {
     
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => {
         return(
-        <div key={""+ pantry.pantryID}>
+        <div key={""+ pantry.pantryID +pantry.pantryName}>
             <SinglePantryButton{...pantry}></SinglePantryButton>
         </div>
     )})

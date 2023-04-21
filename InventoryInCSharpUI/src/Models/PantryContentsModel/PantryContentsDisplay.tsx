@@ -33,12 +33,13 @@ useEffect(() =>{
     if(pantry != null) {
         pantryName = officialPantry.pantryName;
     }
-    console.log(pantryID);
+    // console.log(pantryID);
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
+        console.log(pantryContents.pantryContentID);
     return(
     <div className= "col-md-3">
 
-        <div key = {"" +pantryContents.pantryContentID}>
+        <div key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
         </div>
     </div>

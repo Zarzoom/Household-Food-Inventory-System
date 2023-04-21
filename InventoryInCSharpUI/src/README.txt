@@ -1,0 +1,1 @@
+﻿TODO: Make it so that add Item to pantry button is on screen without having to scroll. The UX design is terrible right now. 

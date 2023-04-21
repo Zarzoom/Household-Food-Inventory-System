@@ -26,6 +26,10 @@ const Layout = () => {
             const ItemList = dispatch(fetchPantries())
         }
     }, [PantryStatus, dispatch])
+    let display = <Outlet/>
+    if (PantryStatus === 'idle' || ItemStatus === 'idle'){
+        display = <p>Loading....</p>
+    }
     return (
         <>
             <ul className="nav">
@@ -39,7 +43,7 @@ const Layout = () => {
                     <Link className="nav-link" to="/item">Items</Link>
                 </li>
             </ul>
-            <Outlet />
+            {display}
         </>
     )
 };

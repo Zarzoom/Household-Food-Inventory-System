@@ -34,7 +34,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
     const item = pantryItem as getItem;
     return(
         <div className= "SinglePantryContentDisplay">
-            <div className= "BlueBox" key = {"" + pantryContents.pantryContentID}>
+            <div className= "BlueBox" key = {"" + pantryContents.pantryContentID +pantryContents.pcItemID}>
                 <div className="col-md-9">
                 <p>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
