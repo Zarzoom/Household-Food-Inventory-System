@@ -14,7 +14,7 @@ export function SingleItemForPantryContents(item: getItem){
     const [newPC, setNewPC] = useState<PantryContentsNoID>({
         pcItemID: item.itemID,
         pcPantryID: pantryID,
-        quantity: 0 ,
+        quantity: 1 ,
     });
     const updateQuantity = (inputQuantity: string) => {
         const newPCQuantity: number = +inputQuantity

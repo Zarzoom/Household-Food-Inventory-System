@@ -23,6 +23,11 @@ export const AddPanel = () =>{
     
     let currentItems: getItem[] = SearchSelector;
     
+    const cancel= () =>{
+        setSearchValue("");
+        setInputValue("");
+    }
+    
     // if (searchValue!= ""){
     //     currentItems = SearchSelector;
     // }
@@ -44,7 +49,7 @@ export const AddPanel = () =>{
     )})
     const dispatch = useAppDispatch();
 
-
+//TODO: have clear search empty search field. 
 
 return(
     <div>
@@ -59,7 +64,7 @@ return(
         {/*</InputGroup>*/}
         <label>Search</label><input type= "text" onChange={(event: any)=>setInputValue(event.target.value)}/>
         <IconButton size={'sm'} icon={<SearchIcon/>} onClick = {(event:any)=>setSearchValue(inputValue)}></IconButton>
-        <IconButton size={'sm'} icon={<StarIcon/>} onClick = {(event:any)=> setSearchValue("")}></IconButton>
+        <IconButton size={'sm'} icon={<StarIcon/>} onClick = {(event:any)=> setSearchValue(" ")}></IconButton>
     </Drawer.Header>
     <Drawer.Body>
         {renderedAllItems}

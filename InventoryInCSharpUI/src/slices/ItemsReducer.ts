@@ -18,7 +18,7 @@ const initialState: ItemsState={
 
 export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
 export const selectItemsByID = (state: RootState, ID: number) => state.Items.StateOfItems.find(item=> item.itemID === ID);
-export const selectContainsSearch = (state: RootState, search: string) => state.Items.StateOfItems.filter(item=>item.brand.includes(search) || item.genericName.includes(search));
+export const selectContainsSearch = (state: RootState, search: string) => state.Items.StateOfItems.filter(item=>item.brand.toLowerCase().includes(search.toLowerCase()) || item.genericName.toLowerCase().includes(search.toLowerCase()));
 // export const findItemArrayByID = (state: RootState, Items: getItem[]) => Items.map((item: getItem)=>state.Items.StateOfItems.find(stateItem => stateItem.itemID === item.itemID));
 
 

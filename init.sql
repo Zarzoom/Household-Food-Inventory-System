@@ -24,5 +24,9 @@ Quantity INT,
 PCItemID INT,
 PCPantryID INT,
 PantryContentID INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY(PantryContentID)
+PRIMARY KEY(PantryContentID),
+FOREIGN KEY (PCItemID)
+    REFERENCES ItemList(ItemID),
+FOREIGN KEY (PCPantryID)
+    REFERENCES PantryList(PantryID)
 );
