@@ -9,6 +9,7 @@ import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 import { Grid, Row, Col } from 'rsuite'
 
+//TODO: The search needs to clear on page change.
 export function SearchItem() {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useAppDispatch();

@@ -7,17 +7,21 @@ import PantryNoID from '../DataModels/PantryNoID'
 interface PantryState{
     StateOfPantry: Pantry[]
     status: 'idle' | 'succeeded' | 'search'| 'failed',
+    search: string,
     error: string | null
 }
 
 const initialState: PantryState={
     status: 'idle',
     error: null,
+    search: "",
     StateOfPantry: new Array()
 }
 
 export const selectAllPantries = (state: RootState) => state.Pantry.StateOfPantry;
 export const selectPantryByID = (state: RootState, ID: number) => state.Pantry.StateOfPantry.find(pantry => pantry.pantryID === ID)
+export const selectContainsSearch = (state: RootState) => state.Pantry.StateOfPantry.filter(pantry=>pantry.pantryName.toLowerCase().includes(state.Pantry.search.toLowerCase()));
+
 export const PantriesReducer = createSlice({
     name: 'pantry',
     initialState,
@@ -38,8 +42,11 @@ export const PantriesReducer = createSlice({
         },
         goContentsPantrySearch: (state, action: PayloadAction<Pantry[]>) =>{
             state.StateOfPantry = action.payload;
+        },
+        goSetSearch: (state, action: PayloadAction<string>) =>{
+            state.search = action.payload
         }
     }
     }
     )
-export const {goFetchPantries, goCreatePantry, goUpdatePantry, goDeletePantry, goContentsPantrySearch} = PantriesReducer.actions;
+export const {goFetchPantries, goCreatePantry, goUpdatePantry, goDeletePantry, goContentsPantrySearch, goSetSearch} = PantriesReducer.actions;

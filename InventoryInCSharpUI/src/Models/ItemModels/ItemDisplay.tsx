@@ -9,15 +9,6 @@ import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemDisplay} from "./SingleItemDisplay"
 
 export const ItemDisplay =() => {
-    const [search, setSearch]= useState();
-    const dispatch = useAppDispatch(); 
-    const ItemStatus = useAppSelector(state => state.Items.status)
-    // useEffect(()=> {
-    //     if(ItemStatus === 'idle') {
-    //         const ItemList = dispatch(fetchItems())
-    //     }
-            
-    // }, [ItemStatus, dispatch])
 
    const AllItems = useAppSelector(state => selectContainsSearch(state))
     const renderedAllItems = AllItems.map((item: getItem) => { return (
