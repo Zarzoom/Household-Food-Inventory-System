@@ -15,6 +15,10 @@ export function SearchItem() {
     const updateSearch = (searchValue: string) =>{
         dispatch(goSetSearch(searchValue));
     }
+    const cancelSearch = (searchValue: string) =>{
+        dispatch(goSetSearch(searchValue));
+        setSearchInput(searchValue);
+    }
     
 return (
     <div className="col-md-3">
@@ -26,7 +30,7 @@ return (
 
             </p>
             <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch(searchInput)}>Search</a>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch("")}>Cancel</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => cancelSearch("")}>Cancel</a>
         </div>
     </div>
 )
