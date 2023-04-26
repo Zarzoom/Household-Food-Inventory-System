@@ -53,16 +53,16 @@ export const updateItem =
             )
         };
 
-export const contentsItemSearch =
-    (search: String): AppThunk =>
-        async dispatch =>{
-    const asynchResponse = await client.getData('http://localhost:8000/api/Item/search/' + search)
-        .then(response => response.json())
-        .then(response => response as getItem[]);
-    dispatch(
-        goContentsItemSearch(asynchResponse)
-    )
-        };
+// export const contentsItemSearch =
+//     (search: String): AppThunk =>
+//         async dispatch =>{
+//     const asynchResponse = await client.getData('http://localhost:8000/api/Item/search/' + search)
+//         .then(response => response.json())
+//         .then(response => response as getItem[]);
+//     dispatch(
+//         goContentsItemSearch(asynchResponse)
+//     )
+//         };
 
-export const getSelectedItemData = (selector: typeof useAppSelector) => (dispatch: Function, selector: typeof useAppSelector) => {return selector(state => selectContainsSearch(state, dispatch.arguments))}
+// export const getSelectedItemData = (selector: typeof useAppSelector) => (dispatch: Function, selector: typeof useAppSelector) => {return selector(state => selectContainsSearch(state, dispatch.arguments))}
         

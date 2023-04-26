@@ -28,20 +28,6 @@ export const AddPanel = () =>{
         setInputValue("");
     }
     
-    // if (searchValue!= ""){
-    //     currentItems = SearchSelector;
-    // }
-    // else if (searchValue == ""){
-    //     currentItems = SearchSelector;
-    // }
-    // const Search = (search: string) =>{
-    //     setSearchValue(inputValue);
-    //     currentItems = SearchSelector;
-    // }
-    // const CancelDispatch = (search: string) =>{
-    //     setSearchValue("");
-    //     currentItems = AllItems
-    // }
     const renderedAllItems = currentItems.map((item: getItem) => { return (
         <div  key={"" + item.itemID}>
             <SingleItemForPantryContents {...item}></SingleItemForPantryContents>

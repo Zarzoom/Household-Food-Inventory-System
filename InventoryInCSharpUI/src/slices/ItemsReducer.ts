@@ -5,7 +5,8 @@ import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
 
 interface ItemsState{
-    StateOfItems: getItem[]
+    StateOfItems: getItem[],
+    search: string,
     status: 'idle' | 'succeeded' | 'search'| 'failed',
     error: string | null
 }
@@ -13,12 +14,13 @@ interface ItemsState{
 const initialState: ItemsState={
     status: 'idle',
     error: null,
+    search: "",
     StateOfItems: new Array()
 }
 
 export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
 export const selectItemsByID = (state: RootState, ID: number) => state.Items.StateOfItems.find(item=> item.itemID === ID);
-export const selectContainsSearch = (state: RootState, search: string) => state.Items.StateOfItems.filter(item=>item.brand.toLowerCase().includes(search.toLowerCase()) || item.genericName.toLowerCase().includes(search.toLowerCase()));
+export const selectContainsSearch = (state: RootState) => state.Items.StateOfItems.filter(item=>item.brand.toLowerCase().includes(state.Items.search.toLowerCase()) || item.genericName.toLowerCase().includes(state.Items.search.toLowerCase()));
 // export const findItemArrayByID = (state: RootState, Items: getItem[]) => Items.map((item: getItem)=>state.Items.StateOfItems.find(stateItem => stateItem.itemID === item.itemID));
 
 
@@ -44,6 +46,9 @@ export const ItemsReducer = createSlice({
                 state.StateOfItems = action.payload;
                     
                 },
+            goSetSearch: (state, action:PayloadAction<string>) =>{
+               state.search = action.payload;
+            }
             // goPantryItemsSearch: (state, action: PayloadAction<getItem[]>) => {
             //   
             // }
@@ -51,4 +56,4 @@ export const ItemsReducer = createSlice({
             }
         },
 )
-export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch} = ItemsReducer.actions;
+export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, goSetSearch} = ItemsReducer.actions;

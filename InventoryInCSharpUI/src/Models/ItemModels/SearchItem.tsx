@@ -1,45 +1,33 @@
 
 import {useState} from "react";
-import {contentsItemSearch, fetchItems} from "../../Thunks/ItemsThunk"
-import {useAppDispatch} from '../../Hooks/hooks'
+import {fetchItems} from "../../Thunks/ItemsThunk"
+import {selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
+import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import getItem from "../../DataModels/getItem"
 import {ItemDisplay} from './ItemDisplay'
 import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
+import { Grid, Row, Col } from 'rsuite'
 
 export function SearchItem() {
-    const [search, setSearch] = useState("");
-
-    const updateSearch = (newSearch: string) => {
-        setSearch(newSearch);
-    };
-    
+    const [searchInput, setSearchInput] = useState("");
     const dispatch = useAppDispatch();
-    const SearchDispatch = () =>{
-        if(search === ""){
-            dispatch(fetchItems());
-        }
-        else {
-            dispatch(contentsItemSearch(search));
-        }
+    const updateSearch = (searchValue: string) =>{
+        dispatch(goSetSearch(searchValue));
     }
-    const CancelDispatch = () =>{
-        setSearch("");
-        dispatch(fetchItems());
-    }
+    
+return (
+    <div className="col-md-3">
+        <div className="BlueBox">
+            <p>
+                <label>Search:</label><br/>
+                <input type="text" placeholder="Generic or Brand Name" value={searchInput}
+                       onChange={(event) => setSearchInput(event.target.value)}/><br/>
 
-    return (
-        <div className="col-md-3">
-            <div className="BlueBox">
-                <p>
-                    <label>Search:</label><br/>
-                    <input type="text" placeholder="Generic or Brand Name" value={search}
-                           onChange={(event) => updateSearch(event.target.value)}/><br/>
-
-                </p>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => SearchDispatch()}>Search</a>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelDispatch()}>Cancel</a>
-            </div>
+            </p>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch(searchInput)}>Search</a>
+            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch("")}>Cancel</a>
         </div>
-    )
+    </div>
+)
 }
