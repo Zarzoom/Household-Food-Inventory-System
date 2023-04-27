@@ -4,7 +4,7 @@ import PantryContentsNoID from '../DataModels/PantryContentsNoID'
 import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
 import { AnyAction } from 'redux'
 import {store} from '../Stores/Store'
-import {goFetchPantryContents, goFetchItemsInPantry, goUpdatePantryContents} from '../slices/PantryContentsReducer'
+import {goFetchPantryContents, goFetchItemsInPantry, goUpdatePantryContents, goDeletePantryContents} from '../slices/PantryContentsReducer'
 
 const client = new HttpClient();
 
@@ -45,5 +45,10 @@ export const addPantryContents = (newPantryContents: PantryContentsNoID): AppThu
         .then(response => response.json())
         .then(response => response as PantryContents);
     dispatch(fetchItemsInPantry(newPantryContents.pcPantryID));
-    }
+    };
+export const deletePantryContents = (PantryContentID: number): AppThunk => 
+    async dispatch => {
+    const asynchResponse = await client.postData('http://localhost:8000/api/deletePantryContents/' + PantryContentID);
+    dispatch(goDeletePantryContents(PantryContentID));
+}
         

@@ -1,15 +1,19 @@
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {useSelector} from 'react-redux'
 import {store} from "../../Stores/Store"
-import {useState, useEffect, Component} from "react";
+import {useState, useEffect} from "react";
 import {fetchPantryContents, updatePantryContents} from "../../Thunks/PantryContentsThunk"
 import Pantry from "../../DataModels/Pantry"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"
+import { Button, IconButton, ButtonGroup, ButtonToolbar } from 'rsuite';
+import {DeletePantryContents} from './DeletePantryContents'
+
 
 
 export function SinglePantryContentDisplay(pantryContents: PantryContents){
+    const [openModal, setOpenModal] = useState(false);
     
     const pantryContentsForSelection = pantryContents as PantryContents;
     const [quantity, setQuantity] = useState<PantryContents>({
@@ -18,6 +22,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
         pantryContentID: pantryContentsForSelection.pantryContentID,
         quantity: pantryContentsForSelection.quantity
     })
+    const pantryContent = quantity as PantryContents;
     const updateQuantity = (inputQuantity: string) => {
         const newQuantity = +inputQuantity
         setQuantity(previousState => {
@@ -45,7 +50,8 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
                         <label>Quantity</label><br/>
                         <input type= "number" value = {quantity.quantity} onChange={ (event) => updateQuantity(event.target.value)}/>
                     </p>
-                    <a className= "btn btn-sm" href="#" role = "button" onClick={(event: any) => updatePantryContentDispatch()}>Add</a>
+                    <a className= "btn btn-sm" href="#" role = "button" onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</a>
+                    <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>
         </div>
