@@ -53,11 +53,13 @@ function AddItemModal() {
         setItem(previousState => {
             return {...previousState, brand: ""}});
     }
+    
     return (
         <div>
         <Button appearance={ 'primary'} color={'cyan'} onClick={(event: any)=>setOpen(true)}>Add New Item</Button>
             <Modal open={open} onClose={()=>setOpen(false)}>
-        <div className="col-md-12">
+        {/*<div className="col-md-12">*/}
+                <Modal.Header></Modal.Header>
             <div className= "BlueBox">
                 <Modal.Body>
                 <p>
@@ -80,7 +82,7 @@ function AddItemModal() {
                 <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>
                 </Modal.Footer>
             </div>
-        </div>
+        {/*</div>*/}
         </Modal>
         </div>
     );
