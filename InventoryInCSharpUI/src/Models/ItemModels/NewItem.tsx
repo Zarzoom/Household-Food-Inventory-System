@@ -4,13 +4,6 @@ import {useAppDispatch} from '../../Hooks/hooks'
 import Item from "../../DataModels/Item"
 
 
-// const newItemManager = new ItemManager();
-// const NewItemDispatch = (newItem: any) =>{
-//     const ItemToJSONStringify = JSON.stringify(newItem);
-//     const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
-//     const dispatch = useAppDispatch();
-//     dispatch(createItem(ItemToJsonParse));
-//}
 function NewItem() {
 
    const [item, setItem] = useState({

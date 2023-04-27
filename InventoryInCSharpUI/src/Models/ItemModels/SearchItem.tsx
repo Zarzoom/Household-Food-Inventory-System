@@ -1,5 +1,5 @@
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {fetchItems} from "../../Thunks/ItemsThunk"
 import {selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
@@ -13,6 +13,12 @@ import { Grid, Row, Col } from 'rsuite'
 export function SearchItem() {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useAppDispatch();
+    
+    useEffect(()=>{
+        if (searchInput === ""){
+            dispatch(goSetSearch(""));
+        }
+    })
     const updateSearch = (searchValue: string) =>{
         dispatch(goSetSearch(searchValue));
     }

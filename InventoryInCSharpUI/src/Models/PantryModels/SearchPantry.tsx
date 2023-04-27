@@ -1,5 +1,5 @@
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {fetchPantries, contentsPantrySearch} from "../../Thunks/PantriesThunk"
 import {goSetSearch} from '../../slices/PantriesReducer'
 import {useAppDispatch} from '../../Hooks/hooks'
@@ -15,6 +15,10 @@ export function SearchPantry() {
 
     
     const dispatch = useAppDispatch();
+    useEffect(()=>{
+        if (search === ""){
+            dispatch(goSetSearch(""));
+        }})
     const SearchDispatch = () =>{
         dispatch(goSetSearch(search))
     }

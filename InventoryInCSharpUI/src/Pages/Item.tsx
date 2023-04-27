@@ -1,6 +1,7 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import NewItem from "../Models/ItemModels/NewItem"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
+import AddItemModal from "../Models/ItemModels/AddItemModal"
 
 
 const Item = () => {
@@ -14,7 +15,7 @@ const Item = () => {
                         </h1>
                     </div>
                 </div><div className="row">
-                <ItemDisplay></ItemDisplay><NewItem></NewItem><SearchItem></SearchItem>
+                <ItemDisplay></ItemDisplay><AddItemModal></AddItemModal><SearchItem></SearchItem>
                 </div>
             </div>
     );

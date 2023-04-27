@@ -12,7 +12,7 @@ const MyPantry = () => {
                     </h1>
                 </div>
             </div><div className="row">
-            <PantryListDisplay></PantryListDisplay><PantryContentsDisplay></PantryContentsDisplay><AddPanel></AddPanel>
+            <AddPanel></AddPanel><PantryListDisplay></PantryListDisplay><PantryContentsDisplay></PantryContentsDisplay>
         </div>
         </div>
     );

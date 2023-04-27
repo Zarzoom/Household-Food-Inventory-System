@@ -11,12 +11,15 @@ import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemForPantryContents} from "./SingleItemForPantryContents"
 import SearchIcon from '@rsuite/icons/Search';
 import StarIcon from '@rsuite/icons/legacy/Star';
+import AddItemModal from '../ItemModels/AddItemModal';
 
 
 export const AddPanel = () =>{
     // const AllItems = useAppSelector(selectAllItems)
 
     const [open,setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    
     const openPanel= (setVal: boolean) =>{
         setOpen(setVal);
         dispatch(goSetSearch(""));
@@ -56,6 +59,9 @@ return(
         <label>Search</label><input type= "text" onChange={(event: any)=>setSearchInput(event.target.value)}/>
         <IconButton size={'sm'} icon={<SearchIcon/>} onClick = {(event:any)=>updateSearch(searchInput)}></IconButton>
         <IconButton size={'sm'} icon={<StarIcon/>} onClick = {(event:any)=> updateSearch(" ")}></IconButton>
+        {/*<Button appearance={'primary'} color={'cyan'} onClick={(event: any)=>setOpen(true)}>Add Item</Button>*/}
+        <AddItemModal></AddItemModal>
+        
     </Drawer.Header>
     <Drawer.Body>
         {renderedAllItems}
