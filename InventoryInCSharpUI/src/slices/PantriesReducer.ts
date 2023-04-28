@@ -39,6 +39,7 @@ export const PantriesReducer = createSlice({
         },
         goDeletePantry: (state, action: PayloadAction<Number>) =>{
             state.StateOfPantry = state.StateOfPantry.filter(pantry => pantry.pantryID !== action.payload);
+            state.status = "idle";
         },
         goContentsPantrySearch: (state, action: PayloadAction<Pantry[]>) =>{
             state.StateOfPantry = action.payload;

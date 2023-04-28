@@ -49,6 +49,13 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.WhereIsThatItem(itemID);
     }
+  
+    [HttpGet("retrievePantryContentsWithItem/{itemID}")]
+    public IEnumerable<PantryContents> findPantryContentsContainingItem(long itemID)
+    {
+        return pantryContentsManager.FindContentsByPCItemID(itemID);
+    }
+    
 
     [HttpPut("deletePantryContent/{pantryContentID}")]
     public void DeletePantryContent(long pantryContentID)

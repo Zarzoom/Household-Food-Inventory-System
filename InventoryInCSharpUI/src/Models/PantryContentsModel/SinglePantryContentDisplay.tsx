@@ -7,7 +7,7 @@ import Pantry from "../../DataModels/Pantry"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"
-import { Button, IconButton, ButtonGroup, ButtonToolbar } from 'rsuite';
+import { Button, IconButton, ButtonGroup, ButtonToolbar, InputNumber } from 'rsuite';
 import {DeletePantryContents} from './DeletePantryContents'
 
 
@@ -23,10 +23,9 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
         quantity: pantryContentsForSelection.quantity
     })
     const pantryContent = quantity as PantryContents;
-    const updateQuantity = (inputQuantity: string) => {
-        const newQuantity = +inputQuantity
+    const updateQuantity = (inputQuantity: number) => {
         setQuantity(previousState => {
-            return {...previousState, quantity: newQuantity}
+            return {...previousState, quantity: inputQuantity}
         })
     }
     const dispatch = useAppDispatch();
@@ -48,9 +47,9 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
                 <div className= "col-md-12">
                     <p>
                         <label>Quantity</label><br/>
-                        <input type= "number" value = {quantity.quantity} onChange={ (event) => updateQuantity(event.target.value)}/>
+                        <InputNumber defaultValue={quantity.quantity} min={1} onChange={ (value:number|string, event) => updateQuantity(+value)}/>
                     </p>
-                    <a className= "btn btn-sm" href="#" role = "button" onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</a>
+                    <Button appearance={'primary'} color={'cyan'}  onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
                     <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>

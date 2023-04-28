@@ -48,17 +48,8 @@ public class PantryManager
     }
     public void DeletePantry(long pantryID)
     {
-        IEnumerable<PantryContents> itemsInPantry = _PCM.FindContentsByPCPantryID(pantryID);
-        if (itemsInPantry != null)
-        {
-            foreach (PantryContents PantryContent in itemsInPantry)
-            {
-                _PCM.DeletePantryContent(PantryContent.pantryContentID);
-            }
-        }
-        else
-        {
-        }
+        _PCM.DeleteContentsByPantry(pantryID);
+        Task.Delay(500).Wait();
         _PR.DeletePantry(pantryID);
     }
 

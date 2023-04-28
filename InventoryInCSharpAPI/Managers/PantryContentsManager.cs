@@ -56,6 +56,13 @@ public class PantryContentsManager
         results.Wait();
         return (results.Result);
     }
+    
+    public IEnumerable<PantryContents> FindContentsByPCItemID(long pcItemID)
+    {
+        var results = _PCR.FindContentsByPCItemID(pcItemID);
+        results.Wait();
+        return (results.Result);
+    }
 
     public PantryContents FindContentsByItemIDAndPantryID(long pcPantryID, long pcItemID)
     {
@@ -102,7 +109,12 @@ public class PantryContentsManager
     {
         _PCR.DeletePantryContent(pantryContentID);
     }
-
+    
+    public void DeleteContentsByItem(long itemID)
+    {
+        _PCR.DeletePantryContentsByItem(itemID);
+    }
+    
     public void DeleteContentsByPantry(long pantryID)
     {
         _PCR.DeletePantryContentsByPantry(pantryID);

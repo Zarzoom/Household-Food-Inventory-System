@@ -59,12 +59,21 @@ public class PantryContentsRepository
             var deletedRows = await connection.ExecuteAsync(sql, parameters);
         }
     }
-    public async void DeletePantryContentsByPantry(long PantryID)
+    public async void DeletePantryContentsByItem(long PCItemID)
     {
         using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var parameters = new { PantryID };
-            var sql = $"DELETE FROM PantryContents WHERE PantryID = @PantryID";
+            var parameters = new { PCItemID };
+            var sql = $"DELETE FROM PantryContents WHERE PCItemID = @PCItemID";
+            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+        }
+    }
+    public async void DeletePantryContentsByPantry(long PCPantryID)
+    {
+        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var parameters = new { PCPantryID };
+            var sql = $"DELETE FROM PantryContents WHERE PCPantryID = @PCPantryID";
             var deletedRows = await connection.ExecuteAsync(sql, parameters);
         }
     }

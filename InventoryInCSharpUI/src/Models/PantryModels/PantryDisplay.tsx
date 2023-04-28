@@ -11,7 +11,13 @@ import {SinglePantryDisplay} from "./SinglePantryDisplay"
 
 
 export const PantryDisplay =() => {
-
+ // const dispatch = useAppDispatch();
+ //    const PantryStatus = useAppSelector(state => state.Pantry.status);
+ //    useEffect(() =>{
+ //        if (PantryStatus === 'idle') {
+ //            const PantryContentsList = dispatch(fetchPantries());
+ //        }});
+        
    const AllPantries = useAppSelector(state=> selectContainsSearch(state))
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => { return (
         <div  key={"" + pantry.pantryID}>

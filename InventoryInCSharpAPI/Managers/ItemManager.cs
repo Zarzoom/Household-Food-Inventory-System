@@ -5,9 +5,12 @@ namespace InventoryInCSharpAPI.Managers;
 public class ItemManager
 {
     private readonly ItemRepository _IR;
-    public ItemManager(ItemRepository IR)
+    private readonly PantryContentsRepository _PCR;
+
+    public ItemManager(ItemRepository IR, PantryContentsRepository PCR)
     {
         this._IR = IR;
+        this._PCR = PCR;
     }
 // private List<Item> ItemList { get; set; } = new List<Item>();
 
@@ -49,9 +52,12 @@ public class ItemManager
 
     public void DeleteItem(long itemID)
     {
+        _PCR.DeletePantryContentsByItem(itemID);
+
+        Task.Delay(500).Wait();
         _IR.DeleteItem(itemID);
     }
-
+//TODO: find better option than task.delay
     //commented out in controller to prevent catastrophic accidents.
 
     public void DeleteALLItems()
