@@ -3,6 +3,7 @@ import {useAppDispatch} from '../../Hooks/hooks'
 import {deleteItem} from "../../Thunks/ItemsThunk"
 import ObjectAndState from "../../DataModels/ObjectAndState"
 import {useState, useEffect, Component, SetStateAction} from "react";
+import {goSetStatus} from "../../slices/ItemsReducer"
 
 
 
@@ -16,6 +17,7 @@ export function DeleteItem(itemAndState: ObjectAndState) {
     const deleteItemDispatch = () => {
         const ItemIDForDeleting = ItemForDeleting.itemID;
         dispatch(deleteItem(ItemIDForDeleting));
+        dispatch(goSetStatus("idle"));
             };
     // Cancel doesn't work
     if(StateSubstitute === 1) {

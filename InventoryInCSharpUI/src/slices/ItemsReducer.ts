@@ -3,11 +3,12 @@ import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
+import StatusString from '../DataModels/StatusString'
 
 interface ItemsState{
     StateOfItems: getItem[],
     search: string,
-    status: 'idle' | 'succeeded' | 'search'| 'failed',
+    status: StatusString,
     error: string | null
 }
 
@@ -48,6 +49,10 @@ export const ItemsReducer = createSlice({
                 },
             goSetSearch: (state, action:PayloadAction<string>) =>{
                state.search = action.payload;
+            },
+            goSetStatus: (state, action: PayloadAction<string>) =>{
+               const NewStatus: StatusString = action.payload as StatusString;
+               state.status = NewStatus;
             }
             // goPantryItemsSearch: (state, action: PayloadAction<getItem[]>) => {
             //   
@@ -56,4 +61,4 @@ export const ItemsReducer = createSlice({
             }
         },
 )
-export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, goSetSearch} = ItemsReducer.actions;
+export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, goSetSearch, goSetStatus} = ItemsReducer.actions;

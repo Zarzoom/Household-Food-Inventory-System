@@ -6,7 +6,7 @@ import { Button, IconButton, ButtonGroup, ButtonToolbar } from 'rsuite';
 import {useState, useEffect, Component} from "react";
 import 'rsuite/dist/rsuite.min.css';
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {selectAllItems, selectContainsSearch,goSetSearch} from "../../slices/ItemsReducer"
+import {selectAllItems, selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
 import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemForPantryContents} from "./SingleItemForPantryContents"
 import SearchIcon from '@rsuite/icons/Search';
