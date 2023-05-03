@@ -7,6 +7,7 @@ import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSe
 import { AnyAction } from 'redux'
 import {store} from '../Stores/Store'
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
+import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
 
 
 const client = new HttpClient();
@@ -31,6 +32,7 @@ export const createItem =
             dispatch(
                 goCreateItem(asynchResponse)
             )
+            
         };
 
 export const deleteItem =
@@ -39,7 +41,12 @@ export const deleteItem =
     const asynchResponse = await client.putData('http://localhost:8000/api/Item/deleteItem/'+ deleteItemID);
     dispatch(
         goDeleteItem(deleteItemID)
+    );
+    //this dispatch makes sure that the pantry contents state is updated so that pantry contents page will load properly.
+    dispatch(
+        fetchPantryContents()
     )
+            
 };
 
 export const updateItem =

@@ -14,6 +14,7 @@ export const fetchPantryContents =
     const asynchResponse = await client.getData('http://localhost:8000/api/PantryContents')
         .then(response => response.json())
         .then(response => response as PantryContents[])
+            console.log(asynchResponse)
             dispatch(
                 goFetchPantryContents(asynchResponse)
             )

@@ -2,11 +2,11 @@
 import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
+import StatusString from '../DataModels/StatusString'
 
 interface PantryContentsState{
     StateOfPantryContents: PantryContents[]
-    status: 'idle' | 'succeeded' | 'failed',
+    status: StatusString,
     error: string| null
     PantryFilter: number| null
 }
@@ -41,9 +41,12 @@ export const PantryContentsReducer = createSlice({
         },
         goDeletePantryContents: (state, action: PayloadAction<number>) =>{
             state.StateOfPantryContents = state.StateOfPantryContents.filter(PantryContents => PantryContents.pantryContentID !== action.payload);
+        },
+        goSetStatus: (state, action: PayloadAction<string>) =>{
+            const NewStatus: StatusString = action.payload as StatusString;
+            state.status = NewStatus;
         }
-
     }
 })
 
-export const {goFetchPantryContents, goFetchItemsInPantry, goSetPantryFilter, goUpdatePantryContents, goDeletePantryContents} = PantryContentsReducer.actions;
+export const {goFetchPantryContents, goFetchItemsInPantry, goSetPantryFilter, goUpdatePantryContents, goDeletePantryContents, goSetStatus} = PantryContentsReducer.actions;
