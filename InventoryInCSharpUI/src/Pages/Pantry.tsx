@@ -1,6 +1,5 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
 import {SearchPantry} from "../Models/PantryModels/SearchPantry"
-import NewPantry from "../Models/PantryModels/NewPantry"
 import AddPantryModal from "../Models/PantryModels/AddPantryModal"
 const Pantry = () => {
     return (

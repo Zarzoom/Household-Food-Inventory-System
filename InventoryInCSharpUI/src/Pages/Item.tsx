@@ -1,5 +1,4 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
-import NewItem from "../Models/ItemModels/NewItem"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
 import AddItemModal from "../Models/ItemModels/AddItemModal"
 

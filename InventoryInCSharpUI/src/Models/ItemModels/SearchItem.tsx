@@ -7,7 +7,7 @@ import getItem from "../../DataModels/getItem"
 import {ItemDisplay} from './ItemDisplay'
 import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
-import { Grid, Row, Col } from 'rsuite'
+import {Grid, Row, Col, Input, Button} from 'rsuite'
 
 //TODO: The search needs to clear on page change.
 export function SearchItem() {
@@ -32,12 +32,15 @@ return (
         <div className="BlueBox">
             <p>
                 <label>Search:</label><br/>
-                <input type="text" placeholder="Generic or Brand Name" value={searchInput}
-                       onChange={(event) => setSearchInput(event.target.value)}/><br/>
+                <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
+                       onChange={(value: string, event) => setSearchInput(value)}/><br/>
 
             </p>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch(searchInput)}>Search</a>
-            <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => cancelSearch("")}>Cancel</a>
+            <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => updateSearch(searchInput)}>Search</Button>
+            <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => cancelSearch("")}>Cancel</Button>
+            
+            {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch(searchInput)}>Search</a>*/}
+            {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => cancelSearch("")}>Cancel</a>*/}
         </div>
     </div>
 )

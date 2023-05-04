@@ -29,11 +29,12 @@ function AddPantryModal() {
     };
     const CancelAddPantry= () =>{
         setPantry(previousState => {
+            setOpen(false)
             return {...previousState, pantryName: ""}});
     }
     return (
         <div>
-            <Button appearance={ 'primary'} color={'cyan'} onClick={()=>setOpen(true)}>Add Item</Button>
+            <Button appearance={ 'primary'} color={'cyan'} onClick={()=>setOpen(true)}>Add Pantry</Button>
             <Modal open={open} onClose={()=>setOpen(false)}>
                 
         <div className="col-md-12">
@@ -41,14 +42,14 @@ function AddPantryModal() {
                 <Modal.Body>
                 <p>
                     <label>Pantry Name:</label><br/>
-                    <input type="text" placeholder="Freezer" value={pantry.pantryName}
-                           onChange={(event) => updatePantryName(event.target.value)}/><br/>
+                    <Input type="text" placeholder="Freezer" value={pantry.pantryName}
+                           onChange={(value: string, event) => updatePantryName(value)}/><br/>
 
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewPantryDispatch()}>Add</a>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddPantry()}>Cancel</a>
+                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => NewPantryDispatch()}>Add</Button>
+                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => CancelAddPantry()}>Cancel</Button>
             </Modal.Footer>
                 
             </div>

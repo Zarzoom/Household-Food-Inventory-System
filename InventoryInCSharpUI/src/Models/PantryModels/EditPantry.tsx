@@ -3,9 +3,11 @@ import {updatePantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import Pantry from "../../DataModels/Pantry"
 import ObjectAndState from "../../DataModels/ObjectAndState"
+import {Modal, Button, Input} from 'rsuite'
 export function EditPantry(pantryForUpdate: Pantry) {
 
-
+    const[open, setOpen] = useState(false);
+    
     const [pantry, setPantry] = useState({
         pantryID: pantryForUpdate.pantryID,
         pantryName: pantryForUpdate.pantryName
@@ -27,17 +29,27 @@ export function EditPantry(pantryForUpdate: Pantry) {
 
     return (
 
-        <div className="col-md-3">
-            <div className= "BlueBox">
-                <p>
-                    <label>Pantry Name:</label><br/>
-                    <input type="text" placeholder="beans" value={pantry.pantryName}
-                           onChange={(event) => updatePantryName(event.target.value)}/><br/>
+        <div>
+            <Button appearance={'primary'} color={'cyan'} onClick={()=>setOpen(true)}>Edit</Button>
+            <Modal open={open} onClose={()=> setOpen(false)}>
+                <Modal.Header>
                     
-                </p>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => UpdatedPantryDispatch()}>Edit</a>
-                <a className="btn btn-sm" href="#" role="button">Cancel</a>
-            </div>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className= "BlueBox">
+                        <p>
+                            <label>Pantry Name:</label><br/>
+                            <Input type="text" placeholder="beans" value={pantry.pantryName}
+                                   onChange={(value: string, event) => updatePantryName(value)}/>                          
+                        </p>
+
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
+                    <Button appearance={'primary'} color={'cyan'}>Cancel</Button> 
+                </Modal.Footer>
+            </Modal>
         </div>
 
     );

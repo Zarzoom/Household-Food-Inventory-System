@@ -37,6 +37,8 @@ function AddItemModal() {
             return {...previousState, size: newSize}
         });
     };
+    
+
     const dispatch = useAppDispatch();
     const NewItemDispatch = () =>{
         const ItemToJSONStringify = JSON.stringify(item);
@@ -78,8 +80,10 @@ function AddItemModal() {
                 </p>
                 </Modal.Body>
                 <Modal.Footer>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>
+                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => NewItemDispatch()}>Add</Button>
+                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => CancelAddItem()}>Cancel</Button>
+                {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>*/}
+                {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>*/}
                 </Modal.Footer>
             </div>
         {/*</div>*/}

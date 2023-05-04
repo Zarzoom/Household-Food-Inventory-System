@@ -3,14 +3,11 @@ import {updateItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import getItem from "../../DataModels/getItem"
 import ObjectAndState from "../../DataModels/ObjectAndState"
-export function EditItem(ItemAndState: ObjectAndState) {
-    const itemForUpdate = ItemAndState.itemForGet as getItem;
+import { Form, Button, Input, Modal } from 'rsuite';
+
+export function EditItem(itemForUpdate: getItem) {
     
-    // const [display, setDisplay] = useState(
-    //     {
-    //         show: ItemAndState.state
-    //     }
-    // )
+    const [open, setOpen] = useState(false);
 
     const [item, setItem] = useState({
         itemID: itemForUpdate.itemID,
@@ -47,30 +44,41 @@ export function EditItem(ItemAndState: ObjectAndState) {
         dispatch(updateItem(ItemToJsonParse));
         return 'Added'
     };
+    
+
 
     return (
-
-        <div className="col-md-3">
-            <div className= "BlueBox">
-                <p>
-                    <label>Generic Name:</label><br/>
-                    <input type="text" placeholder="beans" value={item.genericName}
-                           onChange={(event) => updateGenericName(event.target.value)}/><br/>
-                    <label>Brand:</label><br/>
-                    <input type="text" placeholder="World Famous Beans" value={item.brand}
-                           onChange={(event) => updateBrand(event.target.value)}/><br/>
-                    <label>Size:</label><br/>
-                    <input type="text" placeholder="3oz" value={item.size}
-                           onChange={(event) => updateSize(event.target.value)}/><br/>
-                    <label>Price:</label><br/>
-                    <input type="text" step="any" placeholder="0.00" value={item.price}
-                           onChange={(event) => updatePrice(event.target.value)}/><br/>
-                </p>
-                <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => UpdatedItemDispatch()}>Edit</a>
-                <a className="btn btn-sm" href="#" role="button">Cancel</a>
-            </div>
+        <div>
+            <Button appearance={'primary'} color={'cyan'} onClick={()=> setOpen(true)}>Edit</Button>
+            <Modal open={open} onClose= {() => setOpen(false)}>
+                <div className={"BlueBox"}>
+                    <Modal.Header>
+                      
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>
+                            <label>Generic Name:</label><br/>
+                            <Input type="text" placeholder="beans" value={item.genericName}
+                                   onChange={ (value:string, event) => updateGenericName(value)}/><br/>
+                            <label>Brand:</label><br/>
+                            <Input type="text" placeholder="World Famous Beans" value={item.brand}
+                                   onChange={ (value:string, event) => updateBrand(value)}/><br/>
+                            <label>Size:</label><br/>
+                            <Input type="text" placeholder="3oz" value={item.size}
+                                   onChange={(value: string, event) => updateSize(value)}/><br/>
+                            <label>Price:</label><br/>
+                            <Input type="text" step="any" placeholder="0.00" value={item.price}
+                                   onChange={(value: string, event) => updatePrice(value)}/><br/>
+                        </p> 
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => UpdatedItemDispatch()}>Edit</Button>
+                        <Button appearance={'primary'} color={'cyan'} onClick={()=> setOpen(false)}>Cancel</Button>
+                    </Modal.Footer>
+                </div>
+            </Modal>
         </div>
-
+       
     );
 };
 

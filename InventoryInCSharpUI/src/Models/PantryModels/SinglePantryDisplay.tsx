@@ -13,14 +13,15 @@ const pantryForButtons = pantry as Pantry;
 
 
     return(
-    <div className="SinglePantryDisplay">
+    <div>
+        
     <div className="BlueBox" key ={"" + pantry.pantryID}>
         <p>
             Pantry Name: {pantry.pantryName}
         </p>
-        <Popup trigger={<a className="btn btn-sm" href="#" role="button"> Edit </a>} modal nested>{(EditPantry(pantryForButtons))}</Popup>
+        <EditPantry{...pantry}></EditPantry>
+        <DeletePantry{...pantry}></DeletePantry>
         
-        <Popup trigger={<a className="btn btn-sm" href="#" role="button"> Delete </a>} modal nested>{(DeletePantry(pantryForButtons))}</Popup>
     </div>
     </div>
 

@@ -5,14 +5,13 @@ import ObjectAndState from "../../DataModels/ObjectAndState"
 import {useState, useEffect, Component, SetStateAction} from "react";
 import {goSetStatus} from "../../slices/PantryContentsReducer"
 import{fetchPantryContents} from "../../Thunks/PantryContentsThunk"
+import { Form, Button, Input, Modal } from 'rsuite';
 
 
 
-export function DeleteItem(itemAndState: ObjectAndState) {
-    
-    const ItemForDeleting = itemAndState.itemForGet as getItem;
-    
-   const StateSubstitute = itemAndState.state
+
+export function DeleteItem(ItemForDeleting: getItem) {
+    const [open, setOpen] = useState(false);
     
     const dispatch = useAppDispatch();
     const deleteItemDispatch = () => {
@@ -20,24 +19,29 @@ export function DeleteItem(itemAndState: ObjectAndState) {
         dispatch(deleteItem(ItemIDForDeleting));
             };
     // Cancel doesn't work
-    if(StateSubstitute === 1) {
+ 
         return (
             <div>
-                <div className="row">
-                    <div className="col-md-3 BlueBox">
-                        <p>
-                            Generic Name: {ItemForDeleting.genericName}<br/>Brand
-                            Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
-                        </p>
-                        <a className="btn btn-sm" href="#" role="button">Cancel</a>
-                        <a className="btn btn-sm" href="#" role="button"
-                           onClick={(event: any) => deleteItemDispatch()}>Delete</a>
+                <Button appearance={ 'primary'} color={'cyan'} onClick={()=>setOpen(true)}>Delete</Button>
+                <Modal open={open} onClose= {() => setOpen(false)}>
+                    <div className={"BlueBox"}>
+                        <Modal.Header>
+                            
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>
+                                Generic Name: {ItemForDeleting.genericName}<br/>Brand
+                                Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
+                            </p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => deleteItemDispatch()}>Delete</Button>
+                            <Button appearance={'primary'} color={'cyan'} onClick={()=> setOpen(false)}>Cancel</Button>
+                            
+                        </Modal.Footer>
                     </div>
-                </div>
+                </Modal>
             </div>
-        );
-    }
-    
-    else{<></>}
+        )
 
 }

@@ -4,6 +4,8 @@ import ObjectAndState from "../../DataModels/ObjectAndState"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {fetchItemsInPantry} from '../../Thunks/PantryContentsThunk'
 import {goSetPantryFilter} from '../../slices/PantryContentsReducer'
+import {Button} from 'rsuite'
+
 export function SinglePantryButton(pantry: Pantry){
     // const pantry = pantryAndState.pantry as Pantry;
     // const state = pantryAndState.state as Number;
@@ -18,7 +20,7 @@ export function SinglePantryButton(pantry: Pantry){
     
     return(
         <div key = {"" + pantry.pantryID + pantry.pantryName}>
-        <a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updatePantryContentsState()}> {pantry.pantryName} </a>
+        <Button appearance={'primary'} color={'green'} onClick={(event: any) => updatePantryContentsState()}> {pantry.pantryName} </Button>
         </div>
     )
 }
