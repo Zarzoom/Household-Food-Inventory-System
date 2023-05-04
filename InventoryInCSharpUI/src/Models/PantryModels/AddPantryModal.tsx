@@ -27,6 +27,7 @@ function AddPantryModal() {
         const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
         dispatch(createPantry(PantryToJsonParse));
     };
+    
     const CancelAddPantry= () =>{
         setPantry(previousState => {
             setOpen(false)
