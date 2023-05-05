@@ -158,16 +158,27 @@ public class PantryContentsManager
        return (results.Result);
     }
 
+    /// <summary>
+    /// Calls the DeletePantryContent function from the PantryContentsRepository so that the PantryContent with the same ID as the parameter gets deleted.
+    /// </summary>
+    /// <param name="pantryContentID">This long represents the ItemID that will be searched for in PantryContents</param>
     public void DeletePantryContent(long pantryContentID)
     {
         _PCR.DeletePantryContent(pantryContentID);
     }
-    
+    /// <summary>
+    /// Calls the DeletePantryContentsByItem function from the PantryContentsRepository. This will delete all Pantry contents that have a pcItemID that matches the parameter.  
+    /// </summary>
+    /// <param name="ItemID">This long represents the ItemID that will be searched for in PantryContents</param>
     public void DeleteContentsByItem(long itemID)
     {
         _PCR.DeletePantryContentsByItem(itemID);
     }
     
+    /// <summary>
+    /// Calls the DeletePantryContentsByPantry function from the PantryContentsRepository. This will delete all Pantry contents that have a pcPantryID that matches the parameter.  
+    /// </summary>
+    /// <param name="PantryID">This long represents the PantryID that will be searched for in PantryContents</param>
     public void DeleteContentsByPantry(long pantryID)
     {
         _PCR.DeletePantryContentsByPantry(pantryID);
