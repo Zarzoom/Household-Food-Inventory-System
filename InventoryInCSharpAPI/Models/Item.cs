@@ -9,9 +9,9 @@ public class Item
     public String size { get; set; }
     public long quantity { get; set; }
 
-    public Item()
-    {
-    }
+    // public Item()
+    // {
+    // }
     public Item(String brand, float price, String genericName, String size)
     {
         this.brand = brand;

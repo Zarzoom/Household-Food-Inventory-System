@@ -6,6 +6,10 @@ using MySqlConnector;
 
 public class PantryContentsRepository
 {
+    public PantryContentsRepository()
+    {
+        
+    }
     /// <summary>
     /// Sends SQL Query to database to add a new pantryContent to PantryContents table.
     /// </summary>
@@ -125,15 +129,19 @@ public class PantryContentsRepository
             return allPantryContentWithPCItemID;
         }
     }
-
-    // public async Task<PantryContents> FindContentsByItemIDAndPantryID(long PCPantryID, long PCItemID)
-    // {
-    //     using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
-    //     {
-    //         var parameters = new { PCItemID, PCPantryID };
-    //         var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
-    //         var pantryContentsThatMatch = await connection.QueryAsync<PantryContents>(sql, parameters);
-    //         return pantryContentsThatMatch.SingleOrDefault();
-    //     }
-    // }
+    /// <summary>
+    /// Sends SQL query to the database to find all PantryContents that have an ItemID and PantryID that matches the parameter. This method is used in pantry manager by AddToPantry function to make sure that duplicate pantryContents are not added to the database. 
+    /// </summary>
+    /// <param name="PCItemID">A long that represents the ItemID that we will use to search for the pantryContents </param>
+    /// <returns>Returns a list of all of the PantryContent that were found as a task.</returns>
+    public async Task<PantryContents> FindContentsByItemIDAndPantryID(long PCPantryID, long PCItemID)
+    {
+        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var parameters = new { PCItemID, PCPantryID };
+            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
+            var pantryContentsThatMatch = await connection.QueryAsync<PantryContents>(sql, parameters);
+            return pantryContentsThatMatch.SingleOrDefault();
+        }
+    }
 }

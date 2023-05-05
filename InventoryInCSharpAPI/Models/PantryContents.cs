@@ -7,7 +7,7 @@
         public long pcPantryID { get; set; }
         public long pantryContentID { get; set; }
 
-        public PantryContents() {}
+        // public PantryContents() {}
         public PantryContents(long quantity, long pcItemID, long pcPantryID)
         {
             this.quantity = this.quantity;

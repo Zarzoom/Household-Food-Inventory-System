@@ -6,6 +6,10 @@
 
     public class ItemRepository
     {
+        public ItemRepository()
+        {
+            
+        }
         /// <summary>
         /// Sends SQL Query to Database to add Item and then select the ItemID of the last inserted value.
         /// </summary>

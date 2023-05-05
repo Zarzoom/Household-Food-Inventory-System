@@ -6,6 +6,10 @@ using MySqlConnector;
 
 public class PantryRepository
 {
+    public PantryRepository()
+    {
+        
+    }
 
     /// <summary>
     /// Sends SQL Query to Database to add Pantry and then select the PantryID of the last inserted value.

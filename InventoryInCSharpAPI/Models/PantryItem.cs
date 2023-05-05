@@ -6,7 +6,7 @@ public class PantryItem
     public long quantity { get; set; }
     public long pantryContentID { get; set; }
 
-    public PantryItem() {}
+    // public PantryItem() {}
     public PantryItem(string pantryName, long quantity, long pantryContentID)
     {
         this.pantryContentID = pantryContentID;
