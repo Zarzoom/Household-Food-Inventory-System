@@ -54,8 +54,8 @@ public class PantryManager
     /// Calls the ContainsSearchForPantryName (Searches for a pantry whose PantryName contains the string that was taken in as a parameter) method from Pantry Repository.
     /// This function will then convert the return from Task<IEnumerable<Pantry>> to IEnumerable<Pantry>
     /// </summary>
-    /// <param name="findValue"></param>
-    /// <returns></returns>
+    /// <param name="findValue">A string that will be used as the search term when searching pantryContents table.</param>
+    /// <returns>Returns the pantries that contain the search string as a list of Pantries.</returns>
     public IEnumerable<Pantry> Search(String findValue)
     {
         var results = _PR.ContainsSearchForPantryName(findValue);
@@ -80,7 +80,7 @@ public class PantryManager
     /// and the DeletePantry (Deletes the pantry from PantryList)method from the PantryRepository.
     /// Calling DeleteContentsByPantry makes sure that all pantryContents that are associated with the pantry are deleted before the pantry is deleted. 
     /// </summary>
-    /// <param name="pantryID"></param>
+    /// <param name="pantryID">pantryID is a long that represents the primary key of the pantry that needs to be deleted.</param>
     public void DeletePantry(long pantryID)
     {
         _PCM.DeleteContentsByPantry(pantryID);
@@ -90,7 +90,7 @@ public class PantryManager
     
     /// <summary>
     /// Commented out in controller to prevent catastrophic accidents. This method should delete all of the pantries from PantryList.
-    /// There was very little manual testing of this method and does not have any integration testing.
+    /// There was very little manual testing of this method, and it does not have any integration testing.
     /// </summary>
     public void DeleteALLPantries()
     {
