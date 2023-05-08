@@ -1,22 +1,23 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
 import AddItemModal from "../Models/ItemModels/AddItemModal"
+import {Grid, Container, Header, Content, Footer} from "rsuite"
 
 
 const Item = () => {
     return (
-        
+        <Grid>
             <div>
                 <div className="row" style={{margin: "4em"}}>
-                    <div className="col-md-12">
-                        <h1 className='text-center' style={{fontFamily: "'Times New Roman', Times, serif"}}>
+                        <Header className='text-center' style={{fontFamily: "'Times New Roman', Times, serif"}}>
                             Items
-                        </h1>
-                    </div>
-                </div><div className="row">
-                <ItemDisplay></ItemDisplay><AddItemModal></AddItemModal><SearchItem></SearchItem>
+                        </Header>
                 </div>
+                <Content>
+                <ItemDisplay></ItemDisplay><AddItemModal></AddItemModal><SearchItem></SearchItem>
+                </Content>
             </div>
+        </Grid>
     );
 };
 

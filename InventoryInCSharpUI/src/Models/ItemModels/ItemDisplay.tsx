@@ -7,16 +7,23 @@ import {store} from "../../Stores/Store"
 import {selectAllItems, selectContainsSearch} from "../../slices/ItemsReducer"
 import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemDisplay} from "./SingleItemDisplay"
+import {List, FlexboxGrid, Panel, Col} from "rsuite";
 
 export const ItemDisplay =() => {
 
    const AllItems = useAppSelector(state => selectContainsSearch(state))
     const renderedAllItems = AllItems.map((item: getItem) => { return (
-        <div  key={"" + item.itemID}>
+        <FlexboxGrid.Item as={Col} colspan={24} >
+        <List.Item key={item.itemID}>
             <SingleItemDisplay {...item}></SingleItemDisplay>
-            </div>
+        </List.Item>
+        </FlexboxGrid.Item>
             )})
-    return <div className="col-md-3">{renderedAllItems}</div>
+    return( 
+        <FlexboxGrid as={Col} colspan={24} >
+            <List>{renderedAllItems}</List>
+        </FlexboxGrid>
+    )
 }
 
 

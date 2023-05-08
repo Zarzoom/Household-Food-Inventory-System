@@ -6,6 +6,8 @@ import {useState, useEffect, Component} from "react";
 import {fetchItems} from "../Thunks/ItemsThunk"
 import {fetchPantries} from "../Thunks/PantriesThunk"
 import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
+import {Grid, Row, Col, Container} from "rsuite";
+
 const Layout = () => {
     const dispatch = useAppDispatch();
     // const PantryContentsStatus = useAppSelector(state => state.PantryContents.status);
@@ -31,7 +33,7 @@ const Layout = () => {
         display = <p>Loading....</p>
     }
     return (
-        <>
+        <Container>
             <ul className="nav">
                 <li className="nav-item">
                     <Link className="nav-link" to="/">Home</Link>
@@ -44,7 +46,7 @@ const Layout = () => {
                 </li>
             </ul>
             {display}
-        </>
+        </Container>
     )
 };
 
