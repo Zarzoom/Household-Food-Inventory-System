@@ -24,7 +24,9 @@ public class PantryTests
         [OneTimeSetUp]
         public void Setup()
         {
+            DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
+            DatabaseCleanUp.ItemListDatabasePreparation();
             try
             {
                 Pantry pantry = new Pantry();
@@ -78,7 +80,10 @@ public class PantryTests
         [OneTimeSetUp]
         public void Setup()
         {
+            DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
+            DatabaseCleanUp.ItemListDatabasePreparation();
+
             InsertPantriesForTesting();
             Task.Delay(1000).Wait();
             try
@@ -148,7 +153,9 @@ public class PantryTests
         [OneTimeSetUp]
         public void SetUp()
         {
+            DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
+            DatabaseCleanUp.ItemListDatabasePreparation();
             InsertPantriesForTesting();
             try
             {
@@ -214,7 +221,9 @@ public class PantryTests
         [OneTimeSetUp]
         public void SetUp()
         {
+            DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
+            DatabaseCleanUp.ItemListDatabasePreparation();
             InsertPantiesForUpdate();
             Task.Delay(1000).Wait();
 
@@ -300,9 +309,10 @@ public class PantryTests
         [OneTimeSetUp]
         public void SetUp()
         {
+            
+            DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
-            DatabaseCleanUp.PantryContentsDatabasePreparation();
             ItemInsert();
             PantryInsert();
             PantryContentsInsert();
@@ -513,7 +523,9 @@ public class WhenPantryListIsQueriedForAllPantries : PantryTests
     [OneTimeSetUp]
     public void SetUp()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
 
 
         PantryInsert();

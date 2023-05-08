@@ -22,6 +22,8 @@ public class WhenItemIsInserted : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         try
         {
@@ -108,7 +110,9 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
     [OneTimeSetUp]
     public void Setup()
     {
-       DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
         try
@@ -211,6 +215,8 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
@@ -316,6 +322,8 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
 
@@ -421,6 +429,8 @@ public class WhenItemsAreUpdated : ItemTests
     [OneTimeSetUp]
     public void Setup()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForUpdate();
         Task.Delay(1000).Wait();
@@ -547,6 +557,8 @@ public class WhenItemsAreDeleted : ItemTests
     [OneTimeSetUp]
     public void SetUp()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         InsertItemsForTesting();
         try
@@ -645,6 +657,8 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
     [OneTimeSetUp]
     public void SetUp()
     {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
      
 
