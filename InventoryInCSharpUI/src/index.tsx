@@ -8,6 +8,7 @@ import {useAppDispatch} from './Hooks/hooks'
 import {fetchItems} from "./Thunks/ItemsThunk"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
+import Testing from "./Pages/Testing"
 
 export default function App() {
     return (
@@ -17,6 +18,7 @@ export default function App() {
                     <Route index element={<MyPantry/>}/>
                     <Route path = "item" element={<Item/>} />
                     <Route path = "pantry" element={<Pantry/>} />
+                    <Route path="testing" element={<Testing/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

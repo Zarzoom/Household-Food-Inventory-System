@@ -1,15 +1,13 @@
 
 import {useEffect, useState} from "react";
-import {fetchItems} from "../../Thunks/ItemsThunk"
+
 import {selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
-import getItem from "../../DataModels/getItem"
-import {ItemDisplay} from './ItemDisplay'
-import 'reactjs-popup/dist/index.css';
-import Popup from 'reactjs-popup';
-import {Grid, Row, Col, Input, Button} from 'rsuite'
 
-//TODO: The search needs to clear on page change.
+import 'reactjs-popup/dist/index.css';
+
+import {Input, Button} from 'rsuite'
+
 export function SearchItem() {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useAppDispatch();
@@ -38,9 +36,7 @@ return (
             </p>
             <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => updateSearch(searchInput)}>Search</Button>
             <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => cancelSearch("")}>Cancel</Button>
-            
-            {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => updateSearch(searchInput)}>Search</a>*/}
-            {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => cancelSearch("")}>Cancel</a>*/}
+
         </div>
     </div>
 )
