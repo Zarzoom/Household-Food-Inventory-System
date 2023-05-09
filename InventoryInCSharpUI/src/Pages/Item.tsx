@@ -8,13 +8,15 @@ const Item = () => {
     return (
         <Grid>
                 <Header className='text-center' style={{fontFamily: "'Times New Roman', Times, serif"}}>
-                    <Stack alignItems={"flex-end"} justifyContent={"center"}>
+                <Stack alignItems={"center"} justifyContent={"center"}>
                         <Stack.Item alignSelf={"center"}>
                             <h1>
                         Items
                             </h1>
                         </Stack.Item>
-                        <SearchItem></SearchItem>
+                        <Stack.Item alignSelf={"center"}>
+                            <SearchItem></SearchItem>
+                        </Stack.Item>
                 </Stack>
                 </Header>
                 <Content>
