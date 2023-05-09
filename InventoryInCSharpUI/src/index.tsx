@@ -4,11 +4,10 @@ import Layout from "./Pages/Layout";
 import Item from "./Pages/Item";
 import {Provider} from "react-redux"
 import {store} from "./Stores/Store"
-import {useAppDispatch} from './Hooks/hooks'
-import {fetchItems} from "./Thunks/ItemsThunk"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 import Testing from "./Pages/Testing"
+import "./StyleSheet.less"
 
 export default function App() {
     return (

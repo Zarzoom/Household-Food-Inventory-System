@@ -7,6 +7,7 @@ import {fetchItems} from "../Thunks/ItemsThunk"
 import {fetchPantries} from "../Thunks/PantriesThunk"
 import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
 import {Grid, Row, Col, Container} from "rsuite";
+import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
     const dispatch = useAppDispatch();
@@ -33,23 +34,26 @@ const Layout = () => {
         display = <p>Loading....</p>
     }
     return (
-        <Container>
-            <ul className="nav">
-                <li className="nav-item">
+        <>
+        <Navbar>
+            <Nav>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/">Home</Link>
-                </li>
-                <li className="nav-item">
+                </Nav.Item>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/pantry">Pantry</Link>
-                </li>
-                <li className="nav-item">
+                </Nav.Item>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/item">Items</Link>
-                </li>
-                <li className="nav-item">
+                </Nav.Item>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/testing">Testing</Link>
-                </li>
-            </ul>
-            {display}
-        </Container>
+                </Nav.Item>
+            </Nav>
+        </Navbar>
+    {display}
+        </>
+
     )
 };
 
