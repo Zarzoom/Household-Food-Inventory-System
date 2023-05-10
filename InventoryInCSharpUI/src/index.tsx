@@ -7,7 +7,7 @@ import {store} from "./Stores/Store"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 import Testing from "./Pages/Testing"
-import "./StyleSheet.less"
+import "./ReactSuiteOverride.css"
 
 export default function App() {
     return (

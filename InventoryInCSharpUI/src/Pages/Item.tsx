@@ -1,7 +1,9 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
 import AddItemModal from "../Models/ItemModels/AddItemModal"
-import {Grid, Container, Header, Content, Footer, Sidebar, Stack, FlexboxGrid, Col, Row} from "rsuite"
+import {Grid, Container, Header, Content, Footer, Sidebar, Stack, FlexboxGrid, Col, Row, Panel} from "rsuite"
+import AddPantryModal from "../Models/PantryModels/AddPantryModal";
+import {PantryDisplay} from "../Models/PantryModels/PantryDisplay";
 
 
 const Item = () => {
@@ -10,29 +12,25 @@ const Item = () => {
 <Grid fluid>
                 <Grid fluid>
                     <Row>
-                        <div >
-                            <Col xsOffset={11} xs={2}>
-                            <h1>
+                        <div className={"centerHorizontally"}>
+                            <Col xsOffset={11} xs={2} >
+                            <h1 className={'padding'}>
                         Items
                             </h1>
-                            </Col>
-                            <Col xsOffset={7} xs={4}>
-                                <SearchItem></SearchItem>
                             </Col>
                         </div >
                     </Row>
                     <Row>
-                        <Col xs={4}>
+                        <Col xsOffset={9} xs={6}>
                             <SearchItem></SearchItem>
                         </Col>
                     </Row>
                 </Grid>
                     <Grid fluid>
-                        <Col xs={2}>
-                            <AddItemModal></AddItemModal>
-                        </Col>
-                        <Col xsOffset={6} xs={8}>
-                        <ItemDisplay></ItemDisplay>
+                        <Col xsOffset={8} xs={8}>
+                            <Panel bordered={true} header={<Grid><Col xs={2} xsOffset={11}><AddItemModal></AddItemModal></Col></Grid>}>
+                                <ItemDisplay></ItemDisplay>
+                            </Panel>
                         </Col>
                     </Grid>
 </Grid>

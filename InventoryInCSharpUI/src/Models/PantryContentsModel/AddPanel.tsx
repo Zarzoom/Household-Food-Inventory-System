@@ -50,17 +50,18 @@ return(
 <Button appearance= 'primary' color={'cyan'} onClick={() => openPanel(true)}>Add Item To Pantry</Button>
 <Drawer placement= {placement} open={open} onClose={() => openPanel(false)}>
     <Drawer.Header>
-        {/*<InputGroup size={'md'}>*/}
-        {/*    <Input type= "text" defaultValue= "" onChange={(value: string, event: any)=>setSearchValue(value)}/>*/}
-        {/*    <InputGroup.Button >*/}
-        {/*        <SearchIcon onClick = {(event:any)=>SearchDispatch()}/>*/}
-        {/*    </InputGroup.Button>*/}
-        {/*</InputGroup>*/}
-        <label>Search</label><input type= "text" onChange={(event: any)=>setSearchInput(event.target.value)}/>
-        <IconButton size={'sm'} icon={<SearchIcon/>} onClick = {(event:any)=>updateSearch(searchInput)}></IconButton>
-        <IconButton size={'sm'} icon={<StarIcon/>} onClick = {(event:any)=> updateSearch(" ")}></IconButton>
+        <InputGroup>
+            <label>Search:</label><br/>
+            <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
+                   onChange={(value: string, event) => setSearchInput(value)}/>
+            <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>
+                <SearchIcon />
+            </InputGroup.Button>
+            <InputGroup.Button onClick={(event: any) => updateSearch("")}>
+                <StarIcon/>
+            </InputGroup.Button>
+        </InputGroup>
         <AddItemModal></AddItemModal>
-        
     </Drawer.Header>
     <Drawer.Body>
         {renderedAllItems}

@@ -1,9 +1,18 @@
 ﻿.btn {
     background-color: rgba(255, 214, 143);
-    margin: 0.5em;
+}
+.centerHorizontally{
+    text-align: center;
+
+}
+.BlueBox {
+    margin-bottom: 1em;
+    background-color: rgba(143, 184, 255, 0.5);
+}
+.paddedRow{
+    align-content: center;
 }
 
-.BlueBox {
-    margin: 1em;
-    background-color: rgba(143, 184, 255, 0.5);
+.padding{
+    margin-bottom: 1em;
 }

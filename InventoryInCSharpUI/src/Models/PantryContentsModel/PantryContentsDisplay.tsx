@@ -8,6 +8,9 @@ import PantryContents from "../../DataModels/PantryContents"
 import {selectAllPantryContents, selectPantryFilter} from "../../slices/PantryContentsReducer"
 import {selectPantryByID} from "../../slices/PantriesReducer"
 import {SinglePantryContentDisplay} from "./SinglePantryContentDisplay"
+import {List, FlexboxGrid, Panel, Col, Grid} from "rsuite";
+import {AddPanel} from "./AddPanel"
+
 export const PantryContentsDisplay = () =>{
     const dispatch = useAppDispatch();
 
@@ -37,19 +40,21 @@ useEffect(() =>{
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
         console.log(pantryContents.pantryContentID);
     return(
-    <div className= "col-md-3">
-
-        <div key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
+    <FlexboxGrid.Item as={Col} colspan={24}>
+        <List.Item key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
-        </div>
-    </div>
+        </List.Item>
+    </FlexboxGrid.Item>
     )})
   
-   return( <div className="col-md-9">       
-           <h2 className= 'text-left' style={{fontFamily: "'Times New Roman', Times, serif"}}>
-               {pantryName}
-    </h2>
+   return(
+           <FlexboxGrid>
+               <Panel bordered header={<Grid><Col xs={11}>{pantryName}</Col><Col xs={4}><AddPanel></AddPanel></Col></Grid>} className= 'text-left' style={{fontFamily: "'Times New Roman', Times, serif"}}>
+           <List>
+
         {PantryItems}
-   </div>
+           </List>
+                   </Panel>
+           </FlexboxGrid>
    )
 }

@@ -14,20 +14,14 @@ const ItemAndState: ObjectAndState = {itemForGet: item, state:1}
 
 
     return(
-// <FlexboxGrid as={Col} col={12}>
-//     <FlexboxGrid justify={"start"} >
-        <div>
-<p>
-        
-            Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
-</p>
-{/*</FlexboxGrid>*/}
-{/*    <FlexboxGrid justify={"end"}>*/}
 
-        <EditItem{...item}></EditItem>
-        <DeleteItem {...item}></DeleteItem>
-{/*</FlexboxGrid>*/}
-{/*</FlexboxGrid>*/}
+        <div>
+            <p>
+
+                Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
+            </p>
+            <EditItem{...item}></EditItem>
+            <DeleteItem {...item}></DeleteItem>
         </div>
 )}
 

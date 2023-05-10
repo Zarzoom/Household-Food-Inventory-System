@@ -6,6 +6,8 @@ import {fetchPantries} from "../../Thunks/PantriesThunk"
 import Pantry from "../../DataModels/Pantry"
 import {selectAllPantries} from "../../slices/PantriesReducer"
 import {SinglePantryButton} from "./SinglePantryDisplay"
+import {Panel, Stack} from "rsuite"
+
 import ObjectAndState from "../../DataModels/ObjectAndState"
 
 
@@ -23,9 +25,15 @@ export const PantryListDisplay = () => {
     
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => {
         return(
-        <div key={""+ pantry.pantryID +pantry.pantryName}>
+        <Stack.Item key={""+ pantry.pantryID +pantry.pantryName}>
             <SinglePantryButton{...pantry}></SinglePantryButton>
-        </div>
+        </Stack.Item>
     )})
-    return <div className="col-md-3">{renderedAllPantries}</div>
+    return(
+    <Panel bordered={true} header={"Pantries"} className={"centerHorizontally"}>
+        <Stack direction={"column"} wrap={false} justifyContent={"space-between"} spacing={2}>
+        {renderedAllPantries}
+        </Stack>
+    </Panel>
+    )
 }

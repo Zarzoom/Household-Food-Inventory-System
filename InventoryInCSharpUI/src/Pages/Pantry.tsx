@@ -1,20 +1,36 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
 import {SearchPantry} from "../Models/PantryModels/SearchPantry"
 import AddPantryModal from "../Models/PantryModels/AddPantryModal"
+import {Grid, Row, Col, Panel} from "rsuite";
+import {SearchItem} from "../Models/ItemModels/SearchItem";
+import {ItemDisplay} from "../Models/ItemModels/ItemDisplay";
 const Pantry = () => {
     return (
 
-        <div>
-            <div className="row" style={{margin: "4em"}}>
-                <div className="col-md-12">
-                    <h1 className='text-center' style={{fontFamily: "'Times New Roman', Times, serif"}}>
+        <Grid fluid>
+            <Row>
+            <div className={"centerHorizontally"}>
+                <Col xsOffset={11} xs={2}>
+                    <h1 className={"padding"}>
                         Pantries
                     </h1>
-                </div>
-            </div><div className="row">
-            <PantryDisplay></PantryDisplay><AddPantryModal></AddPantryModal><SearchPantry></SearchPantry>
-        </div>
-        </div>
+                </Col>
+            </div>
+            </Row>
+            <Row>
+                <Col xsOffset={9} xs={6}>
+                    <SearchPantry></SearchPantry>
+                </Col>
+            </Row>
+            <Grid fluid>
+                <Col xsOffset={8} xs={8}>
+                    <Panel bordered={true} header={<Grid><Col xs={2} xsOffset={11}><AddPantryModal></AddPantryModal></Col></Grid>}>
+                        <PantryDisplay></PantryDisplay>
+                    </Panel>
+                </Col>
+            </Grid>
+        </Grid>
+
     );
 };
 export default Pantry;

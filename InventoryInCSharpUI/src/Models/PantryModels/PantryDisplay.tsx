@@ -7,24 +7,26 @@ import {store} from "../../Stores/Store"
 import {selectContainsSearch} from "../../slices/PantriesReducer"
 import {fetchPantries} from "../../Thunks/PantriesThunk"
 import {SinglePantryDisplay} from "./SinglePantryDisplay"
+import {List, FlexboxGrid, Panel, Col} from "rsuite";
+
 
 
 
 export const PantryDisplay =() => {
- // const dispatch = useAppDispatch();
- //    const PantryStatus = useAppSelector(state => state.Pantry.status);
- //    useEffect(() =>{
- //        if (PantryStatus === 'idle') {
- //            const PantryContentsList = dispatch(fetchPantries());
- //        }});
-        
+
    const AllPantries = useAppSelector(state=> selectContainsSearch(state))
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => { return (
-        <div  key={"" + pantry.pantryID}>
-            <SinglePantryDisplay {...pantry}></SinglePantryDisplay>
-            </div>
+        <FlexboxGrid.Item as={Col} colspan={24}>
+            <List.Item key={"" + pantry.pantryID}>
+                <SinglePantryDisplay {...pantry}></SinglePantryDisplay>
+            </List.Item>
+        </FlexboxGrid.Item>
             )})
-    return <div className="col-md-3">{renderedAllPantries}</div>
+    return(
+                <List>
+                    {renderedAllPantries}
+                </List>
+    )
 }
 
 

@@ -13,16 +13,14 @@ const pantryForButtons = pantry as Pantry;
 
 
     return(
-    <div>
+
         
-    <div className="BlueBox" key ={"" + pantry.pantryID}>
+    <div key ={"" + pantry.pantryID}>
         <p>
             Pantry Name: {pantry.pantryName}
         </p>
         <EditPantry{...pantry}></EditPantry>
         <DeletePantry{...pantry}></DeletePantry>
-        
-    </div>
     </div>
 
 )}

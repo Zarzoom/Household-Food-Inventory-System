@@ -4,7 +4,9 @@ import {fetchPantries, contentsPantrySearch} from "../../Thunks/PantriesThunk"
 import {goSetSearch} from '../../slices/PantriesReducer'
 import {useAppDispatch} from '../../Hooks/hooks'
 import Pantry from "../../DataModels/Pantry"
-import {Button, Input} from 'rsuite'
+import {Button, Input, InputGroup} from 'rsuite'
+import SearchIcon from "@rsuite/icons/Search";
+import StarIcon from "@rsuite/icons/legacy/Star";
 
 //TODO: The search needs to clear on page change.
 
@@ -27,15 +29,22 @@ export function SearchPantry() {
     }
 
     return (
-        <div className="col-md-3">
-            <div className="BlueBox">
-                <p>
-                    <label>Search:</label><br/>
-                    <Input type="text" placeholder="Pantry Name" value={search}
-                           onChange={(value: string, event) => setSearch(value)}/><br/>
-                </p>
-                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => SearchDispatch()}>Search</Button>
-                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => CancelDispatch()}>Cancel</Button>
+        <div>
+            <div className={"BlueBox"}>
+                <>
+                    <InputGroup>
+                        <label>Search:</label><br/>
+                        <Input type="text" placeholder="Pantry Name" value={search}
+                               onChange={(value: string, event) => setSearch(value)}/>
+
+                        <InputGroup.Button onClick={(event: any) => SearchDispatch()}>
+                            <SearchIcon/>
+                        </InputGroup.Button>
+                        <InputGroup.Button onClick={(event: any) => CancelDispatch()}>
+                            <StarIcon/>
+                        </InputGroup.Button>
+                    </InputGroup>
+                </>
             </div>
         </div>
     )

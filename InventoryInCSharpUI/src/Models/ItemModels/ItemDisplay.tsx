@@ -19,10 +19,10 @@ export const ItemDisplay =() => {
         </List.Item>
         </FlexboxGrid.Item>
             )})
-    return( 
-        <FlexboxGrid as={Col} colspan={24} >
-            <List>{renderedAllItems}</List>
-        </FlexboxGrid>
+    return(
+            <List>
+                {renderedAllItems}
+            </List>
     )
 }
 

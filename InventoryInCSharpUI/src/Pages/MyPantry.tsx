@@ -1,20 +1,30 @@
 import {PantryListDisplay} from '../Models/PantryContentsModel/PantryListDisplay'
 import {PantryContentsDisplay} from '../Models/PantryContentsModel/PantryContentsDisplay'
 import {AddPanel} from '../Models/PantryContentsModel/AddPanel'
+import {Grid, Container, Header, Content, Footer, Sidebar, Stack, FlexboxGrid, Col, Row} from "rsuite"
+
 const MyPantry = () => {
     return (
 
-        <div>
-            <div className="row" style={{margin: "4em"}}>
-                <div className="col-md-12">
-                    <h1 className='text-center' style={{fontFamily: "'Times New Roman', Times, serif"}}>
-                        My Pantries
-                    </h1>
-                </div>
-            </div><div className="row">
-            <AddPanel></AddPanel><PantryListDisplay></PantryListDisplay><PantryContentsDisplay></PantryContentsDisplay>
-        </div>
-        </div>
+        <Grid fluid>
+            <Row>
+                <div className={"centerHorizontally"}>
+                    <Col xsOffset={10} xs={4} >
+                        <h1 className={"padding"}>
+                            My Pantries
+                        </h1>
+                    </Col>
+                </div >
+            </Row>
+            <Row>
+                <Col xs={2}>
+                    <PantryListDisplay></PantryListDisplay>
+                </Col>
+                <Col xsOffset={6} xs={8}>
+                    <PantryContentsDisplay></PantryContentsDisplay>
+                </Col>
+            </Row>
+        </Grid>
     );
 };
 export default MyPantry;
