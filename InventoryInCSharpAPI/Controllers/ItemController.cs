@@ -49,9 +49,9 @@ public class ItemController : ControllerBase
 
     // PUT api/<ItemController>
     [HttpPut]
-    public void Put([FromBody] Item updatedItem)
+    public Item Put([FromBody] Item updatedItem)
     {
-        itemManager.ItemUpdate(updatedItem);
+        return itemManager.ItemUpdate(updatedItem);
     }
     [HttpPut("deleteItem/{itemID}")]
     public void DeleteItem(long itemID)

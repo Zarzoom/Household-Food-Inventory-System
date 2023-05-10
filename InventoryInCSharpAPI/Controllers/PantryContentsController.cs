@@ -38,7 +38,7 @@ public class PantryContentsController : ControllerBase
         return pantryContentsManager.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
     }
 
-    [HttpGet("retrievePantry/{pantryID}")]
+    [HttpGet("retrieveItemsFromPantry/{pantryID}")]
     public IEnumerable<Item> GetContentsFromPantry(long pantryID)
     {
         return pantryContentsManager.WhatIsInThatPantry(pantryID);
@@ -49,6 +49,13 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.WhereIsThatItem(itemID);
     }
+  
+    [HttpGet("retrievePantryContentsWithItem/{itemID}")]
+    public IEnumerable<PantryContents> findPantryContentsContainingItem(long itemID)
+    {
+        return pantryContentsManager.FindContentsByPCItemID(itemID);
+    }
+    
 
     [HttpPut("deletePantryContent/{pantryContentID}")]
     public void DeletePantryContent(long pantryContentID)
@@ -57,8 +64,8 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPut]
-    public void Put([FromBody] PantryContents updatedPantryContent)
+    public PantryContents Put([FromBody] PantryContents updatedPantryContent)
     {
-        pantryContentsManager.PantryContentUpdate(updatedPantryContent);
+        return pantryContentsManager.PantryContentUpdate(updatedPantryContent);
     }
 }

@@ -44,9 +44,9 @@ public class PantryController : ControllerBase
     }
 
     [HttpPut]
-    public void Put([FromBody] Pantry updatedPantry)
+    public Pantry Put([FromBody] Pantry updatedPantry)
     {
-        pantryManager.PantryUpdate(updatedPantry);
+        return pantryManager.PantryUpdate(updatedPantry);
     }
 
     //Commented out for safety. This method deletes ALL Items.
