@@ -49,7 +49,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
                         <label>Quantity</label><br/>
                         <InputNumber defaultValue={quantity.quantity} min={1} onChange={ (value:number|string, event) => updateQuantity(+value)}/>
                     </p>
-                    <Button appearance={'primary'} color={'cyan'}  onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
+                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
                     <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>

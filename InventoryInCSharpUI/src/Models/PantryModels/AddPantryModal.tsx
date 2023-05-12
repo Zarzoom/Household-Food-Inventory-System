@@ -35,7 +35,7 @@ function AddPantryModal() {
     }
     return (
         <div>
-            <Button appearance={ 'primary'} color={'cyan'} onClick={()=>setOpen(true)}>Add Pantry</Button>
+            <Button className={"yellowButton"} appearance={ 'primary'} onClick={()=>setOpen(true)}>Add Pantry</Button>
             <Modal open={open} onClose={()=>setOpen(false)}>
                 
         <div className="col-md-12">

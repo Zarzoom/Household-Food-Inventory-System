@@ -41,7 +41,7 @@ useEffect(() =>{
         console.log(pantryContents.pantryContentID);
     return(
     <FlexboxGrid.Item as={Col} colspan={24}>
-        <List.Item key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
+        <List.Item className={"blueBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
         </List.Item>
     </FlexboxGrid.Item>

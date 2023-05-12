@@ -6,7 +6,6 @@ import {Provider} from "react-redux"
 import {store} from "./Stores/Store"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
-import Testing from "./Pages/Testing"
 import "./ReactSuiteOverride.css"
 
 export default function App() {
@@ -17,7 +16,6 @@ export default function App() {
                     <Route index element={<MyPantry/>}/>
                     <Route path = "item" element={<Item/>} />
                     <Route path = "pantry" element={<Pantry/>} />
-                    <Route path="testing" element={<Testing/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -47,7 +47,7 @@ export const AddPanel = () =>{
 
 return(
     <div>
-<Button appearance= 'primary' color={'cyan'} onClick={() => openPanel(true)}>Add Item To Pantry</Button>
+<Button className={"yellowButton"} appearance= 'primary' onClick={() => openPanel(true)}>Add Item To Pantry</Button>
 <Drawer placement= {placement} open={open} onClose={() => openPanel(false)}>
     <Drawer.Header>
         <InputGroup>

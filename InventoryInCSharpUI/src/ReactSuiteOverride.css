@@ -1,10 +1,10 @@
-﻿.btn {
-    background-color: rgba(255, 214, 143);
-}
+﻿
 .centerHorizontally{
     text-align: center;
-
 }
+
+
+
 .BlueBox {
     margin-bottom: 1em;
     background-color: rgba(143, 184, 255, 0.5);
@@ -16,3 +16,41 @@
 .padding{
     margin-bottom: 1em;
 }
+
+.yellowBackground{
+    background-color: rgba(255, 214, 143);
+}
+.blueBackground {
+    margin-bottom: 1em;
+    background-color: rgba(143, 184, 255);
+    color: black;
+}
+.blueButton {
+    color: black;
+    background-color: rgba(143, 184, 255);
+    margin-bottom: 1em;
+}
+
+.blueButton:hover{
+    background-color: rgba(67,136,255);
+}
+
+.yellowButton{
+    color: black;
+    background-color: rgba(255, 214, 143);
+    margin-bottom: 1em;
+}
+
+.yellowButton:hover{
+    background: rgba(255,186,67);
+}
+
+.labelForSearch{
+    color: black;
+    background-color: rgba(143, 184, 255);
+    padding-left: 1em;
+    padding-right:1em;
+}
+
+
+

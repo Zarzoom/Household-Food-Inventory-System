@@ -15,7 +15,7 @@ export function DeletePantryContents(pantryContentsForDelete: PantryContents){
     
     return(
         <div>
-            <Button appearance={'primary'} color={"cyan"} onClick={()=>setOpenModal(true)}>Delete</Button>
+            <Button className={"yellowButton"} appearance={'primary'} onClick={()=>setOpenModal(true)}>Delete</Button>
             <Modal open={openModal} onClose={()=>setOpenModal(false)}>
                 <Modal.Header></Modal.Header>
             <div>

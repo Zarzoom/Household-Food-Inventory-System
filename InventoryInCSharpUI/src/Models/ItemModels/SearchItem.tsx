@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import 'reactjs-popup/dist/index.css';
 import {Input, Button, InputGroup} from 'rsuite'
 import SearchIcon from '@rsuite/icons/Search';
-import StarIcon from '@rsuite/icons/legacy/Star';
+import CloseIcon from '@rsuite/icons/Close';
 
 export function SearchItem() {
     const [searchInput, setSearchInput] = useState("");
@@ -26,17 +26,17 @@ export function SearchItem() {
     
 return (
     <div className="col-md-3">
-        <div className="BlueBox">
+        <div >
             <>
                 <InputGroup>
-                    <label>Search:</label><br/>
+                    <label className={"labelForSearch"}>Search:</label><br/>
                     <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
                            onChange={(value: string, event) => setSearchInput(value)}/>
                     <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>
                         <SearchIcon />
                     </InputGroup.Button>
                     <InputGroup.Button onClick={(event: any) => cancelSearch("")}>
-                    <StarIcon/>
+                    <CloseIcon/>
                     </InputGroup.Button>
                 </InputGroup>
 

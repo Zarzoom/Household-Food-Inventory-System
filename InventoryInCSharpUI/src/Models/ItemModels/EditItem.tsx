@@ -49,7 +49,7 @@ export function EditItem(itemForUpdate: getItem) {
 
     return (
         <div>
-            <Button appearance={'primary'} color={'cyan'} onClick={()=> setOpen(true)}>Edit</Button>
+            <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Edit</Button>
             <Modal open={open} onClose= {() => setOpen(false)}>
                 <div className={"BlueBox"}>
                     <Modal.Header>

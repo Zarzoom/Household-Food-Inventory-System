@@ -11,12 +11,6 @@ import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
     const dispatch = useAppDispatch();
-    // const PantryContentsStatus = useAppSelector(state => state.PantryContents.status);
-    // useEffect(() =>{
-    //     if (PantryContentsStatus === 'idle') {
-    //         const PantryContentsList = dispatch(fetchPantryContents());
-    //     }
-    // }, [PantryContentsStatus, dispatch])
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
         if(ItemStatus === 'idle') {
@@ -45,9 +39,6 @@ const Layout = () => {
                 </Nav.Item>
                 <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/item">Items</Link>
-                </Nav.Item>
-                <Nav.Item className="nav-item">
-                    <Link className="nav-link" to="/testing">Testing</Link>
                 </Nav.Item>
             </Nav>
         </Navbar>

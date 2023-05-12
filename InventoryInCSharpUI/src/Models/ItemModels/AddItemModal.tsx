@@ -2,7 +2,7 @@ import {useState} from "react";
 import {createItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import Item from "../../DataModels/Item"
-import { Form, Button, Input, Modal } from 'rsuite';
+import { InputGroup, Button, Input, Modal, Grid, Row, Col } from 'rsuite';
 
 
 function AddItemModal() {
@@ -58,35 +58,28 @@ function AddItemModal() {
     
     return (
         <div>
-        <Button appearance={ 'primary'} color={'cyan'} onClick={(event: any)=>setOpen(true)}>Add New Item</Button>
+        <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>setOpen(true)}>Add New Item</Button>
             <Modal open={open} onClose={()=>setOpen(false)}>
-        {/*<div className="col-md-12">*/}
                 <Modal.Header></Modal.Header>
-            <div className= "BlueBox">
+            <div className= "blueBackground">
                 <Modal.Body>
-                <p>
-                    <label>Generic Name:</label><br/>
-                    <input type="text" placeholder="beans" value={item.genericName}
-                           onChange={(event) => updateGenericName(event.target.value)}/><br/>
-                    <label>Brand:</label><br/>
-                    <input type="text" placeholder="World Famous Beans" value={item.brand}
-                           onChange={(event) => updateBrand(event.target.value)}/><br/>
-                    <label>Size:</label><br/>
-                    <input type="text" placeholder="3oz" value={item.size}
-                           onChange={(event) => updateSize(event.target.value)}/><br/>
-                    <label>Price:</label><br/>
-                    <input type="text" step="any" placeholder="0.00" value={item.price}
-                           onChange={(event) => updatePrice(event.target.value)}/><br/>
-                </p>
+
+                        <label>Generic Name:</label><br/>
+                        <Input placeholder="beans" value={item.genericName}
+                               onChange={(value: string, event) => updateGenericName(value)}/><br/>
+                        <label>Brand:</label><br/>
+                        <Input placeholder="World Famous Beans" value={item.brand}
+                               onChange={(value: string, event) => updateBrand(value)}/><br/>
+                        <label>Size:</label><br/>
+                        <Input placeholder="3oz" value={item.size}
+                               onChange={(value: string, event) => updateSize(value)}/><br/>
+                        <label>Price:</label><br/>
+                        <Input step="any" placeholder="0.00" value={item.price}
+                               onChange={(value: string, event) => updatePrice(value)}/><br/>
+                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => NewItemDispatch()}>Add</Button>
+                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => CancelAddItem()}>Cancel</Button>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => NewItemDispatch()}>Add</Button>
-                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => CancelAddItem()}>Cancel</Button>
-                {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => NewItemDispatch()}>Add</a>*/}
-                {/*<a className="btn btn-sm" href="#" role="button" onClick={(event: any) => CancelAddItem()}>Cancel</a>*/}
-                </Modal.Footer>
             </div>
-        {/*</div>*/}
         </Modal>
         </div>
     );
