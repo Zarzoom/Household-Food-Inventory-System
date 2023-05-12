@@ -1,12 +1,13 @@
 ﻿import Pantry from "../../DataModels/Pantry";
-import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
+import {useAppSelector} from '../../Hooks/hooks'
 import {selectContainsSearch} from "../../slices/PantriesReducer"
 import {SinglePantryDisplay} from "./SinglePantryDisplay"
 import {List} from "rsuite";
 
-
-
-
+/**
+* Summary: Gets state of Pantries and iterates over them to create a SinglePantryDisplay for each of them. It displays all of the SinglePantryDisplays as a list in the Pantry display component.
+ * return: List component with all the SinglePantryDisplays as children.
+ */
 export const PantryDisplay =() => {
 
    const AllPantries = useAppSelector(state=> selectContainsSearch(state))
@@ -17,9 +18,9 @@ export const PantryDisplay =() => {
             </List.Item>
             )})
     return(
-                <List>
-                    {renderedAllPantries}
-                </List>
+            <List>
+                {renderedAllPantries}
+            </List>
     )
 }
 

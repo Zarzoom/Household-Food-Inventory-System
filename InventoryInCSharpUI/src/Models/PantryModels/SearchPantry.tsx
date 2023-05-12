@@ -20,18 +20,18 @@ export function SearchPantry() {
     // A variable for the type defined dispatch function that can be found in Hooks.
     const dispatch = useAppDispatch();
 
-    ///Listens to the value of search on ever change. When it changes to empty it will dispatch goSetSearch with an empty string. This clears the search when the input box is cleared.
+    //Listens to the value of search on ever change. When it changes to empty it will dispatch goSetSearch with an empty string. This clears the search when the input box is cleared.
     useEffect(()=>{
         if (search === ""){
             dispatch(goSetSearch(""));
         }})
 
-    /// Calls the thunk function goSetSearch with the input search string.
+    // Calls the thunk function goSetSearch with the input search string.
     const SearchDispatch = () =>{
         dispatch(goSetSearch(search))
     }
 
-    ///Sets the value of search to an empty string so and then calls the thunk function goSetSearch. This clears the search so that all pantries are displayed.
+    //Sets the value of search to an empty string so and then calls the thunk function goSetSearch. This clears the search so that all pantries are displayed.
     const CancelDispatch = () =>{
         setSearch("");
         dispatch(goSetSearch(""));

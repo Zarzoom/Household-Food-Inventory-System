@@ -17,15 +17,12 @@ export function DeletePantry(pantryForDelete: Pantry) {
             };
  
     
-    //Cancel button does not work.
         return (
             <div>
                 <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Delete</Button>
                 <Modal open={open} onClose= {() => setOpen(false)}>
-                    <div className="BlueBox">
-                    
+                    <div>
                         <Modal.Header>
-                            
                         </Modal.Header>
                         <Modal.Body>
                             <p>
@@ -38,9 +35,7 @@ export function DeletePantry(pantryForDelete: Pantry) {
                             <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
                         </Modal.Footer>
                     </div>
-                        
                 </Modal>
             </div>
         );
-
 }
