@@ -6,9 +6,11 @@
 
     public class ItemRepository
     {
-        public ItemRepository()
+        private ConnectionShitOrSomething CSSOS;
+        public ItemRepository(ConnectionShitOrSomething CSSOS)
         {
-            
+        this.CSSOS = CSSOS;
+
         }
         /// <summary>
         /// Sends SQL Query to Database to add Item and then select the ItemID of the last inserted value.
@@ -19,7 +21,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                    CSSOS.connection
+                    ))
             {
                 var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size); SELECT LAST_INSERT_ID()";
                 var createdItem = await connection.QueryAsync<int>(sql, newItem);
@@ -35,7 +38,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                       CSSOS.connection
+                   ))
             {
                 var sql = "SELECT * FROM ItemList";
                 var itemList = await connection.QueryAsync<Item>(sql);
@@ -51,7 +55,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                       CSSOS.connection
+                   ))
             {
                 var parameters = new { primaryKey };
                 var sql = $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @primaryKey";
@@ -70,7 +75,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                       CSSOS.connection
+                   ))
             {
                 //var parameters = new {searchValue};
                 var sql =
@@ -91,7 +97,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                       CSSOS.connection
+                   ))
             {
                 var sql =
                 "UPDATE ItemList SET GenericName = @GenericName, Brand = @Brand, Price = @Price, Size = @Size WHERE ItemID = @ItemID; SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @ItemID ";
@@ -108,7 +115,8 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       "server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+                       CSSOS.connection
+                   ))
             {
                 var parameters = new { ItemID };
                 var sql = $"DELETE FROM ItemList WHERE ItemID = @ItemID";

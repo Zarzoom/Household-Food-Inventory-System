@@ -1,12 +1,16 @@
 ﻿version: "3.9"
 services:
-    web:
+    api:
         build: .
         ports:
             - "8000:80"
             - "9000:443"
         depends_on:
             - db
+        
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - password=Your_password123
     db:
         image: "mysql"
         command: --init-file /data/application/init.sql
@@ -21,6 +25,16 @@ services:
             MYSQL_DATABASE: InventoryData
             MYSQL_ROOT_PASSWORD: "Your_password123"
             ACCEPT_EULA: "Y"
+    ui:
+        build:
+            context: ./
+            dockerfile: ./UI.Dockerfile
+        ports:
+            - "8080:80"
+              
+        depends_on:
+            -   api
+            
     #InventoryData:
     #    image: postgres:13.1
     #    healthcheck:

@@ -4,14 +4,15 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="docker-compose.yml" />
-    <None Remove="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SecretsManager.Caching" Version="1.0.5" />
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="MySqlConnector" Version="2.2.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

@@ -6,9 +6,12 @@ using MySqlConnector;
 
 public class PantryRepository
 {
-    public PantryRepository()
+    private ConnectionShitOrSomething CSSOS;
+
+    public PantryRepository(ConnectionShitOrSomething CSSOS)
     {
-        
+        this.CSSOS = CSSOS;
+
     }
 
     /// <summary>
@@ -18,7 +21,7 @@ public class PantryRepository
     /// <returns>Returns the PantryID of the inserted Pantry as a task</returns>
     public async Task<int> AddToPantryList(Pantry newPantry)
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             var sql = "INSERT INTO PantryList (PantryName) VALUES (@PantryName); SELECT LAST_INSERT_ID()";
             var createdItem = await connection.QueryAsync<int>(sql, newPantry);
@@ -32,7 +35,7 @@ public class PantryRepository
     /// <returns>Returns a list of all the pantries in PantryList as a task</returns>
     public async Task<IEnumerable<Pantry>> GetPantryList()
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             var sql = "SELECT PantryName, PantryID FROM PantryList";
             var pantryList = await connection.QueryAsync<Pantry>(sql);
@@ -47,7 +50,7 @@ public class PantryRepository
     /// <returns>Returns the Pantry that was found as a task </returns>
     public async Task<Pantry> FindPantryByPrimaryKey(long primaryKey)
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             var parameters = new { primaryKey };
             var sql = $"SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @primaryKey";
@@ -64,7 +67,7 @@ public class PantryRepository
     /// <returns>A list of the pantries that contain the searchValue as a task. </returns>
     public async Task<IEnumerable<Pantry>> ContainsSearchForPantryName(String searchValue)
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             //var parameters = new {searchValue};
             var sql = $"SELECT PantryID, PantryName FROM PantryList WHERE LOWER(PantryName) LIKE LOWER('%{searchValue}%')";
@@ -84,7 +87,7 @@ public class PantryRepository
     /// <returns>Returns the updated Pantry as a task.</returns>
     public async Task<Pantry> PantryUpdate(Pantry updateMe)
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             var sql = "UPDATE PantryList SET PantryName = @PantryName WHERE PantryID = @PantryID; SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @PantryID";
             var createdPantry = await connection.QueryAsync<Pantry>(sql, updateMe);
@@ -98,12 +101,11 @@ public class PantryRepository
     /// <param name="PantryID"> A long that represents the primary key of the pantry that will be deleted. </param>
     public async void DeletePantry(long PantryID)
     {
-        using (var connection = new MySqlConnection("server=host.docker.internal,3306;user=root;password=Your_password123;database=InventoryData;"))
+        using (var connection = new MySqlConnection(CSSOS.connection))
         {
             var parameters = new { PantryID };
             var sql = $"DELETE FROM PantryList WHERE PantryID = @PantryID";
             var deletedRows = await connection.ExecuteAsync(sql, parameters);
         }
     }
-
 }

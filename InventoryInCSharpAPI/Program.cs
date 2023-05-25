@@ -1,11 +1,13 @@
 using InventoryInCSharpAPI.Managers;
 //using InventoryInCSharpAPI.Services;
 using InventoryInCSharpAPI.Repositories;
+using InventoryInCSharpAPI.Models;
 //using Microsoft.Extensions.Configuration;
 
-var builder = WebApplication.CreateBuilder(args);
-
-
+var builder = WebApplication.CreateBuilder(args);//
+var password = builder.Configuration.GetValue<string>("password");//
+var connection = $"{builder.Configuration.GetValue<string>("ConnectionString")}password={password};";//
+var CSSOS = new ConnectionShitOrSomething(connection);
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -18,6 +20,9 @@ builder.Services.AddSingleton<PantryContentsManager>();
 builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
+builder.Services.AddSingleton<ConnectionShitOrSomething>(CSSOS);
+
+Console.WriteLine(connection);
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
   
@@ -33,10 +38,7 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
 
-}
 app.UseSwagger();
 app.UseSwaggerUI();
 // app.UseHttpsRedirection();
