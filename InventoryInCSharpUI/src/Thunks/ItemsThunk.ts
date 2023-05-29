@@ -15,7 +15,7 @@ export const fetchItems =
     (): AppThunk => 
         async dispatch => {
 
-                const asyncResponse = await client.getData('http://localhost:8000/api/Item')
+                const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
                     .then(response => response.json())
                     .then(response => response as getItem[]);
                 dispatch(
@@ -26,19 +26,18 @@ export const fetchItems =
 export const createItem =
     (newItem:Item): AppThunk =>
         async dispatch =>{
-        const asynchResponse = await client.postData('http://localhost:8000/api/Item', newItem)
+        const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Item', newItem)
             .then(response => response.json())
             .then(response => response as getItem);
             dispatch(
                 goCreateItem(asynchResponse)
             )
-            
         };
 
 export const deleteItem =
     (deleteItemID: Number): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData('http://localhost:8000/api/Item/deleteItem/'+ deleteItemID);
+    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
     dispatch(
         goDeleteItem(deleteItemID)
     );
@@ -46,13 +45,12 @@ export const deleteItem =
     dispatch(
         fetchPantryContents()
     )
-            
 };
 
 export const updateItem =
     (updatedItem:getItem): AppThunk =>
         async dispatch =>{
-            const asynchResponse = await client.putData('http://localhost:8000/api/Item', updatedItem)
+            const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item', updatedItem)
                 .then(response => response.json())
                 .then(response => response as getItem);
             dispatch(
@@ -63,7 +61,7 @@ export const updateItem =
 // export const contentsItemSearch =
 //     (search: String): AppThunk =>
 //         async dispatch =>{
-//     const asynchResponse = await client.getData('http://localhost:8000/api/Item/search/' + search)
+//     const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/Item/search/' + search)
 //         .then(response => response.json())
 //         .then(response => response as getItem[]);
 //     dispatch(

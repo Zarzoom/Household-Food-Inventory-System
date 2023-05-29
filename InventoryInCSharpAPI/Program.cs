@@ -7,7 +7,7 @@ using InventoryInCSharpAPI.Models;
 var builder = WebApplication.CreateBuilder(args);//
 var password = builder.Configuration.GetValue<string>("password");//
 var connection = $"{builder.Configuration.GetValue<string>("ConnectionString")}password={password};";//
-var CSSOS = new ConnectionShitOrSomething(connection);
+var CSSOS = new ConnectionStringAndOtherSecrets(connection);
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -20,7 +20,7 @@ builder.Services.AddSingleton<PantryContentsManager>();
 builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
-builder.Services.AddSingleton<ConnectionShitOrSomething>(CSSOS);
+builder.Services.AddSingleton<ConnectionStringAndOtherSecrets>(CSSOS);
 
 Console.WriteLine(connection);
 

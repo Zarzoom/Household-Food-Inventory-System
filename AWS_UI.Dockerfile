@@ -15,32 +15,11 @@ RUN npm run build
 #COPY --from=publish ./src/build/static/ .
 
 #ENTRYPOINT ["node", "./build/static/js/main.min.js"]
-FROM nginx:1.19-alpine AS localDev
-COPY --from=publish ./src/build /usr/share/nginx/html
-COPY ./InventoryInCSharpUI/nginx.conf /etc/nginx/conf.d/default.conf
-# Expose port
-EXPOSE 8080
-
-# Copy .env file and shell script to container
-WORKDIR /usr/share/nginx/html
-COPY ./InventoryInCSharpUI/env.sh .
-COPY ./InventoryInCSharpUI/.env.local .env
-
-# Add bash
-RUN apk add --no-cache bash
-
-# Make our shell script executable
-RUN chmod +x env.sh
-RUN bash env.sh
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
-
 FROM nginx:1.19-alpine AS server
 COPY --from=publish ./src/build /usr/share/nginx/html
 COPY ./InventoryInCSharpUI/nginx.conf /etc/nginx/conf.d/default.conf
 # Expose port
-EXPOSE 8080
+EXPOSE 80
 
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
@@ -52,7 +31,6 @@ RUN apk add --no-cache bash
 
 # Make our shell script executable
 RUN chmod +x env.sh
-RUN bash env.sh
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

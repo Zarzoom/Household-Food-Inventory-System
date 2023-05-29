@@ -11,7 +11,7 @@ const client = new HttpClient();
 export const fetchPantryContents =
     (): AppThunk =>
         async dispatch => {
-    const asynchResponse = await client.getData('http://localhost:8000/api/PantryContents')
+    const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/PantryContents')
         .then(response => response.json())
         .then(response => response as PantryContents[])
             console.log(asynchResponse)
@@ -23,7 +23,7 @@ export const fetchPantryContents =
 export const fetchItemsInPantry =
     (pcPantryID: number): AppThunk =>
         async dispatch => {
-    const asynchResponse = await client.getData('http://localhost:8000/api/PantryContents/' + pcPantryID)
+    const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/PantryContents/' + pcPantryID)
         .then(response => response.json())
         .then(response => response as PantryContents[])
     dispatch(
@@ -33,7 +33,7 @@ export const fetchItemsInPantry =
 export const updatePantryContents =
     (updatedPantryContents: PantryContents): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData('http://localhost:8000/api/PantryContents', updatedPantryContents)
+    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/PantryContents', updatedPantryContents)
         .then(response => response.json())
         .then(response => response as PantryContents);
     dispatch(
@@ -42,14 +42,14 @@ export const updatePantryContents =
         };
 export const addPantryContents = (newPantryContents: PantryContentsNoID): AppThunk =>
     async dispatch => {
-    const asynchResponse = await client.postData('http://localhost:8000/api/PantryContents', newPantryContents)
+    const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/PantryContents', newPantryContents)
         .then(response => response.json())
         .then(response => response as PantryContents);
     dispatch(fetchItemsInPantry(newPantryContents.pcPantryID));
     };
 export const deletePantryContents = (PantryContentID: number): AppThunk => 
     async dispatch => {
-    const asynchResponse = await client.postData('http://localhost:8000/api/deletePantryContents/' + PantryContentID);
+    const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/deletePantryContents/' + PantryContentID);
     dispatch(goDeletePantryContents(PantryContentID));
 }
         

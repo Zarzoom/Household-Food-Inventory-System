@@ -6,10 +6,10 @@
 
     public class ItemRepository
     {
-        private ConnectionShitOrSomething CSSOS;
-        public ItemRepository(ConnectionShitOrSomething CSSOS)
+        private ConnectionStringAndOtherSecrets CSOS;
+        public ItemRepository(ConnectionStringAndOtherSecrets csos)
         {
-        this.CSSOS = CSSOS;
+        this.CSOS = csos;
 
         }
         /// <summary>
@@ -21,7 +21,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                    CSSOS.connection
+                    CSOS.connection
                     ))
             {
                 var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size); SELECT LAST_INSERT_ID()";
@@ -38,7 +38,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       CSSOS.connection
+                       CSOS.connection
                    ))
             {
                 var sql = "SELECT * FROM ItemList";
@@ -55,7 +55,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       CSSOS.connection
+                       CSOS.connection
                    ))
             {
                 var parameters = new { primaryKey };
@@ -75,7 +75,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       CSSOS.connection
+                       CSOS.connection
                    ))
             {
                 //var parameters = new {searchValue};
@@ -97,7 +97,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       CSSOS.connection
+                       CSOS.connection
                    ))
             {
                 var sql =
@@ -115,7 +115,7 @@
         {
             using (var connection =
                    new MySqlConnection(
-                       CSSOS.connection
+                       CSOS.connection
                    ))
             {
                 var parameters = new { ItemID };

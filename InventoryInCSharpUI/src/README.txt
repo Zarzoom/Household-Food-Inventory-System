@@ -3,6 +3,8 @@ Make it so that add Item to pantry button is on screen without having to scroll.
 make cancel button work
 search pantries in pantry contents
 add pantry on pantry content page.
+Make it scale to half screen. list of pantries in myPantries is messed up. add item to pantry button disappears.
+
 
 nicety:
 what pantry is item in.

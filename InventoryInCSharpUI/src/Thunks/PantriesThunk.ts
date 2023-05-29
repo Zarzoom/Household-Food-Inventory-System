@@ -11,7 +11,7 @@ const client = new HttpClient();
 export const fetchPantries =
     (): AppThunk =>
         async dispatch => {
-            const asyncResponse = await client.getData('http://localhost:8000/api/Pantry')
+            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Pantry')
                 .then(response => response.json())
                 .then(response => response as Pantry[]);
             dispatch(
@@ -21,7 +21,7 @@ export const fetchPantries =
 export const createPantry =
     (newPantry: PantryNoID): AppThunk =>
         async dispatch => {
-        const asyncResponse = await client.postData('http://localhost:8000/api/Pantry', newPantry)
+        const asyncResponse = await client.postData(process.env.REACT_APP_API + '/api/Pantry', newPantry)
             .then(response => response.json())
             .then(response => response as Pantry);
         dispatch(
@@ -31,7 +31,7 @@ export const createPantry =
 export const updatePantry =
     (updatedPantry: Pantry): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData('http://localhost:8000/api/Pantry', updatedPantry)
+    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Pantry', updatedPantry)
         .then(response => response.json())
         .then(response => response as Pantry);
     dispatch(
@@ -42,7 +42,7 @@ export const updatePantry =
 export const deletePantry =
     (deletePantryID: Number): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData('http://localhost:8000/api/Pantry/deletePantry/'+ deletePantryID);
+    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Pantry/deletePantry/'+ deletePantryID);
     dispatch(
         goDeletePantry(deletePantryID)
     )
@@ -51,7 +51,7 @@ export const deletePantry =
 export const contentsPantrySearch =
     (search: String): AppThunk =>
     async dispatch =>{
-        const asynchResponse = await client.getData('http://localhost:8000/api/Pantry/search/' + search)
+        const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/Pantry/search/' + search)
             .then(response => response.json())
             .then(response => response as Pantry[]);
         dispatch(

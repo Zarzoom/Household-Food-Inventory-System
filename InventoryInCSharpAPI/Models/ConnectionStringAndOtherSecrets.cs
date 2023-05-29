@@ -1,10 +1,10 @@
 ﻿namespace InventoryInCSharpAPI.Models;
 
-public class ConnectionShitOrSomething
+public class ConnectionStringAndOtherSecrets
 {
     public String connection { get; set; }
 
-    public ConnectionShitOrSomething(String setConnect)
+    public ConnectionStringAndOtherSecrets(String setConnect)
     {
         connection = setConnect;
     }
