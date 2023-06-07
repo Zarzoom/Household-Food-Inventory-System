@@ -6,11 +6,10 @@ Create Items with the brand, generic name, price, and size. Create pantries that
 
 # How to Run the Application
 To run the application you will need to have docker installed or to setup the database connections yourself.
-`docker-compose up`
+`docker compose up`
 
 To run the Tests for this project. 
 `docker-compose -f docker-compose-test.yml up --build`
 
 # ToDo
-Add integration testing for pantry and pantry contents.
-Test delete function for Item.
+Make UI adaptable to multiple screen sizes.

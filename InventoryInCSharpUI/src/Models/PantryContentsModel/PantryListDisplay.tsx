@@ -5,7 +5,7 @@ import {useState, useEffect, Component} from "react";
 import {fetchPantries} from "../../Thunks/PantriesThunk"
 import Pantry from "../../DataModels/Pantry"
 import {selectAllPantries} from "../../slices/PantriesReducer"
-import {SinglePantryButton} from "./SinglePantryDisplay"
+import {SinglePantryButton} from "./SinglePantryButton"
 import {Panel, Stack} from "rsuite"
 
 import ObjectAndState from "../../DataModels/ObjectAndState"
@@ -17,11 +17,6 @@ export const PantryListDisplay = () => {
     const dispatch = useAppDispatch();
     const PantryStatus = useAppSelector(state => state.Pantry.status);
     const AllPantries = useAppSelector(selectAllPantries);
-    // useEffect(()=> {
-    //     if(PantryStatus === 'idle') {
-    //         const PantryList = dispatch(fetchPantries())
-    //     }
-    // }, [PantryStatus, dispatch])
     
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => {
         return(
