@@ -21,18 +21,18 @@ const Item = () => {
                         </div >
                     </Row>
                     <Row>
-                        <Col xsOffset={4} xs={16} smOffset={4} sm={16} mdOffset={9} md={6}>
+                        <Col xsOffset={4} xs={16} smOffset={4} sm={16} xxlOffset={9} xxl={6}>
                             <SearchItem></SearchItem>
                         </Col>
                     </Row>
                 </Grid>
-                    <Grid fluid>
-                        <Col xs={24} smOffset={3} sm={18} mdOffset={8} md={8}>
-                            <Panel bordered={true} header={<Grid><Col  xsOffset={15} xs={2} md={2} mdOffset={11}><AddItemModal></AddItemModal></Col></Grid>}>
-                                <ItemDisplay></ItemDisplay>
-                            </Panel>
-                        </Col>
-                    </Grid>
+                <Grid fluid>
+                    <Col xs={24} smOffset={3} sm={18} xxlOffset={8} xxl={8}>
+                        <Panel bordered={true} header={<Grid><Col  xsOffset={11} xs={2} xxl={2} xxlOffset={11}><AddItemModal></AddItemModal></Col></Grid>}>
+                            <ItemDisplay></ItemDisplay>
+                        </Panel>
+                    </Col>
+                </Grid>
 </Grid>
 
     );

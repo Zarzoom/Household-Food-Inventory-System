@@ -17,10 +17,10 @@ const MyPantry = () => {
                 </div >
             </Row>
             <Row>
-                <Col xs={3}>
+                <Col sm={5} lg={3}>
                     <PantryListDisplay></PantryListDisplay>
                 </Col>
-                <Col xsOffset={3} xs={9}>
+                <Col smOffset={1} sm={16} lgOffset={4} lg={10} xxlOffset={5} xxl={8}>
                     <PantryContentsDisplay></PantryContentsDisplay>
                 </Col>
             </Row>

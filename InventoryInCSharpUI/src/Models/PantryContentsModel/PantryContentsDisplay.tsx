@@ -49,7 +49,7 @@ useEffect(() =>{
   
    return(
            <FlexboxGrid>
-               <Panel bordered header={<Grid><Col xs={11}>{pantryName}</Col><Col xs={4}><AddPanel></AddPanel></Col></Grid>} className= 'text-left' style={{fontFamily: "'Times New Roman', Times, serif"}}>
+               <Panel bordered header={<Grid><Col sm={8} xxl={4}>{pantryName}</Col><Col sm={4} xxl={4}><AddPanel></AddPanel></Col></Grid>} className= 'text-left' style={{fontFamily: "'Times New Roman', Times, serif"}}>
            <List>
 
         {PantryItems}

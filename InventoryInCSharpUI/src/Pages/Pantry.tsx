@@ -18,19 +18,18 @@ const Pantry = () => {
             </div>
             </Row>
             <Row>
-                <Col xsOffset={9} xs={6}>
+                <Col xsOffset={4} xs={16} smOffset={4} sm={16} xxlOffset={9} xxl={6}>
                     <SearchPantry></SearchPantry>
                 </Col>
             </Row>
             <Grid fluid>
-                <Col xsOffset={4} xs={13}>
-                    <Panel bordered={true} header={<Grid><Col xs={2} xsOffset={11}><AddPantryModal></AddPantryModal></Col></Grid>}>
+                <Col xs={24} smOffset={3} sm={18} xxlOffset={8} xxl={8}>
+                    <Panel bordered={true} header={<Grid><Col xs={2} xsOffset={11} xxl={2} xxlOffset={11}><AddPantryModal></AddPantryModal></Col></Grid>}>
                         <PantryDisplay></PantryDisplay>
                     </Panel>
                 </Col>
             </Grid>
         </Grid>
-
     );
 };
 export default Pantry;
