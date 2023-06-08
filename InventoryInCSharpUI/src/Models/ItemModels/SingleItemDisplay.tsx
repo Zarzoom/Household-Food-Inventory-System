@@ -1,24 +1,24 @@
 ﻿import getItem from "../../DataModels/getItem"
 import {EditItem} from "./EditItem"
 import {DeleteItem} from "./DeleteItem"
-import {Grid, Col} from "rsuite"
+import {Grid, Col, Stack} from "rsuite"
 
 
 
 export function SingleItemDisplay(item: getItem)
 {
     return(
-    <Grid>
+    <Grid className={'autoWidthGrid'}>
         <div >
             <Col xs={11}>
                 <p>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                 </p>
             </Col>
-            <Col>
+            <Stack direction={'column'} alignItems={'flex-end'}>
                 <EditItem{...item}></EditItem>
                 <DeleteItem {...item}></DeleteItem>
-            </Col>
+            </Stack>
         </div>
     </Grid>
 )}

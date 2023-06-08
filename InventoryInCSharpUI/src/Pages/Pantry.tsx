@@ -1,7 +1,7 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
 import {SearchPantry} from "../Models/PantryModels/SearchPantry"
 import AddPantryModal from "../Models/PantryModels/AddPantryModal"
-import {Grid, Row, Col, Panel} from "rsuite";
+import {Grid, Row, Col, Panel, Stack} from "rsuite";
 import {SearchItem} from "../Models/ItemModels/SearchItem";
 import {ItemDisplay} from "../Models/ItemModels/ItemDisplay";
 const Pantry = () => {
@@ -18,13 +18,13 @@ const Pantry = () => {
             </div>
             </Row>
             <Row>
-                <Col xsOffset={4} xs={16} smOffset={4} sm={16} xxlOffset={9} xxl={6}>
+                <Col xsOffset={4} xs={16} mdOffset={5} md={14} lgOffset={7} lg={10} xxlOffset={8} xxl={8}>
                     <SearchPantry></SearchPantry>
                 </Col>
             </Row>
             <Grid fluid>
-                <Col xs={24} smOffset={3} sm={18} xxlOffset={8} xxl={8}>
-                    <Panel bordered={true} header={<Grid><Col xs={2} xsOffset={11} xxl={2} xxlOffset={11}><AddPantryModal></AddPantryModal></Col></Grid>}>
+                <Col xs={24} smOffset={3} sm={18} mdOffset={4} md={16} lgOffset={6} lg={12} xxlOffset={7} xxl={10}>
+                    <Panel bordered={true} header={<Stack justifyContent={'flex-end'}><AddPantryModal></AddPantryModal></Stack>}>
                         <PantryDisplay></PantryDisplay>
                     </Panel>
                 </Col>
