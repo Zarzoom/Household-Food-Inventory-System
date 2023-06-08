@@ -3,8 +3,6 @@
     text-align: center;
 }
 
-
-
 .BlueBox {
     margin-bottom: 1em;
     background-color: rgba(143, 184, 255, 0.5);
@@ -52,5 +50,18 @@
     padding-right:1em;
 }
 
+.columnRightAlign{
+    align-content: end;
+    align-items: flex-end;
+}
+
+.autoWidthGrid{
+    width: auto;
+}
+
+.rightAlignDiv{
+    margin-left: auto;
+    margin-right: 0;
+}
 
 

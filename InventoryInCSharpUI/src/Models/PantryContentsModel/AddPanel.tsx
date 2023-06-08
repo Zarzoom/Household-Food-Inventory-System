@@ -1,14 +1,13 @@
 import PantryContents from "../../DataModels/PantryContents"
 import getItem from "../../DataModels/getItem"
-import Drawer from "rsuite/Drawer";
-import { Input, InputGroup } from 'rsuite';
-import { Button, IconButton, ButtonGroup, ButtonToolbar } from 'rsuite';
-import {useState, useEffect, Component} from "react";
-import 'rsuite/dist/rsuite.min.css';
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {selectAllItems, selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
-import {fetchItems} from "../../Thunks/ItemsThunk"
 import {SingleItemForPantryContents} from "./SingleItemForPantryContents"
+import {fetchItems} from "../../Thunks/ItemsThunk"
+import {useState, useEffect, Component} from "react";
+import Drawer from "rsuite/Drawer";
+import { Button, IconButton, ButtonGroup, ButtonToolbar, Input, InputGroup, Stack } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css';
 import SearchIcon from '@rsuite/icons/Search';
 import StarIcon from '@rsuite/icons/legacy/Star';
 import AddItemModal from '../ItemModels/AddItemModal';
@@ -47,26 +46,28 @@ export const AddPanel = () =>{
 
 return(
     <div>
-<Button className={"yellowButton"} appearance= 'primary' onClick={() => openPanel(true)}>Add Item To Pantry</Button>
-<Drawer placement= {placement} open={open} onClose={() => openPanel(false)}>
-    <Drawer.Header>
-        <InputGroup>
-            <label>Search:</label><br/>
-            <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
-                   onChange={(value: string, event) => setSearchInput(value)}/>
-            <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>
-                <SearchIcon />
-            </InputGroup.Button>
-            <InputGroup.Button onClick={(event: any) => updateSearch("")}>
-                <StarIcon/>
-            </InputGroup.Button>
-        </InputGroup>
-        <AddItemModal></AddItemModal>
-    </Drawer.Header>
-    <Drawer.Body>
-        {renderedAllItems}
-    </Drawer.Body>
-</Drawer>
+        <Stack justifyContent={'flex-end'}>
+            <Button className={"yellowButton"} appearance= 'primary' onClick={() => openPanel(true)}>Add Item To Pantry</Button>
+        </Stack>
+        <Drawer size={'sm'} placement= {placement} open={open} onClose={() => openPanel(false)}>
+            <Drawer.Header>
+                <InputGroup>
+                    <label>Search:</label><br/>
+                    <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
+                           onChange={(value: string, event) => setSearchInput(value)}/>
+                    <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>
+                        <SearchIcon />
+                    </InputGroup.Button>
+                    <InputGroup.Button onClick={(event: any) => updateSearch("")}>
+                        <StarIcon/>
+                    </InputGroup.Button>
+                </InputGroup>
+                <AddItemModal></AddItemModal>
+            </Drawer.Header>
+            <Drawer.Body>
+                {renderedAllItems}
+            </Drawer.Body>
+        </Drawer>
     </div>
 )
 }
