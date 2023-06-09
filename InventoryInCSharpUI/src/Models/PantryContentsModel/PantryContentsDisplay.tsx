@@ -40,21 +40,17 @@ useEffect(() =>{
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
         console.log(pantryContents.pantryContentID);
     return(
-    <FlexboxGrid.Item as={Col} colspan={24}>
         <List.Item className={"blueBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
         </List.Item>
-    </FlexboxGrid.Item>
     )})
   
    return(
        <Panel bordered header={<Grid className={'autoWidthGrid'}>
            <Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}  style={{fontFamily: "'Times New Roman', Times, serif"}}>
-           <FlexboxGrid>
-               <List>
-                   {PantryItems}
-               </List>
-           </FlexboxGrid>
+           <List>
+               {PantryItems}
+           </List>
        </Panel>
    )
 }
