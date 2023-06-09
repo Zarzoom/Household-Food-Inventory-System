@@ -12,4 +12,4 @@ To run the Tests for this project.
 `docker-compose -f docker-compose-test.yml up --build`
 
 # ToDo
-Make UI adaptable to multiple screen sizes.
+Fix background color to improve contrast of text. 

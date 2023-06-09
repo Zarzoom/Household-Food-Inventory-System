@@ -17,7 +17,6 @@ export const ItemDisplay =() => {
         <List.Item className={"blueBackground"} key={item.itemID}>
             <SingleItemDisplay {...item}></SingleItemDisplay>
         </List.Item>
-        /*</FlexboxGrid.Item>*/
             )})
     return(
             <List>

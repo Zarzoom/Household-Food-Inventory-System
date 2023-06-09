@@ -1,12 +1,12 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
 import {SearchPantry} from "../Models/PantryModels/SearchPantry"
 import AddPantryModal from "../Models/PantryModels/AddPantryModal"
-import {Grid, Row, Col, Panel, Stack} from "rsuite";
 import {SearchItem} from "../Models/ItemModels/SearchItem";
 import {ItemDisplay} from "../Models/ItemModels/ItemDisplay";
+import {Grid, Row, Col, Panel, Stack} from "rsuite";
+
 const Pantry = () => {
     return (
-
         <Grid fluid>
             <Row>
             <div className={"centerHorizontally"}>

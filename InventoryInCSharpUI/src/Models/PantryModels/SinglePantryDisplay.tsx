@@ -12,7 +12,6 @@ export function SinglePantryDisplay(pantry: Pantry)
 {
 
     return(
-
        <Grid className={'autoWidthGrid'}>
             <div>
                 <Col xs={11}>
@@ -26,6 +25,6 @@ export function SinglePantryDisplay(pantry: Pantry)
                 </Stack>
             </div>
        </Grid>
-
-    )}
+    )
+}
 

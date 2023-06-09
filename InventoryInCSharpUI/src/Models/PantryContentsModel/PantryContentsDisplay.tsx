@@ -48,15 +48,13 @@ useEffect(() =>{
     )})
   
    return(
-           
-               <Panel bordered header={<Grid className={'autoWidthGrid'}><Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}  style={{fontFamily: "'Times New Roman', Times, serif"}}>
-                   <FlexboxGrid>
-           <List>
-
-        {PantryItems}
-           </List>
-                   </FlexboxGrid>
-                   </Panel>
-           
+       <Panel bordered header={<Grid className={'autoWidthGrid'}>
+           <Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}  style={{fontFamily: "'Times New Roman', Times, serif"}}>
+           <FlexboxGrid>
+               <List>
+                   {PantryItems}
+               </List>
+           </FlexboxGrid>
+       </Panel>
    )
 }

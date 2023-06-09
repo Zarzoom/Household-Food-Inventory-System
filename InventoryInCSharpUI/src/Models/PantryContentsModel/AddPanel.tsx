@@ -9,12 +9,11 @@ import Drawer from "rsuite/Drawer";
 import { Button, IconButton, ButtonGroup, ButtonToolbar, Input, InputGroup, Stack } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import SearchIcon from '@rsuite/icons/Search';
-import StarIcon from '@rsuite/icons/legacy/Star';
+import CloseIcon from "@rsuite/icons/Close";
 import AddItemModal from '../ItemModels/AddItemModal';
 
 
 export const AddPanel = () =>{
-    // const AllItems = useAppSelector(selectAllItems)
 
     const [open,setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
@@ -33,16 +32,18 @@ export const AddPanel = () =>{
     const SearchSelector = useAppSelector(state => selectContainsSearch(state));
     
     let currentItems: getItem[] = SearchSelector;
-    
 
+    const cancelSearchDispatch = () =>{
+        setSearchInput("");
+        dispatch(goSetSearch(""));
+    }
     
     const renderedAllItems = currentItems.map((item: getItem) => { return (
         <div  key={"" + item.itemID}>
             <SingleItemForPantryContents {...item}></SingleItemForPantryContents>
         </div>
     )})
-
-//TODO: have clear search empty search field. 
+    
 
 return(
     <div>
@@ -58,8 +59,8 @@ return(
                     <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>
                         <SearchIcon />
                     </InputGroup.Button>
-                    <InputGroup.Button onClick={(event: any) => updateSearch("")}>
-                        <StarIcon/>
+                    <InputGroup.Button onClick={(event: any) => cancelSearchDispatch()}>
+                        <CloseIcon/>
                     </InputGroup.Button>
                 </InputGroup>
                 <AddItemModal></AddItemModal>

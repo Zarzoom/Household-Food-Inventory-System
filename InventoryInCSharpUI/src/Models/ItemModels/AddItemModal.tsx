@@ -54,6 +54,7 @@ function AddItemModal() {
             return {...previousState, price: ""}});
         setItem(previousState => {
             return {...previousState, brand: ""}});
+        setOpen(false);
     }
     
     return (
@@ -84,8 +85,5 @@ function AddItemModal() {
         </div>
     );
 };
-
-
-
 
 export default AddItemModal;

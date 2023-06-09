@@ -1,11 +1,10 @@
 import {PantryListDisplay} from '../Models/PantryContentsModel/PantryListDisplay'
 import {PantryContentsDisplay} from '../Models/PantryContentsModel/PantryContentsDisplay'
 import {AddPanel} from '../Models/PantryContentsModel/AddPanel'
-import {Grid, Container, Header, Content, Footer, Sidebar, Stack, FlexboxGrid, Col, Row} from "rsuite"
+import {Grid, Container, Stack, Col, Row} from "rsuite"
 
 const MyPantry = () => {
     return (
-
         <Grid fluid>
             <Row>
                 <div className={"centerHorizontally"}>

@@ -27,12 +27,12 @@ export function SearchPantry() {
         }})
 
     // Calls the thunk function goSetSearch with the input search string.
-    const SearchDispatch = () =>{
+    const searchDispatch = () =>{
         dispatch(goSetSearch(search))
     }
 
     //Sets the value of search to an empty string so and then calls the thunk function goSetSearch. This clears the search so that all pantries are displayed.
-    const CancelDispatch = () =>{
+    const cancelDispatch = () =>{
         setSearch("");
         dispatch(goSetSearch(""));
     }
@@ -45,10 +45,10 @@ export function SearchPantry() {
                         <label className={"labelForSearch"}>Search:</label><br/>
                         <Input type="text" placeholder="Pantry Name" value={search}
                                onChange={(value: string, event) => setSearch(value)}/>
-                        <InputGroup.Button onClick={(event: any) => SearchDispatch()}>
+                        <InputGroup.Button onClick={(event: any) => searchDispatch()}>
                             <SearchIcon/>
                         </InputGroup.Button>
-                        <InputGroup.Button onClick={(event: any) => CancelDispatch()}>
+                        <InputGroup.Button onClick={(event: any) => cancelDispatch()}>
                             <CloseIcon/>
                         </InputGroup.Button>
                     </InputGroup>
