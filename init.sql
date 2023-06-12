@@ -10,13 +10,17 @@ GenericName VARCHAR(255),
 Price DECIMAL(8,2),
 Size VARCHAR(255),
 ItemID INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY(ItemID)
+PRIMARY KEY(ItemID),
+FOREIGN KEY (Password)
+    REFERENCES Login(Password)
 );
 
 CREATE TABLE IF NOT EXISTS PantryList(
 PantryName VARCHAR(255),
 PantryID INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY(PantryID)
+PRIMARY KEY(PantryID),
+FOREIGN KEY (Password)
+    REFERENCES Login(Password)
 );
 
 CREATE TABLE IF NOT EXISTS PantryContents(
@@ -28,5 +32,13 @@ PRIMARY KEY(PantryContentID),
 FOREIGN KEY (PCItemID)
     REFERENCES ItemList(ItemID),
 FOREIGN KEY (PCPantryID)
-    REFERENCES PantryList(PantryID)
+    REFERENCES PantryList(PantryID),
+FOREIGN KEY (Password)
+    REFERENCES Login(Password)
 );
+
+CREATE TABLE IF NOT EXISTS Login(
+    UserName VARCHAR(225),
+    Password INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (Password)
+)
