@@ -5,54 +5,67 @@ namespace InventoryInCSharpAPI.Managers;
 public class LoginManager
 {
     private readonly LoginRepository _LR;
-    public LoginManager(LoginRepository LR)
+    private readonly ILogger<LoginManager> logger;
+    public LoginManager(LoginRepository LR, ILogger<LoginManager> logger)
     {
         this._LR = LR;
+        this.logger = logger;
     }
 
     public User AddLogin(User newUser)
     {
-        Boolean unique = NoDuplicates(newUser);
-        if (unique == true)
-        {
-            var results = _LR.AddLogin(newUser);
+        var results = _LR.AddLogin(newUser);
             results.Wait();
             newUser.password = results.Result;
             return newUser;
-        }
-        else
-        {
-            return null;
-        }
     }
 
     public Boolean NoDuplicates(User potentialUser)
     {
-        var foundUserNames = findUserWithUserName(potentialUser);
-        if (foundUserNames == null)
-        {
-            return true;
-        }
-        else
+        var foundUserName = findUserWithUserName(potentialUser.userName);
+        logger.LogInformation($"{foundUserName?.userName} + {potentialUser.userName}");
+        if (potentialUser.userName.Equals(foundUserName?.userName))
         {
             return false;
         }
+        else
+        {
+            return true;
+        }
     }
 
-    public User findUserWithUserName(User userForSearch)
+    public User findUserWithUserName(String userNameForSearch)
     {
-        var results = _LR.findUserWithUserName(userForSearch.userName);
+        var results = _LR.findUserWithUserName(userNameForSearch);
         results.Wait();
         var foundUser = results.Result;
         return (foundUser);
     }
 
-    public User findUserWithPassword(User userForSearch)
+    public User findUserWithPassword(long passwordForSearch)
     {
-        var results = _LR.findUserWithPassword(userForSearch.password);
+        var results = _LR.findUserWithPassword(passwordForSearch);
         results.Wait();
         var foundUser = results.Result;
         return (foundUser);
     }
-    
+
+    public User findUserWithPasswordAndUsername(User userForSearch)
+    {
+        var results = _LR.findUserWithPasswordAndUserName(userForSearch);
+        results.Wait();
+        var foundUser = results.Result;
+        return (foundUser);
+    }
+
+    public User updateUserName(User updatedUser)
+    {
+        var foundUser = findUserWithPassword(updatedUser.password);
+        
+        var results = _LR.updateUserName(updatedUser);
+            results.Wait();
+            var createdUpdatedUser = results.Result;
+            return createdUpdatedUser;
+
+    }
 }

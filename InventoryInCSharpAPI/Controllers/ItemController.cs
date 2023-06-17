@@ -1,6 +1,6 @@
-﻿using InventoryInCSharpAPI.Managers;
+﻿using Microsoft.AspNetCore.Mvc;
 using InventoryInCSharpAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+using InventoryInCSharpAPI.Managers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,38 +18,38 @@ public class ItemController : ControllerBase
     }
     // GET: api/<ItemController>
     /// <summary>
-    ///     prices bellow 1 need a 0 in the ones place. example: 0.99
+    /// prices bellow 1 need a 0 in the ones place. example: 0.99
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<Item> Get()
+    public IEnumerable<Item> GetAllItems()
     {
-        return itemManager.GetItemList();
+        return (itemManager.GetItemList());
     }
 
     // GET api/<ItemController>/5
     [HttpGet("{primaryKey}")]
-    public Item Get(long primaryKey)
+    public Item GetItemWithPrimaryKey(long primaryKey)
     {
         return itemManager.FindByPrimaryKey(primaryKey);
     }
     //GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
-    public IEnumerable<Item> Get(string searchValue)
+    public IEnumerable<Item> Get(String searchValue)
     {
         return itemManager.Search(searchValue);
     }
 
     // POST api/<ItemController>
     [HttpPost]
-    public Item Post([FromBody] Item postmanItem)
+    public Item PostItemToItemList([FromBody] Item postmanItem)
     {
         return itemManager.AddToItemList(postmanItem);
     }
 
     // PUT api/<ItemController>
     [HttpPut]
-    public Item Put([FromBody] Item updatedItem)
+    public Item PutUpdatedItemIntoDatabase([FromBody] Item updatedItem)
     {
         return itemManager.ItemUpdate(updatedItem);
     }
@@ -64,4 +64,5 @@ public class ItemController : ControllerBase
     // public void deleteALLItems(){
     //     itemManager.deleteALLItems();
     // }
+
 }

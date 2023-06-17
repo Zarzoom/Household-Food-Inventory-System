@@ -2,6 +2,16 @@
 
 public class User
 {
-    public string userName { get; set; }
-    public int password { get; set; }
+    public String userName { get; set; }
+    public long password { get; set; }
+
+    public User()
+    {
+        
+    }
+    
+    public User(String userName)
+    {
+        this.userName = userName;
+    }
 }
