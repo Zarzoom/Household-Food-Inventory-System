@@ -22,14 +22,14 @@ public class ItemController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public IEnumerable<Item> Get()
+    public IEnumerable<Item> GetAllItems()
     {
         return (itemManager.GetItemList());
     }
 
     // GET api/<ItemController>/5
     [HttpGet("{primaryKey}")]
-    public Item Get(long primaryKey)
+    public Item GetItemWithPrimaryKey(long primaryKey)
     {
         return itemManager.FindByPrimaryKey(primaryKey);
     }
@@ -42,14 +42,14 @@ public class ItemController : ControllerBase
 
     // POST api/<ItemController>
     [HttpPost]
-    public Item Post([FromBody] Item postmanItem)
+    public Item PostItemToItemList([FromBody] Item postmanItem)
     {
         return itemManager.AddToItemList(postmanItem);
     }
 
     // PUT api/<ItemController>
     [HttpPut]
-    public Item Put([FromBody] Item updatedItem)
+    public Item PutUpdatedItemIntoDatabase([FromBody] Item updatedItem)
     {
         return itemManager.ItemUpdate(updatedItem);
     }

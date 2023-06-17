@@ -20,6 +20,8 @@ builder.Services.AddSingleton<PantryContentsManager>();
 builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
+builder.Services.AddSingleton<LoginManager>();
+builder.Services.AddSingleton<LoginRepository>();
 builder.Services.AddSingleton<ConnectionStringAndOtherSecrets>(CSSOS);
 
 Console.WriteLine(connection);

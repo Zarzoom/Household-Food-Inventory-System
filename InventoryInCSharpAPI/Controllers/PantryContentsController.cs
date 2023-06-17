@@ -16,24 +16,24 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPost]
-    public PantryContents Post([FromBody] PantryContents postmanPantryContent)
+    public PantryContents PostNewPantryContent([FromBody] PantryContents postmanPantryContent)
     {
         return pantryContentsManager.AddToPantry(postmanPantryContent);
     }
 
     [HttpGet]
-    public IEnumerable<PantryContents> Get()
+    public IEnumerable<PantryContents> GetAllPantryContents()
     {
         return pantryContentsManager.GetAllPantryContents();
     }
 
     [HttpGet("{pcPantryID}")]
-    public IEnumerable<PantryContents> Get(long pcPantryID)
+    public IEnumerable<PantryContents> GetPantryContentsWithPantryID(long pcPantryID)
     {
         return pantryContentsManager.FindContentsByPCPantryID(pcPantryID);
     }
     [HttpGet("{pcPantryID}/{pcItemID}")]
-    public PantryContents Get(long pcPantryID, long pcItemID)
+    public PantryContents GetPantryContentsWithPantryIDAndItemID(long pcPantryID, long pcItemID)
     {
         return pantryContentsManager.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
     }
@@ -64,7 +64,7 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPut]
-    public PantryContents Put([FromBody] PantryContents updatedPantryContent)
+    public PantryContents PutUpdatedPantryContentIntoPantryContentsList([FromBody] PantryContents updatedPantryContent)
     {
         return pantryContentsManager.PantryContentUpdate(updatedPantryContent);
     }
