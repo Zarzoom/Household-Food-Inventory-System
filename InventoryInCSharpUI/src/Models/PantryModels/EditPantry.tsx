@@ -23,7 +23,6 @@ export function EditPantry(pantryForUpdate: Pantry) {
         const PantryToJSONStringify = JSON.stringify(pantry);
         const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
         dispatch(updatePantry(PantryToJsonParse));
-        setOpen(false);
         return 'Added'
     };
 
@@ -53,7 +52,7 @@ export function EditPantry(pantryForUpdate: Pantry) {
         </div>
 
     );
-}
+};
 
 
 

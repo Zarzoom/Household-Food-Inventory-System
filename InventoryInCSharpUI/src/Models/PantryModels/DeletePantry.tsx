@@ -1,5 +1,5 @@
 import Pantry from "../../DataModels/Pantry"
-import {useAppDispatch} from '../../Hooks/hooks'
+import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import {deletePantry} from "../../Thunks/PantriesThunk"
 import {useState} from "react";
 import {Modal, Button} from 'rsuite'
@@ -31,7 +31,4 @@ export function DeletePantry(pantryForDelete: Pantry) {
                             <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
                         </Modal.Footer>
                     </div>
-            </Modal>
-        </div>
-    );
 }
