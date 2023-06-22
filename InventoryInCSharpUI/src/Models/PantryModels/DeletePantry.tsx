@@ -1,8 +1,7 @@
 ﻿import Pantry from "../../DataModels/Pantry"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import {deletePantry} from "../../Thunks/PantriesThunk"
-import ObjectAndState from "../../DataModels/ObjectAndState"
-import {useState, useEffect, Component, SetStateAction} from "react";
+import {useState} from "react";
 import {Modal, Button} from 'rsuite'
 
 //working on installing a modal

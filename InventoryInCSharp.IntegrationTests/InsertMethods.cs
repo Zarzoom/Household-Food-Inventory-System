@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Amazon.Util.Internal;
+using Dapper;
 using InventoryInCSharpAPI.Models;
 using MySqlConnector;
 using System.Text;
@@ -59,6 +60,16 @@ public class InsertMethods
         {
             Console.WriteLine(e);
             throw;
+        }
+    }
+
+    public static void LoginInsertDirectlyToDatabase(User newUser)
+    {
+        using (var connection = new MySqlConnection("server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "INSERT INTO Login (UserName) VALUES (@UserName)";
+            var actual = connection.ExecuteAsync(sql, newUser);
+            actual.Wait();
         }
     }
 }

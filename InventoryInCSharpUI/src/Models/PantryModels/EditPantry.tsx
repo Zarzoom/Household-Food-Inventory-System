@@ -2,7 +2,6 @@ import {useState} from "react";
 import {updatePantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import Pantry from "../../DataModels/Pantry"
-import ObjectAndState from "../../DataModels/ObjectAndState"
 import {Modal, Button, Input} from 'rsuite'
 export function EditPantry(pantryForUpdate: Pantry) {
 

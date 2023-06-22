@@ -56,9 +56,8 @@ public class LoginRepository
     {
         using (var connection = new MySqlConnection(CSOS.connection))
         {
-            var parameters = new { userForSearch };
-            var sql = $"SELECT UserName, Password FROM Login WHERE Password = {userForSearch.password} AND UserName = {userForSearch.userName}";
-            var foundUser = await connection.QueryAsync<User>(sql, parameters);
+            var sql = "SELECT UserName, Password FROM Login WHERE Password = @password AND UserName = @userName";
+            var foundUser = await connection.QueryAsync<User>(sql, userForSearch);
             return foundUser.SingleOrDefault();
         }
     }

@@ -66,6 +66,5 @@ public class LoginManager
             results.Wait();
             var createdUpdatedUser = results.Result;
             return createdUpdatedUser;
-
     }
 }
