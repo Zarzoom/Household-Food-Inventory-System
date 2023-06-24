@@ -66,4 +66,23 @@ public class DatabaseCleanUp
             var actual = connection.Execute(sql);
         }
     }
+    public static void LoginDatabasePreparation()
+    {
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "DELETE FROM Login";
+            var actual = connection.ExecuteAsync(sql);
+            actual.Wait();
+        }
+
+        using (var connection =
+               new MySqlConnection(
+                   "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
+        {
+            var sql = "ALTER TABLE Login AUTO_INCREMENT = 1";
+            var actual = connection.Execute(sql);
+        }
+    }
 }

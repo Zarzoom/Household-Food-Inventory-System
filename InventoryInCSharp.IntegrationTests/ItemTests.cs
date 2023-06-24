@@ -44,7 +44,7 @@ public class WhenItemIsInserted : ItemTests
             Console.WriteLine(e);
             throw;
         }
-        Task.Delay(1000).Wait();
+        Task.Delay(1000).Wait(); 
 
         actualItem = GetActual();
 
