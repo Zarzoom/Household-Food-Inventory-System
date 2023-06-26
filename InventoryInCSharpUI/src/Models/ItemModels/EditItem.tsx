@@ -2,7 +2,6 @@ import {useState} from "react";
 import {updateItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import getItem from "../../DataModels/getItem"
-import ObjectAndState from "../../DataModels/ObjectAndState"
 import { Form, Button, Input, Modal } from 'rsuite';
 
 export function EditItem(itemForUpdate: getItem) {

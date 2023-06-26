@@ -1,7 +1,6 @@
 ﻿import getItem from "../../DataModels/getItem"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deleteItem} from "../../Thunks/ItemsThunk"
-import ObjectAndState from "../../DataModels/ObjectAndState"
 import {useState, useEffect, Component, SetStateAction} from "react";
 import {goSetStatus} from "../../slices/PantryContentsReducer"
 import{fetchPantryContents} from "../../Thunks/PantryContentsThunk"
