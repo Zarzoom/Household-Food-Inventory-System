@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventoryInCSharpAPI.Managers;
 using InventoryInCSharpAPI.Models;
-using InventoryInCSharpAPI.Managers;
-
+using Microsoft.AspNetCore.Mvc;
 namespace InventoryInCSharpAPI.Controllers;
 
 [Route("api/[controller]")]
@@ -26,7 +25,7 @@ public class PantryController : ControllerBase
     }
 
     [HttpGet("search/{searchValue}")]
-    public IEnumerable<Pantry> Get(String searchValue)
+    public IEnumerable<Pantry> Get(string searchValue)
     {
         return pantryManager.Search(searchValue);
     }

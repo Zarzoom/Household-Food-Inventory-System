@@ -2,10 +2,10 @@
 
 public class ConnectionStringAndOtherSecrets
 {
-    public String connection { get; set; }
 
-    public ConnectionStringAndOtherSecrets(String setConnect)
+    public ConnectionStringAndOtherSecrets(string setConnect)
     {
         connection = setConnect;
     }
+    public string connection { get; set; }
 }

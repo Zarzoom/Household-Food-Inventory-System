@@ -2,15 +2,15 @@
 
 public class Pantry
 {
-    public String pantryName { get; set; }
-    public long pantryID { get; set; }
 
     public Pantry()
     {
     }
 
-    public Pantry(String pantryName)
+    public Pantry(string pantryName)
     {
         this.pantryName = pantryName;
     }
+    public string pantryName { get; set; }
+    public long pantryID { get; set; }
 }

@@ -79,7 +79,7 @@ export function EditItem(itemForUpdate: getItem) {
         </div>
        
     );
-};
+}
 
 
 

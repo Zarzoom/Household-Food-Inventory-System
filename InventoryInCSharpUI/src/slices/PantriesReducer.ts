@@ -15,7 +15,7 @@ const initialState: PantryState={
     status: 'idle',
     error: null,
     search: "",
-    StateOfPantry: new Array()
+    StateOfPantry: []
 }
 
 export const selectAllPantries = (state: RootState) => state.Pantry.StateOfPantry;

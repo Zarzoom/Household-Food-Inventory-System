@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventoryInCSharpAPI.Managers;
 using InventoryInCSharpAPI.Models;
-using InventoryInCSharpAPI.Managers;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,13 +18,13 @@ public class ItemController : ControllerBase
     }
     // GET: api/<ItemController>
     /// <summary>
-    /// prices bellow 1 need a 0 in the ones place. example: 0.99
+    ///     prices bellow 1 need a 0 in the ones place. example: 0.99
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     public IEnumerable<Item> Get()
     {
-        return (itemManager.GetItemList());
+        return itemManager.GetItemList();
     }
 
     // GET api/<ItemController>/5
@@ -35,7 +35,7 @@ public class ItemController : ControllerBase
     }
     //GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
-    public IEnumerable<Item> Get(String searchValue)
+    public IEnumerable<Item> Get(string searchValue)
     {
         return itemManager.Search(searchValue);
     }
@@ -64,5 +64,4 @@ public class ItemController : ControllerBase
     // public void deleteALLItems(){
     //     itemManager.deleteALLItems();
     // }
-
 }

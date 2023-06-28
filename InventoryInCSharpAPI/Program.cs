@@ -1,12 +1,12 @@
 using InventoryInCSharpAPI.Managers;
-//using InventoryInCSharpAPI.Services;
-using InventoryInCSharpAPI.Repositories;
 using InventoryInCSharpAPI.Models;
+using InventoryInCSharpAPI.Repositories;
+//using InventoryInCSharpAPI.Services;
 //using Microsoft.Extensions.Configuration;
 
-var builder = WebApplication.CreateBuilder(args);//
-var password = builder.Configuration.GetValue<string>("password");//
-var connection = $"{builder.Configuration.GetValue<string>("ConnectionString")}password={password};";//
+var builder = WebApplication.CreateBuilder(args); //
+var password = builder.Configuration.GetValue<string>("password"); //
+var connection = $"{builder.Configuration.GetValue<string>("ConnectionString")}password={password};"; //
 var CSSOS = new ConnectionStringAndOtherSecrets(connection);
 // Add services to the container.
 
@@ -20,21 +20,21 @@ builder.Services.AddSingleton<PantryContentsManager>();
 builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
-builder.Services.AddSingleton<ConnectionStringAndOtherSecrets>(CSSOS);
+builder.Services.AddSingleton(CSSOS);
 
 Console.WriteLine(connection);
 
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-  
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy  =>
+    options.AddPolicy(MyAllowSpecificOrigins,
+        policy =>
         {
             policy.WithOrigins("http://localhost:3000",
                 "http://localhost:8000");
         });
-});  
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

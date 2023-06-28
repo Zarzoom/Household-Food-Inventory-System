@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventoryInCSharpAPI.Managers;
 using InventoryInCSharpAPI.Models;
-using InventoryInCSharpAPI.Managers;
-
+using Microsoft.AspNetCore.Mvc;
 namespace InventoryInCSharpAPI.Controllers;
 
 [Route("api/[controller]")]
@@ -49,13 +48,13 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.WhereIsThatItem(itemID);
     }
-  
+
     [HttpGet("retrievePantryContentsWithItem/{itemID}")]
     public IEnumerable<PantryContents> findPantryContentsContainingItem(long itemID)
     {
         return pantryContentsManager.FindContentsByPCItemID(itemID);
     }
-    
+
 
     [HttpPut("deletePantryContent/{pantryContentID}")]
     public void DeletePantryContent(long pantryContentID)

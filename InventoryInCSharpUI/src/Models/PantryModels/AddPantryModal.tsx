@@ -63,7 +63,7 @@ function AddPantryModal() {
 </Modal>
 </div>
     );
-};
+}
 
 
 

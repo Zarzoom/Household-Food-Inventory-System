@@ -88,6 +88,6 @@ function AddItemModal() {
         </Modal>
         </div>
     );
-};
+}
 
 export default AddItemModal;

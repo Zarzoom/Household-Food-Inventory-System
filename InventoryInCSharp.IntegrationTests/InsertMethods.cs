@@ -19,7 +19,7 @@ public class InsertMethods
             actual.Wait();
         }
     }
-    
+
     public static void PantryContentInsertDirectlyToDatabase(PantryContents newPantryContent)
     {
         using (var connection =
@@ -31,7 +31,7 @@ public class InsertMethods
             actual.Wait();
         }
     }
-    
+
     public static void PantryInsertDirectlyToDatabase(Pantry newPantry)
     {
         using (var connection =
@@ -43,14 +43,14 @@ public class InsertMethods
             actual.Wait();
         }
     }
-    
+
     public static void ItemInsertUsingAPI(Item newItem)
     {
         try
         {
 
             var content = new StringContent(JsonSerializer.Serialize(newItem), Encoding.UTF8, "application/json");
-            using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/Item", content);
+            using var httpResponse = client.PostAsync("http://localhost:8000/api/Item", content);
             httpResponse.Wait();
             Task.Delay(1000).Wait();
 

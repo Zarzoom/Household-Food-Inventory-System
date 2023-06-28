@@ -1,6 +1,5 @@
-﻿namespace InventoryInCSharpAPI
+﻿namespace InventoryInCSharpAPI;
+
+public class Class
 {
-    public class Class
-    {
-    }
 }

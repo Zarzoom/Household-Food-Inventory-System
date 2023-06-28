@@ -16,7 +16,7 @@ const initialState: ItemsState={
     status: 'idle',
     error: null,
     search: "",
-    StateOfItems: new Array()
+    StateOfItems: []
 }
 
 export const selectAllItems = (state: RootState) => state.Items.StateOfItems;

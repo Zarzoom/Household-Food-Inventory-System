@@ -24,7 +24,7 @@ public class DatabaseCleanUp
             var actual = connection.Execute(sql);
         }
     }
-    
+
     [OneTimeTearDown]
     public static void PantryListDatabasePreparation()
     {
@@ -45,7 +45,7 @@ public class DatabaseCleanUp
             var actual = connection.Execute(sql);
         }
     }
-    
+
     [OneTimeTearDown]
     public static void PantryContentsDatabasePreparation()
     {

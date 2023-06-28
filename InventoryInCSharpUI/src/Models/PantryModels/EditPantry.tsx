@@ -52,7 +52,7 @@ export function EditPantry(pantryForUpdate: Pantry) {
         </div>
 
     );
-};
+}
 
 
 

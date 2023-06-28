@@ -1,21 +1,20 @@
-﻿namespace InventoryInCSharpAPI.Repositories;
-
+﻿using Dapper;
 using InventoryInCSharpAPI.Models;
-using Dapper;
 using MySqlConnector;
+namespace InventoryInCSharpAPI.Repositories;
 
 public class PantryRepository
 {
-    private ConnectionStringAndOtherSecrets CSOS;
+    private readonly ConnectionStringAndOtherSecrets CSOS;
 
     public PantryRepository(ConnectionStringAndOtherSecrets csos)
     {
-        this.CSOS = csos;
+        CSOS = csos;
 
     }
 
     /// <summary>
-    /// Sends SQL Query to Database to add Pantry and then select the PantryID of the last inserted value.
+    ///     Sends SQL Query to Database to add Pantry and then select the PantryID of the last inserted value.
     /// </summary>
     /// <param name="newPantry">a new Pantry object for insertion to the database.</param>
     /// <returns>Returns the PantryID of the inserted Pantry as a task</returns>
@@ -28,9 +27,9 @@ public class PantryRepository
             return createdItem.SingleOrDefault();
         }
     }
-    
+
     /// <summary>
-    /// Sends SQL Query to get all the pantries that are stored in the PantryList table. 
+    ///     Sends SQL Query to get all the pantries that are stored in the PantryList table.
     /// </summary>
     /// <returns>Returns a list of all the pantries in PantryList as a task</returns>
     public async Task<IEnumerable<Pantry>> GetPantryList()
@@ -42,9 +41,9 @@ public class PantryRepository
             return pantryList;
         }
     }
-    
+
     /// <summary>
-    /// Sends SQL Query to Database to search for Pantry using primary key.
+    ///     Sends SQL Query to Database to search for Pantry using primary key.
     /// </summary>
     /// <param name="primaryKey">takes in an integer that represents the primary key that the function will be searching for.</param>
     /// <returns>Returns the Pantry that was found as a task </returns>
@@ -53,19 +52,19 @@ public class PantryRepository
         using (var connection = new MySqlConnection(CSOS.connection))
         {
             var parameters = new { primaryKey };
-            var sql = $"SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @primaryKey";
+            var sql = "SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @primaryKey";
             var pantry = await connection.QueryAsync<Pantry>(sql, parameters);
             return pantry.SingleOrDefault();
         }
     }
 
     /// <summary>
-    ///Sends SQL Query to Database to do a contains search of PantryName.
-    /// If PantryName contains the string regardless of case, the method will return the matching Pantry or Pantries.
+    ///     Sends SQL Query to Database to do a contains search of PantryName.
+    ///     If PantryName contains the string regardless of case, the method will return the matching Pantry or Pantries.
     /// </summary>
     /// <param name="searchValue"> The string that will be searched for in the PantryList Table</param>
     /// <returns>A list of the pantries that contain the searchValue as a task. </returns>
-    public async Task<IEnumerable<Pantry>> ContainsSearchForPantryName(String searchValue)
+    public async Task<IEnumerable<Pantry>> ContainsSearchForPantryName(string searchValue)
     {
         using (var connection = new MySqlConnection(CSOS.connection))
         {
@@ -78,11 +77,13 @@ public class PantryRepository
     }
 
     /// <summary>
-    ///Sends SQL Query to Database to update the current pantry entry with the new PantryName value. The pantry that needs the update is found using the primary key.
-    /// Primary key cannot be updated. 
+    ///     Sends SQL Query to Database to update the current pantry entry with the new PantryName value. The pantry that needs
+    ///     the update is found using the primary key.
+    ///     Primary key cannot be updated.
     /// </summary>
-    /// <param name="updateMe">The Pantry, updateMe, has the primary key of the pantry that will be updated in PantryList.
-    /// All of the other properties have the desired edits as their value.
+    /// <param name="updateMe">
+    ///     The Pantry, updateMe, has the primary key of the pantry that will be updated in PantryList.
+    ///     All of the other properties have the desired edits as their value.
     /// </param>
     /// <returns>Returns the updated Pantry as a task.</returns>
     public async Task<Pantry> PantryUpdate(Pantry updateMe)
@@ -96,7 +97,7 @@ public class PantryRepository
     }
 
     /// <summary>
-    /// Sends SQL Query to Database to Delete a Pantry with the PantryID that matches the parameter.
+    ///     Sends SQL Query to Database to Delete a Pantry with the PantryID that matches the parameter.
     /// </summary>
     /// <param name="PantryID"> A long that represents the primary key of the pantry that will be deleted. </param>
     public async void DeletePantry(long PantryID)
@@ -104,7 +105,7 @@ public class PantryRepository
         using (var connection = new MySqlConnection(CSOS.connection))
         {
             var parameters = new { PantryID };
-            var sql = $"DELETE FROM PantryList WHERE PantryID = @PantryID";
+            var sql = "DELETE FROM PantryList WHERE PantryID = @PantryID";
             var deletedRows = await connection.ExecuteAsync(sql, parameters);
         }
     }

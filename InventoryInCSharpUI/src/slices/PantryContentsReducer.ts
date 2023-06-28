@@ -14,7 +14,7 @@ interface PantryContentsState{
 const initialState: PantryContentsState={
     status:'idle',
     error: null,
-    StateOfPantryContents: new Array(),
+    StateOfPantryContents: [],
     PantryFilter: -1
 }
 
