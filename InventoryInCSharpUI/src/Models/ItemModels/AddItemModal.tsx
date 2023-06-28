@@ -2,13 +2,11 @@ import {useState} from "react";
 import {createItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import Item from "../../DataModels/Item"
-import { InputGroup, Button, Input, Modal, Grid, Row, Col } from 'rsuite';
-
+import { InputGroup, Button, Input, Modal, Grid, Row, Col, Message } from 'rsuite';
 
 function AddItemModal() {
     
     const [open, setOpen] = useState(false);
-
     
     const [item, setItem] = useState({
         brand: "",
@@ -41,9 +39,15 @@ function AddItemModal() {
 
     const dispatch = useAppDispatch();
     const NewItemDispatch = () =>{
-        const ItemToJSONStringify = JSON.stringify(item);
-        const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
-        dispatch(createItem(ItemToJsonParse));
+        if(item.price != "" && item.size != "" && item.brand != "" && item.genericName != "") {
+            const ItemToJSONStringify = JSON.stringify(item);
+            const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
+            dispatch(createItem(ItemToJsonParse));
+        }
+        else{
+          
+            alert("Please fill in all fields.");
+        }
     };
     const CancelAddItem= () =>{
         setItem(previousState => {

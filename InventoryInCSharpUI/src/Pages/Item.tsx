@@ -1,8 +1,6 @@
 ﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
 import AddItemModal from "../Models/ItemModels/AddItemModal"
-import AddItemModalForm from "../Models/ItemModels/AddItemModalForm"
-
 import AddPantryModal from "../Models/PantryModels/AddPantryModal";
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay";
 import {Grid, Stack, Col, Row, Panel} from "rsuite"
@@ -28,7 +26,7 @@ const Item = () => {
             </Grid>
             <Grid fluid>
                 <Col xs={24} smOffset={3} sm={18} mdOffset={4} md={16} lgOffset={6} lg={12} xxlOffset={7} xxl={10}>
-                    <Panel bordered={true} header={<Stack justifyContent={'flex-end'}><AddItemModalForm></AddItemModalForm></Stack>}>
+                    <Panel bordered={true} header={<Stack justifyContent={'flex-end'}><AddItemModal></AddItemModal></Stack>}>
                         <ItemDisplay></ItemDisplay>
                     </Panel>
                 </Col>

@@ -23,9 +23,14 @@ function AddPantryModal() {
 
     const dispatch = useAppDispatch();
     const NewPantryDispatch = () =>{
-        const PantryToJSONStringify = JSON.stringify(pantry);
-        const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
-        dispatch(createPantry(PantryToJsonParse));
+        if(pantry.pantryName != "") {
+            const PantryToJSONStringify = JSON.stringify(pantry);
+            const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
+            dispatch(createPantry(PantryToJsonParse));
+        }
+        else{
+            alert("Please provide a Pantry Name.");
+        }
     };
     
     const CancelAddPantry= () =>{
