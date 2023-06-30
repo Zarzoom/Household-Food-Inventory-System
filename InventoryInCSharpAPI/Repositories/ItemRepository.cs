@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using InventoryInCSharpAPI.Models;
 using MySqlConnector;
+using InventoryInCSharpAPI.Services;
+using System.Text;
 namespace InventoryInCSharpAPI.Repositories;
 
 public class ItemRepository
@@ -19,12 +21,11 @@ public class ItemRepository
     public async Task<int> AddToItemList(Item newItem)
     {
         using (var connection =
-               new MySqlConnection(
-                   CSOS.connection
-               ))
+               
+               new MySqlConnection(CSOS.connection))
         {
             var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size); SELECT LAST_INSERT_ID()";
-            var createdItem = await connection.QueryAsync<int>(sql, newItem);
+            var createdItem = await connection.QueryAsyncWithRetry<int>(sql, newItem);
             return createdItem.SingleOrDefault();
         }
     }
@@ -41,7 +42,7 @@ public class ItemRepository
                ))
         {
             var sql = "SELECT * FROM ItemList";
-            var itemList = await connection.QueryAsync<Item>(sql);
+            var itemList = await connection.QueryAsyncWithRetry<Item>(sql);
             return itemList;
         }
     }
@@ -59,7 +60,7 @@ public class ItemRepository
         {
             var parameters = new { primaryKey };
             var sql = "SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @primaryKey";
-            var item = await connection.QueryAsync<Item>(sql, parameters);
+            var item = await connection.QueryAsyncWithRetry<Item>(sql, parameters);
             return item.SingleOrDefault();
         }
     }
@@ -81,7 +82,7 @@ public class ItemRepository
             //var parameters = new {searchValue};
             var sql =
                 $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE LOWER(GenericName) LIKE LOWER('%{searchValue}%') OR LOWER(Brand) LIKE LOWER('%{searchValue}%')";
-            var item = await connection.QueryAsync<Item>(sql);
+            var item = await connection.QueryAsyncWithRetry<Item>(sql);
             return item;
         }
     }
@@ -104,7 +105,7 @@ public class ItemRepository
         {
             var sql =
                 "UPDATE ItemList SET GenericName = @GenericName, Brand = @Brand, Price = @Price, Size = @Size WHERE ItemID = @ItemID; SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @ItemID ";
-            var createdItem = await connection.QueryAsync<Item>(sql, updateMe);
+            var createdItem = await connection.QueryAsyncWithRetry<Item>(sql, updateMe);
             return createdItem.SingleOrDefault();
         }
     }
@@ -122,7 +123,7 @@ public class ItemRepository
         {
             var parameters = new { ItemID };
             var sql = "DELETE FROM ItemList WHERE ItemID = @ItemID";
-            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
         }
     }
 }

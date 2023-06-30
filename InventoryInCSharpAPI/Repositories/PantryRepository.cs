@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using InventoryInCSharpAPI.Models;
 using MySqlConnector;
+using InventoryInCSharpAPI.Services;
 namespace InventoryInCSharpAPI.Repositories;
 
 public class PantryRepository
@@ -23,7 +24,7 @@ public class PantryRepository
         using (var connection = new MySqlConnection(CSOS.connection))
         {
             var sql = "INSERT INTO PantryList (PantryName) VALUES (@PantryName); SELECT LAST_INSERT_ID()";
-            var createdItem = await connection.QueryAsync<int>(sql, newPantry);
+            var createdItem = await connection.QueryAsyncWithRetry<int>(sql, newPantry);
             return createdItem.SingleOrDefault();
         }
     }
@@ -37,7 +38,7 @@ public class PantryRepository
         using (var connection = new MySqlConnection(CSOS.connection))
         {
             var sql = "SELECT PantryName, PantryID FROM PantryList";
-            var pantryList = await connection.QueryAsync<Pantry>(sql);
+            var pantryList = await connection.QueryAsyncWithRetry<Pantry>(sql);
             return pantryList;
         }
     }
@@ -53,7 +54,7 @@ public class PantryRepository
         {
             var parameters = new { primaryKey };
             var sql = "SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @primaryKey";
-            var pantry = await connection.QueryAsync<Pantry>(sql, parameters);
+            var pantry = await connection.QueryAsyncWithRetry<Pantry>(sql, parameters);
             return pantry.SingleOrDefault();
         }
     }
@@ -70,7 +71,7 @@ public class PantryRepository
         {
             //var parameters = new {searchValue};
             var sql = $"SELECT PantryID, PantryName FROM PantryList WHERE LOWER(PantryName) LIKE LOWER('%{searchValue}%')";
-            var pantry = await connection.QueryAsync<Pantry>(sql);
+            var pantry = await connection.QueryAsyncWithRetry<Pantry>(sql);
             return pantry;
         }
 
@@ -91,7 +92,7 @@ public class PantryRepository
         using (var connection = new MySqlConnection(CSOS.connection))
         {
             var sql = "UPDATE PantryList SET PantryName = @PantryName WHERE PantryID = @PantryID; SELECT PantryID, PantryName FROM PantryList WHERE PantryID = @PantryID";
-            var createdPantry = await connection.QueryAsync<Pantry>(sql, updateMe);
+            var createdPantry = await connection.QueryAsyncWithRetry<Pantry>(sql, updateMe);
             return createdPantry.SingleOrDefault();
         }
     }
@@ -106,7 +107,7 @@ public class PantryRepository
         {
             var parameters = new { PantryID };
             var sql = "DELETE FROM PantryList WHERE PantryID = @PantryID";
-            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
         }
     }
 }
