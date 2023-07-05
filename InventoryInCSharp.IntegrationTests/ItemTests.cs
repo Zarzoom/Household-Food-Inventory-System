@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using InventoryInCSharpAPI.Models;
 
-namespace InventoryInCSharp.IntegrationTests;
+namespace InventoryInCSharp.IntegrationTests.ItemTests;
 
 public class ItemTests
 {

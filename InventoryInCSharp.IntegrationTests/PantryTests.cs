@@ -1,13 +1,11 @@
-﻿namespace InventoryInCSharp.IntegrationTests;
-
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using MySqlConnector;
 using Dapper;
 using System.Text;
 using System.Text.Json;
 using InventoryInCSharpAPI.Models;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
 
+namespace InventoryInCSharp.IntegrationTests.PantryTests;
 
 public class PantryTests
 {

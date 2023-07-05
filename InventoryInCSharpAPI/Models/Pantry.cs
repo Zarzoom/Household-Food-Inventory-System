@@ -4,6 +4,8 @@ public class Pantry
 {
     public String pantryName { get; set; }
     public long pantryID { get; set; }
+    public long password { get; set; }
+
 
     public Pantry()
     {

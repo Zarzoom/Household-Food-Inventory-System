@@ -8,6 +8,7 @@ public class Item
     public String genericName { get; set; }
     public String size { get; set; }
     public long quantity { get; set; }
+    public long password { get; set; }
 
     public Item()
     {

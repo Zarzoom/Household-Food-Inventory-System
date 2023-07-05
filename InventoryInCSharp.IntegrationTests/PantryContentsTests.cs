@@ -4,7 +4,7 @@ using Dapper;
 using System.Text;
 using System.Text.Json;
 using InventoryInCSharpAPI.Models;
-namespace InventoryInCSharp.IntegrationTests;
+namespace InventoryInCSharp.IntegrationTests.PantryContentsTests;
 
 public class PantryContentsTests
 {

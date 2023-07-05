@@ -6,6 +6,8 @@
         public long pcItemID { get; set; }
         public long pcPantryID { get; set; }
         public long pantryContentID { get; set; }
+        public long password { get; set; }
+
 
         public PantryContents() {}
         public PantryContents(long quantity, long pcItemID, long pcPantryID)

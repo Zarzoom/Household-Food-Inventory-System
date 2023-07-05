@@ -24,7 +24,7 @@
                     CSOS.connection
                     ))
             {
-                var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@GenericName, @Brand, @Price, @Size); SELECT LAST_INSERT_ID()";
+                var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size, Password) VALUES (@GenericName, @Brand, @Price, @Size, @Password); SELECT LAST_INSERT_ID()";
                 var createdItem = await connection.QueryAsync<int>(sql, newItem);
                 return createdItem.SingleOrDefault();
             }
