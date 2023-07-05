@@ -1,17 +1,20 @@
-﻿namespace InventoryInCSharpAPI.Models;
-
-public class PantryContents
+﻿namespace InventoryInCSharpAPI.Models
 {
-
-    public PantryContents() {}
-    public PantryContents(long quantity, long pcItemID, long pcPantryID)
+    public class PantryContents
     {
-        this.quantity = this.quantity;
-        this.pcItemID = pcItemID;
-        this.pcPantryID = pcPantryID;
+        public long quantity { get; set; }
+        public long pcItemID { get; set; }
+        public long pcPantryID { get; set; }
+        public long pantryContentID { get; set; }
+        public long password { get; set; }
+
+
+        public PantryContents() {}
+        public PantryContents(long quantity, long pcItemID, long pcPantryID)
+        {
+            this.quantity = this.quantity;
+            this.pcItemID = pcItemID;
+            this.pcPantryID = pcPantryID;
+        }
     }
-    public long quantity { get; set; }
-    public long pcItemID { get; set; }
-    public long pcPantryID { get; set; }
-    public long pantryContentID { get; set; }
 }
