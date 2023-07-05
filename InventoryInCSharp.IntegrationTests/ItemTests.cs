@@ -11,6 +11,14 @@ public class ItemTests
 {
     protected static readonly HttpClient client = new HttpClient();
 
+    public void InsertLogin()
+    {
+        User testUser = new User();
+        testUser.userName = "testUser";
+        testUser.password = 1;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+    }
+
 }
 
 [TestFixture]
@@ -25,6 +33,9 @@ public class WhenItemIsInserted : ItemTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+        InsertLogin();
+        Task.Delay(1000).Wait();
         try
         {
 
@@ -33,6 +44,7 @@ public class WhenItemIsInserted : ItemTests
             item.brand = "Best Test";
             item.size = "1 question";
             item.price = 7.88F;
+            item.password = 1;
 
             var content = new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json");
             using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/Item", content);
@@ -70,6 +82,7 @@ public class WhenItemIsInserted : ItemTests
         expectedItem.brand = "Best Test";
         expectedItem.size = "1 question";
         expectedItem.price = 7.88F;
+        expectedItem.password = 1;
 
         return expectedItem;
     }
@@ -113,6 +126,9 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+
+        InsertLogin();
         InsertItemsForTesting();
 
         try
@@ -140,6 +156,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         expectedItem.brand = "Brand Test 2";
         expectedItem.price = 1.99F;
         expectedItem.size = "2 Test";
+        expectedItem.password = 1;
         expectedItem.itemID = 2;
     }
 
@@ -150,6 +167,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
         //testItem1.itemID = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
@@ -159,6 +177,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         //testItem2.itemID = 2;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
@@ -168,6 +187,7 @@ public class WhenItemsAreInsertedDirectlyToDatabaseAndSearchedForByPrimaryKey : 
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
     }
@@ -218,6 +238,9 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+
+        InsertLogin();
         InsertItemsForTesting();
 
         try
@@ -246,6 +269,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         expectedItem.brand = "Brand Test 2";
         expectedItem.price = 1.99F;
         expectedItem.size = "2 Test";
+        expectedItem.password = 1;
         expectedItem.itemID = 2;
     }
 
@@ -256,6 +280,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
 
         InsertMethods.ItemInsertUsingAPI(testItem1);
 
@@ -264,6 +289,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
 
         InsertMethods.ItemInsertUsingAPI(testItem2);
 
@@ -272,6 +298,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForByPrimaryK
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
 
         InsertMethods.ItemInsertUsingAPI(testItem3);
     }
@@ -325,6 +352,9 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+
+        InsertLogin();
         InsertItemsForTesting();
 
         try
@@ -350,6 +380,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         expectedItem1.brand = "Brand Test 1";
         expectedItem1.price = 1.99F;
         expectedItem1.size = "1 Test";
+        expectedItem1.password = 0;
         expectedItem1.itemID = 1;
         expectedItemList.Add(expectedItem1);
 
@@ -357,6 +388,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         expectedItem2.brand = "Brand Test 2";
         expectedItem2.price = 1.99F;
         expectedItem2.size = "2 Test";
+        expectedItem2.password = 0;
         expectedItem2.itemID = 2;
 
         expectedItemList.Add(expectedItem2);
@@ -365,6 +397,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         expectedItem3.brand = "Brand Test 3";
         expectedItem3.price = 1.99F;
         expectedItem3.size = "3 Test";
+        expectedItem3.password = 0;
         expectedItem3.itemID = 3;
 
         expectedItemList.Add(expectedItem3);
@@ -379,6 +412,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
 
 
         InsertMethods.ItemInsertUsingAPI(testItem1);
@@ -388,6 +422,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         //testItem2.itemID = 2;
 
         InsertMethods.ItemInsertUsingAPI(testItem2);
@@ -397,6 +432,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
 
         InsertMethods.ItemInsertUsingAPI(testItem3);
 
@@ -405,6 +441,7 @@ public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithGeneri
         testItem4.brand = "should not be found";
         testItem4.price = 9.99F;
         testItem4.size = "4 not found";
+        testItem4.password = 1;
 
         InsertMethods.ItemInsertUsingAPI(testItem4);
     }
@@ -432,6 +469,8 @@ public class WhenItemsAreUpdated : ItemTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+        InsertLogin();
         InsertItemsForUpdate();
         Task.Delay(1000).Wait();
         try
@@ -470,6 +509,7 @@ public class WhenItemsAreUpdated : ItemTests
         itemToUpdate.price = 99999.99F;
         itemToUpdate.genericName = "Failed Test";
         itemToUpdate.size = "1 failed test";
+        itemToUpdate.password = 1;
         InsertMethods.ItemInsertDirectlyToDatabase(itemToUpdate);
 
         Item testItem1 = new Item();
@@ -477,6 +517,7 @@ public class WhenItemsAreUpdated : ItemTests
         testItem1.price = 8888.88F;
         testItem1.genericName = "Wrong Item";
         testItem1.size = "1 wrong item";
+        testItem1.password = 1;
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
         
         Item testItem2 = new Item();
@@ -484,6 +525,7 @@ public class WhenItemsAreUpdated : ItemTests
         testItem2.price = 8888.88F;
         testItem2.genericName = "Wrong Item";
         testItem2.size = "2 wrong item";
+        testItem2.password = 1;
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
     }
     public Item GetActual()
@@ -560,6 +602,9 @@ public class WhenItemsAreDeleted : ItemTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+
+        InsertLogin();
         InsertItemsForTesting();
         try
         {
@@ -583,6 +628,7 @@ public class WhenItemsAreDeleted : ItemTests
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
 
@@ -591,6 +637,7 @@ public class WhenItemsAreDeleted : ItemTests
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
 
@@ -599,6 +646,7 @@ public class WhenItemsAreDeleted : ItemTests
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
     }
@@ -627,6 +675,7 @@ public class WhenItemsAreDeleted : ItemTests
         expectedItem1.price = 1.99F;
         expectedItem1.size = "1 Test";
         expectedItem1.itemID = 1;
+        expectedItem1.password = 1;
         expectedItemList.Add(expectedItem1);
 
         expectedItem3.genericName = "Generic Name Test 3";
@@ -634,6 +683,7 @@ public class WhenItemsAreDeleted : ItemTests
         expectedItem3.price = 1.99F;
         expectedItem3.size = "3 Test";
         expectedItem3.itemID = 3;
+        expectedItem3.password = 1;
 
         expectedItemList.Add(expectedItem3);
 
@@ -660,9 +710,9 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
-     
+        DatabaseCleanUp.LoginDatabasePreparation();
 
-
+        InsertLogin();
         ItemInsert();
 
 
@@ -689,6 +739,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
         //testItem1.itemID = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
@@ -698,6 +749,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         //testItem2.itemID = 2;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
@@ -707,6 +759,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
     }
@@ -718,6 +771,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
         testItem1.itemID = 1;
 
         expectedItemList.Add(testItem1);
@@ -728,6 +782,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         testItem2.itemID = 2;
 
         expectedItemList.Add(testItem2);
@@ -738,6 +793,7 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
         testItem3.itemID = 3;
 
        expectedItemList.Add(testItem3);

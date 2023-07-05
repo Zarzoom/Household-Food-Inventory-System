@@ -2,13 +2,19 @@
 CREATE DATABASE IF NOT EXISTS  InventoryData;
 
 USE InventoryData;
-
+    
+CREATE TABLE IF NOT EXISTS Login(
+UserName VARCHAR(225),
+Password INT NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (Password)
+);
 
 CREATE TABLE IF NOT EXISTS ItemList(
 Brand VARCHAR(255),
 GenericName VARCHAR(255),
 Price DECIMAL(8,2),
 Size VARCHAR(255),
+Password INT,
 ItemID INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(ItemID),
 FOREIGN KEY (Password)
@@ -17,6 +23,7 @@ FOREIGN KEY (Password)
 
 CREATE TABLE IF NOT EXISTS PantryList(
 PantryName VARCHAR(255),
+Password INT,
 PantryID INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(PantryID),
 FOREIGN KEY (Password)
@@ -27,6 +34,7 @@ CREATE TABLE IF NOT EXISTS PantryContents(
 Quantity INT,
 PCItemID INT,
 PCPantryID INT,
+Password INT,
 PantryContentID INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(PantryContentID),
 FOREIGN KEY (PCItemID)
@@ -37,8 +45,3 @@ FOREIGN KEY (Password)
     REFERENCES Login(Password)
 );
 
-CREATE TABLE IF NOT EXISTS Login(
-    UserName VARCHAR(225),
-    Password INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (Password)
-)
