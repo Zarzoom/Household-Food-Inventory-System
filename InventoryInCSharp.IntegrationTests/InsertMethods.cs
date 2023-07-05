@@ -15,7 +15,7 @@ public class InsertMethods
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size) VALUES (@genericName, @brand, @price, @size)";
+            var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size, Password) VALUES (@genericName, @brand, @price, @size, @Password)";
             var actual = connection.ExecuteAsync(sql, newItem);
             actual.Wait();
         }
