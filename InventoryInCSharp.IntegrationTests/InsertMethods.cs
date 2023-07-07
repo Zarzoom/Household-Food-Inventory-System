@@ -27,7 +27,7 @@ public class InsertMethods
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "INSERT INTO PantryContents (Quantity, PCItemID, PCPantryID) VALUES (@quantity, @pcItemID, @pcPantryID)";
+            var sql = "INSERT INTO PantryContents (Quantity, PCItemID, PCPantryID, Password) VALUES (@quantity, @pcItemID, @pcPantryID, @Password)";
             var actual = connection.ExecuteAsync(sql, newPantryContent);
             actual.Wait();
         }
@@ -39,7 +39,7 @@ public class InsertMethods
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "INSERT INTO PantryList (pantryName) VALUES (@pantryName)";
+            var sql = "INSERT INTO PantryList (pantryName, Password) VALUES (@pantryName, @Password)";
             var actual = connection.ExecuteAsync(sql, newPantry);
             actual.Wait();
         }
