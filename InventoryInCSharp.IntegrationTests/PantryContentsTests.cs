@@ -9,7 +9,13 @@ namespace InventoryInCSharp.IntegrationTests.PantryContentsTests;
 public class PantryContentsTests
 {
     protected static readonly HttpClient client = new HttpClient();
-
+    public void InsertLogin()
+    {
+        User testUser = new User();
+        testUser.userName = "testUser";
+        testUser.password = 1;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+    }
     public void ItemInsert()
     {
         Item testItem1 = new Item();
@@ -17,6 +23,7 @@ public class PantryContentsTests
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
         //testItem1.itemID = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
@@ -26,6 +33,7 @@ public class PantryContentsTests
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         //testItem2.itemID = 2;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
@@ -35,6 +43,7 @@ public class PantryContentsTests
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 1;
         //testItem3.itemID = 3;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
@@ -43,18 +52,21 @@ public class PantryContentsTests
     {
         Pantry TestPantry1 = new Pantry();
         TestPantry1.pantryName = "Test Name 1";
+        TestPantry1.password = 1;
         //TestPantry1.pantryID = 1;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
 
         Pantry TestPantry2 = new Pantry();
         TestPantry2.pantryName = "Test Name 2";
+        TestPantry2.password = 1;
         //TestPantry2.pantryID = 2;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
 
         Pantry TestPantry3 = new Pantry();
         TestPantry3.pantryName = "Test Name 3";
+        TestPantry3.password = 1;
         //TestPantry3.pantryID = 3;
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
     }
@@ -65,6 +77,7 @@ public class PantryContentsTests
             pcPantryID = 2,
             pcItemID = 1,
             quantity = 3,
+            password = 1,
             //pantryContentID = 1,
 
         };
@@ -76,6 +89,7 @@ public class PantryContentsTests
             pcPantryID = 2,
             pcItemID = 2,
             quantity = 3,
+            password = 1,
             //pantryContentID = 2,
 
         };
@@ -87,6 +101,7 @@ public class PantryContentsTests
             pcPantryID = 2,
             pcItemID = 3,
             quantity = 3,
+            password = 1,
             //pantryContentID = 3,
         };
 
@@ -97,6 +112,7 @@ public class PantryContentsTests
             pcPantryID = 3,
             pcItemID = 2,
             quantity = 3,
+            password = 1,
             //pantryContentID = 4,
 
         };
@@ -108,6 +124,7 @@ public class PantryContentsTests
             pcPantryID = 3,
             pcItemID = 3,
             quantity = 3,
+            password = 1,
             //pantryContentID = 5;
 
         };
@@ -128,7 +145,7 @@ public class WhenPantryContentIsInserted : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
 
@@ -139,6 +156,7 @@ public class WhenPantryContentIsInserted : PantryContentsTests
             newPantryContent.pcPantryID = 2;
             newPantryContent.pcItemID = 1;
             newPantryContent.quantity = 3;
+            newPantryContent.password = 1;
 
             var content = new StringContent(JsonSerializer.Serialize(newPantryContent), Encoding.UTF8, "application/json");
             using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/PantryContents", content);
@@ -292,7 +310,7 @@ public class WhenPantryContentsAreSearchedForByPCPantryID : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
@@ -369,7 +387,7 @@ public class WhenPantryContentsAreSearchedForByPCItemID : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
@@ -429,7 +447,7 @@ public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryCont
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
@@ -496,7 +514,7 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
@@ -597,7 +615,7 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
@@ -701,11 +719,10 @@ public class WhenPantryContentIsUpdated : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
-        
         CreateUpdatedPantryContent();
 
         try

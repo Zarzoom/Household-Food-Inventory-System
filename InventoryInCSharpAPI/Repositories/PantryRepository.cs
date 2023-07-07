@@ -23,7 +23,7 @@ public class PantryRepository
     {
         using (var connection = new MySqlConnection(CSOS.connection))
         {
-            var sql = "INSERT INTO PantryList (PantryName) VALUES (@PantryName); SELECT LAST_INSERT_ID()";
+            var sql = "INSERT INTO PantryList (PantryName, Password) VALUES (@PantryName, @Password); SELECT LAST_INSERT_ID()";
             var createdItem = await connection.QueryAsync<int>(sql, newPantry);
             return createdItem.SingleOrDefault();
         }

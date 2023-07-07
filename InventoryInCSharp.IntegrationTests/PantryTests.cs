@@ -10,6 +10,13 @@ namespace InventoryInCSharp.IntegrationTests.PantryTests;
 public class PantryTests
 {
     protected static readonly HttpClient client = new HttpClient();
+    public void InsertLogin()
+    {
+        User testUser = new User();
+        testUser.userName = "testUser";
+        testUser.password = 1;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+    }
 
 }
 
@@ -25,10 +32,12 @@ public class PantryTests
             DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
+            InsertLogin();
             try
             {
                 Pantry pantry = new Pantry();
                 pantry.pantryName = "Test Pantry 1";
+                pantry.password = 1;
 
                 var content = new StringContent(JsonSerializer.Serialize(pantry), Encoding.UTF8, "application/json");
                 using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/Pantry", content);
@@ -81,6 +90,7 @@ public class PantryTests
             DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
+            InsertLogin();
 
             InsertPantriesForTesting();
             Task.Delay(1000).Wait();
@@ -105,16 +115,19 @@ public class PantryTests
         {
             Pantry testPantry1 = new Pantry();
             testPantry1.pantryName = "Name testPantry1";
+            testPantry1.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(testPantry1);
 
             Pantry testPantry2 = new Pantry();
             testPantry2.pantryName = "Name testPantry2";
+            testPantry2.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(testPantry2);
 
             Pantry testPantry3 = new Pantry();
             testPantry3.pantryName = "Name testPantry3";
+            testPantry3.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(testPantry3);
         }
@@ -154,6 +167,7 @@ public class PantryTests
             DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
+            InsertLogin();
             InsertPantriesForTesting();
             try
             {
@@ -176,16 +190,19 @@ public class PantryTests
         {
             Pantry TestPantry1 = new Pantry();
             TestPantry1.pantryName = "Test Name 1";
+            TestPantry1.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
 
             Pantry TestPantry2 = new Pantry();
             TestPantry2.pantryName = "This Won't Show Up";
+            TestPantry2.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
 
             Pantry TestPantry3 = new Pantry();
             TestPantry3.pantryName = "Test Name 3";
+            TestPantry3.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
         }
@@ -222,13 +239,15 @@ public class PantryTests
             DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
+            InsertLogin();
             InsertPantiesForUpdate();
-            Task.Delay(1000).Wait();
+            
 
             try
             {
                 Pantry updatedPantry = new Pantry();
                 updatedPantry.pantryName = "Correct Pantry Name";
+                updatedPantry.password = 1;
                 updatedPantry.pantryID = 2;
 
                 var content = new StringContent(JsonSerializer.Serialize(updatedPantry), Encoding.UTF8, "application/json");
@@ -256,14 +275,17 @@ public class PantryTests
         {
             Pantry testPantry1 = new Pantry();
             testPantry1.pantryName = "Test Pantry 1";
+            testPantry1.password = 1;
             InsertMethods.PantryInsertDirectlyToDatabase(testPantry1);
 
             Pantry pantryForUpdate = new Pantry();
             pantryForUpdate.pantryName = "Test Failure";
+            pantryForUpdate.password = 1;
             InsertMethods.PantryInsertDirectlyToDatabase(pantryForUpdate);
 
             Pantry testPantry2 = new Pantry();
             testPantry2.pantryName = "Test Pantry 2";
+            testPantry2.password = 1;
             InsertMethods.PantryInsertDirectlyToDatabase(pantryForUpdate);
         }
 
@@ -271,6 +293,7 @@ public class PantryTests
         {
             Pantry expectedPantry = new Pantry();
             expectedPantry.pantryName = "Correct Pantry Name";
+            expectedPantry.password = 1;
             expectedPantry.pantryID = 2;
             return expectedPantry;
         }
@@ -311,6 +334,7 @@ public class PantryTests
             DatabaseCleanUp.PantryContentsDatabasePreparation();
             DatabaseCleanUp.PantryListDatabasePreparation();
             DatabaseCleanUp.ItemListDatabasePreparation();
+            InsertLogin();
             ItemInsert();
             PantryInsert();
             PantryContentsInsert();
@@ -338,16 +362,19 @@ public class PantryTests
         {
             Pantry TestPantry1 = new Pantry();
             TestPantry1.pantryName = "Test Name 1";
+            TestPantry1.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
 
             Pantry TestPantry2 = new Pantry();
             TestPantry2.pantryName = "Test Name 2";
+            TestPantry2.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
 
             Pantry TestPantry3 = new Pantry();
             TestPantry3.pantryName = "Test Name 3";
+            TestPantry3.password = 1;
 
             InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
         }
@@ -359,6 +386,7 @@ public class PantryTests
             testItem1.brand = "Brand Test 1";
             testItem1.price = 1.99F;
             testItem1.size = "1 Test";
+            testItem1.password = 1;
             //testItem1.itemID = 1;
 
             InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
@@ -368,6 +396,7 @@ public class PantryTests
             testItem2.brand = "Brand Test 2";
             testItem2.price = 1.99F;
             testItem2.size = "2 Test";
+            testItem2.password = 1;
             //testItem2.itemID = 2;
 
             InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
@@ -377,6 +406,7 @@ public class PantryTests
             testItem3.brand = "Brand Test 3";
             testItem3.price = 1.99F;
             testItem3.size = "3 Test";
+            testItem3.password = 1;
 
             InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
         }
@@ -387,6 +417,7 @@ public class PantryTests
                 pcPantryID = 2,
                 pcItemID = 1,
                 quantity = 3,
+                password = 1,
             };
 
             InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent1);
@@ -396,6 +427,7 @@ public class PantryTests
                 pcPantryID = 2,
                 pcItemID = 2,
                 quantity = 3,
+                password = 1,
             };
             
             InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent2);
@@ -405,6 +437,7 @@ public class PantryTests
                 pcPantryID = 2,
                 pcItemID = 3,
                 quantity = 3,
+                password = 1,
             };
             
             InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent3);
@@ -414,6 +447,7 @@ public class PantryTests
                 pcPantryID = 3,
                 pcItemID = 2,
                 quantity = 3,
+                password = 1,
             };
             
             InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent4);
@@ -423,6 +457,7 @@ public class PantryTests
                 pcPantryID = 3,
                 pcItemID = 3,
                 quantity = 3,
+                password = 1,
             };
             
             InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent5);
@@ -525,7 +560,7 @@ public class WhenPantryListIsQueriedForAllPantries : PantryTests
         DatabaseCleanUp.PantryListDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
 
-
+        InsertLogin();
         PantryInsert();
 
 
@@ -549,16 +584,19 @@ public class WhenPantryListIsQueriedForAllPantries : PantryTests
     {
         Pantry TestPantry1 = new Pantry();
         TestPantry1.pantryName = "Test Name 1";
+        TestPantry1.password = 1;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
 
         Pantry TestPantry2 = new Pantry();
         TestPantry2.pantryName = "Test Name 2";
+        TestPantry2.password = 1;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
 
         Pantry TestPantry3 = new Pantry();
         TestPantry3.pantryName = "Test Name 3";
+        TestPantry3.password = 1;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
     }
