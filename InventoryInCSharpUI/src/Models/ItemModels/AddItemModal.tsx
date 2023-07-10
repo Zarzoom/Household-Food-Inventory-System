@@ -69,16 +69,16 @@ function AddItemModal() {
             <div className= "blueBackground">
                 <Modal.Body>
 
-                        <label>Generic Name:</label><br/>
+                        <label className={"whiteText"}>Generic Name:</label><br/>
                         <Input placeholder="beans" value={item.genericName}
                                onChange={(value: string, event) => updateGenericName(value)}/><br/>
-                        <label>Brand:</label><br/>
+                        <label className={"whiteText"}>Brand:</label><br/>
                         <Input placeholder="World Famous Beans" value={item.brand}
                                onChange={(value: string, event) => updateBrand(value)}/><br/>
-                        <label>Size:</label><br/>
+                        <label className={"whiteText"}>Size:</label><br/>
                         <Input placeholder="3oz" value={item.size}
                                onChange={(value: string, event) => updateSize(value)}/><br/>
-                        <label>Price:</label><br/>
+                        <label className={"whiteText"}>Price:</label><br/>
                         <Input step="any" placeholder="0.00" value={item.price}
                                onChange={(value: string, event) => updatePrice(value)}/><br/>
                     <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => NewItemDispatch()}>Add</Button>

@@ -6,8 +6,6 @@ import PantryNoID from "../../DataModels/PantryNoID"
 import { Form, Button, Input, Modal } from 'rsuite';
 
 
-
-
 function AddPantryModal() {
     
     const [open, setOpen] = useState(false);
@@ -47,15 +45,15 @@ function AddPantryModal() {
             <div className= "BlueBox">
                 <Modal.Body>
                 <p>
-                    <label>Pantry Name:</label><br/>
+                    <label className={"whiteText"}>Pantry Name:</label><br/>
                     <Input type="text" placeholder="Freezer" value={pantry.pantryName}
                            onChange={(value: string, event) => updatePantryName(value)}/><br/>
 
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => NewPantryDispatch()}>Add</Button>
-                <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => CancelAddPantry()}>Cancel</Button>
+                <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => NewPantryDispatch()}>Add</Button>
+                <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => CancelAddPantry()}>Cancel</Button>
             </Modal.Footer>
                 
             </div>

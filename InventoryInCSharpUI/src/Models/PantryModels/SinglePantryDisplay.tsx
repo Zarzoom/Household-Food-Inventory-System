@@ -14,8 +14,8 @@ export function SinglePantryDisplay(pantry: Pantry)
     return(
        <Grid className={'autoWidthGrid'}>
             <div>
-                <Col xs={11}>
-                    <p>
+                <Col xs={13}>
+                    <p className={"whiteText"}>
                         Pantry Name: {pantry.pantryName}
                     </p>
                 </Col>

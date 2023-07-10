@@ -40,16 +40,16 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
         <div className= "SinglePantryContentDisplay">
             <div className= "BlueBox" key = {"" + pantryContents.pantryContentID +pantryContents.pcItemID}>
                 <div className="col-md-9">
-                    <p>
+                    <p className={"whiteText"}>
                         Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                     </p>
                 </div>
                 <div className= "col-md-12">
                     <p>
-                        <label>Quantity</label><br/>
+                        <label className={"whiteText"}>Quantity</label><br/>
                         <InputNumber defaultValue={quantity.quantity} min={1} onChange={ (value:number|string, event) => updateQuantity(+value)}/>
                     </p>
-                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
+                    <Button className={"yellowButton"}  appearance={'primary'} onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
                     <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>

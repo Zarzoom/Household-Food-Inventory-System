@@ -10,8 +10,8 @@ export function SingleItemDisplay(item: getItem)
     return(
     <Grid className={'autoWidthGrid'}>
         <div >
-            <Col xs={11}>
-                <p>
+            <Col xs={13}>
+                <p className={"whiteText"}>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                 </p>
             </Col>
