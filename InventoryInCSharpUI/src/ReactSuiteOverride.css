@@ -34,6 +34,7 @@
 }
 
 .yellowButton{
+    /*border: thin solid rgba(240, 129, 15);*/
     color: black;
     background-color: rgba(230,223,68);
     margin-bottom: 1em;
