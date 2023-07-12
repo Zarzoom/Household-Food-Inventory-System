@@ -1,4 +1,5 @@
 using Dapper;
+using MySqlConnector;
 using Polly;
 using Polly.Retry;
 using System.Data;
@@ -8,7 +9,7 @@ namespace InventoryInCSharpAPI.Services;
 public static class DapperExtension
 {
     private static readonly AsyncRetryPolicy RetryPolicy =
-        Policy.Handle<SqlException>().Or<TimeoutException>().WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+        Policy.Handle<MySqlException>().Or<TimeoutException>().WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
     public async static Task<int> ExecuteAsyncWithRetry(this IDbConnection connector, string sql, object param = null,
         IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
