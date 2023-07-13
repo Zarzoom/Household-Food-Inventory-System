@@ -17,7 +17,6 @@ export function DeleteItem(ItemForDeleting: getItem) {
         const ItemIDForDeleting = ItemForDeleting.itemID;
         dispatch(deleteItem(ItemIDForDeleting));
             };
-    // Cancel doesn't work
  
         return (
             <div>
@@ -28,14 +27,14 @@ export function DeleteItem(ItemForDeleting: getItem) {
                             
                         </Modal.Header>
                         <Modal.Body>
-                            <p>
+                            <p className={"whiteText"}>
                                 Generic Name: {ItemForDeleting.genericName}<br/>Brand
                                 Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
                             </p>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => deleteItemDispatch()}>Delete</Button>
-                            <Button appearance={'primary'} color={'cyan'} onClick={()=> setOpen(false)}>Cancel</Button>
+                            <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => deleteItemDispatch()}>Delete</Button>
+                            <Button appearance={'primary'} className={"yellowButton"} onClick={()=> setOpen(false)}>Cancel</Button>
                             
                         </Modal.Footer>
                     </div>

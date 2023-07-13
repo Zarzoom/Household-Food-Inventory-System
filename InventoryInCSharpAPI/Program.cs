@@ -38,7 +38,10 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+//
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=UIRedirect}");
 app.UseSwagger();
 app.UseSwaggerUI();
 // app.UseHttpsRedirection();

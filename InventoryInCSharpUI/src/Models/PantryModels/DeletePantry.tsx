@@ -20,18 +20,18 @@ export function DeletePantry(pantryForDelete: Pantry) {
             <div>
                 <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Delete</Button>
                 <Modal open={open} onClose= {() => setOpen(false)}>
-                    <div>
+                    <div className={"BlueBox"}>
                         <Modal.Header>
                         </Modal.Header>
                         <Modal.Body>
-                            <p>
+                            <p className={"whiteText"}>
                                 Pantry Name: {pantryForDelete.pantryName}
                             </p>
     
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button appearance={'primary'} color={'cyan'} onClick={()=>setOpen(false)}>Cancel</Button>
-                            <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
+                            <Button appearance={'primary'} className={"yellowButton"} onClick={()=>setOpen(false)}>Cancel</Button>
+                            <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
                         </Modal.Footer>
                     </div>
                 </Modal>

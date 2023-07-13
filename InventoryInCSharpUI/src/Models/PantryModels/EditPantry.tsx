@@ -37,16 +37,15 @@ export function EditPantry(pantryForUpdate: Pantry) {
                 <Modal.Body>
                     <div className= "BlueBox">
                         <p>
-                            <label>Pantry Name:</label><br/>
+                            <label className={"whiteText"}>Pantry Name:</label><br/>
                             <Input type="text" placeholder="beans" value={pantry.pantryName}
                                    onChange={(value: string, event) => updatePantryName(value)}/>                          
                         </p>
-
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance={'primary'} color={'cyan'} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
-                    <Button appearance={'primary'} color={'cyan'}>Cancel</Button> 
+                    <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
+                    <Button appearance={'primary'} className={"yellowButton"}>Cancel</Button> 
                 </Modal.Footer>
             </Modal>
         </div>
