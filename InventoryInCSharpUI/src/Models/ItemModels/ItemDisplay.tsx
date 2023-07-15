@@ -8,7 +8,6 @@ export const ItemDisplay =() => {
 
    const AllItems = useAppSelector(state => selectContainsSearch(state))
     const renderedAllItems = AllItems.map((item: getItem) => { return (
-        // <FlexboxGrid.Item as={Col} colspan={24} className={"BlueBackground"}>
         <List.Item className={"blueBackground"} key={item.itemID}>
             <SingleItemDisplay {...item}></SingleItemDisplay>
         </List.Item>

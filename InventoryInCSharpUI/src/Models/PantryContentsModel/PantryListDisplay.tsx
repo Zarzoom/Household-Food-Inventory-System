@@ -6,8 +6,6 @@ import {Panel, Stack} from "rsuite"
 
 
 export const PantryListDisplay = () => {
-    const dispatch = useAppDispatch();
-    const PantryStatus = useAppSelector(state => state.Pantry.status);
     const AllPantries = useAppSelector(selectAllPantries);
     
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => {

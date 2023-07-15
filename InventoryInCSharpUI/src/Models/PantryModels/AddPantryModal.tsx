@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {createPantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import { Form, Button, Input, Modal } from 'rsuite';
+import {Button, Input, Modal} from 'rsuite';
 
 function AddPantryModal() {
     
@@ -18,7 +18,7 @@ function AddPantryModal() {
 
     const dispatch = useAppDispatch();
     const NewPantryDispatch = () =>{
-        if(pantry.pantryName != "") {
+        if(pantry.pantryName !== "") {
             const PantryToJSONStringify = JSON.stringify(pantry);
             const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
             dispatch(createPantry(PantryToJsonParse));

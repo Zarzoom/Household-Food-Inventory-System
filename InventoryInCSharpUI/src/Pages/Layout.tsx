@@ -10,13 +10,13 @@ const Layout = () => {
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
         if(ItemStatus === 'idle') {
-            const ItemList = dispatch(fetchItems())
+            dispatch(fetchItems())
         }
     }, [ItemStatus, dispatch])
     const PantryStatus = useAppSelector(state => state.Pantry.status)
     useEffect(()=> {
         if (PantryStatus === 'idle') {
-            const ItemList = dispatch(fetchPantries())
+            dispatch(fetchPantries())
         }
     }, [PantryStatus, dispatch])
     let display = <Outlet/>

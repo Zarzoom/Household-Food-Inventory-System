@@ -16,7 +16,7 @@ export const PantryContentsDisplay = () =>{
 const CurrentPantryContents = useAppSelector(selectAllPantryContents);
 useEffect(() =>{
     if (PantryContentsStatus === 'idle') {
-        const PantryContentsList = dispatch(fetchPantryContents());
+        dispatch(fetchPantryContents());
     }
 }, [PantryContentsStatus, dispatch])
 

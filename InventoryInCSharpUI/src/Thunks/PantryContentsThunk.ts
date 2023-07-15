@@ -40,14 +40,14 @@ export const updatePantryContents =
         };
 export const addPantryContents = (newPantryContents: PantryContentsNoID): AppThunk =>
     async dispatch => {
-    const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/PantryContents', newPantryContents)
+    await client.postData(process.env.REACT_APP_API + '/api/PantryContents', newPantryContents)
         .then(response => response.json())
         .then(response => response as PantryContents);
     dispatch(fetchItemsInPantry(newPantryContents.pcPantryID));
     };
 export const deletePantryContents = (PantryContentID: number): AppThunk => 
     async dispatch => {
-    const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/deletePantryContents/' + PantryContentID);
+    await client.postData(process.env.REACT_APP_API + '/api/deletePantryContents/' + PantryContentID);
     dispatch(goDeletePantryContents(PantryContentID));
 }
         

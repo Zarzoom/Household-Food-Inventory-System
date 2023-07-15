@@ -32,7 +32,7 @@ export const createItem =
 export const deleteItem =
     (deleteItemID: Number): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
+    await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
     dispatch(
         goDeleteItem(deleteItemID)
     );

@@ -40,7 +40,7 @@ export const updatePantry =
 export const deletePantry =
     (deletePantryID: Number): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Pantry/deletePantry/'+ deletePantryID);
+    await client.putData(process.env.REACT_APP_API + '/api/Pantry/deletePantry/'+ deletePantryID);
     dispatch(
         goDeletePantry(deletePantryID)
     )

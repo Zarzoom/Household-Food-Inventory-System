@@ -22,7 +22,6 @@ export function SingleItemForPantryContents(item: getItem){
     }
     const dispatch = useAppDispatch();
 const newPantryContentsDispatch = () =>{
-    const newPantryContents = newPC;
         dispatch(addPantryContents(newPC));
 }
     return(

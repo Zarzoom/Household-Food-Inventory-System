@@ -9,7 +9,6 @@ import {DeletePantryContents} from './DeletePantryContents'
 
 
 export function SinglePantryContentDisplay(pantryContents: PantryContents){
-    const [openModal, setOpenModal] = useState(false);
     
     const pantryContentsForSelection = pantryContents as PantryContents;
     const [quantity, setQuantity] = useState<PantryContents>({
