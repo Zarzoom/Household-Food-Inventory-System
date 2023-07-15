@@ -38,7 +38,7 @@ function AddItemModal() {
 
     const dispatch = useAppDispatch();
     const NewItemDispatch = () =>{
-        if(item.price != "" && item.size != "" && item.brand != "" && item.genericName != "") {
+        if(item.price !== "" && item.size !== "" && item.brand !== "" && item.genericName !== "") {
             const ItemToJSONStringify = JSON.stringify(item);
             const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
             dispatch(createItem(ItemToJsonParse));

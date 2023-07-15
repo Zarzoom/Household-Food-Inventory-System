@@ -41,11 +41,10 @@ export function EditItem(itemForUpdate: getItem) {
         const ItemToJSONStringify = JSON.stringify(item);
         const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
         dispatch(updateItem(ItemToJsonParse));
+        setOpen(false);
         return 'Added'
     };
     
-
-
     return (
         <div>
             <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Edit</Button>

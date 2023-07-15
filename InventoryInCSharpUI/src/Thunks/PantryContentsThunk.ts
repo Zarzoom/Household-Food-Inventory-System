@@ -1,9 +1,7 @@
 import HttpClient from '../Services/Controlers/HttpClient'
 import PantryContents from '../DataModels/PantryContents'
 import PantryContentsNoID from '../DataModels/PantryContentsNoID'
-import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
-import { AnyAction } from 'redux'
-import {store} from '../Stores/Store'
+import {AppThunk} from '../Stores/Store'
 import {goFetchPantryContents, goFetchItemsInPantry, goUpdatePantryContents, goDeletePantryContents} from '../slices/PantryContentsReducer'
 
 const client = new HttpClient();

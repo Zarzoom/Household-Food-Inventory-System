@@ -2,25 +2,20 @@
 import HttpClient from '../Services/Controlers/HttpClient'
 import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
-import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
-import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, selectContainsSearch} from '../slices/ItemsReducer'
-import { AnyAction } from 'redux'
-import {store} from '../Stores/Store'
-import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
+import {AppThunk } from '../Stores/Store'
+import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem} from '../slices/ItemsReducer'
 import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
-
 
 const client = new HttpClient();
 export const fetchItems =
     (): AppThunk => 
         async dispatch => {
-
-                const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
-                    .then(response => response.json())
-                    .then(response => response as getItem[]);
-                dispatch(
-                    goFetchItems(asyncResponse)
-                )
+            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
+                .then(response => response.json())
+                .then(response => response as getItem[]);
+            dispatch(
+                goFetchItems(asyncResponse)
+            )
         };
 
 export const createItem =

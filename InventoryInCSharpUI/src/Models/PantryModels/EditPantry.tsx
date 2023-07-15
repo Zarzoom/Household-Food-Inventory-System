@@ -23,6 +23,7 @@ export function EditPantry(pantryForUpdate: Pantry) {
         const PantryToJSONStringify = JSON.stringify(pantry);
         const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
         dispatch(updatePantry(PantryToJsonParse));
+        setOpen(false);
         return 'Added'
     };
 
@@ -45,7 +46,7 @@ export function EditPantry(pantryForUpdate: Pantry) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
-                    <Button appearance={'primary'} className={"yellowButton"}>Cancel</Button> 
+                    <Button appearance={'primary'} className={"yellowButton"} onClick={()=>setOpen(false)}>Cancel</Button> 
                 </Modal.Footer>
             </Modal>
         </div>

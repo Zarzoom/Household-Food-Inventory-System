@@ -11,6 +11,7 @@ export function DeletePantryContents(pantryContentsForDelete: PantryContents){
     const deletePantryContentDispatch = () =>{
         const pantryContentIDForDelete: number = pantryContentsForDelete.pantryContentID;
         dispatch(deletePantryContents(pantryContentIDForDelete));
+        setOpenModal(false);
     };
     
     return(
@@ -21,14 +22,13 @@ export function DeletePantryContents(pantryContentsForDelete: PantryContents){
             <div>
                 <div className=" BlueBox">
                     <Modal.Body>
-                    <p>
+                    <p className={"whiteText"}>
                         Are you sure?
                     </p>
                     </Modal.Body>
                     <Modal.Footer>
-                    <a className="btn btn-sm" href="#" role="button">Cancel</a>
-                    <a className="btn btn-sm" href="#" role="button"
-                       onClick={(event: any) => deletePantryContentDispatch()}>Delete</a>
+                    <Button className={"yellowButton"} onClick={()=>setOpenModal(false)}>Cancel</Button>
+                    <Button className={"yellowButton"} onClick={(event: any) => deletePantryContentDispatch()}>Delete</Button>
                 </Modal.Footer>
                 </div>
             </div>
