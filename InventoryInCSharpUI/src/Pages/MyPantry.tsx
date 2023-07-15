@@ -1,7 +1,6 @@
 import {PantryListDisplay} from '../Models/PantryContentsModel/PantryListDisplay'
 import {PantryContentsDisplay} from '../Models/PantryContentsModel/PantryContentsDisplay'
-import {AddPanel} from '../Models/PantryContentsModel/AddPanel'
-import {Grid, Container, Stack, Col, Row} from "rsuite"
+import {Grid, Col, Row} from "rsuite"
 
 const MyPantry = () => {
     return (

@@ -1,13 +1,8 @@
 ﻿import getItem from "../../DataModels/getItem"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deleteItem} from "../../Thunks/ItemsThunk"
-import {useState, useEffect, Component, SetStateAction} from "react";
-import {goSetStatus} from "../../slices/PantryContentsReducer"
-import{fetchPantryContents} from "../../Thunks/PantryContentsThunk"
-import { Form, Button, Input, Modal } from 'rsuite';
-
-
-
+import {useState} from "react";
+import {Button, Modal} from 'rsuite';
 
 export function DeleteItem(ItemForDeleting: getItem) {
     const [open, setOpen] = useState(false);

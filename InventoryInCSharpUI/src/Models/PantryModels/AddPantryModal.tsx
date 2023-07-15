@@ -1,10 +1,7 @@
 import {useState} from "react";
 import {createPantry} from "../../Thunks/PantriesThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import Pantry from "../../DataModels/Pantry"
-import PantryNoID from "../../DataModels/PantryNoID"
 import { Form, Button, Input, Modal } from 'rsuite';
-
 
 function AddPantryModal() {
     

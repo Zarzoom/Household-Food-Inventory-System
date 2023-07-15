@@ -3,8 +3,6 @@ import {EditItem} from "./EditItem"
 import {DeleteItem} from "./DeleteItem"
 import {Grid, Col, Stack} from "rsuite"
 
-
-
 export function SingleItemDisplay(item: getItem)
 {
     return(

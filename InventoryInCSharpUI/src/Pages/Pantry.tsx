@@ -1,8 +1,6 @@
 import {PantryDisplay} from "../Models/PantryModels/PantryDisplay"
 import {SearchPantry} from "../Models/PantryModels/SearchPantry"
 import AddPantryModal from "../Models/PantryModels/AddPantryModal"
-import {SearchItem} from "../Models/ItemModels/SearchItem";
-import {ItemDisplay} from "../Models/ItemModels/ItemDisplay";
 import {Grid, Row, Col, Panel, Stack} from "rsuite";
 
 const Pantry = () => {

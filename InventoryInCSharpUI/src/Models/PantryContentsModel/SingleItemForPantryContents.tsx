@@ -4,9 +4,7 @@ import 'rsuite/dist/rsuite.min.css';
 import Button from 'rsuite/Button';
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {useState} from "react";
-import {selectPantryFilter} from "../../slices/PantryContentsReducer"
 import {addPantryContents} from "../../Thunks/PantryContentsThunk"
-
 
 export function SingleItemForPantryContents(item: getItem){
     let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)

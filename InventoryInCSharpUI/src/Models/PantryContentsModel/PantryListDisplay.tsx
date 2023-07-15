@@ -1,8 +1,4 @@
 ﻿import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {useSelector} from 'react-redux'
-import {store} from "../../Stores/Store"
-import {useState, useEffect, Component} from "react";
-import {fetchPantries} from "../../Thunks/PantriesThunk"
 import Pantry from "../../DataModels/Pantry"
 import {selectAllPantries} from "../../slices/PantriesReducer"
 import {SinglePantryButton} from "./SinglePantryButton"

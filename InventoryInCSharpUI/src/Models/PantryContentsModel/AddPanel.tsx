@@ -1,12 +1,10 @@
-import PantryContents from "../../DataModels/PantryContents"
 import getItem from "../../DataModels/getItem"
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {selectAllItems, selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
+import {selectContainsSearch, goSetSearch} from "../../slices/ItemsReducer"
 import {SingleItemForPantryContents} from "./SingleItemForPantryContents"
-import {fetchItems} from "../../Thunks/ItemsThunk"
-import {useState, useEffect, Component} from "react";
+import {useState} from "react";
 import Drawer from "rsuite/Drawer";
-import { Button, IconButton, ButtonGroup, ButtonToolbar, Input, InputGroup, Stack } from 'rsuite';
+import { Button, Input, InputGroup, Stack } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import SearchIcon from '@rsuite/icons/Search';
 import CloseIcon from "@rsuite/icons/Close";

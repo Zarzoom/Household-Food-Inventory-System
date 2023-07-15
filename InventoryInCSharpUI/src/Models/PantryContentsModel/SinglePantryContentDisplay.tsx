@@ -1,15 +1,11 @@
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {useSelector} from 'react-redux'
-import {store} from "../../Stores/Store"
 import {useState, useEffect} from "react";
 import {fetchPantryContents, updatePantryContents} from "../../Thunks/PantryContentsThunk"
-import Pantry from "../../DataModels/Pantry"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"
-import { Button, IconButton, ButtonGroup, ButtonToolbar, InputNumber } from 'rsuite';
+import { Button, InputNumber} from 'rsuite';
 import {DeletePantryContents} from './DeletePantryContents'
-
 
 
 export function SinglePantryContentDisplay(pantryContents: PantryContents){

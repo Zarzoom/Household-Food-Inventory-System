@@ -1,13 +1,8 @@
-﻿import {useState, useEffect, Component} from "react";
-import Item from "../../DataModels/Item";
-import getItem from "../../DataModels/getItem";
-import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {useSelector} from 'react-redux'
-import {store} from "../../Stores/Store"
-import {selectAllItems, selectContainsSearch} from "../../slices/ItemsReducer"
-import {fetchItems} from "../../Thunks/ItemsThunk"
+﻿import getItem from "../../DataModels/getItem";
+import {useAppSelector} from '../../Hooks/hooks'
+import {selectContainsSearch} from "../../slices/ItemsReducer"
 import {SingleItemDisplay} from "./SingleItemDisplay"
-import {List, FlexboxGrid, Panel, Col} from "rsuite";
+import {List} from "rsuite";
 
 export const ItemDisplay =() => {
 

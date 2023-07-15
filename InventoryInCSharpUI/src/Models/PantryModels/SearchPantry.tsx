@@ -1,6 +1,5 @@
 
 import {useEffect, useState} from "react";
-import {fetchPantries, contentsPantrySearch} from "../../Thunks/PantriesThunk"
 import {goSetSearch} from '../../slices/PantriesReducer'
 import {useAppDispatch} from '../../Hooks/hooks'
 import {Input, InputGroup} from 'rsuite'
