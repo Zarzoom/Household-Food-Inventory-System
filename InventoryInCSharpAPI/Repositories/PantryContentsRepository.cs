@@ -21,7 +21,7 @@ public class PantryContentsRepository
     {
         using (var connection = new MySqlConnection(_csos.connection))
         {
-            var sql = "INSERT INTO PantryContents (PCPantryID, PCItemID, Quantity) VALUES (@PCPantryID, @PCItemID, @Quantity); SELECT LAST_INSERT_ID()";
+            var sql = "INSERT INTO PantryContents (PCPantryID, PCItemID, Quantity, Password) VALUES (@PCPantryID, @PCItemID, @Quantity, @Password); SELECT LAST_INSERT_ID()";
             var createdItem = await connection.QueryAsync<int>(sql, newPantryContent);
             return createdItem.SingleOrDefault();
         }
@@ -52,7 +52,7 @@ public class PantryContentsRepository
     {
         using (var connection = new MySqlConnection(_csos.connection))
         {
-            var sql = "SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents";
+            var sql = "SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents";
             var allPantryContents = await connection.QueryAsync<PantryContents>(sql);
             return allPantryContents;
         }
@@ -68,7 +68,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var parameters = new { PCPantryID };
-            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCPantryID = @PCPantryID";
+            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCPantryID = @PCPantryID";
             var allPantryContentWithPCPantryID = await connection.QueryAsync<PantryContents>(sql, parameters);
             return allPantryContentWithPCPantryID;
         }
@@ -126,7 +126,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var parameters = new { PCItemID };
-            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID";
+            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCItemID = @PCItemID";
             var allPantryContentWithPCItemID = await connection.QueryAsync<PantryContents>(sql, parameters);
             return allPantryContentWithPCItemID;
         }
@@ -141,9 +141,25 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var parameters = new { PCItemID, PCPantryID };
-            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
+            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
             var pantryContentsThatMatch = await connection.QueryAsync<PantryContents>(sql, parameters);
             return pantryContentsThatMatch.SingleOrDefault();
+        }
+    }
+    
+    /// <summary>
+    ///Sends SQL Query to Database to search for all items with a password that matches the parameter password.  
+    /// </summary>
+    /// <param name="password"> password is a long representing the users password that is a foreign key on the pantry contents that they have created. 
+    /// </param>
+    /// <returns>Returns a list of the pantry contents with a foreign key password that matches the param password.</returns>
+    public async Task<IEnumerable<PantryContents>> GetUserPantryContents(long password)
+    {
+        using (var connection = new MySqlConnection(_csos.connection))
+        {
+            var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE Password LIKE '%{password}%'";
+            var UserPantryContents = await connection.QueryAsync<PantryContents>(sql);
+            return UserPantryContents;
         }
     }
 }

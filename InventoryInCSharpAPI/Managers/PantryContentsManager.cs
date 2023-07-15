@@ -64,6 +64,18 @@ public class PantryContentsManager
         results.Wait();
         return (results.Result);
     }
+    
+    /// <summary>
+    /// Calls the GetUserPantryContents (finds all PantryContents that match the users password) method from PantryContentsRepository. Converts return from a Task<IEnumerable<PantryContents>> to an IEnumerable<PantryContents> 
+    /// </summary>
+    /// <param name="password"> A long with a value that matches the users password.</param>
+    /// <returns>Returns all PantryContents that have a password that matches the parameter password.</returns>
+    public IEnumerable<PantryContents> GetAllUserPantryContents(long password)
+    {
+        var results = _PCR.GetUserPantryContents(password);
+        results.Wait();
+        return (results.Result);
+    }
 
     /// <summary>
     /// Calls FindContentsByPCPantryID(sends sql query to search database using the pcPantryID of pantryContents) from pantryContentsRepository.
@@ -141,7 +153,7 @@ public class PantryContentsManager
         {
             var findPantryItems = _PR.FindPantryByPrimaryKey(pantryContent.pcPantryID);
             findPantryItems.Wait();
-            PantryItem pantryItem = new PantryItem(findPantryItems.Result.pantryName, pantryContent.quantity, pantryContent.pantryContentID);
+            PantryItem pantryItem = new PantryItem(findPantryItems.Result.pantryName, pantryContent.quantity, pantryContent.pantryContentID, pantryContent.password);
             yield return pantryItem;
         }
     }

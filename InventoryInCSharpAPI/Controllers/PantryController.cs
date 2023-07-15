@@ -20,6 +20,13 @@ public class PantryController : ControllerBase
     {
         return pantryManager.GetPantryList();
     }
+
+    [HttpGet("userSearch/{password}")]
+    public IEnumerable<Pantry> GetUserPantries(long password)
+    {
+        return pantryManager.GetAllUserPantries(password);
+    }
+
     [HttpGet("{primaryKey}")]
     public Pantry GetPantryWithPrimaryKey(long primaryKey)
     {

@@ -33,6 +33,13 @@ public class ItemController : ControllerBase
     {
         return itemManager.FindByPrimaryKey(primaryKey);
     }
+    
+    [HttpGet("userSearch/{password}")]
+    public IEnumerable<Item> GetUserItems(long password)
+    {
+        return itemManager.GetAllUserItems(password);
+    }
+    
     //GET api/<ItemController>/search/searchValue
     [HttpGet("search/{searchValue}")]
     public IEnumerable<Item> Get(String searchValue)

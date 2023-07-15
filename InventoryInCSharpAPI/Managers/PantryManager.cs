@@ -87,7 +87,19 @@ public class PantryManager
         Task.Delay(500).Wait();
         _PR.DeletePantry(pantryID);
     }
-    
+
+    /// <summary>
+    /// Calls the GetUserPantries (finds all pantries that match the users password) method from PantryRepository. Converts return from a Task<IEnumerable<pantry>> to an IEnumerable<Pantry> 
+    /// </summary>
+    /// <param name="password"> A long with a value that matches the users password.</param>
+    /// <returns>Returns all pantries that have a password that matches the parameter password.</returns>
+    public IEnumerable<Pantry> GetAllUserPantries(long password)
+    {
+        var results = _PR.GetUserPantries(password);
+        results.Wait();
+        return (results.Result);
+    }
+
     /// <summary>
     /// Commented out in controller to prevent catastrophic accidents. This method should delete all of the pantries from PantryList.
     /// There was very little manual testing of this method, and it does not have any integration testing.
