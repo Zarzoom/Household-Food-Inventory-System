@@ -1,4 +1,4 @@
-﻿import getItem from "../../DataModels/getItem"
+import getItem from "../../DataModels/getItem"
 import {EditItem} from "./EditItem"
 import {DeleteItem} from "./DeleteItem"
 import {Grid, Col, Stack} from "rsuite"

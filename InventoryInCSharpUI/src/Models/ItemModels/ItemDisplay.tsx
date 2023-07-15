@@ -1,4 +1,4 @@
-﻿import getItem from "../../DataModels/getItem";
+import getItem from "../../DataModels/getItem";
 import {useAppSelector} from '../../Hooks/hooks'
 import {selectContainsSearch} from "../../slices/ItemsReducer"
 import {SingleItemDisplay} from "./SingleItemDisplay"

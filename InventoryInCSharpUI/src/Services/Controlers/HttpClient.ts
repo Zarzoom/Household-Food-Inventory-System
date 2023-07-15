@@ -1,4 +1,4 @@
-﻿
+
 class HttpClient {
 
     postData (url: string = "", data: any = {}): Promise<any> {

@@ -1,4 +1,4 @@
-﻿import Pantry from "../../DataModels/Pantry"
+import Pantry from "../../DataModels/Pantry"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deletePantry} from "../../Thunks/PantriesThunk"
 import {useState} from "react";

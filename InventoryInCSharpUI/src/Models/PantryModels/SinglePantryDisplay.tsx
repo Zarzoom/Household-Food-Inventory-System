@@ -1,4 +1,4 @@
-﻿import Pantry from "../../DataModels/Pantry"
+import Pantry from "../../DataModels/Pantry"
 import {EditPantry} from "./EditPantry"
 import {DeletePantry} from "./DeletePantry"
 import 'reactjs-popup/dist/index.css';

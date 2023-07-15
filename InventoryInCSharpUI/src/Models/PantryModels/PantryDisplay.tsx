@@ -1,4 +1,4 @@
-﻿import Pantry from "../../DataModels/Pantry";
+import Pantry from "../../DataModels/Pantry";
 import {useAppSelector} from '../../Hooks/hooks'
 import {selectContainsSearch} from "../../slices/PantriesReducer"
 import {SinglePantryDisplay} from "./SinglePantryDisplay"

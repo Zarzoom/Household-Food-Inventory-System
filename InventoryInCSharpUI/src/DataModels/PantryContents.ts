@@ -1,4 +1,4 @@
-﻿type PantryContents ={
+type PantryContents ={
     quantity?: number
     pcItemID: number
     pcPantryID: number

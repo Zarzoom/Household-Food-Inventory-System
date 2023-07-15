@@ -1,4 +1,4 @@
-﻿import getItem from "../../DataModels/getItem"
+import getItem from "../../DataModels/getItem"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deleteItem} from "../../Thunks/ItemsThunk"
 import {useState} from "react";

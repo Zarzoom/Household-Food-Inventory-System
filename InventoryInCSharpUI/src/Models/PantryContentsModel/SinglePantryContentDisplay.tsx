@@ -1,6 +1,6 @@
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {useState, useEffect} from "react";
-import {fetchPantryContents, updatePantryContents} from "../../Thunks/PantryContentsThunk"
+import {useState} from "react";
+import {updatePantryContents} from "../../Thunks/PantryContentsThunk"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"

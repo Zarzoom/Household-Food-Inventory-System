@@ -1,4 +1,4 @@
-﻿import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
+import {useAppSelector} from '../../Hooks/hooks'
 import Pantry from "../../DataModels/Pantry"
 import {selectAllPantries} from "../../slices/PantriesReducer"
 import {SinglePantryButton} from "./SinglePantryButton"

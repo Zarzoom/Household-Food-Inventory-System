@@ -14,7 +14,6 @@ import AddItemModal from '../ItemModels/AddItemModal';
 export const AddPanel = () =>{
 
     const [open,setOpen] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
     
     const openPanel= (setVal: boolean) =>{
         setOpen(setVal);

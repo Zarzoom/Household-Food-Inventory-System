@@ -1,4 +1,4 @@
-﻿type PantryItem = {
+type PantryItem = {
     pantryName: string
     quantity: number
     pantryContentID: number

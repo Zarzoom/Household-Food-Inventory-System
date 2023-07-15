@@ -1,4 +1,4 @@
-﻿import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
 import {useEffect} from "react";
 import {fetchItems} from "../Thunks/ItemsThunk"

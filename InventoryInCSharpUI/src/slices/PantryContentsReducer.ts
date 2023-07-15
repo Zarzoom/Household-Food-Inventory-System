@@ -1,4 +1,4 @@
-﻿import PantryContents from '../DataModels/PantryContents'
+import PantryContents from '../DataModels/PantryContents'
 import {RootState} from '../Stores/Store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import StatusString from '../DataModels/StatusString'
