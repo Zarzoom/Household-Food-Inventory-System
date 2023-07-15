@@ -26,6 +26,12 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.GetAllPantryContents();
     }
+    
+    [HttpGet("userSearch/{password}")]
+    public IEnumerable<PantryContents> GetUserPantryContents(long password)
+    {
+        return pantryContentsManager.GetAllUserPantryContents(password);
+    }
 
     [HttpGet("{pcPantryID}")]
     public IEnumerable<PantryContents> GetPantryContentsWithPantryID(long pcPantryID)

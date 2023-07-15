@@ -17,6 +17,11 @@ public class ItemTests
         testUser.userName = "testUser";
         testUser.password = 1;
         InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+        
+        User testUser2 = new User();
+        testUser.userName = "testUser2";
+        testUser.password = 2;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
     }
 
 }
@@ -806,4 +811,119 @@ public class WhenItemListIsQueriedForAllItems : ItemTests
     {
         Assert.AreEqual(expectedItemString, actualItemString);
     }
+}
+
+public class WhenItemsAreInsertedThroughTheAPIToDatabaseAndSearchedForWithPassword : ItemTests
+{
+    private static readonly HttpClient client = new HttpClient();
+
+    private String actualItemString;
+    private Item expectedItem1 = new Item();
+    private Item expectedItem2 = new Item();
+    private Item expectedItem3 = new Item();
+    private List<Item> expectedItemList = new List<Item>();
+    private String expectedItemString;
+
+    [OneTimeSetUp]
+    public void Setup()
+    {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.LoginDatabasePreparation();
+
+        InsertLogin();
+        InsertItemsForTesting();
+
+        try
+        {
+            Task.Delay(1000).Wait();
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync("http://localhost:8000/api/Item/userSearch/1");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadAsStringAsync();
+            results.Wait();
+            actualItemString = results.Result;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        GetExpectedItemString();
+    }
+
+    public void GetExpectedItemString()
+    {
+
+
+        expectedItem2.genericName = "Generic Name Test 2";
+        expectedItem2.brand = "Brand Test 2";
+        expectedItem2.price = 1.99F;
+        expectedItem2.size = "2 Test";
+        expectedItem2.password = 0;
+        expectedItem2.itemID = 2;
+
+        expectedItemList.Add(expectedItem2);
+
+        expectedItem3.genericName = "Generic Name Test 3";
+        expectedItem3.brand = "Brand Test 3";
+        expectedItem3.price = 1.99F;
+        expectedItem3.size = "3 Test";
+        expectedItem3.password = 0;
+        expectedItem3.itemID = 3;
+
+        expectedItemList.Add(expectedItem3);
+
+        expectedItemString = JsonSerializer.Serialize(expectedItemList);
+    }
+
+    public void InsertItemsForTesting()
+    {
+        Item testItem1 = new Item();
+        testItem1.genericName = "Should Not Be Found 1";
+        testItem1.brand = "should not be found 1";
+        testItem1.price = 1.99F;
+        testItem1.size = "1 not found";
+        testItem1.password = 2;
+
+
+        InsertMethods.ItemInsertUsingAPI(testItem1);
+
+        Item testItem2 = new Item();
+        testItem2.genericName = "Generic Name Test 2";
+        testItem2.brand = "Brand Test 2";
+        testItem2.price = 1.99F;
+        testItem2.size = "2 Test";
+        testItem2.password = 1;
+        //testItem2.itemID = 2;
+
+        InsertMethods.ItemInsertUsingAPI(testItem2);
+
+        Item testItem3 = new Item();
+        testItem3.genericName = "Generic Name Test 3";
+        testItem3.brand = "Brand Test 3";
+        testItem3.price = 1.99F;
+        testItem3.size = "3 Test";
+        testItem3.password = 1;
+
+        InsertMethods.ItemInsertUsingAPI(testItem3);
+
+        Item testItem4 = new Item();
+        testItem4.genericName = "Should Not Be Found 4";
+        testItem4.brand = "should not be found 4";
+        testItem4.price = 9.99F;
+        testItem4.size = "4 not found";
+        testItem4.password = 2;
+
+        InsertMethods.ItemInsertUsingAPI(testItem4);
+    }
+
+    //Execute
+    [Test]
+    public void ThenTheCorrectItemsAreFound()
+    {
+        Assert.AreEqual(expectedItemString, actualItemString);
+    }
+
+
 }

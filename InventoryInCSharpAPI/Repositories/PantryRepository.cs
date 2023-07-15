@@ -108,4 +108,20 @@ public class PantryRepository
             var deletedRows = await connection.ExecuteAsync(sql, parameters);
         }
     }
+
+    /// <summary>
+    ///Sends SQL Query to Database to search for all pantries with a password that matches the parameter password.  
+    /// </summary>
+    /// <param name="password"> password is a long representing the users password that is a foreign key on the pantries that they have created. 
+    /// </param>
+    /// <returns>Returns a list of the pantries with a foreign key password that matches the param password.</returns>
+    public async Task<IEnumerable<Pantry>> GetUserPantries(long password)
+    {
+        using (var connection = new MySqlConnection(CSOS.connection))
+        {
+            var sql = $"SELECT PantryID, PantryName FROM PantryList WHERE Password LIKE '%{password}%'";
+            var UserPantries = await connection.QueryAsync<Pantry>(sql);
+            return UserPantries;
+        }
+    }
 }

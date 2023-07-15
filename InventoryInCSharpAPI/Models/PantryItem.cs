@@ -9,10 +9,11 @@ public class PantryItem
 
 
     public PantryItem() {}
-    public PantryItem(string pantryName, long quantity, long pantryContentID)
+    public PantryItem(string pantryName, long quantity, long pantryContentID, long password)
     {
         this.pantryContentID = pantryContentID;
         this.pantryName = pantryName;
         this.quantity = quantity;
+        this.password = password;
     }
 }

@@ -16,6 +16,11 @@ public class PantryTests
         testUser.userName = "testUser";
         testUser.password = 1;
         InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+
+        User testUser2 = new User();
+        testUser.userName = "testUser2";
+        testUser.password = 2;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser2);
     }
 
 }
@@ -614,6 +619,85 @@ public class WhenPantryListIsQueriedForAllPantries : PantryTests
         TestPantry2.pantryID = 2;
 
         expectedPantryList.Add(TestPantry2);
+
+        Pantry TestPantry3 = new Pantry();
+        TestPantry3.pantryName = "Test Name 3";
+        TestPantry3.pantryID = 3;
+
+        expectedPantryList.Add(TestPantry3);
+
+       expectedPantryString = JsonSerializer.Serialize(expectedPantryList);
+    }
+
+    [Test]
+    public void ThenAllPantriesHaveBeenReturned()
+    {
+        Assert.AreEqual(expectedPantryString, actualPantryString);
+    }
+}
+
+public class WhenPantryListIsQueriedForAllPantriesWithPassword : PantryTests
+{
+    private List<Pantry> expectedPantryList = new List<Pantry>();
+    private String expectedPantryString;
+    private String actualPantryString;
+
+    
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+
+        InsertLogin();
+        PantryInsert();
+
+
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/Pantry/userSearch/{1}");
+            httpResponse.Wait();
+            var result = httpResponse.Result.Content.ReadAsStringAsync();
+            result.Wait();
+            actualPantryString = result.Result;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        
+        CreateExpected();
+    }
+    
+    public void PantryInsert()
+    {
+        Pantry TestPantry1 = new Pantry();
+        TestPantry1.pantryName = "Test Name 1";
+        TestPantry1.password = 1;
+
+        InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
+
+        Pantry TestPantry2 = new Pantry();
+        TestPantry2.pantryName = "Test Name 2";
+        TestPantry2.password = 2;
+
+        InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
+
+        Pantry TestPantry3 = new Pantry();
+        TestPantry3.pantryName = "Test Name 3";
+        TestPantry3.password = 1;
+
+        InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
+    }
+
+    public void CreateExpected()
+    {
+        Pantry TestPantry1 = new Pantry();
+        TestPantry1.pantryName = "Test Name 1";
+        TestPantry1.pantryID = 1;
+
+        expectedPantryList.Add(TestPantry1);
 
         Pantry TestPantry3 = new Pantry();
         TestPantry3.pantryName = "Test Name 3";
