@@ -464,7 +464,7 @@ public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryCont
 
         try
         {
-            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{2}/{3}");
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{3}/{4}");
             httpResponse.Wait();
             var results = httpResponse.Result.Content.ReadFromJsonAsync<PantryContents>();
             results.Wait();
@@ -480,10 +480,11 @@ public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryCont
 
     public void CreateExpected()
     {
-        expectedPantryContents.pcPantryID = 2;
-        expectedPantryContents.pcItemID = 3;
+        expectedPantryContents.pcPantryID = 3;
+        expectedPantryContents.pcItemID = 4;
         expectedPantryContents.quantity = 3;
-        expectedPantryContents.pantryContentID = 3;
+        expectedPantryContents.pantryContentID = 4;
+        expectedPantryContents.password = 2;
     }
 
     [Test]
@@ -554,6 +555,7 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
             pcItemID = 1,
             quantity = 3,
             pantryContentID = 1,
+            password = 1,
 
         };
 
@@ -565,6 +567,7 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
             pcItemID = 2,
             quantity = 3,
             pantryContentID = 2,
+            password = 1,
 
         };
 
@@ -572,10 +575,11 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
 
         PantryContents testPantryContent3 = new PantryContents
         {
-            pcPantryID = 2,
-            pcItemID = 3,
+            pcPantryID = 1,
+            pcItemID = 2,
             quantity = 3,
             pantryContentID = 3,
+            password = 1,
         };
 
         expectedPantryContentsList.Add(testPantryContent3);
@@ -583,9 +587,10 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
         PantryContents testPantryContent4 = new PantryContents
         {
             pcPantryID = 3,
-            pcItemID = 2,
+            pcItemID = 4,
             quantity = 3,
             pantryContentID = 4,
+            password = 2,
 
         };
 
@@ -598,6 +603,7 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
             pcItemID = 3,
             quantity = 3,
             pantryContentID = 5,
+            password = 2,
 
         };
 
@@ -655,6 +661,7 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
             pcPantryID = 2,
             pcItemID = 1,
             quantity = 3,
+            password = 1,
             pantryContentID = 1,
 
         };
@@ -663,9 +670,10 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
 
         PantryContents testPantryContent3 = new PantryContents
         {
-            pcPantryID = 2,
-            pcItemID = 3,
+            pcPantryID = 1,
+            pcItemID = 2,
             quantity = 3,
+            password = 1,
             pantryContentID = 3,
         };
 
@@ -674,8 +682,9 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
         PantryContents testPantryContent4 = new PantryContents
         {
             pcPantryID = 3,
-            pcItemID = 2,
+            pcItemID = 4,
             quantity = 3,
+            password = 2,
             pantryContentID = 4,
 
         };
@@ -688,6 +697,7 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
             pcPantryID = 3,
             pcItemID = 3,
             quantity = 3,
+            password = 2,
             pantryContentID = 5,
 
         };
@@ -704,7 +714,7 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID FROM PantryContents";
+            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID, Password FROM PantryContents";
             var actual = connection.Query<PantryContents>(sql);
             Task.Delay(1000).Wait();
             actualPantryContentsString = JsonSerializer.Serialize(actual);
