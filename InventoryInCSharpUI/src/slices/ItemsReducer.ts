@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import getItem from '../DataModels/getItem'
+import Item from '../DataModels/Item'
 import StatusString from '../DataModels/StatusString'
 
 interface ItemsState{
@@ -14,9 +16,10 @@ const initialState: ItemsState={
     status: 'idle',
     error: null,
     search: "",
-    StateOfItems: []
+    StateOfItems: new Array()
 }
 
+export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
 export const selectItemsByID = (state: RootState, ID: number) => state.Items.StateOfItems.find(item=> item.itemID === ID);
 export const selectContainsSearch = (state: RootState) => state.Items.StateOfItems.filter(item=>item.brand.toLowerCase().includes(state.Items.search.toLowerCase()) || item.genericName.toLowerCase().includes(state.Items.search.toLowerCase()));
 // export const findItemArrayByID = (state: RootState, Items: getItem[]) => Items.map((item: getItem)=>state.Items.StateOfItems.find(stateItem => stateItem.itemID === item.itemID));
@@ -37,7 +40,7 @@ export const ItemsReducer = createSlice({
                state.StateOfItems = state.StateOfItems.filter(item => item.itemID !== action.payload);
             },
             goUpdateItem: (state, action: PayloadAction<getItem>)=>{
-               const updateStateItem = state.StateOfItems.findIndex(item=> item.itemID === action.payload.itemID)
+               const updateStateItem = state.StateOfItems.findIndex(item=> item.itemID == action.payload.itemID)
               state.StateOfItems[updateStateItem] = action.payload;
             },
             goContentsItemSearch: (state, action: PayloadAction<getItem[]>)=>{
@@ -51,7 +54,11 @@ export const ItemsReducer = createSlice({
                const NewStatus: StatusString = action.payload as StatusString;
                state.status = NewStatus;
             }
+            // goPantryItemsSearch: (state, action: PayloadAction<getItem[]>) => {
+            //   
+            // }
+
             }
         },
 )
-export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goSetSearch} = ItemsReducer.actions;
+export const {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, goSetSearch, goSetStatus} = ItemsReducer.actions;
