@@ -14,21 +14,20 @@ const client = new HttpClient();
 export const fetchItems =
     (): AppThunk => 
         async dispatch => {
-
-                const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
-                    .then(response => response.json())
-                    .then(response => response as getItem[]);
-                dispatch(
-                    goFetchItems(asyncResponse)
-                )
+            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
+                .then(response => response.json())
+                .then(response => response as getItem[]);
+            dispatch(
+                goFetchItems(asyncResponse)
+            )
         };
 
 export const createItem =
     (newItem:Item): AppThunk =>
         async dispatch =>{
-        const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Item', newItem)
-            .then(response => response.json())
-            .then(response => response as getItem);
+            const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Item', newItem)
+                .then(response => response.json())
+                .then(response => response as getItem);
             dispatch(
                 goCreateItem(asynchResponse)
             )
@@ -37,15 +36,15 @@ export const createItem =
 export const deleteItem =
     (deleteItemID: Number): AppThunk =>
         async dispatch =>{
-    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
-    dispatch(
-        goDeleteItem(deleteItemID)
-    );
-    //this dispatch makes sure that the pantry contents state is updated so that pantry contents page will load properly.
-    dispatch(
-        fetchPantryContents()
-    )
-};
+            const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
+            dispatch(
+                goDeleteItem(deleteItemID)
+            );
+            //this dispatch makes sure that the pantry contents state is updated so that pantry contents page will load properly.
+            dispatch(
+                fetchPantryContents()
+            )
+        };
 
 export const updateItem =
     (updatedItem:getItem): AppThunk =>

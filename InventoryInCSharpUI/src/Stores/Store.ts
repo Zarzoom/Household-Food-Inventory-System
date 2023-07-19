@@ -5,13 +5,15 @@ import { AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import getItem from '../DataModels/getItem'
 import {PantryContentsReducer} from '../slices/PantryContentsReducer'
+import {LoginReducer} from "../slices/LoginReducer";
 
 
 export const store = configureStore({
     reducer: {
         Items: ItemsReducer.reducer,
         Pantry: PantriesReducer.reducer,
-        PantryContents: PantryContentsReducer.reducer
+        PantryContents: PantryContentsReducer.reducer,
+        Login: LoginReducer.reducer
     }
 })
  // export const initStoreDecision = (preloadedState)
