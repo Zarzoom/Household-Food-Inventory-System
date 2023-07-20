@@ -1,28 +1,34 @@
-import { Outlet, Link } from "react-router-dom";
+﻿import { Outlet, Link } from "react-router-dom";
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
-import {useEffect} from "react";
+import {useState, useEffect} from "react";
 import {fetchItems} from "../Thunks/ItemsThunk"
 import {fetchPantries} from "../Thunks/PantriesThunk"
-import { Navbar, Nav} from 'rsuite';
+import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
     const dispatch = useAppDispatch();
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
         if(ItemStatus === 'idle') {
-            dispatch(fetchItems())
+            const ItemList = dispatch(fetchItems())
         }
     }, [ItemStatus, dispatch])
     const PantryStatus = useAppSelector(state => state.Pantry.status)
     useEffect(()=> {
         if (PantryStatus === 'idle') {
-            dispatch(fetchPantries())
+            const ItemList = dispatch(fetchPantries())
         }
     }, [PantryStatus, dispatch])
     let display = <Outlet/>
     if (PantryStatus === 'idle' || ItemStatus === 'idle'){
         display = <p>Loading....</p>
     }
+    // const LoginStatus = useAppSelector(state => state.Login.status)
+    // useEffect(()=> {
+    //     if(LoginStatus === 'notLoggedIn'){
+    //         display = 
+    //     }
+    // })
     return (
         <>
         <Navbar>
