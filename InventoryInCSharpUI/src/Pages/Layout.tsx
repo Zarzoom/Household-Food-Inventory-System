@@ -1,12 +1,8 @@
 ﻿import { Outlet, Link } from "react-router-dom";
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
-import {useSelector} from 'react-redux'
-import {store} from "../Stores/Store"
-import {useState, useEffect, Component} from "react";
+import {useState, useEffect} from "react";
 import {fetchItems} from "../Thunks/ItemsThunk"
 import {fetchPantries} from "../Thunks/PantriesThunk"
-import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
-import {Grid, Row, Col, Container} from "rsuite";
 import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
@@ -27,6 +23,12 @@ const Layout = () => {
     if (PantryStatus === 'idle' || ItemStatus === 'idle'){
         display = <p>Loading....</p>
     }
+    // const LoginStatus = useAppSelector(state => state.Login.status)
+    // useEffect(()=> {
+    //     if(LoginStatus === 'notLoggedIn'){
+    //         display = 
+    //     }
+    // })
     return (
         <>
         <Navbar>
