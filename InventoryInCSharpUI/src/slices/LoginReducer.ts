@@ -1,9 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {createSlice, isRejectedWithValue, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../Stores/Store'
 import Login from '../DataModels/Login'
 import StatusString from '../DataModels/StatusString'
-import login from "../DataModels/Login";
-import {ItemsReducer} from "./ItemsReducer";
+import {createLogin} from "../Thunks/LoginThunks";
 
 
 interface LoginState{
@@ -32,8 +31,20 @@ export const LoginReducer = createSlice({
             }
             else{ state.error = "Incorrect UserName or Password"}
         },
-        
+        extraReducers: (builder) => {
+            builder.error(createLogin.pending, (state, action) => {
+                // both `state` and `action` are now correctly typed
+                // based on the slice state and the `pending` action creator
+            })
     }
-})
+},
+extraReducers: (builder) => {
+        builder
+                .addMatcher( isRejectedWithValue(),
+                        (state: LoginState, action: PayloadAction<String>) => {state.error = action.payload}
+                )
+}
+        
+)
 
 export const {goCreateLogin, goFetchLogin} = LoginReducer.actions;
