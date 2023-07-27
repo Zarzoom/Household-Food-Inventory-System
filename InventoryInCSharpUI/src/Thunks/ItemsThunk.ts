@@ -1,5 +1,6 @@
 
 import HttpClient from '../Services/Controlers/HttpClient'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
 import {AppThunk } from '../Stores/Store'
@@ -7,16 +8,12 @@ import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem} from '../slices/
 import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
 
 const client = new HttpClient();
-export const fetchItems =
-    (): AppThunk => 
-        async dispatch => {
-            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
-                .then(response => response.json())
-                .then(response => response as getItem[]);
-            dispatch(
-                goFetchItems(asyncResponse)
-            )
-        };
+export const fetchItems = createAsyncThunk(
+        'items/fetchItems',
+                async (arg, thunkAPI) => (
+                        goFetchItems(await client.getData(process.env.REACT_APP_API + '/api/Item')))
+                )
+      
 
 export const createItem =
     (newItem:Item): AppThunk =>
