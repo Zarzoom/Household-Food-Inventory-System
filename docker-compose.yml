@@ -29,7 +29,7 @@ services:
         build:
             context: ./
             dockerfile: ./UI.Dockerfile
-            target: "server"
+            target: "localdev"
         ports:
             - "8080:8080"
               

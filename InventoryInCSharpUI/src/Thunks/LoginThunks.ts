@@ -2,6 +2,7 @@ import HttpClient from '../Services/Controlers/HttpClient'
 import Login from "../DataModels/Login"
 import {AppThunk} from "../Stores/Store";
 import {goCreateLogin, goFetchLogin} from "../slices/LoginReducer";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
 const client = new HttpClient();
 
@@ -24,4 +25,4 @@ export const fetchLogin =
             dispatch(
                     goFetchLogin(asynchResponse)
             )
-        }
+        };
