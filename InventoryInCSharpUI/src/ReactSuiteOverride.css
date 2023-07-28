@@ -6,6 +6,7 @@
 .BlueBox {
     margin-bottom: 1em;
     background-color: rgba(6, 56, 82);
+    font-family: Arial, Helvetica, sans-serif;
 }
 .paddedRow{
     align-content: center;

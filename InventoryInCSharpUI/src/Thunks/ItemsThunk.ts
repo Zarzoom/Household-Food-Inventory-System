@@ -11,7 +11,7 @@ const client = new HttpClient();
 export const fetchItems = createAsyncThunk(
         'items/fetchItems',
                 async (arg, thunkAPI) => (
-                        goFetchItems(await client.getData(process.env.REACT_APP_API + '/api/Item')))
+                       thunkAPI.dispatch( goFetchItems(await client.getData(process.env.REACT_APP_API + '/api/Item').then(response => response.json()).then(response => response as getItem[]))))
                 )
       
 
