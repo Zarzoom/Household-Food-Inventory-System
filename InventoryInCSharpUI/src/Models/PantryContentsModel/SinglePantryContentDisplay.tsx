@@ -4,7 +4,7 @@ import {updatePantryContents} from "../../Thunks/PantryContentsThunk"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectItemsByID} from "../../slices/ItemsReducer"
 import getItem from "../../DataModels/getItem"
-import { Button, InputNumber} from 'rsuite';
+import { Button, Panel, InputNumber} from 'rsuite';
 import {DeletePantryContents} from './DeletePantryContents'
 
 
@@ -32,7 +32,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
     const pantryItem = useAppSelector(state=>selectItemsByID(state, pantryContents.pcItemID))
     const item = pantryItem as getItem;
     return(
-        <div className= "SinglePantryContentDisplay">
+        <Panel className= "SinglePantryContentDisplay">
             <div className= "BlueBox" key = {"" + pantryContents.pantryContentID +pantryContents.pcItemID}>
                 <div className="col-md-9">
                     <p className={"whiteText"}>
@@ -48,6 +48,6 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
                     <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>
-        </div>
+        </Panel>
     )
 }

@@ -5,6 +5,7 @@ import Button from 'rsuite/Button';
 import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
 import {useState} from "react";
 import {addPantryContents} from "../../Thunks/PantryContentsThunk"
+import {Panel} from "rsuite";
 
 export function SingleItemForPantryContents(item: getItem){
     let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)
@@ -26,7 +27,7 @@ const newPantryContentsDispatch = () =>{
 }
     return(
         <div className="SingleItemDisplay">
-            <div className="BlueBox" key ={"" + item.itemID}>
+            <div key ={"" + item.itemID}>
                 <p className={"whiteText"}>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                 </p>
