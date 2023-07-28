@@ -38,9 +38,9 @@ useEffect(() =>{
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
         console.log(pantryContents.pantryContentID);
     return(
-        <List.Item className={"blueBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
+        <Panel className={"blueBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
-        </List.Item>
+        </Panel>
     )})
   
    return(
