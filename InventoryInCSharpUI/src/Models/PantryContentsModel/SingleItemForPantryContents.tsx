@@ -27,7 +27,7 @@ const newPantryContentsDispatch = () =>{
 }
     return(
         <div className="SingleItemDisplay">
-            <div key ={"" + item.itemID}>
+            <div className={"BlueBox"} key ={"" + item.itemID}>
                 <p className={"whiteText"}>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                 </p>

@@ -22,6 +22,7 @@ builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
 builder.Services.AddSingleton(CSSOS);
 
+
 Console.WriteLine(connection);
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
