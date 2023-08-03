@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import Pantry from '../DataModels/Pantry'
+import StatusString from "../DataModels/StatusString";
 import PantryNoID from '../DataModels/PantryNoID'
 
 interface PantryState{
     StateOfPantry: Pantry[]
-    status: 'idle' | 'succeeded' | 'search'| 'failed',
+    status: StatusString,
     search: string,
     error: string | null
 }

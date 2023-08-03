@@ -5,6 +5,7 @@ import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
 import { AnyAction } from 'redux'
 import {store} from '../Stores/Store'
 import {goFetchPantries, goCreatePantry, goUpdatePantry, goDeletePantry, goContentsPantrySearch} from '../slices/PantriesReducer'
+import {goSetStatus} from "../slices/ItemsReducer";
 
 const client = new HttpClient();
 
@@ -57,5 +58,11 @@ export const contentsPantrySearch =
         dispatch(
             goContentsPantrySearch(asynchResponse)
         )
-    }
+    };
+
+export const updatePantryStatus =
+        (statusUpdate: string): AppThunk =>
+                dispatch =>{
+                    dispatch(goSetStatus(statusUpdate))
+                }
     
