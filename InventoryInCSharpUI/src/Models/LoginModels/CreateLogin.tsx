@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {createLogin} from "../../Thunks/LoginThunks"
-import { goSubmitError} from "../../slices/LoginReducer"
+import {goSubmitError} from "../../slices/LoginReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import { Button, Input, Modal } from 'rsuite';
 import {useDispatch, useSelector} from "react-redux";
