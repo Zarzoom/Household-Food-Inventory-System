@@ -1,8 +1,7 @@
 import {useState} from "react";
 import {createItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import Item from "../../DataModels/Item"
-import { InputGroup, Button, Input, Modal, Grid, Row, Col } from 'rsuite';
+import { Button, Input, Modal } from 'rsuite';
 
 
 function AddItemModal() {
