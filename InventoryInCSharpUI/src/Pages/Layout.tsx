@@ -7,6 +7,32 @@ import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
     const dispatch = useAppDispatch();
+    useEffect(()=> {
+        if(LoginStatus === 'notLoggedIn'){
+            display =
+                    <>
+                        <Navbar>
+                            <Nav>
+                                <Nav.Item className={"nav-item"}>
+                                    <Link className={"nav-link"} to={"/"}>Login</Link>
+                                </Nav.Item>
+                                <Nav.Item disabled={true} className="nav-item">
+                                    <Link className="nav-link" to="/pantryContents">Home</Link>
+                                </Nav.Item>
+                                <Nav.Item disabled={true} className="nav-item">
+                                    <Link className="nav-link" to="/pantry">Pantry</Link>
+                                </Nav.Item>
+                                <Nav.Item disabled={true} className="nav-item">
+                                    <Link className="nav-link" to="/item">Items</Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Navbar>
+                    </>}
+        else if (LoginStatus === 'idle'){
+            dispatch(updateItemStatus("idle"));
+            dispatch(updatePantryStatus("idle"));
+        }
+    })
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
         if(ItemStatus === 'idle') {
@@ -24,32 +50,7 @@ const Layout = () => {
         display = <p>Loading....</p>
     }
     const LoginStatus = useAppSelector(state => state.Login.status)
-    useEffect(()=> {
-        if(LoginStatus === 'notLoggedIn'){
-            display = 
-        <>        
-            <Navbar>
-                <Nav>
-                    <Nav.Item className={"nav-item"}>
-                        <Link className={"nav-link"} to={"/"}>Login</Link>
-                    </Nav.Item>
-                    <Nav.Item disabled={true} className="nav-item">
-                        <Link className="nav-link" to="/pantryContents">Home</Link>
-                    </Nav.Item>
-                    <Nav.Item disabled={true} className="nav-item">
-                        <Link className="nav-link" to="/pantry">Pantry</Link>
-                    </Nav.Item>
-                    <Nav.Item disabled={true} className="nav-item">
-                        <Link className="nav-link" to="/item">Items</Link>
-                    </Nav.Item>
-                </Nav>
-            </Navbar>
-        </>}
-            else if (LoginStatus === 'idle'){
-                dispatch(updateItemStatus("idle"));
-                dispatch(updatePantryStatus("idle"));
-            }
-    })
+
 
             return (
         <>
