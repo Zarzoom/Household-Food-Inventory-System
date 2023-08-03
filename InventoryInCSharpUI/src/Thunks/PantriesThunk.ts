@@ -1,8 +1,11 @@
 import HttpClient from '../Services/Controlers/HttpClient'
 import Pantry from '../DataModels/Pantry'
 import PantryNoID from '../DataModels/PantryNoID'
-import {AppThunk } from '../Stores/Store'
+import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
+import { AnyAction } from 'redux'
+import {store} from '../Stores/Store'
 import {goFetchPantries, goCreatePantry, goUpdatePantry, goDeletePantry, goContentsPantrySearch} from '../slices/PantriesReducer'
+import {goSetStatus} from "../slices/ItemsReducer";
 
 const client = new HttpClient();
 
@@ -40,7 +43,7 @@ export const updatePantry =
 export const deletePantry =
     (deletePantryID: Number): AppThunk =>
         async dispatch =>{
-    await client.putData(process.env.REACT_APP_API + '/api/Pantry/deletePantry/'+ deletePantryID);
+    const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Pantry/deletePantry/'+ deletePantryID);
     dispatch(
         goDeletePantry(deletePantryID)
     )
@@ -55,5 +58,11 @@ export const contentsPantrySearch =
         dispatch(
             goContentsPantrySearch(asynchResponse)
         )
-    }
+    };
+
+export const updatePantryStatus =
+        (statusUpdate: string): AppThunk =>
+                dispatch =>{
+                    dispatch(goSetStatus(statusUpdate))
+                }
     

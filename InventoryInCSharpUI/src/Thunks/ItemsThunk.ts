@@ -3,7 +3,7 @@ import HttpClient from '../Services/Controlers/HttpClient'
 import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
 import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
-import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goContentsItemSearch, selectContainsSearch} from '../slices/ItemsReducer'
+import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goSetStatus, goContentsItemSearch, selectContainsSearch} from '../slices/ItemsReducer'
 import { AnyAction } from 'redux'
 import {store} from '../Stores/Store'
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
@@ -56,6 +56,12 @@ export const updateItem =
                 goUpdateItem(asynchResponse)
             )
         };
+
+export const updateItemStatus =
+        (statusUpdate: string): AppThunk =>
+                dispatch =>{
+    dispatch(goSetStatus(statusUpdate))
+                }
 
 // export const contentsItemSearch =
 //     (search: String): AppThunk =>

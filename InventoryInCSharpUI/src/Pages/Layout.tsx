@@ -1,8 +1,8 @@
 ﻿import { Outlet, Link } from "react-router-dom";
 import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
 import {useState, useEffect} from "react";
-import {fetchItems} from "../Thunks/ItemsThunk"
-import {fetchPantries} from "../Thunks/PantriesThunk"
+import {fetchItems, updateItemStatus} from "../Thunks/ItemsThunk"
+import {fetchPantries, updatePantryStatus} from "../Thunks/PantriesThunk"
 import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
@@ -23,13 +23,35 @@ const Layout = () => {
     if (PantryStatus === 'idle' || ItemStatus === 'idle'){
         display = <p>Loading....</p>
     }
-    // const LoginStatus = useAppSelector(state => state.Login.status)
-    // useEffect(()=> {
-    //     if(LoginStatus === 'notLoggedIn'){
-    //         display = 
-    //     }
-    // })
-    return (
+    const LoginStatus = useAppSelector(state => state.Login.status)
+    useEffect(()=> {
+        if(LoginStatus === 'notLoggedIn'){
+            display = 
+        <>        
+            <Navbar>
+                <Nav>
+                    <Nav.Item className={"nav-item"}>
+                        <Link className={"nav-link"} to={"/"}>Login</Link>
+                    </Nav.Item>
+                    <Nav.Item disabled={true} className="nav-item">
+                        <Link className="nav-link" to="/pantryContents">Home</Link>
+                    </Nav.Item>
+                    <Nav.Item disabled={true} className="nav-item">
+                        <Link className="nav-link" to="/pantry">Pantry</Link>
+                    </Nav.Item>
+                    <Nav.Item disabled={true} className="nav-item">
+                        <Link className="nav-link" to="/item">Items</Link>
+                    </Nav.Item>
+                </Nav>
+            </Navbar>
+        </>}
+            else if (LoginStatus === 'idle'){
+                dispatch(updateItemStatus("idle"));
+                dispatch(updatePantryStatus("idle"));
+            }
+    })
+
+            return (
         <>
         <Navbar>
             <Nav>
