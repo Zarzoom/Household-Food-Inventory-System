@@ -36,9 +36,9 @@ export const LoginReducer = createSlice({
         goFetchLogin: (state, action:PayloadAction<Login>) =>{
             if(state.StateOfLogin == action.payload){
                 state.status = 'idle';
-                // state.Items.status = 'idle';
-                // state.Pantry.status = 'idle';
-                // state.PantryContents.status = 'idle';
+                state.Items.status = 'idle';
+                state.Pantry.status = 'idle';
+                state.PantryContents.status = 'idle';
                 state.StateOfLogin = action.payload;
             }
             else{ state.error = "Incorrect UserName or Password"}
