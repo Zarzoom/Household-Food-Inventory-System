@@ -13,8 +13,16 @@ export const createLogin =
     (newLogin: Login): AppThunk => 
         async dispatch => {
             const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Login', newLogin)
-                .then(response => response.json())
-                .then(response => response as string)
+                .then(response => {
+                    if(response.status === 409){
+                        console.log(response);
+                        return response.text();
+                    }
+                    else {
+                        return response.json() as Login;
+                    }
+                console.log(response);
+                })
             const Response = asynchResponse as string
             if(Response.includes( "The user name has already been taken. Please, choose another.")){
                 dispatch(
