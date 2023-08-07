@@ -23,15 +23,20 @@ export const createLogin =
                     }
                 console.log(response);
                 })
-            const Response = asynchResponse as string
-            if(Response.includes( "The user name has already been taken. Please, choose another.")){
+            const Response = asynchResponse
+            if(typeof Response === "string" && Response.includes( "The user name has already been taken. Please, choose another.")){
                 dispatch(
-                        goSubmitError(asynchResponse)
+                        goSubmitError( "The user name has already been taken. Please, choose another.")
+                )
+                
+            }
+            else if(typeof Response === "string" && !Response.includes( "The user name has already been taken. Please, choose another.")){
+                dispatch(
+                        goSubmitError("Something went wrong. Please try again.")
                 )
             }
             else{
-                const sendResponse = JSON.parse(asynchResponse);
-                dispatch(goCreateLogin(sendResponse))
+                dispatch(goCreateLogin(asynchResponse));
             }
             
         };
