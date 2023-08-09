@@ -4,14 +4,28 @@ import {goSubmitError} from "../../slices/LoginReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import { Button, Input, Modal, Message, useToaster } from 'rsuite';
 import Login from "../../DataModels/Login"
-import {PLACEMENT} from "rsuite/utils";
 
 
-export function CreateLogin(){
+export function SignIn(){
     const [open, setOpen] = useState(false);
     // const [displayed, setDisplayed] = useState("")
     let displayed = <p></p>;
-    const[newUsername, setUsername] = useState("");
+    const[signInLogin, setSignInLogin] = useState({
+        username: "",
+        password: "",
+    });
+
+    const updateUsername = (attemptedUsername: string) => {
+        setSignInLogin(previousState => {
+            return {...previousState, username: attemptedUsername}
+        })
+    }
+
+    const updatePassword = (attemptedPassword: string) => {
+        setSignInLogin(previousState => {
+            return {...previousState, password: attemptedPassword}
+        })
+    }
 
     const dispatch = useAppDispatch();
     const newLogin = useAppSelector(state => state.Login.StateOfLogin);
@@ -19,14 +33,14 @@ export function CreateLogin(){
     const toaster = useToaster();
 
     const newLoginDispatch = () =>{
-        const loginToJSONStringify = JSON.stringify(newUsername);
+        const loginToJSONStringify = JSON.stringify(signInLogin);
         const loginToJsonParse = JSON.parse(loginToJSONStringify);
         const loginLogin: Login = {username: loginToJsonParse}
         dispatch(createLogin(loginLogin));
-            
-          
+
+
     }
-    if(error !== undefined && error === "The user name has already been taken. Please, choose another.") {
+    if(error !== undefined && error === "Incorrect UserName or Password") {
         displayed = (<p> user name has already been taken. Please, choose another.</p>)
         toaster.push(<Message closable={true} type={"warning"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayed}</Message>, {placement: 'topCenter'});
@@ -35,7 +49,7 @@ export function CreateLogin(){
         displayed = (<p>Something went wrong. Please try again.</p>)
         toaster.push(<Message closable={true} type={"warning"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayed}</Message>, {placement: 'topCenter'});
-       
+
     }
     else if(error === undefined && newLogin !== undefined){
         displayed = (<p>Username: {newLogin.username}/nPassword: {newLogin.password}</p>)
@@ -44,40 +58,18 @@ export function CreateLogin(){
     }
 
 
-
-
-
-const cancelLoginDispatch = () => {
-setUsername("");
-    setOpen(false);
-}
-
-const closeMessage = () => {
-        displayed = (<p/>)
-}
-
-const closeModal = () => {
+    
+    const cancelSignInDispatch = () => {
+        updatePassword("");
+        updateUsername("");
         setOpen(false);
-    dispatch(goSubmitError(undefined));
-}
+    }
 
-return (
-        <div>
-            <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>setOpen(true)}>Create Login</Button>
-            <Modal open={open} onClose={()=>closeModal()}>
-                <Modal.Header></Modal.Header>
-                <div className= "blueBackground">
-                    <Modal.Body>
-                        <p>Logins are intended to customize user experience and not for security purposes.</p>
-                        <label>Username:</label><br/>
-                        <Input placeholder="beans" value={newUsername}
-                               onChange={(value: string, event) => setUsername(value)}/><br/>
-                        <div> {displayed}</div>
-                        <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Add</Button>
-                        <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => cancelLoginDispatch()}>Cancel</Button>
-                    </Modal.Body>
-                </div>
-            </Modal>
-        </div>
-);
-};
+    const closeMessage = () => {
+        displayed = (<p/>)
+    }
+
+    const closeModal = () => {
+        setOpen(false);
+        dispatch(goSubmitError(undefined));
+    }

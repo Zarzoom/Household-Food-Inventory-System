@@ -14,7 +14,7 @@ export const createLogin =
         async dispatch => {
             const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Login', newLogin)
                 .then(response => {
-                    if(response.status === 409){
+                    if(response.status !== 200){
                         console.log(response);
                         return response.text();
                     }
@@ -26,16 +26,17 @@ export const createLogin =
             const Response = asynchResponse
             if(typeof Response === "string" && Response.includes( "The user name has already been taken. Please, choose another.")){
                 dispatch(
-                        goSubmitError( "The user name has already been taken. Please, choose another.")
+                        goSubmitError( Response as string)
                 )
                 
             }
-            else if(typeof Response === "string" && !Response.includes( "The user name has already been taken. Please, choose another.")){
+            else if(typeof Response === "string"){
                 dispatch(
-                        goSubmitError("Something went wrong. Please try again.")
+                        goSubmitError("Something went wrong. Please try again." as string)
                 )
             }
             else{
+                dispatch(goSubmitError(undefined))
                 dispatch(goCreateLogin(asynchResponse));
             }
             
