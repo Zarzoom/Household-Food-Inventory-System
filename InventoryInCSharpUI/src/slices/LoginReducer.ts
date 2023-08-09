@@ -4,6 +4,7 @@ import Login from '../DataModels/Login'
 import StatusString from '../DataModels/StatusString'
 import {createLogin} from "../Thunks/LoginThunks";
 import {useSelector} from "react-redux";
+import {stat} from "fs";
 
 
 interface LoginState{
@@ -29,9 +30,11 @@ export const LoginReducer = createSlice({
     reducers:{
         goCreateLogin: (state, action: PayloadAction<Login>)=>{
             state.StateOfLogin = action.payload; 
+            console.log(state.StateOfLogin);
         },
         goSubmitError: (state, action:PayloadAction<string|undefined>)=>{
             state.error = action.payload;
+            console.log(state.error);
         },
         goValidateLogin: (state, action:PayloadAction<Login>) =>{
             if(state.StateOfLogin == action.payload){
