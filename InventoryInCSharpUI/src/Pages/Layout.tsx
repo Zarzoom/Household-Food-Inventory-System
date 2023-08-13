@@ -44,17 +44,17 @@ const Layout = () => {
                     <Link className="nav-link" to="/">Login</Link>
                 </Nav.Item>
                 <Nav.Item className="nav-item">
-                    <Link className="nav-link" to="/myPantry">MyPantry</Link>
+                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/myPantry":"#"}>MyPantry</Link>
                 </Nav.Item>
                 <Nav.Item className="nav-item">
                     <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/pantry":"#"}>Pantry</Link>
                 </Nav.Item>
                 <Nav.Item className="nav-item" disabled={loggedIn}>
-                    <Link className="nav-link" to="/item">Items</Link>
+                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/item":"#"}>Items</Link>
                 </Nav.Item>
             </Nav>
         </Navbar>
-    {display}
+    {display}  
         </>
 
     )
