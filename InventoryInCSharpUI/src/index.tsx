@@ -10,6 +10,7 @@ import MyPantry from "./Pages/MyPantry"
 import "./ReactSuiteOverride.css"
 import {useEffect} from "react";
 import {useAppSelector} from "./Hooks/hooks";
+import "./StyleSheet.less"
 
 export default function App() {
     
