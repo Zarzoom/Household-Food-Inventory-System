@@ -12,10 +12,10 @@ const Layout = () => {
     
     useEffect(()=> {
         if (LoginStatus === "notLoggedIn"){
-            setLoggedIn(true)
+            setLoggedIn(false)
         }
         else {
-            setLoggedIn(false)
+            setLoggedIn(true)
         }
     }, [LoginStatus])
     const ItemStatus = useAppSelector(state => state.Items.status)
@@ -43,11 +43,11 @@ const Layout = () => {
                 <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/">Login</Link>
                 </Nav.Item>
-                <Nav.Item className="nav-item" disabled={loggedIn}>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to="/myPantry">MyPantry</Link>
                 </Nav.Item>
-                <Nav.Item className="nav-item" disabled={loggedIn}>
-                    <Link className="nav-link" to="/pantry">Pantry</Link>
+                <Nav.Item className="nav-item">
+                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/pantry":"#"}>Pantry</Link>
                 </Nav.Item>
                 <Nav.Item className="nav-item" disabled={loggedIn}>
                     <Link className="nav-link" to="/item">Items</Link>
