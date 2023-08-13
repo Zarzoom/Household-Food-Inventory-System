@@ -1,80 +1,57 @@
-@import "rsuite/lib/styles/themes/default/index.less"; //The default style file.
-@import 'custom-theme.less'; // Style customization.
 
-@card_color: rgba(6, 56, 82);
-@secondary_card_color: rgba(230,223,68);
-@light_button: rgba(230,223,68);
-@light_button_hover: rgba(255,186,67);
-@dark_button: rgba(6, 56, 82);
-@dark_button_hover: rgba(1, 26, 39);
-@black: black;
-@white: white;
+@import '~rsuite/styles/index.less'; //The default style file.
 
-
-
-.centerContainer{
-  display: flex;
-  align-items: center;
-}
-
-.centerHorizontally{
+.centerHorizontally {
   text-align: center;
 }
-
-.paddedRow{
+.BlueBox {
+  margin-bottom: 1em;
+  background-color: rgba(143, 184, 255, 0.5);
+}
+.paddedRow {
   align-content: center;
 }
-
-.padding{
+.padding {
   margin-bottom: 1em;
 }
-
-.yellowBackground{
-  background-color: @secondary_card_color;
+.yellowBackground {
+  background-color: rgba(255, 214, 143);
 }
 .blueBackground {
   margin-bottom: 1em;
-  background-color: @secondary_card_color;
+  background-color: rgba(143, 184, 255);
   color: black;
 }
 .blueButton {
-  color: white;
-  background-color: @dark_button;
-  margin-bottom: 1em;
-}
-
-.blueButton:hover{
-  background-color: @dark_button_hover;
-}
-
-.yellowButton{
-  /*border: thin solid rgba(240, 129, 15);*/
   color: black;
-  background-color: @light_button;
+  background-color: rgba(143, 184, 255);
   margin-bottom: 1em;
+  &:hover {
+    background-color: rgba(67,136,255);
+  }
 }
-
-.yellowButton:hover{
-  background: @light_button_hover;
+.yellowButton {
+  color: black;
+  background-color: rgba(255, 214, 143);
+  margin-bottom: 1em;
+  &:hover {
+    background: rgba(255,186,67);
+  }
 }
-
-//.labelForSearch{
-//  color: black;
-//  background-color: rgba(143, 184, 255);
-//  padding-left: 1em;
-//  padding-right:1em;
-//}
-
-.columnRightAlign{
+.labelForSearch {
+  color: black;
+  background-color: rgba(143, 184, 255);
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.columnRightAlign {
   align-content: end;
   align-items: flex-end;
 }
-
-.autoWidthGrid{
+.autoWidthGrid {
   width: auto;
 }
-
-.rightAlignDiv{
+.rightAlignDiv {
   margin-left: auto;
   margin-right: 0;
 }
