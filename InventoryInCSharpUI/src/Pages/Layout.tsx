@@ -12,6 +12,9 @@ const Layout = () => {
     
     useEffect(()=> {
         if (LoginStatus === "notLoggedIn"){
+            setLoggedIn(true)
+        }
+        else {
             setLoggedIn(false)
         }
     }, [LoginStatus])

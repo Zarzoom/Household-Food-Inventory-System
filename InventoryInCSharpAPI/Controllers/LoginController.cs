@@ -49,7 +49,7 @@ public class LoginController : ControllerBase
         var searchResult = loginManager.findUserWithPasswordAndUsername(searchUser);
         if (searchResult == null)
         {
-            return (NotFound("User name or password is incorrect."));
+            return (NotFound("Username or password is incorrect."));
         }
         else
         {

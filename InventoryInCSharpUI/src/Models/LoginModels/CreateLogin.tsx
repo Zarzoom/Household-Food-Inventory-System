@@ -16,6 +16,7 @@ export function CreateLogin(){
     const dispatch = useAppDispatch();
     const newLogin = useAppSelector(state => state.Login.StateOfLogin);
     const error = useAppSelector(state=>(state.Login.error));
+    const status = useAppSelector(state => (state.Login.status));
     const toaster = useToaster();
 
     const newLoginDispatch = () =>{
@@ -23,21 +24,20 @@ export function CreateLogin(){
         const loginToJsonParse = JSON.parse(loginToJSONStringify);
         const loginLogin: Login = {username: loginToJsonParse}
         dispatch(createLogin(loginLogin));
-            
           
     }
-    if(error !== undefined && error === "The user name has already been taken. Please, choose another.") {
+    if(error !== undefined && error === "The user name has already been taken. Please, choose another." && open === true) {
         displayed = (<p> user name has already been taken. Please, choose another.</p>)
         toaster.push(<Message closable={true} type={"warning"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayed}</Message>, {placement: 'topCenter'});
     }
-    else if(error !== undefined && error === "Something went wrong. Please try again."){
+    else if(error !== undefined && error === "Something went wrong. Please try again." && open === true){
         displayed = (<p>Something went wrong. Please try again.</p>)
         toaster.push(<Message closable={true} type={"warning"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayed}</Message>, {placement: 'topCenter'});
        
     }
-    else if(error === undefined && newLogin !== undefined){
+    else if(error === undefined && newLogin !== undefined && status === "notLoggedIn" && open === true){
         displayed = (<p>Username: {newLogin.username}/nPassword: {newLogin.password}</p>)
         toaster.push(<Message closable={true} type={"info"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayed}</Message>, {placement: 'topCenter'});
@@ -61,9 +61,14 @@ const closeModal = () => {
     dispatch(goSubmitError(undefined));
 }
 
+    const openModal = () => {
+        setOpen(true)
+        dispatch(goSubmitError(undefined));
+    }
+
 return (
         <div>
-            <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>setOpen(true)}>Create Login</Button>
+            <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>{openModal()}}>Create Login</Button>
             <Modal open={open} onClose={()=>closeModal()}>
                 <Modal.Header></Modal.Header>
                 <div className= "blueBackground">
@@ -78,6 +83,6 @@ return (
                     </Modal.Body>
                 </div>
             </Modal>
-        </div>
+        </div> 
 );
 };

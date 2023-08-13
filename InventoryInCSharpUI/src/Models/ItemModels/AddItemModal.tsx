@@ -1,12 +1,15 @@
 import {useState} from "react";
 import {createItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
+import {useAppSelector} from "../../Hooks/hooks";
 import { Button, Input, Modal } from 'rsuite';
+import Login from "../../DataModels/Login";
 
 
 function AddItemModal() {
     
     const [open, setOpen] = useState(false);
+    
     
     const [item, setItem] = useState({
         brand: "",

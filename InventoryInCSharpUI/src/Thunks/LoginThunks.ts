@@ -4,6 +4,8 @@ import {AppThunk} from "../Stores/Store";
 import {goCreateLogin, goValidateLogin, goSubmitError} from "../slices/LoginReducer";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {useSelector} from "react-redux";
+import {type} from "os";
+import {goSetStatus} from "../slices/ItemsReducer";
 
 
 const client = new HttpClient();
@@ -44,10 +46,25 @@ export const createLogin =
 export const validateLogin =
     (attemptedLogin: Login): AppThunk =>
         async dispatch => {
-            const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/Login/LoginSearch')
-                .then(response => response.json())
-                .then(response => response as Login);
-            dispatch(
-                    goValidateLogin(asynchResponse)
-            )
+            const asyncResponse = await client.putData(process.env.REACT_APP_API + '/api/Login/LoginSearch', attemptedLogin)
+                .then(response => {
+                    if(response.status !== 200){
+                        return response.text();
+                    }
+                    else{
+                        return  response.json() as Boolean;
+                    }
+                });
+            const response = asyncResponse;
+            if(typeof  response === "string" && response.includes("Username or password is incorrect.")){
+                dispatch(goSubmitError("Username or password is incorrect."));
+            }
+            else if(typeof response === "string"){
+                dispatch(goSubmitError("Something went wrong. Please try again."))
+            }
+            else {
+                dispatch(goSubmitError(undefined));
+                dispatch(goSetStatus('idle'))
+                dispatch(goValidateLogin(attemptedLogin));
+            }
         };

@@ -1,5 +1,6 @@
 import {Grid, Stack, Col, Row, Panel} from "rsuite"
 import {CreateLogin} from "../Models/LoginModels/CreateLogin"
+import {SignIn} from "../Models/LoginModels/SignIn";
 
 
 const Login = () => {
@@ -7,7 +8,7 @@ const Login = () => {
             <Grid fluid>
                 <Row>
                     <Col xsOffset={11} xs={2} >
-            <CreateLogin></CreateLogin>
+            <CreateLogin></CreateLogin><SignIn></SignIn>
                         </Col>
                 </Row>
             </Grid>
