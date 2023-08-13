@@ -36,15 +36,12 @@ export const LoginReducer = createSlice({
             state.error = action.payload;
             console.log(state.error);
         },
+        goSetStatus: (state, action: PayloadAction<string>) =>{
+            const NewStatus: StatusString = action.payload as StatusString;
+            state.status = NewStatus;
+        },
         goValidateLogin: (state, action:PayloadAction<Login>) =>{
-            if(state.StateOfLogin == action.payload){
-                state.status = 'idle';
-                // state.Items.status = 'idle';
-                // state.Pantry.status = 'idle';
-                // state.PantryContents.status = 'idle';
-                state.StateOfLogin = action.payload;
-            }
-            else{ state.error = "Incorrect UserName or Password"}
+            state.StateOfLogin = action.payload;
         },
         
 },
@@ -53,4 +50,4 @@ export const LoginReducer = createSlice({
         
 )
 
-export const {goCreateLogin, goValidateLogin, goSubmitError} = LoginReducer.actions;
+export const {goCreateLogin, goValidateLogin, goSubmitError, goSetStatus} = LoginReducer.actions;
