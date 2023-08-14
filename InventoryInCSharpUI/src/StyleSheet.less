@@ -1,57 +1,79 @@
 
 @import '~rsuite/styles/index.less'; //The default style file.
 
-.centerHorizontally {
+
+
+@card_color: rgba(6, 56, 82);
+@secondary_card_color: rgba(230, 223, 68);
+@light_button: rgba(230, 223, 68);
+@light_button_hover: rgba(255, 186, 67);
+@dark_button: rgba(6, 56, 82);
+@dark_button_hover: rgba(1, 26, 39);
+@black: black;
+@white: white;
+
+
+.centerContainer{
+  display: flex;
+  align-items: center;
+}
+
+.centerHorizontally{
   text-align: center;
 }
-.BlueBox {
-  margin-bottom: 1em;
-  background-color: rgba(143, 184, 255, 0.5);
-}
-.paddedRow {
+
+.paddedRow{
   align-content: center;
 }
-.padding {
+
+.padding{
   margin-bottom: 1em;
 }
-.yellowBackground {
-  background-color: rgba(255, 214, 143);
+
+.yellowBackground{
+  background-color: @secondary_card_color;
 }
 .blueBackground {
   margin-bottom: 1em;
-  background-color: rgba(143, 184, 255);
+  background-color: @secondary_card_color;
   color: black;
 }
 .blueButton {
-  color: black;
-  background-color: rgba(143, 184, 255);
+  color: white;
+  background-color: @dark_button;
   margin-bottom: 1em;
-  &:hover {
-    background-color: rgba(67,136,255);
-  }
-}
-.yellowButton {
+
+  &:hover{
+    background-color: @dark_button_hover;
+  }}
+
+.yellowButton{
+  /*border: thin solid rgba(240, 129, 15);*/
   color: black;
-  background-color: rgba(255, 214, 143);
+  background-color: @light_button;
   margin-bottom: 1em;
-  &:hover {
-    background: rgba(255,186,67);
-  }
-}
-.labelForSearch {
-  color: black;
-  background-color: rgba(143, 184, 255);
-  padding-left: 1em;
-  padding-right: 1em;
-}
-.columnRightAlign {
+
+  &:hover{
+    background: @light_button_hover;
+  }}
+
+//.labelForSearch{
+//  color: black;
+//  background-color: rgba(143, 184, 255);
+//  padding-left: 1em;
+//  padding-right:1em;
+//}
+
+.columnRightAlign{
   align-content: end;
   align-items: flex-end;
 }
-.autoWidthGrid {
+
+.autoWidthGrid{
   width: auto;
 }
-.rightAlignDiv {
+
+.rightAlignDiv{
   margin-left: auto;
   margin-right: 0;
 }
