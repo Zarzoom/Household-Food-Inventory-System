@@ -12,9 +12,9 @@ import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
 
 const client = new HttpClient();
 export const fetchItems =
-    (): AppThunk => 
+    (password: number): AppThunk => 
         async dispatch => {
-            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item')
+            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Item/userSearch/'+ password)
                 .then(response => response.json())
                 .then(response => response as getItem[]);
             dispatch(

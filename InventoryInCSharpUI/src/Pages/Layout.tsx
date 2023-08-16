@@ -8,20 +8,16 @@ import { Navbar, Nav, Header, Content} from 'rsuite';
 const Layout = () => {
     const dispatch = useAppDispatch();
     const LoginStatus = useAppSelector(state => state.Login.status) as string;
+    const userLoginSelector = useAppSelector(state => state.Login.StateOfLogin);
     const [loggedIn, setLoggedIn] = useState(false);
     
-    useEffect(()=> {
-        if (LoginStatus === "notLoggedIn"){
-            setLoggedIn(false)
-        }
-        else {
-            setLoggedIn(true)
-        }
-    }, [LoginStatus])
     const ItemStatus = useAppSelector(state => state.Items.status)
     useEffect(()=> {
-        if(ItemStatus === 'idle') {
-            const ItemList = dispatch(fetchItems())
+        if(ItemStatus === 'idle' && userLoginSelector !== undefined) {
+            const user = userLoginSelector;
+            const userPasswordString = "${user.password}"
+            const userPassword = +userPasswordString;
+            const ItemList = dispatch(fetchItems(userPassword));
         }
     }, [ItemStatus, dispatch])
     const PantryStatus = useAppSelector(state => state.Pantry.status)

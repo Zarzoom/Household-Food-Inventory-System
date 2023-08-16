@@ -6,5 +6,6 @@ type getItem = {
     genericName: string
     size: string
     quantity?: number
+    password: number
 }
 export default getItem;
