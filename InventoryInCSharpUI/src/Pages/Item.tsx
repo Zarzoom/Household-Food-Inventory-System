@@ -1,4 +1,4 @@
-﻿import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
+import {ItemDisplay} from "../Models/ItemModels/ItemDisplay"
 import {SearchItem} from "../Models/ItemModels/SearchItem"
 import AddItemModal from "../Models/ItemModels/AddItemModal"
 import {Grid, Stack, Col, Row, Panel} from "rsuite"
