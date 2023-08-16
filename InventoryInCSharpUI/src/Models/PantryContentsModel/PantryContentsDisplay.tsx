@@ -45,7 +45,7 @@ useEffect(() =>{
   
    return(
        <Panel className={"panelBackground"} bordered header={<Grid className={'autoWidthGrid'}>
-           <Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}  style={{fontFamily: "'Times New Roman', Times, serif"}}>
+           <Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}>
            <List>
                {PantryItems}
            </List>
