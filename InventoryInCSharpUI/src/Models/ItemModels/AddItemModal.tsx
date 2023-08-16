@@ -12,6 +12,7 @@ function AddItemModal() {
         price: "",
         genericName: "",
         size: "",
+        password: "",
     });
 
     const updateBrand = (newBrand: string) => {

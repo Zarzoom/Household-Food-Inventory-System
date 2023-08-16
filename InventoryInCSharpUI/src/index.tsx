@@ -6,7 +6,7 @@ import {Provider} from "react-redux"
 import {store} from "./Stores/Store"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
-import "./ReactSuiteOverride.css"
+import "./StyleSheet.less"
 
 export default function App() {
     return (
