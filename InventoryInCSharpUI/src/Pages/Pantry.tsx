@@ -22,7 +22,7 @@ const Pantry = () => {
             </Row>
             <Grid fluid>
                 <Col xs={24} smOffset={3} sm={18} mdOffset={4} md={16} lgOffset={6} lg={12} xxlOffset={7} xxl={10}>
-                    <Panel bordered={true} header={<Stack justifyContent={'flex-end'}><AddPantryModal></AddPantryModal></Stack>}>
+                    <Panel className={"panelBackground"} bordered={true} header={<Stack justifyContent={'flex-end'}><AddPantryModal></AddPantryModal></Stack>}>
                         <PantryDisplay></PantryDisplay>
                     </Panel>
                 </Col>

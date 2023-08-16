@@ -1,4 +1,4 @@
-import Pantry from "../../DataModels/Pantry"
+﻿import Pantry from "../../DataModels/Pantry"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deletePantry} from "../../Thunks/PantriesThunk"
 import {useState} from "react";
@@ -16,21 +16,21 @@ export function DeletePantry(pantryForDelete: Pantry) {
     
     return (
         <div>
-            <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Delete</Button>
+            <Button className={"cardButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Delete</Button>
             <Modal open={open} onClose= {() => setOpen(false)}>
-                <div className={"BlueBox"}>
                     <Modal.Header>
                     </Modal.Header>
-                    <Modal.Body>
-                        <p className={"whiteText"}>
-                            Pantry Name: {pantryForDelete.pantryName}
-                        </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button appearance={'primary'} className={"yellowButton"} onClick={()=>setOpen(false)}>Cancel</Button>
-                        <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
-                    </Modal.Footer>
-                </div>
+                    <div className={"modalBackground"}>
+                        <Modal.Body>
+                            <p className={"whiteText"}>
+                                Pantry Name: {pantryForDelete.pantryName}
+                            </p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button appearance={'primary'} className={"modalButton"} onClick={()=>setOpen(false)}>Cancel</Button>
+                            <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
+                        </Modal.Footer>
+                    </div>
             </Modal>
         </div>
     );

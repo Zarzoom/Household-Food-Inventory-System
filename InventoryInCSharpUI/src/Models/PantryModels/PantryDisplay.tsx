@@ -1,4 +1,4 @@
-import Pantry from "../../DataModels/Pantry";
+﻿import Pantry from "../../DataModels/Pantry";
 import {useAppSelector} from '../../Hooks/hooks'
 import {selectContainsSearch} from "../../slices/PantriesReducer"
 import {SinglePantryDisplay} from "./SinglePantryDisplay"
@@ -13,7 +13,7 @@ export const PantryDisplay =() => {
    const AllPantries = useAppSelector(state=> selectContainsSearch(state))
     const renderedAllPantries = AllPantries.map((pantry: Pantry) => { return (
 
-            <List.Item className={"blueBackground"} key={"" + pantry.pantryID}>
+            <List.Item className={"cardBackground"} key={"" + pantry.pantryID}>
                 <SinglePantryDisplay {...pantry}></SinglePantryDisplay>
             </List.Item>
             )})

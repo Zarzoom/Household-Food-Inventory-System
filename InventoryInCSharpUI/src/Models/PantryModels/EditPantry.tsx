@@ -30,24 +30,25 @@ export function EditPantry(pantryForUpdate: Pantry) {
     return (
 
         <div>
-            <Button className={"yellowButton"} appearance={'primary'} onClick={()=>setOpen(true)}>Edit</Button>
+            <Button className={"cardButton"} appearance={'primary'} onClick={()=>setOpen(true)}>Edit</Button>
             <Modal open={open} onClose={()=> setOpen(false)}>
                 <Modal.Header>
-                    
                 </Modal.Header>
-                <Modal.Body>
-                    <div className= "BlueBox">
-                        <p>
-                            <label className={"whiteText"}>Pantry Name:</label><br/>
-                            <Input type="text" placeholder="beans" value={pantry.pantryName}
-                                   onChange={(value: string, event) => updatePantryName(value)}/>                          
-                        </p>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
-                    <Button appearance={'primary'} className={"yellowButton"} onClick={()=>setOpen(false)}>Cancel</Button> 
-                </Modal.Footer>
+                <div className= "modalBackground">
+                    <Modal.Body>
+                        
+                            <p>
+                                <label className={"whiteText"}>Pantry Name:</label><br/>
+                                <Input type="text" placeholder="beans" value={pantry.pantryName}
+                                       onChange={(value: string, event) => updatePantryName(value)}/>                          
+                            </p>
+                        
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => UpdatedPantryDispatch()}>Edit</Button>
+                        <Button appearance={'primary'} className={"modalButton"} onClick={()=>setOpen(false)}>Cancel</Button> 
+                    </Modal.Footer>
+                </div>
             </Modal>
         </div>
 

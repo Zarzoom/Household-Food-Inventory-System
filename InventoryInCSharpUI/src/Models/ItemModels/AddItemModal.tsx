@@ -63,10 +63,10 @@ function AddItemModal() {
     
     return (
         <div>
-        <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>setOpen(true)}>Add New Item</Button>
-            <Modal open={open} onClose={()=>setOpen(false)}>
+        <Button className={"displayBoxButton"} appearance={ 'primary'} onClick={(event: any)=>setOpen(true)}>Add New Item</Button>
+            <Modal open={open} onClose={()=>setOpen(false)} >
                 <Modal.Header></Modal.Header>
-            <div className= "blueBackground">
+            <div className={"modalBackground"}>
                 <Modal.Body>
 
                         <label className={"whiteText"}>Generic Name:</label><br/>
@@ -81,8 +81,8 @@ function AddItemModal() {
                         <label className={"whiteText"}>Price:</label><br/>
                         <Input step="any" placeholder="0.00" value={item.price}
                                onChange={(value: string, event) => updatePrice(value)}/><br/>
-                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => NewItemDispatch()}>Add</Button>
-                    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => CancelAddItem()}>Cancel</Button>
+                    <Button className={"cardButton"} appearance={'primary'} onClick={(event: any) => NewItemDispatch()}>Add</Button>
+                    <Button className={"cardButton"} appearance={'primary'} onClick={(event: any) => CancelAddItem()}>Cancel</Button>
                 </Modal.Body>
             </div>
         </Modal>

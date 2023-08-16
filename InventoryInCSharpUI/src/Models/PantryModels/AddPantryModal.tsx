@@ -35,11 +35,11 @@ function AddPantryModal() {
     }
     return (
         <div>
-            <Button className={"yellowButton"} appearance={ 'primary'} onClick={()=>setOpen(true)}>Add Pantry</Button>
+            <Button className={"displayBoxButton"} appearance={ 'primary'} onClick={()=>setOpen(true)}>Add Pantry</Button>
             <Modal open={open} onClose={()=>setOpen(false)}>
                 
         <div className="col-md-12">
-            <div className= "BlueBox">
+            <div className= "modalBackground">
                 <Modal.Body>
                 <p>
                     <label className={"whiteText"}>Pantry Name:</label><br/>
@@ -49,8 +49,8 @@ function AddPantryModal() {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => NewPantryDispatch()}>Add</Button>
-                <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => CancelAddPantry()}>Cancel</Button>
+                <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => NewPantryDispatch()}>Add</Button>
+                <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => CancelAddPantry()}>Cancel</Button>
             </Modal.Footer>
                 
             </div>

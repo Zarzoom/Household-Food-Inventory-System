@@ -2,15 +2,25 @@
 @import '~rsuite/styles/index.less'; //The default style file.
 
 
-
-@card_color: rgba(6, 56, 82);
-@secondary_card_color: rgba(230, 223, 68);
-@light_button: rgba(230, 223, 68);
-@light_button_hover: rgba(255, 186, 67);
-@dark_button: rgba(6, 56, 82);
-@dark_button_hover: rgba(1, 26, 39);
+@lightest: rgba(246, 196, 135, 1);
+@light: rgba(255, 97, 80, 1);
+@medium: rgba(7, 36, 72);
+@light_hover: rgba(255, 74, 55, 1);
+@dark_hover: rgba(9, 48, 95, 1);
+//@dark: rgba();
+//@darkest:rgba();
 @black: black;
 @white: white;
+@card_color: @medium;
+@secondary_card_color: @lightest;
+@display_box: @lightest;
+@display_box_button: @medium;
+@display_box_button_hover: @dark_hover;
+@card_button: @light;
+@card_button_hover: @light_hover;
+@card_text: @white;
+@button_text: @medium;
+@header_text: @black
 
 
 .centerContainer{
@@ -30,39 +40,46 @@
   margin-bottom: 1em;
 }
 
-.yellowBackground{
-  background-color: @secondary_card_color;
-}
-.blueBackground {
+.cardBackground {
   margin-bottom: 1em;
-  background-color: @secondary_card_color;
-  color: black;
+  background-color: @card_color;
+  color: @card_text;
 }
-.blueButton {
-  color: white;
-  background-color: @dark_button;
+.modalBackground {
+  margin-bottom: 1em;
+  background-color: @card_color;
+  color: @card_text;
+}
+.panelBackground {
+  background-color: @display_box;
+}
+.cardButton {
+  color: @medium;
+  background-color: @light;
   margin-bottom: 1em;
 
   &:hover{
-    background-color: @dark_button_hover;
+    background-color: @card_button_hover;
+  }}
+.modalButton {
+  color: @medium;
+  background-color: @light;
+  margin-bottom: 1em;
+
+  &:hover{
+    background-color: @card_button_hover;
   }}
 
-.yellowButton{
+.displayBoxButton{
   /*border: thin solid rgba(240, 129, 15);*/
-  color: black;
-  background-color: @light_button;
+  color: white;
+  background-color: @display_box_button;
   margin-bottom: 1em;
 
   &:hover{
-    background: @light_button_hover;
+    background: @display_box_button_hover;
   }}
 
-//.labelForSearch{
-//  color: black;
-//  background-color: rgba(143, 184, 255);
-//  padding-left: 1em;
-//  padding-right:1em;
-//}
 
 .columnRightAlign{
   align-content: end;

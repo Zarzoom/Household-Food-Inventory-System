@@ -16,19 +16,19 @@ export function DeletePantryContents(pantryContentsForDelete: PantryContents){
     
     return(
         <div>
-            <Button className={"yellowButton"} appearance={'primary'} onClick={()=>setOpenModal(true)}>Delete</Button>
+            <Button className={"cardButton"} appearance={'primary'} onClick={()=>setOpenModal(true)}>Delete</Button>
             <Modal open={openModal} onClose={()=>setOpenModal(false)}>
                 <Modal.Header></Modal.Header>
             <div>
-                <div className=" BlueBox">
+                <div className=" modalBackground">
                     <Modal.Body>
                     <p className={"whiteText"}>
                         Are you sure?
                     </p>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button className={"yellowButton"} onClick={()=>setOpenModal(false)}>Cancel</Button>
-                    <Button className={"yellowButton"} onClick={(event: any) => deletePantryContentDispatch()}>Delete</Button>
+                    <Button className={"modalButton"} onClick={()=>setOpenModal(false)}>Cancel</Button>
+                    <Button className={"modalButton"} onClick={(event: any) => deletePantryContentDispatch()}>Delete</Button>
                 </Modal.Footer>
                 </div>
             </div>

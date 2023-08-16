@@ -33,7 +33,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
     const item = pantryItem as getItem;
     return(
         <Panel className= "SinglePantryContentDisplay">
-            <div className= "BlueBox" key = {"" + pantryContents.pantryContentID +pantryContents.pcItemID}>
+            <div className= "cardBackground" key = {"" + pantryContents.pantryContentID +pantryContents.pcItemID}>
                 <div className="col-md-9">
                     <p className={"whiteText"}>
                         Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
@@ -44,7 +44,7 @@ export function SinglePantryContentDisplay(pantryContents: PantryContents){
                         <label className={"whiteText"}>Quantity</label><br/>
                         <InputNumber defaultValue={quantity.quantity} min={1} onChange={ (value:number|string, event) => updateQuantity(+value)}/>
                     </p>
-                    <Button className={"yellowButton"}  appearance={'primary'} onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
+                    <Button className={"cardButton"}  appearance={'primary'} onClick={(event: any) => updatePantryContentDispatch()}>Edit Quantity</Button>
                     <DeletePantryContents {...pantryContent}></DeletePantryContents>
                 </div>
             </div>

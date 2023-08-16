@@ -41,7 +41,7 @@ export function SearchPantry() {
             <div>
                 <>
                     <InputGroup>
-                        <label className="labelForSearch">Search:</label><br/>
+                        <label>Search:</label><br/>
                         <Input type="text" placeholder="Pantry Name" value={search}
                                onChange={(value: string, event) => setSearch(value)}/>
                         <InputGroup.Button onClick={(event: any) => searchDispatch()}>
