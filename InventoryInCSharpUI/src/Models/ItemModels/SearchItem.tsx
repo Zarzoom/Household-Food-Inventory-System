@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {goSetSearch} from "../../slices/ItemsReducer"
 import {useAppDispatch} from '../../Hooks/hooks'
 import 'reactjs-popup/dist/index.css';
-import {Input, Button, InputGroup} from 'rsuite'
+import {Input, InputGroup} from 'rsuite'
 import SearchIcon from '@rsuite/icons/Search';
 import CloseIcon from '@rsuite/icons/Close';
 
