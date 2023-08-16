@@ -29,7 +29,7 @@ return (
         <div >
             <>
                 <InputGroup>
-                    <label className={"labelForSearch"}>Search:</label><br/>
+                    <label>Search:</label><br/>
                     <Input type="text" placeholder="Generic or Brand Name" value={searchInput}
                            onChange={(value: string, event) => setSearchInput(value)}/>
                     <InputGroup.Button onClick={(event: any) => updateSearch(searchInput)}>

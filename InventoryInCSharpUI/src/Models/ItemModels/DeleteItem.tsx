@@ -1,4 +1,4 @@
-import getItem from "../../DataModels/getItem"
+﻿import getItem from "../../DataModels/getItem"
 import {useAppDispatch} from '../../Hooks/hooks'
 import {deleteItem} from "../../Thunks/ItemsThunk"
 import {useState} from "react";
@@ -15,23 +15,23 @@ export function DeleteItem(ItemForDeleting: getItem) {
  
         return (
             <div>
-                <Button className={"yellowButton"} appearance={ 'primary'} onClick={()=>setOpen(true)}>Delete</Button>
+                <Button className={"cardButton"} appearance={ 'primary'} onClick={()=>setOpen(true)}>Delete</Button>
                 <Modal open={open} onClose= {() => setOpen(false)}>
-                    <div className={"BlueBox"}>
                         <Modal.Header>
                             
                         </Modal.Header>
-                        <Modal.Body>
-                            <p className={"whiteText"}>
-                                Generic Name: {ItemForDeleting.genericName}<br/>Brand
-                                Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
-                            </p>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => deleteItemDispatch()}>Delete</Button>
-                            <Button appearance={'primary'} className={"yellowButton"} onClick={()=> setOpen(false)}>Cancel</Button>
-                            
-                        </Modal.Footer>
+                        <div className={"modalBackground"}>
+                            <Modal.Body>
+                                <p className={"whiteText"}>
+                                    Generic Name: {ItemForDeleting.genericName}<br/>Brand
+                                    Name: {ItemForDeleting.brand}<br/>Size: {ItemForDeleting.size}<br/>Price: {ItemForDeleting.price}
+                                </p>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => deleteItemDispatch()}>Delete</Button>
+                                <Button appearance={'primary'} className={"modalButton"} onClick={()=> setOpen(false)}>Cancel</Button>
+                                
+                            </Modal.Footer>
                     </div>
                 </Modal>
             </div>

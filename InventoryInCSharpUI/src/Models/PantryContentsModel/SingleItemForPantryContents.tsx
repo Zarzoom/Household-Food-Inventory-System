@@ -27,11 +27,11 @@ const newPantryContentsDispatch = () =>{
 }
     return(
         <div className="SingleItemDisplay">
-            <div className={"BlueBox"} key ={"" + item.itemID}>
+            <div className={"cardBackground"} key ={"" + item.itemID}>
                 <p className={"whiteText"}>
                     Generic Name: {item.genericName}<br/>Brand Name: {item.brand}<br/>Size: {item.size}<br/>Price: {item.price}
                 </p>
-                <Button appearance={'primary'} className={"yellowButton"} onClick={()=> newPantryContentsDispatch()}>Add</Button>
+                <Button appearance={'primary'} className={"cardButton"} onClick={()=> newPantryContentsDispatch()}>Add</Button>
                 <input type= "number" onChange={ (event: any) => updateQuantity(event.target.value)}/>
             </div>
         </div> 

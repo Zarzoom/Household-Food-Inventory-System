@@ -38,13 +38,13 @@ useEffect(() =>{
     const PantryItems = CurrentPantryContents.map((pantryContents : PantryContents) =>{
         console.log(pantryContents.pantryContentID);
     return(
-        <Panel className={"blueBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
+        <Panel className={"panelBackground"} key = {"" +pantryContents.pantryContentID + pantryContents.pcItemID}>
             <SinglePantryContentDisplay{...pantryContents}></SinglePantryContentDisplay>
         </Panel>
     )})
   
    return(
-       <Panel bordered header={<Grid className={'autoWidthGrid'}>
+       <Panel className={"panelBackground"} bordered header={<Grid className={'autoWidthGrid'}>
            <Col className= 'text-left' sm={12}>{pantryName}</Col><Col className={'rightAlign'} sm={12}><AddPanel></AddPanel></Col></Grid>}  style={{fontFamily: "'Times New Roman', Times, serif"}}>
            <List>
                {PantryItems}

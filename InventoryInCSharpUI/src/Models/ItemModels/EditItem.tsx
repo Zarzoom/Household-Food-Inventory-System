@@ -47,33 +47,34 @@ export function EditItem(itemForUpdate: getItem) {
     
     return (
         <div>
-            <Button className={"yellowButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Edit</Button>
+            <Button className={"cardButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Edit</Button>
             <Modal open={open} onClose= {() => setOpen(false)}>
-                <div className={"BlueBox"}>
+                
                     <Modal.Header>
                       
                     </Modal.Header>
-                    <Modal.Body>
-                        <p>
-                            <label className={"whiteText"}>Generic Name:</label><br/>
-                            <Input type="text" placeholder="beans" value={item.genericName}
-                                   onChange={ (value:string, event) => updateGenericName(value)}/><br/>
-                            <label className={"whiteText"}>Brand:</label><br/>
-                            <Input type="text" placeholder="World Famous Beans" value={item.brand}
-                                   onChange={ (value:string, event) => updateBrand(value)}/><br/>
-                            <label className={"whiteText"}>Size:</label><br/>
-                            <Input type="text" placeholder="3oz" value={item.size}
-                                   onChange={(value: string, event) => updateSize(value)}/><br/>
-                            <label className={"whiteText"}>Price:</label><br/>
-                            <Input type="text" step="any" placeholder="0.00" value={item.price}
-                                   onChange={(value: string, event) => updatePrice(value)}/><br/>
-                        </p> 
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button appearance={'primary'} className={"yellowButton"} onClick={(event: any) => UpdatedItemDispatch()}>Edit</Button>
-                        <Button appearance={'primary'} className={"yellowButton"} onClick={()=> setOpen(false)}>Cancel</Button>
-                    </Modal.Footer>
-                </div>
+                    <div className={"modalBackground"}>
+                        <Modal.Body >
+                            <p>
+                                <label className={"whiteText"}>Generic Name:</label><br/>
+                                <Input type="text" placeholder="beans" value={item.genericName}
+                                       onChange={ (value:string, event) => updateGenericName(value)}/><br/>
+                                <label className={"whiteText"}>Brand:</label><br/>
+                                <Input type="text" placeholder="World Famous Beans" value={item.brand}
+                                       onChange={ (value:string, event) => updateBrand(value)}/><br/>
+                                <label className={"whiteText"}>Size:</label><br/>
+                                <Input type="text" placeholder="3oz" value={item.size}
+                                       onChange={(value: string, event) => updateSize(value)}/><br/>
+                                <label className={"whiteText"}>Price:</label><br/>
+                                <Input type="text" step="any" placeholder="0.00" value={item.price}
+                                       onChange={(value: string, event) => updatePrice(value)}/><br/>
+                            </p> 
+                        </Modal.Body>
+                        <Modal.Footer >
+                            <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => UpdatedItemDispatch()}>Edit</Button>
+                            <Button appearance={'primary'} className={"modalButton"} onClick={()=> setOpen(false)}>Cancel</Button>
+                        </Modal.Footer>
+                    </div>
             </Modal>
         </div>
        

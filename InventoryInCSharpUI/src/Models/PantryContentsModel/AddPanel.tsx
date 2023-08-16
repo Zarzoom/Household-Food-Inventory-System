@@ -45,7 +45,7 @@ export const AddPanel = () =>{
 return(
     <div>
         <Stack justifyContent={'flex-end'}>
-            <Button className={"yellowButton"} appearance= 'primary' onClick={() => openPanel(true)}>Add Item To Pantry</Button>
+            <Button className={"displayBoxButton"} appearance= 'primary' onClick={() => openPanel(true)}>Add Item To Pantry</Button>
         </Stack>
         <Drawer size={'sm'} placement= {placement} open={open} onClose={() => openPanel(false)}>
             <Drawer.Header>

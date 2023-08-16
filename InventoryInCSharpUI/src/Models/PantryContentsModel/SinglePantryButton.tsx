@@ -18,7 +18,7 @@ export function SinglePantryButton(pantry: Pantry){
     
     return(
         <div key = {"" + pantry.pantryID + pantry.pantryName}>
-        <Button className={"blueButton"} appearance={'primary'} onClick={(event: any) => updatePantryContentsState()}> {pantry.pantryName} </Button>
+        <Button className={"displayBoxButton"} appearance={'primary'} onClick={(event: any) => updatePantryContentsState()}> {pantry.pantryName} </Button>
         </div>
     )
 }
