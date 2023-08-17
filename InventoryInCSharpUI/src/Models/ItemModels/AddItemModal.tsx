@@ -15,20 +15,15 @@ function AddItemModal() {
     const [open, setOpen] = useState(false);
     const loginState = useAppSelector(state=> state.Login.StateOfLogin);
     
-    useEffect(()=>{
-        if(loginState !== undefined){
-            const user = loginState;
-            updateUserUsername(user.username);
-            updateUserPassword("${user.password}")
-        }
-    })
+
+    const passwordString = loginState?.password;
     
     const [item, setItem] = useState({
         brand: "",
         price: "",
         genericName: "",
         size: "",
-        password: user.userPassword,
+        password: passwordString,
     });
 
     const updateUserUsername = (newUserUsername: string) =>{

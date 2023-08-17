@@ -8,8 +8,7 @@ import {store} from "./Stores/Store"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 import "./StyleSheet.less"
-import {useEffect} from "react";
-import {useAppSelector} from "./Hooks/hooks";
+
 
 export default function App() {
     

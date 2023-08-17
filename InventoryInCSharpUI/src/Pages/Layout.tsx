@@ -45,7 +45,7 @@ const Layout = () => {
                 <Nav.Item className="nav-item">
                     <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/pantry":"#"}>Pantry</Link>
                 </Nav.Item>
-                <Nav.Item className="nav-item" disabled={loggedIn}>
+                <Nav.Item className="nav-item">
                     <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/item":"#"}>Items</Link>
                 </Nav.Item>
             </Nav>
