@@ -14,6 +14,7 @@ export function EditItem(itemForUpdate: getItem) {
         price: "" + itemForUpdate.price,
         genericName: itemForUpdate.genericName,
         size: itemForUpdate.size,
+        password: "" + itemForUpdate.password,
     });
 
     const updateBrand = (newBrand: string) => {

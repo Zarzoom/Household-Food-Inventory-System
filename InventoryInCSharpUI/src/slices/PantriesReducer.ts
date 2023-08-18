@@ -13,7 +13,7 @@ interface PantryState{
 }
 
 const initialState: PantryState={
-    status: 'notLoggedIn',
+    status: 'idle',
     error: null,
     search: "",
     StateOfPantry: new Array()

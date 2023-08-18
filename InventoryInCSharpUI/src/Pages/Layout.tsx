@@ -6,30 +6,33 @@ import {fetchPantries, updatePantryStatus} from "../Thunks/PantriesThunk"
 import { Navbar, Nav, Header, Content} from 'rsuite';
 
 const Layout = () => {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const LoginStatus = useAppSelector(state => state.Login.status) as string;
-    const userLoginSelector = useAppSelector(state => state.Login.StateOfLogin);
-    const [loggedIn, setLoggedIn] = useState(false);
-    
-    const ItemStatus = useAppSelector(state => state.Items.status)
-    useEffect(()=> {
-        if(ItemStatus === 'idle' && userLoginSelector !== undefined) {
-            const user = userLoginSelector;
-            const userPasswordString = "${user.password}"
-            const userPassword = +userPasswordString;
-            const ItemList = dispatch(fetchItems(userPassword));
-        }
-    }, [ItemStatus, dispatch])
-    const PantryStatus = useAppSelector(state => state.Pantry.status)
-    useEffect(()=> {
-        if (PantryStatus === 'idle') {
-            const ItemList = dispatch(fetchPantries())
-        }
-    }, [PantryStatus, dispatch])
+    // const userLoginSelector = useAppSelector(state => state.Login.StateOfLogin);
+    // const [loggedIn, setLoggedIn] = useState(false);
+    //
+    // const ItemStatus = useAppSelector(state => state.Items.status)
+    // useEffect(()=> {
+    //     if(ItemStatus === 'idle' && userLoginSelector !== undefined) {
+    //         const user = userLoginSelector;
+    //         const userPasswordString = "${user.password}"
+    //         const userPassword = +userPasswordString;
+    //         const ItemList = dispatch(fetchItems(userPassword));
+    //     }
+    // }, [ItemStatus, dispatch])
+    // const PantryStatus = useAppSelector(state => state.Pantry.status)
+    // useEffect(()=> {
+    //     if (PantryStatus === 'idle' && userLoginSelector !== undefined) {
+    //         const user = userLoginSelector;
+    //         const userPasswordString = "${user.password}"
+    //         const userPassword = +userPasswordString;
+    //         const ItemList = dispatch(fetchPantries(userPassword))
+    //     }
+    // }, [PantryStatus, dispatch])
     let display = <Outlet/>
-    if (PantryStatus === 'idle' || ItemStatus === 'idle'){
-        display = <p>Loading....</p>
-    }
+    // if (PantryStatus === 'idle' || ItemStatus === 'idle'){
+    //     display = <p>Loading....</p>
+    // }
 
 
             return (
@@ -50,7 +53,7 @@ const Layout = () => {
                 </Nav.Item>
             </Nav>
         </Navbar>
-    {display}  
+            {display}
         </>
 
     )

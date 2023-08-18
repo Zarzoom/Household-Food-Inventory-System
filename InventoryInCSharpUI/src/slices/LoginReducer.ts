@@ -36,6 +36,9 @@ export const LoginReducer = createSlice({
             state.error = action.payload;
             console.log(state.error);
         },
+        goSignOut: (state, action) =>{
+            state.StateOfLogin = undefined;
+        },
         goSetStatus: (state, action: PayloadAction<string>) =>{
             const NewStatus: StatusString = action.payload as StatusString;
             state.status = NewStatus;
@@ -50,4 +53,4 @@ export const LoginReducer = createSlice({
         
 )
 
-export const {goCreateLogin, goValidateLogin, goSubmitError, goSetStatus} = LoginReducer.actions;
+export const {goCreateLogin, goValidateLogin, goSubmitError, goSetStatus, goSignOut} = LoginReducer.actions;

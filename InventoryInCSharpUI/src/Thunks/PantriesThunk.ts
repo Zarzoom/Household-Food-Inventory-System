@@ -10,9 +10,9 @@ import {goSetStatus} from "../slices/ItemsReducer";
 const client = new HttpClient();
 
 export const fetchPantries =
-    (): AppThunk =>
+    (password: number): AppThunk =>
         async dispatch => {
-            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Pantry')
+            const asyncResponse = await client.getData(process.env.REACT_APP_API + '/api/Pantry/userSearch/'+ password)
                 .then(response => response.json())
                 .then(response => response as Pantry[]);
             dispatch(

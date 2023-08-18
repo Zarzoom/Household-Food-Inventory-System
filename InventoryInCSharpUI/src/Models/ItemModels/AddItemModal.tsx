@@ -14,8 +14,6 @@ function AddItemModal() {
     })
     const [open, setOpen] = useState(false);
     const loginState = useAppSelector(state=> state.Login.StateOfLogin);
-    
-
     const passwordString = loginState?.password;
     
     const [item, setItem] = useState({

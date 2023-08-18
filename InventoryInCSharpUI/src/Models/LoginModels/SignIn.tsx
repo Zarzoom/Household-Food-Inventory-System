@@ -1,15 +1,15 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {validateLogin} from "../../Thunks/LoginThunks"
 import {goSubmitError} from "../../slices/LoginReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import { Button, Input, Modal, Message, useToaster } from 'rsuite';
-import Login from "../../DataModels/Login"
-import statusString from "../../DataModels/StatusString";
+import {fetchItems} from "../../Thunks/ItemsThunk";
+import {fetchPantries} from "../../Thunks/PantriesThunk";
+
 
 
 export function SignIn() {
     const [open, setOpen] = useState(false);
-    // const [displayed, setDisplayed] = useState("")
     let displayedSignIn = <p></p>;
     const [signInLogin, setSignInLogin] = useState({
         username: "",
@@ -38,8 +38,6 @@ export function SignIn() {
         const loginToJSONStringify = JSON.stringify(signInLogin);
         const loginToJsonParse = JSON.parse(loginToJSONStringify);
         dispatch(validateLogin(loginToJsonParse));
-
-
     }
     if (error !== undefined && error === "Username or password is incorrect." && open === true) {
         displayedSignIn = (<p>"Username or password is incorrect.</p>)
@@ -51,6 +49,8 @@ export function SignIn() {
                               onClose={(event: any) => closeMessage()}>{displayedSignIn}</Message>, {placement: 'topCenter'});
 
     } else if (error === undefined && newLogin !== undefined && status === "idle" && open === true) {
+        dispatch(fetchItems(+signInLogin.password));
+        dispatch(fetchPantries(+signInLogin.password));
         displayedSignIn = (<p>You are logged in.</p>)
         toaster.push(<Message closable={true} type={"info"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayedSignIn}</Message>, {placement: 'topCenter'});
@@ -91,7 +91,7 @@ export function SignIn() {
                             <Input placeholder="00000" value={signInLogin.password}
                                    onChange={(value: string, event) => updatePassword(value)}/><br/>
                             <div> {displayedSignIn}</div>
-                            <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Add</Button>
+                            <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Login</Button>
                             <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => cancelSignInDispatch()}>Cancel</Button>
                         </Modal.Body>
                     </div>

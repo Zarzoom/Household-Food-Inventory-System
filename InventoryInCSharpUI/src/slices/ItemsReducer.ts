@@ -13,7 +13,7 @@ interface ItemsState{
 }
 
 const initialState: ItemsState={
-    status: 'notLoggedIn',
+    status: 'idle',
     error: null,
     search: "",
     StateOfItems: new Array()
