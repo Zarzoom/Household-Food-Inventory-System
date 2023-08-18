@@ -34,7 +34,7 @@ export const createItem =
         };
 
 export const deleteItem =
-    (deleteItemID: Number): AppThunk =>
+    (deleteItemID: Number, deleteItemPassword: number): AppThunk =>
         async dispatch =>{
             const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
             dispatch(
@@ -42,7 +42,7 @@ export const deleteItem =
             );
             //this dispatch makes sure that the pantry contents state is updated so that pantry contents page will load properly.
             dispatch(
-                fetchPantryContents()
+                fetchPantryContents(deleteItemPassword)
             )
         };
 

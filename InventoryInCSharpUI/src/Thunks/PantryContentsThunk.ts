@@ -7,9 +7,9 @@ import {goFetchPantryContents, goFetchItemsInPantry, goUpdatePantryContents, goD
 const client = new HttpClient();
 
 export const fetchPantryContents =
-    (): AppThunk =>
+    (password: number): AppThunk =>
         async dispatch => {
-    const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/PantryContents')
+    const asynchResponse = await client.getData(process.env.REACT_APP_API + '/api/PantryContents/userSearch/' + password)
         .then(response => response.json())
         .then(response => response as PantryContents[])
             console.log(asynchResponse)

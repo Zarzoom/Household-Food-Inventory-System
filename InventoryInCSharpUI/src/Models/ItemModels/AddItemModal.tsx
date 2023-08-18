@@ -14,26 +14,26 @@ function AddItemModal() {
     })
     const [open, setOpen] = useState(false);
     const loginState = useAppSelector(state=> state.Login.StateOfLogin);
-    const passwordString = loginState?.password;
+    const password = loginState?.password;
     
     const [item, setItem] = useState({
         brand: "",
         price: "",
         genericName: "",
         size: "",
-        password: passwordString,
+        password: password,
     });
 
-    const updateUserUsername = (newUserUsername: string) =>{
-        setUser(previousState => {
-            return {...previousState, userUsername: newUserUsername}
-        });
-    };
-    const updateUserPassword = (newUserPassword: string) =>{
-        setUser(previousState => {
-            return { ...previousState, userPassword: newUserPassword}
-        });
-    };
+    // const updateUserUsername = (newUserUsername: string) =>{
+    //     setUser(previousState => {
+    //         return {...previousState, userUsername: newUserUsername}
+    //     });
+    // };
+    // const updateUserPassword = (newUserPassword: string) =>{
+    //     setUser(previousState => {
+    //         return { ...previousState, userPassword: newUserPassword}
+    //     });
+    // };
     const updateBrand = (newBrand: string) => {
         setItem(previousState => {
             return {...previousState, brand: newBrand}

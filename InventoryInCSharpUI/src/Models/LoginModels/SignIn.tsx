@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import { Button, Input, Modal, Message, useToaster } from 'rsuite';
 import {fetchItems} from "../../Thunks/ItemsThunk";
 import {fetchPantries} from "../../Thunks/PantriesThunk";
+import {fetchPantryContents} from "../../Thunks/PantryContentsThunk";
 
 
 
@@ -51,6 +52,7 @@ export function SignIn() {
     } else if (error === undefined && newLogin !== undefined && status === "idle" && open === true) {
         dispatch(fetchItems(+signInLogin.password));
         dispatch(fetchPantries(+signInLogin.password));
+        dispatch(fetchPantryContents(+signInLogin.password));
         displayedSignIn = (<p>You are logged in.</p>)
         toaster.push(<Message closable={true} type={"info"} duration={100000}
                               onClose={(event: any) => closeMessage()}>{displayedSignIn}</Message>, {placement: 'topCenter'});

@@ -13,12 +13,10 @@ export const PantryContentsDisplay = () =>{
     const dispatch = useAppDispatch();
 
     const PantryContentsStatus = useAppSelector(state => state.PantryContents.status);
-const CurrentPantryContents = useAppSelector(selectAllPantryContents);
-useEffect(() =>{
-    if (PantryContentsStatus === 'idle') {
-        dispatch(fetchPantryContents());
-    }
-}, [PantryContentsStatus, dispatch])
+    const CurrentPantryContents = useAppSelector(selectAllPantryContents);
+    const loginState = useAppSelector(state=> state.Login.StateOfLogin);
+    const passwordString = "" + loginState?.password;
+
 
     
     let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)

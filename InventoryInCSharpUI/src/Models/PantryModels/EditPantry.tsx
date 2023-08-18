@@ -9,7 +9,8 @@ export function EditPantry(pantryForUpdate: Pantry) {
     
     const [pantry, setPantry] = useState({
         pantryID: pantryForUpdate.pantryID,
-        pantryName: pantryForUpdate.pantryName
+        pantryName: pantryForUpdate.pantryName,
+        password: "" + pantryForUpdate.password,
     });
 
     const updatePantryName = (newPantryName: string) => {

@@ -17,7 +17,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Login/>}/>
-                    <Route path = "pantryContents" element={<MyPantry/>}/>
+                    <Route path = "myPantries" element={<MyPantry/>}/>
                     <Route path = "item" element={<Item/>} />
                     <Route path = "pantry" element={<Pantry/>} />
                 </Route>
