@@ -71,6 +71,8 @@ export function SignIn() {
 
     const closeModal = () => {
         displayedSignIn = (<p/>);
+        updateUsername("");
+        updatePassword("");
         setOpen(false);
         dispatch(goSubmitError(undefined));
     }
