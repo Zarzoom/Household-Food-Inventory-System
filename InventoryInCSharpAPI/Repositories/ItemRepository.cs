@@ -1,4 +1,5 @@
-﻿namespace InventoryInCSharpAPI.Repositories
+﻿using InventoryInCSharpAPI.Services;
+namespace InventoryInCSharpAPI.Repositories
 {
     using InventoryInCSharpAPI.Models;
     using Dapper;
@@ -25,7 +26,7 @@
                     ))
             {
                 var sql = "INSERT INTO ItemList (GenericName, Brand, Price, Size, Password) VALUES (@GenericName, @Brand, @Price, @Size, @Password); SELECT LAST_INSERT_ID()";
-                var createdItem = await connection.QueryAsync<int>(sql, newItem);
+                var createdItem = await connection.QueryAsyncWithRetry<int>(sql, newItem);
                 return createdItem.SingleOrDefault();
             }
         }
@@ -42,7 +43,7 @@
                    ))
             {
                 var sql = "SELECT * FROM ItemList";
-                var itemList = await connection.QueryAsync<Item>(sql);
+                var itemList = await connection.QueryAsyncWithRetry<Item>(sql);
                 return itemList;
             }
         }
@@ -60,7 +61,7 @@
             {
                 var parameters = new { primaryKey };
                 var sql = $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @primaryKey";
-                var item = await connection.QueryAsync<Item>(sql, parameters);
+                var item = await connection.QueryAsyncWithRetry<Item>(sql, parameters);
                 return item.SingleOrDefault();
             }
         }
@@ -81,7 +82,7 @@
                 //var parameters = new {searchValue};
                 var sql =
                     $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE LOWER(GenericName) LIKE LOWER('%{searchValue}%') OR LOWER(Brand) LIKE LOWER('%{searchValue}%')";
-                var item = await connection.QueryAsync<Item>(sql);
+                var item = await connection.QueryAsyncWithRetry<Item>(sql);
                 return item;
             }
         }
@@ -102,7 +103,7 @@
             {
                 var sql =
                 "UPDATE ItemList SET GenericName = @GenericName, Brand = @Brand, Price = @Price, Size = @Size WHERE ItemID = @ItemID; SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE ItemID = @ItemID ";
-                var createdItem = await connection.QueryAsync<Item>(sql, updateMe);
+                var createdItem = await connection.QueryAsyncWithRetry<Item>(sql, updateMe);
                 return createdItem.SingleOrDefault();
             }
         }
@@ -120,7 +121,7 @@
             {
                 var parameters = new { ItemID };
                 var sql = $"DELETE FROM ItemList WHERE ItemID = @ItemID";
-                var deletedRows = await connection.ExecuteAsync(sql, parameters);
+                var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
             }
         }
         
@@ -135,7 +136,7 @@
             using (var connection = new MySqlConnection(CSOS.connection))
             {
                 var sql = $"SELECT ItemID, GenericName, Brand, Price, Size FROM ItemList WHERE Password LIKE '%{password}%'";
-                var UserItems = await connection.QueryAsync<Item>(sql);
+                var UserItems = await connection.QueryAsyncWithRetry<Item>(sql);
                 return UserItems;
             }
         }

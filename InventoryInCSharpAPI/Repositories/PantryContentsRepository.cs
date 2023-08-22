@@ -1,8 +1,9 @@
 ﻿namespace InventoryInCSharpAPI.Repositories;
 
-using InventoryInCSharpAPI.Models;
 using Dapper;
+using InventoryInCSharpAPI.Models;
 using MySqlConnector;
+using InventoryInCSharpAPI.Services;
 
 public class PantryContentsRepository
 {
@@ -22,7 +23,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var sql = "INSERT INTO PantryContents (PCPantryID, PCItemID, Quantity, Password) VALUES (@PCPantryID, @PCItemID, @Quantity, @Password); SELECT LAST_INSERT_ID()";
-            var createdItem = await connection.QueryAsync<int>(sql, newPantryContent);
+            var createdItem = await connection.QueryAsyncWithRetry<int>(sql, newPantryContent);
             return createdItem.SingleOrDefault();
         }
     }
@@ -39,7 +40,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var sql = "UPDATE PantryContents SET PCPantryID = @PCPantryID, PCItemID = @PCItemID, Quantity = @Quantity WHERE PantryContentID = @PantryContentID; SELECT PantryContentID, PCPantryID, PCItemID, Quantity FROM PantryContents WHERE PantryContentID = @PantryContentID";
-            var createdPantryContent = await connection.QueryAsync<PantryContents>(sql, updateMe);
+            var createdPantryContent = await connection.QueryAsyncWithRetry<PantryContents>(sql, updateMe);
             return createdPantryContent.SingleOrDefault();
         }
     }
@@ -53,7 +54,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var sql = "SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents";
-            var allPantryContents = await connection.QueryAsync<PantryContents>(sql);
+            var allPantryContents = await connection.QueryAsyncWithRetry<PantryContents>(sql);
             return allPantryContents;
         }
     }
@@ -69,7 +70,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PCPantryID };
             var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCPantryID = @PCPantryID";
-            var allPantryContentWithPCPantryID = await connection.QueryAsync<PantryContents>(sql, parameters);
+            var allPantryContentWithPCPantryID = await connection.QueryAsyncWithRetry<PantryContents>(sql, parameters);
             return allPantryContentWithPCPantryID;
         }
     }
@@ -84,7 +85,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PantryContentID };
             var sql = $"DELETE FROM PantryContents WHERE PantryContentID = @PantryContentID";
-            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
         }
     }
     
@@ -98,7 +99,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PCItemID };
             var sql = $"DELETE FROM PantryContents WHERE PCItemID = @PCItemID";
-            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
         }
     }
     
@@ -112,7 +113,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PCPantryID };
             var sql = $"DELETE FROM PantryContents WHERE PCPantryID = @PCPantryID";
-            var deletedRows = await connection.ExecuteAsync(sql, parameters);
+            var deletedRows = await connection.ExecuteAsyncWithRetry(sql, parameters);
         }
     }
     
@@ -127,7 +128,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PCItemID };
             var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCItemID = @PCItemID";
-            var allPantryContentWithPCItemID = await connection.QueryAsync<PantryContents>(sql, parameters);
+            var allPantryContentWithPCItemID = await connection.QueryAsyncWithRetry<PantryContents>(sql, parameters);
             return allPantryContentWithPCItemID;
         }
     }
@@ -142,7 +143,7 @@ public class PantryContentsRepository
         {
             var parameters = new { PCItemID, PCPantryID };
             var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID, Password FROM PantryContents WHERE PCItemID = @PCItemID AND PCPantryID = @PCPantryID";
-            var pantryContentsThatMatch = await connection.QueryAsync<PantryContents>(sql, parameters);
+            var pantryContentsThatMatch = await connection.QueryAsyncWithRetry<PantryContents>(sql, parameters);
             return pantryContentsThatMatch.SingleOrDefault();
         }
     }
@@ -158,7 +159,7 @@ public class PantryContentsRepository
         using (var connection = new MySqlConnection(_csos.connection))
         {
             var sql = $"SELECT PCItemID, PCPantryID, Quantity, PantryContentID FROM PantryContents WHERE Password LIKE '%{password}%'";
-            var UserPantryContents = await connection.QueryAsync<PantryContents>(sql);
+            var UserPantryContents = await connection.QueryAsyncWithRetry<PantryContents>(sql);
             return UserPantryContents;
         }
     }
