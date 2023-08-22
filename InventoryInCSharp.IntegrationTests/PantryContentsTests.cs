@@ -1,113 +1,151 @@
-﻿using Dapper;
-using InventoryInCSharpAPI.Models;
+﻿using System.Net.Http.Json;
 using MySqlConnector;
-using System.Net.Http.Json;
+using Dapper;
 using System.Text;
 using System.Text.Json;
-namespace InventoryInCSharp.IntegrationTests;
+using InventoryInCSharpAPI.Models;
+namespace InventoryInCSharp.IntegrationTests.PantryContentsTests;
 
 public class PantryContentsTests
 {
     protected static readonly HttpClient client = new HttpClient();
-
+    public void InsertLogin()
+    {
+        User testUser = new User();
+        testUser.userName = "testUser";
+        testUser.password = 1;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+        
+        User testUser2 = new User();
+        testUser.userName = "testUser2";
+        testUser.password = 2;
+        InsertMethods.LoginInsertDirectlyToDatabase(testUser);
+    }
     public void ItemInsert()
     {
-        var testItem1 = new Item();
+        Item testItem1 = new Item();
         testItem1.genericName = "Generic Name Test 1";
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
         testItem1.size = "1 Test";
+        testItem1.password = 1;
         //testItem1.itemID = 1;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem1);
 
-        var testItem2 = new Item();
+        Item testItem2 = new Item();
         testItem2.genericName = "Generic Name Test 2";
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
         testItem2.size = "2 Test";
+        testItem2.password = 1;
         //testItem2.itemID = 2;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem2);
 
-        var testItem3 = new Item();
+        Item testItem3 = new Item();
         testItem3.genericName = "Generic Name Test 3";
         testItem3.brand = "Brand Test 3";
         testItem3.price = 1.99F;
         testItem3.size = "3 Test";
+        testItem3.password = 2;
         //testItem3.itemID = 3;
 
         InsertMethods.ItemInsertDirectlyToDatabase(testItem3);
+        
+        Item testItem4 = new Item();
+        testItem4.genericName = "Generic Name Test 4";
+        testItem4.brand = "Brand Test 4";
+        testItem4.price = 1.99F;
+        testItem4.size = "4 Test";
+        testItem4.password = 2;
+        //testItem3.itemID = 4;
+
+        InsertMethods.ItemInsertDirectlyToDatabase(testItem4);
     }
     public void PantryInsert()
     {
-        var TestPantry1 = new Pantry();
+        Pantry TestPantry1 = new Pantry();
         TestPantry1.pantryName = "Test Name 1";
+        TestPantry1.password = 1;
         //TestPantry1.pantryID = 1;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry1);
 
-        var TestPantry2 = new Pantry();
+        Pantry TestPantry2 = new Pantry();
         TestPantry2.pantryName = "Test Name 2";
+        TestPantry2.password = 1;
         //TestPantry2.pantryID = 2;
 
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry2);
 
-        var TestPantry3 = new Pantry();
+        Pantry TestPantry3 = new Pantry();
         TestPantry3.pantryName = "Test Name 3";
+        TestPantry3.password = 2;
         //TestPantry3.pantryID = 3;
         InsertMethods.PantryInsertDirectlyToDatabase(TestPantry3);
+        
+        Pantry TestPantry4 = new Pantry();
+        TestPantry4.pantryName = "Test Name 4";
+        TestPantry4.password = 2;
+        //TestPantry3.pantryID = 4;
+        InsertMethods.PantryInsertDirectlyToDatabase(TestPantry4);
     }
     public void PantryContentsInsert()
     {
-        var testPantryContent1 = new PantryContents
+        PantryContents testPantryContent1 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 1,
-            quantity = 3
+            quantity = 3,
+            password = 1,
             //pantryContentID = 1,
 
         };
 
         InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent1);
 
-        var testPantryContent2 = new PantryContents
+        PantryContents testPantryContent2 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 2,
-            quantity = 3
+            quantity = 3,
+            password = 1,
             //pantryContentID = 2,
 
         };
 
         InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent2);
 
-        var testPantryContent3 = new PantryContents
+        PantryContents testPantryContent3 = new PantryContents
         {
-            pcPantryID = 2,
-            pcItemID = 3,
-            quantity = 3
+            pcPantryID = 1,
+            pcItemID = 2,
+            quantity = 3,
+            password = 1,
             //pantryContentID = 3,
         };
 
         InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent3);
 
-        var testPantryContent4 = new PantryContents
+        PantryContents testPantryContent4 = new PantryContents
         {
             pcPantryID = 3,
-            pcItemID = 2,
-            quantity = 3
+            pcItemID = 4,
+            quantity = 3,
+            password = 2,
             //pantryContentID = 4,
 
         };
 
         InsertMethods.PantryContentInsertDirectlyToDatabase(testPantryContent4);
 
-        var testPantryContent5 = new PantryContents
+        PantryContents testPantryContent5 = new PantryContents
         {
             pcPantryID = 3,
             pcItemID = 3,
-            quantity = 3
+            quantity = 3,
+            password = 2,
             //pantryContentID = 5;
 
         };
@@ -119,6 +157,8 @@ public class PantryContentsTests
 [TestFixture]
 public class WhenPantryContentIsInserted : PantryContentsTests
 {
+    private PantryContents expectedPantryContent = new PantryContents();
+    private PantryContents actualPantryContent = new PantryContents();
 
     [OneTimeSetUp]
     public void SetUp()
@@ -126,26 +166,33 @@ public class WhenPantryContentIsInserted : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
 
 
-        var newPantryContent = new PantryContents();
-        newPantryContent.pcPantryID = 2;
-        newPantryContent.pcItemID = 1;
-        newPantryContent.quantity = 3;
+        try
+        {
+            var newPantryContent = new PantryContents();
+            newPantryContent.pcPantryID = 2;
+            newPantryContent.pcItemID = 1;
+            newPantryContent.quantity = 3;
+            newPantryContent.password = 1;
 
-        var content = new StringContent(JsonSerializer.Serialize(newPantryContent), Encoding.UTF8, "application/json");
-        using var httpResponse = client.PostAsync("http://localhost:8000/api/PantryContents", content);
-        httpResponse.Wait();
+            var content = new StringContent(JsonSerializer.Serialize(newPantryContent), Encoding.UTF8, "application/json");
+            using Task<HttpResponseMessage> httpResponse = client.PostAsync("http://localhost:8000/api/PantryContents", content);
+            httpResponse.Wait();
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         Task.Delay(1000).Wait();
         actualPantryContent = GetActualPantryContents();
         CreateExpectedPantryContents();
 
     }
-    private readonly PantryContents expectedPantryContent = new PantryContents();
-    private PantryContents actualPantryContent = new PantryContents();
 
     public PantryContents GetActualPantryContents()
     {
@@ -194,11 +241,12 @@ public class WhenPantryContentIsInserted : PantryContentsTests
     }
 }
 
+[TestFixture]
 public class WhenTheItemsInAPantryAreFoundBySearchingPantryContentsWithThePantryID : PantryContentsTests
 {
-    private string actualItemString;
-    private readonly List<Item> expectedItemList = new List<Item>();
-    private string expectedItemString;
+    private List<Item> expectedItemList = new List<Item>();
+    private String expectedItemString;
+    private String actualItemString;
 
     [OneTimeSetUp]
     public void SetUp()
@@ -212,18 +260,26 @@ public class WhenTheItemsInAPantryAreFoundBySearchingPantryContentsWithThePantry
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/retrieveItemsFromPantry/{2}");
-        httpResponse.Wait();
-        var results = httpResponse.Result.Content.ReadAsStringAsync();
-        results.Wait();
-        actualItemString = results.Result;
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/retrieveItemsFromPantry/{2}");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadAsStringAsync();
+            results.Wait();
+            actualItemString = results.Result;
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         CreateExpected();
 
     }
 
     public void CreateExpected()
     {
-        var testItem1 = new Item();
+        Item testItem1 = new Item();
         testItem1.genericName = "Generic Name Test 1";
         testItem1.brand = "Brand Test 1";
         testItem1.price = 1.99F;
@@ -233,7 +289,7 @@ public class WhenTheItemsInAPantryAreFoundBySearchingPantryContentsWithThePantry
 
         expectedItemList.Add(testItem1);
 
-        var testItem2 = new Item();
+        Item testItem2 = new Item();
         testItem2.genericName = "Generic Name Test 2";
         testItem2.brand = "Brand Test 2";
         testItem2.price = 1.99F;
@@ -242,16 +298,6 @@ public class WhenTheItemsInAPantryAreFoundBySearchingPantryContentsWithThePantry
         testItem2.quantity = 3;
 
         expectedItemList.Add(testItem2);
-
-        var testItem3 = new Item();
-        testItem3.genericName = "Generic Name Test 3";
-        testItem3.brand = "Brand Test 3";
-        testItem3.price = 1.99F;
-        testItem3.size = "3 Test";
-        testItem3.itemID = 3;
-        testItem3.quantity = 3;
-
-        expectedItemList.Add(testItem3);
 
         expectedItemString = JsonSerializer.Serialize(expectedItemList);
     }
@@ -263,11 +309,12 @@ public class WhenTheItemsInAPantryAreFoundBySearchingPantryContentsWithThePantry
     }
 }
 
+[TestFixture]
 public class WhenPantryContentsAreSearchedForByPCPantryID : PantryContentsTests
 {
-    private string actualPantryContentsString;
-    private readonly List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
-    private string expectedPantryContentsString;
+    private List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
+    private String expectedPantryContentsString;
+    private String actualPantryContentsString;
 
     [OneTimeSetUp]
     public void SetUp()
@@ -276,51 +323,52 @@ public class WhenPantryContentsAreSearchedForByPCPantryID : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{2}");
-        httpResponse.Wait();
-        var results = httpResponse.Result.Content.ReadAsStringAsync();
-        results.Wait();
-        actualPantryContentsString = results.Result;
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{2}");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadAsStringAsync();
+            results.Wait();
+            actualPantryContentsString = results.Result;
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         CreateExpected();
 
     }
 
     public void CreateExpected()
     {
-        var testPantryContent1 = new PantryContents
+        PantryContents testPantryContent1 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 1,
             quantity = 3,
-            pantryContentID = 1
+            pantryContentID = 1,
+            password = 1,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent1);
 
-        var testPantryContent2 = new PantryContents
+        PantryContents testPantryContent2 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 2,
             quantity = 3,
-            pantryContentID = 2
-
+            pantryContentID = 2,
+            password = 1,
+            
         };
         expectedPantryContentsList.Add(testPantryContent2);
-
-        var testPantryContent3 = new PantryContents
-        {
-            pcPantryID = 2,
-            pcItemID = 3,
-            quantity = 3,
-            pantryContentID = 3
-        };
-        expectedPantryContentsList.Add(testPantryContent3);
 
         expectedPantryContentsString = JsonSerializer.Serialize(expectedPantryContentsList);
     }
@@ -332,11 +380,12 @@ public class WhenPantryContentsAreSearchedForByPCPantryID : PantryContentsTests
     }
 }
 
+[TestFixture]
 public class WhenPantryContentsAreSearchedForByPCItemID : PantryContentsTests
 {
-    private string actualPantryItemString;
-    private readonly List<PantryItem> expectedPantryItemList = new List<PantryItem>();
-    private string expectedPantryItemString;
+    private List<PantryItem> expectedPantryItemList = new List<PantryItem>();
+    private String expectedPantryItemString;
+    private String actualPantryItemString;
 
     [OneTimeSetUp]
     public void SetUp()
@@ -345,16 +394,24 @@ public class WhenPantryContentsAreSearchedForByPCItemID : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/retrieveItemLocation/{2}");
-        httpResponse.Wait();
-        var results = httpResponse.Result.Content.ReadAsStringAsync();
-        results.Wait();
-        actualPantryItemString = results.Result;
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/retrieveItemLocation/{2}");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadAsStringAsync();
+            results.Wait();
+            actualPantryItemString = results.Result;
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         CreateExpected();
 
     }
@@ -362,16 +419,18 @@ public class WhenPantryContentsAreSearchedForByPCItemID : PantryContentsTests
     public void CreateExpected()
     {
 
-        var TestPantryItem1 = new PantryItem();
+        PantryItem TestPantryItem1 = new PantryItem();
         TestPantryItem1.pantryName = "Test Name 2";
         TestPantryItem1.pantryContentID = 2;
         TestPantryItem1.quantity = 3;
+        TestPantryItem1.password = 1;
         expectedPantryItemList.Add(TestPantryItem1);
 
-        var TestPantryItem2 = new PantryItem();
-        TestPantryItem2.pantryName = "Test Name 3";
-        TestPantryItem2.pantryContentID = 4;
+        PantryItem TestPantryItem2 = new PantryItem();
+        TestPantryItem2.pantryName = "Test Name 1";
+        TestPantryItem2.pantryContentID = 3;
         TestPantryItem2.quantity = 3;
+        TestPantryItem2.password = 1;
         expectedPantryItemList.Add(TestPantryItem2);
 
         expectedPantryItemString = JsonSerializer.Serialize(expectedPantryItemList);
@@ -384,10 +443,11 @@ public class WhenPantryContentsAreSearchedForByPCItemID : PantryContentsTests
     }
 }
 
+[TestFixture]
 public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryContentsTests
 {
+    private PantryContents expectedPantryContents = new PantryContents();
     private PantryContents actualPantryContents = new PantryContents();
-    private readonly PantryContents expectedPantryContents = new PantryContents();
 
 
     [OneTimeSetUp]
@@ -397,26 +457,34 @@ public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryCont
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{2}/{3}");
-        httpResponse.Wait();
-        var results = httpResponse.Result.Content.ReadFromJsonAsync<PantryContents>();
-        results.Wait();
-        actualPantryContents = results.Result;
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/{3}/{4}");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadFromJsonAsync<PantryContents>();
+            results.Wait();
+            actualPantryContents = results.Result;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         CreateExpected();
 
     }
 
     public void CreateExpected()
     {
-        expectedPantryContents.pcPantryID = 2;
-        expectedPantryContents.pcItemID = 3;
+        expectedPantryContents.pcPantryID = 3;
+        expectedPantryContents.pcItemID = 4;
         expectedPantryContents.quantity = 3;
-        expectedPantryContents.pantryContentID = 3;
+        expectedPantryContents.pantryContentID = 4;
+        expectedPantryContents.password = 2;
     }
 
     [Test]
@@ -442,13 +510,15 @@ public class WhenPantryContentsAreSearchedWithPCItemIDAndPCPantryID : PantryCont
     {
         Assert.AreEqual(expectedPantryContents.pantryContentID, actualPantryContents.pantryContentID);
     }
+
 }
 
+[TestFixture]
 public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTests
 {
-    private string actualPantryContentsString;
-    private readonly List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
-    private string expectedPantryContentsString;
+    private List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
+    private String expectedPantryContentsString;
+    private String actualPantryContentsString;
 
     [OneTimeSetUp]
     public void SetUp()
@@ -456,72 +526,84 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.GetAsync("http://localhost:8000/api/PantryContents");
-        httpResponse.Wait();
-        var result = httpResponse.Result.Content.ReadAsStringAsync();
-        result.Wait();
-        actualPantryContentsString = result.Result;
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync("http://localhost:8000/api/PantryContents");
+            httpResponse.Wait();
+            var result = httpResponse.Result.Content.ReadAsStringAsync();
+            result.Wait();
+            actualPantryContentsString = result.Result;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
 
         CreateExpected();
     }
 
     public void CreateExpected()
     {
-        var testPantryContent1 = new PantryContents
+        PantryContents testPantryContent1 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 1,
             quantity = 3,
-            pantryContentID = 1
+            pantryContentID = 1,
+            password = 1,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent1);
 
-        var testPantryContent2 = new PantryContents
+        PantryContents testPantryContent2 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 2,
             quantity = 3,
-            pantryContentID = 2
+            pantryContentID = 2,
+            password = 1,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent2);
 
-        var testPantryContent3 = new PantryContents
+        PantryContents testPantryContent3 = new PantryContents
         {
-            pcPantryID = 2,
-            pcItemID = 3,
+            pcPantryID = 1,
+            pcItemID = 2,
             quantity = 3,
-            pantryContentID = 3
+            pantryContentID = 3,
+            password = 1,
         };
 
         expectedPantryContentsList.Add(testPantryContent3);
 
-        var testPantryContent4 = new PantryContents
+        PantryContents testPantryContent4 = new PantryContents
         {
             pcPantryID = 3,
-            pcItemID = 2,
+            pcItemID = 4,
             quantity = 3,
-            pantryContentID = 4
+            pantryContentID = 4,
+            password = 2,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent4);
 
 
-        var testPantryContent5 = new PantryContents
+        PantryContents testPantryContent5 = new PantryContents
         {
             pcPantryID = 3,
             pcItemID = 3,
             quantity = 3,
-            pantryContentID = 5
+            pantryContentID = 5,
+            password = 2,
 
         };
 
@@ -538,11 +620,12 @@ public class WhenPantryContentsIsQueriedForAllPantryContents : PantryContentsTes
     }
 }
 
+[TestFixture]
 public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : PantryContentsTests
 {
-    private string actualPantryContentsString;
-    private readonly List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
-    private string expectedPantryContentsString;
+    private List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
+    private String expectedPantryContentsString;
+    private String actualPantryContentsString;
 
     [OneTimeSetUp]
     public void SetUp()
@@ -550,13 +633,20 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
 
-        using var httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents/deletePantryContent/2", null);
-        httpResponse.Wait();
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents/deletePantryContent/2", null);
+            httpResponse.Wait();
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         Task.Delay(1000).Wait();
         GetActual();
         Task.Delay(1000).Wait();
@@ -566,45 +656,49 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
 
     public void CreateExpected()
     {
-        var testPantryContent1 = new PantryContents
+        PantryContents testPantryContent1 = new PantryContents
         {
             pcPantryID = 2,
             pcItemID = 1,
             quantity = 3,
-            pantryContentID = 1
+            password = 1,
+            pantryContentID = 1,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent1);
 
-        var testPantryContent3 = new PantryContents
+        PantryContents testPantryContent3 = new PantryContents
         {
-            pcPantryID = 2,
-            pcItemID = 3,
+            pcPantryID = 1,
+            pcItemID = 2,
             quantity = 3,
-            pantryContentID = 3
+            password = 1,
+            pantryContentID = 3,
         };
 
         expectedPantryContentsList.Add(testPantryContent3);
 
-        var testPantryContent4 = new PantryContents
+        PantryContents testPantryContent4 = new PantryContents
         {
             pcPantryID = 3,
-            pcItemID = 2,
+            pcItemID = 4,
             quantity = 3,
-            pantryContentID = 4
+            password = 2,
+            pantryContentID = 4,
 
         };
 
         expectedPantryContentsList.Add(testPantryContent4);
 
 
-        var testPantryContent5 = new PantryContents
+        PantryContents testPantryContent5 = new PantryContents
         {
             pcPantryID = 3,
             pcItemID = 3,
             quantity = 3,
-            pantryContentID = 5
+            password = 2,
+            pantryContentID = 5,
 
         };
 
@@ -620,7 +714,7 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
                new MySqlConnection(
                    "server=localhost,3306;user=root;password=Your_password123;database=InventoryData;"))
         {
-            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID FROM PantryContents";
+            var sql = "SELECT PCPantryID, PCItemID, Quantity, PantryContentID, Password FROM PantryContents";
             var actual = connection.Query<PantryContents>(sql);
             Task.Delay(1000).Wait();
             actualPantryContentsString = JsonSerializer.Serialize(actual);
@@ -634,11 +728,12 @@ public class WhenPantryContentIsSearchedForWithPantryContentIDAndDeleted : Pantr
     }
 }
 
+[TestFixture]
 public class WhenPantryContentIsUpdated : PantryContentsTests
 {
+    private PantryContents updatedPantryContent = new PantryContents();
+    private PantryContents expectedUpdatedPantryContents = new PantryContents();
     private PantryContents actualUpdatedPantryContents = new PantryContents();
-    private readonly PantryContents expectedUpdatedPantryContents = new PantryContents();
-    private readonly PantryContents updatedPantryContent = new PantryContents();
 
 
     [OneTimeSetUp]
@@ -647,16 +742,22 @@ public class WhenPantryContentIsUpdated : PantryContentsTests
         DatabaseCleanUp.PantryContentsDatabasePreparation();
         DatabaseCleanUp.ItemListDatabasePreparation();
         DatabaseCleanUp.PantryListDatabasePreparation();
-
+        InsertLogin();
         ItemInsert();
         PantryInsert();
         PantryContentsInsert();
-
         CreateUpdatedPantryContent();
 
-        var content = new StringContent(JsonSerializer.Serialize(updatedPantryContent), Encoding.UTF8, "application/json");
-        using var httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents", content);
-        httpResponse.Wait();
+        try
+        {
+            var content = new StringContent(JsonSerializer.Serialize(updatedPantryContent), Encoding.UTF8, "application/json");
+            using Task<HttpResponseMessage> httpResponse = client.PutAsync("http://localhost:8000/api/PantryContents", content);
+            httpResponse.Wait();
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
         Task.Delay(1000).Wait();
         GetActual();
         Task.Delay(1000).Wait();
@@ -705,16 +806,97 @@ public class WhenPantryContentIsUpdated : PantryContentsTests
     {
         Assert.AreEqual(expectedUpdatedPantryContents.pcItemID, actualUpdatedPantryContents.pcItemID);
     }
-
+    
     [Test]
     public void ThenTheQuanittyIsUpdated()
     {
         Assert.AreEqual(expectedUpdatedPantryContents.quantity, actualUpdatedPantryContents.quantity);
     }
-
+    
     [Test]
     public void ThenThePantryContentIDStayedTheSame()
     {
         Assert.AreEqual(expectedUpdatedPantryContents.pantryContentID, actualUpdatedPantryContents.pantryContentID);
     }
 }
+
+[TestFixture]
+public class WhenPantryContentsAreSearchedForByPassword : PantryContentsTests
+{
+    private List<PantryContents> expectedPantryContentsList = new List<PantryContents>();
+    private String expectedPantryContentsString;
+    private String actualPantryContentsString;
+
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+
+        DatabaseCleanUp.PantryContentsDatabasePreparation();
+        DatabaseCleanUp.ItemListDatabasePreparation();
+        DatabaseCleanUp.PantryListDatabasePreparation();
+        InsertLogin();
+        Task.Delay(1000);
+        ItemInsert();
+        PantryInsert();
+        PantryContentsInsert();
+
+        try
+        {
+            using Task<HttpResponseMessage> httpResponse = client.GetAsync($"http://localhost:8000/api/PantryContents/userSearch/{1}");
+            httpResponse.Wait();
+            var results = httpResponse.Result.Content.ReadAsStringAsync();
+            results.Wait();
+            actualPantryContentsString = results.Result;
+
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+        CreateExpected();
+
+    }
+
+    public void CreateExpected()
+    {
+        PantryContents testPantryContent1 = new PantryContents
+        {
+            pcPantryID = 2,
+            pcItemID = 1,
+            quantity = 3,
+            // password = 2,
+            pantryContentID = 1,
+
+        };
+        expectedPantryContentsList.Add(testPantryContent1);
+
+        PantryContents testPantryContent2 = new PantryContents
+        {
+            pcPantryID = 2,
+            pcItemID = 2,
+            quantity = 3,
+            // password = 1,
+            pantryContentID = 2,
+        };
+        expectedPantryContentsList.Add(testPantryContent2);
+        
+        PantryContents testPantryContent3 = new PantryContents
+        {
+            pcPantryID = 1,
+            pcItemID = 2,
+            quantity = 3,
+            // password = 2,
+            pantryContentID = 3,
+        };
+        expectedPantryContentsList.Add(testPantryContent3);
+
+        expectedPantryContentsString = JsonSerializer.Serialize(expectedPantryContentsList);
+    }
+
+    [Test]
+    public void ThenAllPantryContentsInThePantryAreFound()
+    {
+        Assert.AreEqual(expectedPantryContentsString, actualPantryContentsString);
+    }
+}
+

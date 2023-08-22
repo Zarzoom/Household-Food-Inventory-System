@@ -1,6 +1,8 @@
-﻿using InventoryInCSharpAPI.Managers;
+﻿using Microsoft.AspNetCore.Mvc;
 using InventoryInCSharpAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+using InventoryInCSharpAPI.Managers;
+
+
 namespace InventoryInCSharpAPI.Controllers;
 
 [Route("api/[controller]")]
@@ -14,18 +16,25 @@ public class PantryController : ControllerBase
         this.pantryManager = pantryManager;
     }
     [HttpGet]
-    public IEnumerable<Pantry> Get()
+    public IEnumerable<Pantry> GetAllPantries()
     {
         return pantryManager.GetPantryList();
     }
+
+    [HttpGet("userSearch/{password}")]
+    public IEnumerable<Pantry> GetUserPantries(long password)
+    {
+        return pantryManager.GetAllUserPantries(password);
+    }
+
     [HttpGet("{primaryKey}")]
-    public Pantry Get(long primaryKey)
+    public Pantry GetPantryWithPrimaryKey(long primaryKey)
     {
         return pantryManager.FindPantryByPrimaryKey(primaryKey);
     }
 
     [HttpGet("search/{searchValue}")]
-    public IEnumerable<Pantry> Get(string searchValue)
+    public IEnumerable<Pantry> GetPantryWithPantryName(String searchValue)
     {
         return pantryManager.Search(searchValue);
     }
@@ -37,13 +46,13 @@ public class PantryController : ControllerBase
     }
 
     [HttpPost]
-    public Pantry Post([FromBody] Pantry postmanPantry)
+    public Pantry PostPantryToPantrList([FromBody] Pantry postmanPantry)
     {
         return pantryManager.AddToPantryList(postmanPantry);
     }
 
     [HttpPut]
-    public Pantry Put([FromBody] Pantry updatedPantry)
+    public Pantry PutUpdatesIntoPantryList([FromBody] Pantry updatedPantry)
     {
         return pantryManager.PantryUpdate(updatedPantry);
     }

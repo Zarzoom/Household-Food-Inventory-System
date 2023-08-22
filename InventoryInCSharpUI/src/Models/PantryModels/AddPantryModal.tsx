@@ -1,13 +1,16 @@
 import {useState} from "react";
 import {createPantry} from "../../Thunks/PantriesThunk"
-import {useAppDispatch} from '../../Hooks/hooks'
+import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import {Button, Input, Modal} from 'rsuite';
 
 function AddPantryModal() {
     
     const [open, setOpen] = useState(false);
+    const loginState = useAppSelector(state=> state.Login.StateOfLogin);
+    const passwordString = loginState?.password;
     const [pantry, setPantry] = useState({
-        pantryName: ""
+        pantryName: "",
+        password: passwordString,
     });
 
     const updatePantryName = (newPantryName: string) => {

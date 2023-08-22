@@ -1,2 +1,2 @@
-type StatusString = 'idle' | 'succeeded' | 'search'| 'failed'
+type StatusString = 'idle' | 'succeeded' | 'search'| 'failed'| 'notLoggedIn'
 export default StatusString;

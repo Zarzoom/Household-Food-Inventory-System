@@ -9,7 +9,8 @@ export function EditPantry(pantryForUpdate: Pantry) {
     
     const [pantry, setPantry] = useState({
         pantryID: pantryForUpdate.pantryID,
-        pantryName: pantryForUpdate.pantryName
+        pantryName: pantryForUpdate.pantryName,
+        password: "" + pantryForUpdate.password,
     });
 
     const updatePantryName = (newPantryName: string) => {
@@ -23,7 +24,6 @@ export function EditPantry(pantryForUpdate: Pantry) {
         const PantryToJSONStringify = JSON.stringify(pantry);
         const PantryToJsonParse = JSON.parse(PantryToJSONStringify);
         dispatch(updatePantry(PantryToJsonParse));
-        setOpen(false);
         return 'Added'
     };
 
@@ -53,7 +53,7 @@ export function EditPantry(pantryForUpdate: Pantry) {
         </div>
 
     );
-}
+};
 
 
 

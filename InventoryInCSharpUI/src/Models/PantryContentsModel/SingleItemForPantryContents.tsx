@@ -9,10 +9,12 @@ import {addPantryContents} from "../../Thunks/PantryContentsThunk"
 export function SingleItemForPantryContents(item: getItem){
     let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)
     pantryID = pantryID as number;
+    
     const [newPC, setNewPC] = useState<PantryContentsNoID>({
         pcItemID: item.itemID,
         pcPantryID: pantryID,
-        quantity: 1 ,
+        quantity: 1,
+        password: item.password,
     });
     const updateQuantity = (inputQuantity: string) => {
         const newPCQuantity: number = +inputQuantity
@@ -22,6 +24,8 @@ export function SingleItemForPantryContents(item: getItem){
     }
     const dispatch = useAppDispatch();
 const newPantryContentsDispatch = () =>{
+    console.log(item)
+    console.log(newPC);
         dispatch(addPantryContents(newPC));
 }
     return(

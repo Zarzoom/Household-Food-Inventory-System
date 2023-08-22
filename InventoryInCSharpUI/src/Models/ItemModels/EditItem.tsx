@@ -2,7 +2,7 @@ import {useState} from "react";
 import {updateItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
 import getItem from "../../DataModels/getItem"
-import {Button, Input, Modal} from 'rsuite';
+import { Button, Input, Modal } from 'rsuite';
 
 export function EditItem(itemForUpdate: getItem) {
     
@@ -14,6 +14,7 @@ export function EditItem(itemForUpdate: getItem) {
         price: "" + itemForUpdate.price,
         genericName: itemForUpdate.genericName,
         size: itemForUpdate.size,
+        password: "" + itemForUpdate.password,
     });
 
     const updateBrand = (newBrand: string) => {
@@ -41,10 +42,11 @@ export function EditItem(itemForUpdate: getItem) {
         const ItemToJSONStringify = JSON.stringify(item);
         const ItemToJsonParse = JSON.parse(ItemToJSONStringify);
         dispatch(updateItem(ItemToJsonParse));
-        setOpen(false);
         return 'Added'
     };
     
+
+
     return (
         <div>
             <Button className={"cardButton"} appearance={'primary'} onClick={()=> setOpen(true)}>Edit</Button>
@@ -79,7 +81,7 @@ export function EditItem(itemForUpdate: getItem) {
         </div>
        
     );
-}
+};
 
 
 

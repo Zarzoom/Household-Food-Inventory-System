@@ -33,7 +33,7 @@ RUN apk add --no-cache bash
 
 # Make our shell script executable
 RUN chmod +x env.sh
-RUN bash env.sh
+#RUN bash env.sh
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
@@ -57,7 +57,7 @@ RUN apk add --no-cache bash
 
 # Make our shell script executable
 RUN chmod +x env.sh
-RUN bash env.sh
+#RUN bash env.sh
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

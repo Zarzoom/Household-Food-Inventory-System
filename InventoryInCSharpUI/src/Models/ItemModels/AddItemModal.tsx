@@ -1,20 +1,39 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {createItem} from "../../Thunks/ItemsThunk"
 import {useAppDispatch} from '../../Hooks/hooks'
-import {Button, Input, Modal} from 'rsuite';
+import {useAppSelector} from "../../Hooks/hooks";
+import { Button, Input, Modal } from 'rsuite';
+import Login from "../../DataModels/Login";
+
 
 function AddItemModal() {
     
+    const [user, setUser] = useState({
+        userUsername: "",
+        userPassword: ""
+    })
     const [open, setOpen] = useState(false);
+    const loginState = useAppSelector(state=> state.Login.StateOfLogin);
+    const password = loginState?.password;
     
     const [item, setItem] = useState({
         brand: "",
         price: "",
         genericName: "",
         size: "",
-        password: "",
+        password: password,
     });
 
+    // const updateUserUsername = (newUserUsername: string) =>{
+    //     setUser(previousState => {
+    //         return {...previousState, userUsername: newUserUsername}
+    //     });
+    // };
+    // const updateUserPassword = (newUserPassword: string) =>{
+    //     setUser(previousState => {
+    //         return { ...previousState, userPassword: newUserPassword}
+    //     });
+    // };
     const updateBrand = (newBrand: string) => {
         setItem(previousState => {
             return {...previousState, brand: newBrand}

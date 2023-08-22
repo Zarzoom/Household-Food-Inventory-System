@@ -10,7 +10,8 @@ export function DeleteItem(ItemForDeleting: getItem) {
     const dispatch = useAppDispatch();
     const deleteItemDispatch = () => {
         const ItemIDForDeleting = ItemForDeleting.itemID;
-        dispatch(deleteItem(ItemIDForDeleting));
+        const ItemPasswordForDeleting = ItemForDeleting.password;
+        dispatch(deleteItem(ItemIDForDeleting, ItemPasswordForDeleting));
             };
  
         return (

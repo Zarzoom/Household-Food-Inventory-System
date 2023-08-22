@@ -1,6 +1,7 @@
-﻿using InventoryInCSharpAPI.Managers;
+﻿using Microsoft.AspNetCore.Mvc;
 using InventoryInCSharpAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+using InventoryInCSharpAPI.Managers;
+
 namespace InventoryInCSharpAPI.Controllers;
 
 [Route("api/[controller]")]
@@ -15,24 +16,30 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPost]
-    public PantryContents Post([FromBody] PantryContents postmanPantryContent)
+    public PantryContents PostNewPantryContent([FromBody] PantryContents postmanPantryContent)
     {
         return pantryContentsManager.AddToPantry(postmanPantryContent);
     }
 
     [HttpGet]
-    public IEnumerable<PantryContents> Get()
+    public IEnumerable<PantryContents> GetAllPantryContents()
     {
         return pantryContentsManager.GetAllPantryContents();
     }
+    
+    [HttpGet("userSearch/{password}")]
+    public IEnumerable<PantryContents> GetUserPantryContents(long password)
+    {
+        return pantryContentsManager.GetAllUserPantryContents(password);
+    }
 
     [HttpGet("{pcPantryID}")]
-    public IEnumerable<PantryContents> Get(long pcPantryID)
+    public IEnumerable<PantryContents> GetPantryContentsWithPantryID(long pcPantryID)
     {
         return pantryContentsManager.FindContentsByPCPantryID(pcPantryID);
     }
     [HttpGet("{pcPantryID}/{pcItemID}")]
-    public PantryContents Get(long pcPantryID, long pcItemID)
+    public PantryContents GetPantryContentsWithPantryIDAndItemID(long pcPantryID, long pcItemID)
     {
         return pantryContentsManager.FindContentsByItemIDAndPantryID(pcPantryID, pcItemID);
     }
@@ -48,13 +55,13 @@ public class PantryContentsController : ControllerBase
     {
         return pantryContentsManager.WhereIsThatItem(itemID);
     }
-
+  
     [HttpGet("retrievePantryContentsWithItem/{itemID}")]
     public IEnumerable<PantryContents> findPantryContentsContainingItem(long itemID)
     {
         return pantryContentsManager.FindContentsByPCItemID(itemID);
     }
-
+    
 
     [HttpPut("deletePantryContent/{pantryContentID}")]
     public void DeletePantryContent(long pantryContentID)
@@ -63,7 +70,7 @@ public class PantryContentsController : ControllerBase
     }
 
     [HttpPut]
-    public PantryContents Put([FromBody] PantryContents updatedPantryContent)
+    public PantryContents PutUpdatedPantryContentIntoPantryContentsList([FromBody] PantryContents updatedPantryContent)
     {
         return pantryContentsManager.PantryContentUpdate(updatedPantryContent);
     }
