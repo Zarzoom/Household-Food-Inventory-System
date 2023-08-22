@@ -1,15 +1,13 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {createLogin} from "../../Thunks/LoginThunks"
 import {goSubmitError} from "../../slices/LoginReducer"
 import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
 import { Button, Input, Modal, Message, useToaster } from 'rsuite';
 import Login from "../../DataModels/Login"
-import {PLACEMENT} from "rsuite/utils";
 
 
 export function CreateLogin(){
     const [open, setOpen] = useState(false);
-    // const [displayed, setDisplayed] = useState("")
     let displayed = <p></p>;
     const[newUsername, setUsername] = useState("");
 

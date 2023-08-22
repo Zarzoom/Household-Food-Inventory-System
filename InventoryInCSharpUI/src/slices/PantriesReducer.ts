@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import Pantry from '../DataModels/Pantry'
 import StatusString from "../DataModels/StatusString";
-import PantryNoID from '../DataModels/PantryNoID'
 
 interface PantryState{
     StateOfPantry: Pantry[]
@@ -16,7 +14,7 @@ const initialState: PantryState={
     status: 'idle',
     error: null,
     search: "",
-    StateOfPantry: new Array()
+    StateOfPantry: []
 }
 
 export const selectAllPantries = (state: RootState) => state.Pantry.StateOfPantry;
@@ -35,7 +33,7 @@ export const PantriesReducer = createSlice({
             state.StateOfPantry.push(action.payload);
         },
         goUpdatePantry: (state, action: PayloadAction<Pantry>) => {
-            const updateStatePantry = state.StateOfPantry.findIndex(pantry => pantry.pantryID == action.payload.pantryID)
+            const updateStatePantry = state.StateOfPantry.findIndex(pantry => pantry.pantryID === action.payload.pantryID)
     state.StateOfPantry[updateStatePantry] = action.payload;
         },
         goDeletePantry: (state, action: PayloadAction<Number>) =>{

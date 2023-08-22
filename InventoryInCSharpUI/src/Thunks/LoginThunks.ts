@@ -15,13 +15,11 @@ export const createLogin =
             const asynchResponse = await client.postData(process.env.REACT_APP_API + '/api/Login', newLogin)
                 .then(response => {
                     if(response.status !== 200){
-                        console.log(response);
                         return response.text();
                     }
                     else {
                         return response.json() as Login;
                     }
-                console.log(response);
                 })
             const Response = asynchResponse
             if(typeof Response === "string" && Response.includes( "The user name has already been taken. Please, choose another.")){
