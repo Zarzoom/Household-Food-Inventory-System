@@ -83,10 +83,10 @@ export function SignIn() {
 
     return (
             <div>
-                <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>{openModal()}}>Sign In</Button>
+                <Button className={"displayBoxButton"} appearance={ 'primary'} onClick={(event: any)=>{openModal()}}>Sign In</Button>
                 <Modal open={open} onClose={()=>closeModal()}>
                     <Modal.Header></Modal.Header>
-                    <div className= "blueBackground">
+                    <div className= "modalBackground">
                         <Modal.Body>
                             <p>Logins are intended to customize user experience and not for security purposes.</p>
                             <label>Username:</label><br/>
@@ -95,8 +95,8 @@ export function SignIn() {
                             <Input placeholder="00000" value={signInLogin.password}
                                    onChange={(value: string, event) => updatePassword(value)}/><br/>
                             <div> {displayedSignIn}</div>
-                            <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Login</Button>
-                            <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => cancelSignInDispatch()}>Cancel</Button>
+                            <Button className={"modalButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Login</Button>
+                            <Button className={"modalButton"} appearance={'primary'} onClick={(event: any) => cancelSignInDispatch()}>Cancel</Button>
                         </Modal.Body>
                     </div>
                 </Modal>

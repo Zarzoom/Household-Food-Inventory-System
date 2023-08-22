@@ -13,7 +13,7 @@ export function SignOut () {
 
     return (
 <div>
-    <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => SignOut()}>Sign Out</Button>
+    <Button className={"displayBoxButton"} appearance={'primary'} onClick={(event: any) => SignOut()}>Sign Out</Button>
 </div>
     )
 }

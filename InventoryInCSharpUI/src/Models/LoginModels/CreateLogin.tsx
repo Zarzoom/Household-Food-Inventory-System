@@ -68,18 +68,18 @@ const closeModal = () => {
 
 return (
         <div>
-            <Button className={"yellowButton"} appearance={ 'primary'} onClick={(event: any)=>{openModal()}}>Create Login</Button>
+            <Button className={"displayBoxButton"} appearance={ 'primary'} onClick={(event: any)=>{openModal()}}>Create Login</Button>
             <Modal open={open} onClose={()=>closeModal()}>
                 <Modal.Header></Modal.Header>
-                <div className= "blueBackground">
+                <div className= "modalBackground">
                     <Modal.Body>
                         <p>Logins are intended to customize user experience and not for security purposes.</p>
                         <label>Username:</label><br/>
                         <Input placeholder="beans" value={newUsername}
                                onChange={(value: string, event) => setUsername(value)}/><br/>
                         <div> {displayed}</div>
-                        <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Add</Button>
-                        <Button className={"yellowButton"} appearance={'primary'} onClick={(event: any) => cancelLoginDispatch()}>Cancel</Button>
+                        <Button className={"modalButton"} appearance={'primary'} onClick={(event: any) => newLoginDispatch()}>Add</Button>
+                        <Button className={"modalButton"} appearance={'primary'} onClick={(event: any) => cancelLoginDispatch()}>Cancel</Button>
                     </Modal.Body>
                 </div>
             </Modal>

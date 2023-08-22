@@ -31,4 +31,7 @@ export function DeletePantry(pantryForDelete: Pantry) {
                             <Button appearance={'primary'} className={"modalButton"} onClick={(event: any) => deletePantryDispatch()}>Delete</Button>
                         </Modal.Footer>
                     </div>
-}
+                </Modal>
+        </div>
+    )
+};
