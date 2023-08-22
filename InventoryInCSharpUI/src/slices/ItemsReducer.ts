@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {useSelector} from 'react-redux'
 import {RootState} from '../Stores/Store'
 import getItem from '../DataModels/getItem'
-import Item from '../DataModels/Item'
 import StatusString from '../DataModels/StatusString'
 
 interface ItemsState{
@@ -16,7 +14,7 @@ const initialState: ItemsState={
     status: 'idle',
     error: null,
     search: "",
-    StateOfItems: new Array()
+    StateOfItems: []
 }
 
 export const selectAllItems = (state: RootState) => state.Items.StateOfItems;
@@ -40,7 +38,7 @@ export const ItemsReducer = createSlice({
                state.StateOfItems = state.StateOfItems.filter(item => item.itemID !== action.payload);
             },
             goUpdateItem: (state, action: PayloadAction<getItem>)=>{
-               const updateStateItem = state.StateOfItems.findIndex(item=> item.itemID == action.payload.itemID)
+               const updateStateItem = state.StateOfItems.findIndex(item=> item.itemID === action.payload.itemID)
               state.StateOfItems[updateStateItem] = action.payload;
             },
             goContentsItemSearch: (state, action: PayloadAction<getItem[]>)=>{

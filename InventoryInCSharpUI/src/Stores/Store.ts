@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {ItemsReducer, goFetchItems} from '../slices/ItemsReducer'
+import {ItemsReducer} from '../slices/ItemsReducer'
 import {PantriesReducer} from '../slices/PantriesReducer'
 import { AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import getItem from '../DataModels/getItem'
 import {PantryContentsReducer} from '../slices/PantryContentsReducer'
 import {LoginReducer} from "../slices/LoginReducer";
 

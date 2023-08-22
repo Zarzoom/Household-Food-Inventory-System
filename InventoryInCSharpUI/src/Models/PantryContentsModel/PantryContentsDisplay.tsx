@@ -1,6 +1,4 @@
-import {useAppSelector, useAppDispatch} from '../../Hooks/hooks'
-import {useEffect} from "react";
-import {fetchPantryContents} from "../../Thunks/PantryContentsThunk"
+import {useAppSelector} from '../../Hooks/hooks'
 import Pantry from "../../DataModels/Pantry"
 import PantryContents from "../../DataModels/PantryContents"
 import {selectAllPantryContents} from "../../slices/PantryContentsReducer"
@@ -10,14 +8,8 @@ import {List, Panel, Col, Grid} from "rsuite";
 import {AddPanel} from "./AddPanel"
 
 export const PantryContentsDisplay = () =>{
-    const dispatch = useAppDispatch();
 
-    const PantryContentsStatus = useAppSelector(state => state.PantryContents.status);
     const CurrentPantryContents = useAppSelector(selectAllPantryContents);
-    const loginState = useAppSelector(state=> state.Login.StateOfLogin);
-    const passwordString = "" + loginState?.password;
-
-
     
     let pantryID : number| null = useAppSelector(state => state.PantryContents.PantryFilter)
     let pantryName: string = "All Pantries";

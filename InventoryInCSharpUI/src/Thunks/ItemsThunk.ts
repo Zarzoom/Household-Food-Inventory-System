@@ -2,11 +2,8 @@
 import HttpClient from '../Services/Controlers/HttpClient'
 import getItem from '../DataModels/getItem'
 import Item from '../DataModels/Item'
-import { RootState, AppDispatch, AppThunk } from '../Stores/Store'
-import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goSetStatus, goContentsItemSearch, selectContainsSearch} from '../slices/ItemsReducer'
-import { AnyAction } from 'redux'
-import {store} from '../Stores/Store'
-import {useAppSelector, useAppDispatch} from '../Hooks/hooks'
+import {AppThunk } from '../Stores/Store'
+import {goFetchItems, goCreateItem, goDeleteItem, goUpdateItem, goSetStatus} from '../slices/ItemsReducer'
 import {fetchPantryContents} from "../Thunks/PantryContentsThunk"
 
 
@@ -36,7 +33,7 @@ export const createItem =
 export const deleteItem =
     (deleteItemID: Number, deleteItemPassword: number): AppThunk =>
         async dispatch =>{
-            const asynchResponse = await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
+            await client.putData(process.env.REACT_APP_API + '/api/Item/deleteItem/'+ deleteItemID);
             dispatch(
                 goDeleteItem(deleteItemID)
             );

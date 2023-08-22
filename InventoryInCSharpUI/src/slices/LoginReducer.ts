@@ -1,10 +1,6 @@
-import {createSlice, isRejectedWithValue, PayloadAction} from '@reduxjs/toolkit'
-import {RootState} from '../Stores/Store'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import Login from '../DataModels/Login'
 import StatusString from '../DataModels/StatusString'
-import {createLogin} from "../Thunks/LoginThunks";
-import {useSelector} from "react-redux";
-import {stat} from "fs";
 
 
 interface LoginState{

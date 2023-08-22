@@ -1,4 +1,4 @@
-﻿type PantryContentsNoID ={
+type PantryContentsNoID ={
     quantity: number
     pcItemID: number
     pcPantryID: number

@@ -1,5 +1,5 @@
 import Pantry from "../../DataModels/Pantry"
-import {useAppDispatch, useAppSelector} from '../../Hooks/hooks'
+import {useAppDispatch} from '../../Hooks/hooks'
 import {deletePantry} from "../../Thunks/PantriesThunk"
 import {useState} from "react";
 import {Modal, Button} from 'rsuite'

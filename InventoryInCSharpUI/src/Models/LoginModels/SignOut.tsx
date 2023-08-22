@@ -1,4 +1,4 @@
-import {useAppSelector, useAppDispatch} from "../../Hooks/hooks";
+import {useAppDispatch} from "../../Hooks/hooks";
 import {goSetStatus, goSignOut} from "../../slices/LoginReducer";
 import{Button} from "rsuite";
 
