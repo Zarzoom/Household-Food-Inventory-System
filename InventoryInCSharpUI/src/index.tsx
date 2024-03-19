@@ -8,19 +8,21 @@ import {store} from "./Stores/Store"
 import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 import "./StyleSheet.less"
-import {PublicClientApplication, EventType} from '@azure/msal-browser';
+import {PublicClientApplication, EventType, AuthenticationResult} from '@azure/msal-browser';
 import {msalConfig} from './AuthConfig';
 
 
 const msalInstance = new PublicClientApplication(msalConfig);
 if(!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length >0)
 {
-    msalInstance.setActiveAccount(msalInstance.getActiveAccount()[0]);
+    msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
 }
 
 msalInstance.addEventCallback((event) => {
-    if (event.eventType === EventType.LOGIN_SUCCESS && event.payload.account) {
-        const account = event.payload.account;
+    if ((event.eventType === EventType.LOGIN_SUCCESS || event.eventType === EventType.ACQUIRE_TOKEN_SUCCESS || event.eventType === EventType.SSO_SILENT_SUCCESS) && event.payload) {
+        const payload = event.payload as AuthenticationResult;
+        const account = payload.account;
+
         msalInstance.setActiveAccount(account);
     }
 });
@@ -44,6 +46,6 @@ export default function App() {
 const root = ReactDOM.createRoot(document.getElementById('root')as HTMLElement);
 root.render(
     <Provider store = {store}>
-    <App instance = {msalInstance}/>
+    <App pca = {msalInstance}/>
     </Provider> 
 );
