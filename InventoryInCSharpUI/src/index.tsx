@@ -9,7 +9,12 @@ import Pantry from "./Pages/Pantry"
 import MyPantry from "./Pages/MyPantry"
 import "./StyleSheet.less"
 import {PublicClientApplication, EventType, AuthenticationResult} from '@azure/msal-browser';
+import { IPublicClientApplication } from "@azure/msal-browser";
 import {msalConfig} from './AuthConfig';
+import {MsalProvider, useMsal} from "@azure/msal-react";
+import {useEffect} from "react";
+
+
 
 
 const msalInstance = new PublicClientApplication(msalConfig);
@@ -27,25 +32,30 @@ msalInstance.addEventCallback((event) => {
     }
 });
 
-export default function App() {
-    
+
+type AppProps = {pca: IPublicClientApplication};
+export default function App({pca}: AppProps) {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Login/>}/>
-                    <Route path = "myPantries" element={<MyPantry/>}/>
-                    <Route path = "item" element={<Item/>} />
-                    <Route path = "pantry" element={<Pantry/>} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+
+            <MsalProvider instance={pca}>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={<Layout />}>
+                                <Route index element={<Login/>}/>
+                                <Route path = "myPantries" element={<MyPantry/>}/>
+                                <Route path = "item" element={<Item/>} />
+                                <Route path = "pantry" element={<Pantry/>} />
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
+                </MsalProvider>
     );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root')as HTMLElement);
 root.render(
-    <Provider store = {store}>
-    <App pca = {msalInstance}/>
-    </Provider> 
+
+            <Provider store = {store}>
+                <App pca = {msalInstance}/>
+            </Provider>
 );

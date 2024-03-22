@@ -1,6 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
 import {useAppSelector} from '../Hooks/hooks'
-import { Navbar, Nav} from 'rsuite';
+import {Navbar, Nav, Button} from 'rsuite';
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { InteractionStatus, InteractionType, InteractionRequiredAuthError, AccountInfo } from "@azure/msal-browser";
+import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
+
 
 const Layout = () => {
    
@@ -10,23 +14,32 @@ const Layout = () => {
     
             return (
         <>
-        <Navbar>
-            <Nav>
-                <Nav.Item className="nav-item">
-                    <Link className="nav-link" to="/">Login</Link>
-                </Nav.Item>
-                <Nav.Item className="nav-item">
-                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/myPantries":"#"}>MyPantry</Link>
-                </Nav.Item>
-                <Nav.Item className="nav-item">
-                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/pantry":"#"}>Pantry</Link>
-                </Nav.Item>
-                <Nav.Item className="nav-item">
-                    <Link className="nav-link" to={LoginStatus !== "notLoggedIn" ?"/item":"#"}>Items</Link>
-                </Nav.Item>
-            </Nav>
-        </Navbar>
-            {display}
+            <MsalAuthenticationTemplate
+                    interactionType={InteractionType.Redirect}
+            >
+            </MsalAuthenticationTemplate>
+            <AuthenticatedTemplate>
+                <Navbar>
+                    <Nav>
+
+                        <Nav.Item className="nav-item">
+                            <Link className="nav-link" to="/myPantries">MyPantry</Link>
+                        </Nav.Item>
+                        <Nav.Item className="nav-item">
+                            <Link className="nav-link" to="/pantry">Pantry</Link>
+                        </Nav.Item>
+                        <Nav.Item className="nav-item">
+                            <Link className="nav-link" to="/item">Items</Link>
+                        </Nav.Item>
+                    </Nav>
+                </Navbar>
+                    {display}
+            </AuthenticatedTemplate>
+
+            <UnauthenticatedTemplate>
+                <p>Please Sign in.</p>
+                <Button >Login</Button>
+            </UnauthenticatedTemplate>
         </>
 
     )

@@ -50,7 +50,7 @@ export const msalConfig = {
     },
     system: {
         loggerOptions: {
-            loggerCallback: (level, message, containsPii) => {
+            loggerCallback: (level: LogLevel, message: string, containsPii: boolean) => {
                 if (containsPii) {
                     return;
                 }
@@ -79,15 +79,7 @@ export const msalConfig = {
  * Add here the endpoints and scopes when obtaining an access token for protected web APIs. For more information, see:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
-export const protectedResources = {
-    apiTodoList: {
-        endpoint: 'http://localhost:5000/api/todolist',
-        scopes: {
-            read: ['https://fabrikamb2c.onmicrosoft.com/TodoList/ToDoList.Read'],
-            write: ['https://fabrikamb2c.onmicrosoft.com/TodoList/ToDoList.ReadWrite'],
-        },
-    },
-};
+
 
 /**
  * Scopes you add here will be prompted for user consent during sign-in.
