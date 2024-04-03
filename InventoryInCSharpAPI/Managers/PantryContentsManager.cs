@@ -70,7 +70,8 @@ public class PantryContentsManager
     /// </summary>
     /// <param name="password"> A long with a value that matches the users password.</param>
     /// <returns>Returns all PantryContents that have a password that matches the parameter password.</returns>
-    public IEnumerable<PantryContents> GetAllUserPantryContents(long password)
+    
+    public IEnumerable<PantryContents> GetAllUserPantryContents(string password)
     {
         var results = _PCR.GetUserPantryContents(password);
         results.Wait();

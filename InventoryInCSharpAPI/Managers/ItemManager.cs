@@ -43,12 +43,13 @@ public class ItemManager
     /// </summary>
     /// <param name="password"> A long with a value that matches the users password.</param>
     /// <returns>Returns all Items that have a password that matches the parameter password.</returns>
-    public IEnumerable<Item> GetAllUserItems(long password)
-    {
-        var results = _IR.GetUserItems(password);
-        results.Wait();
-        return (results.Result);
-    }
+    
+    public IEnumerable<Item> GetAllUserItems(string password)
+         {
+             var results = _IR.GetUserItems(password);
+             results.Wait();
+             return (results.Result);
+         }
     
     /// <summary>
     /// Calls the FindItemByPrimaryKey method (returns item whose primary key matches the parameter.) from Item Repository and converts results

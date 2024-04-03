@@ -154,7 +154,7 @@ public class PantryContentsRepository
     /// <param name="password"> password is a long representing the users password that is a foreign key on the pantry contents that they have created. 
     /// </param>
     /// <returns>Returns a list of the pantry contents with a foreign key password that matches the param password.</returns>
-    public async Task<IEnumerable<PantryContents>> GetUserPantryContents(long password)
+    public async Task<IEnumerable<PantryContents>> GetUserPantryContents(string password)
     {
         using (var connection = new MySqlConnection(_csos.connection))
         {

@@ -93,7 +93,8 @@ public class PantryManager
     /// </summary>
     /// <param name="password"> A long with a value that matches the users password.</param>
     /// <returns>Returns all pantries that have a password that matches the parameter password.</returns>
-    public IEnumerable<Pantry> GetAllUserPantries(long password)
+    
+    public IEnumerable<Pantry> GetAllUserPantries(string password)
     {
         var results = _PR.GetUserPantries(password);
         results.Wait();

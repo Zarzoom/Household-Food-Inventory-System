@@ -131,7 +131,8 @@ namespace InventoryInCSharpAPI.Repositories
         /// <param name="password"> password is a long representing the users password that is a foreign key on the items that they have created. 
         /// </param>
         /// <returns>Returns a list of the items with a foreign key password that matches the param password.</returns>
-        public async Task<IEnumerable<Item>> GetUserItems(long password)
+        
+        public async Task<IEnumerable<Item>> GetUserItems(string password)
         {
             using (var connection = new MySqlConnection(CSOS.connection))
             {

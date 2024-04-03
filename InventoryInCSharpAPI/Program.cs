@@ -2,6 +2,8 @@ using InventoryInCSharpAPI.Managers;
 //using InventoryInCSharpAPI.Services;
 using InventoryInCSharpAPI.Repositories;
 using InventoryInCSharpAPI.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 //using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);//
@@ -20,9 +22,16 @@ builder.Services.AddSingleton<PantryContentsManager>();
 builder.Services.AddSingleton<ItemRepository>();
 builder.Services.AddSingleton<PantryRepository>();
 builder.Services.AddSingleton<PantryContentsRepository>();
-builder.Services.AddSingleton<LoginManager>();
-builder.Services.AddSingleton<LoginRepository>();
 builder.Services.AddSingleton<ConnectionStringAndOtherSecrets>(CSSOS);
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "http://localhost:3000/login";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+
+        };
+    });
 
 Console.WriteLine(connection);
 
