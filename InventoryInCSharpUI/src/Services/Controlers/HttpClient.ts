@@ -1,4 +1,9 @@
+ import {msalConfig} from '../../AuthConfig';
+import {PublicClientApplication} from '@azure/msal-browser';
 
+
+
+const msalInstance = new PublicClientApplication(msalConfig);
 class HttpClient {
 
     postData (url: string = "", data: any = {}): Promise<any> {
@@ -10,6 +15,7 @@ class HttpClient {
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
                 "Content-Type": "application/json",
+                "Authorization" : "Bearer " + "to be fille din "
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             redirect: "follow", // manual, *follow, error

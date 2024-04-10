@@ -38,7 +38,7 @@ export const b2cPolicies = {
  */
 export const msalConfig = {
     auth: {
-        clientId: '02dd82d5-7782-4773-9a0c-0b469ed70a0e', // This is the ONLY mandatory field that you need to supply.
+        clientId: '075e569e-541b-448e-9593-3c7b314d8f99', // This is the ONLY mandatory field that you need to supply.
         authority: 'https://login.microsoftonline.com/common/', // Choose SUSI as your default authority.
         redirectUri: '/login', // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
         postLogoutRedirectUri: '/login', // Indicates the page to navigate after logout.
